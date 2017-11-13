@@ -15,7 +15,7 @@ namespace SecretP3
         public VolunteerSystem()
         {
             Shift test = new Shift(new DateTime(2017, 5, 15, 3, 0, 0), 7, "Kitchen");
-            test.Description = "Dette er bare for sjov til en beskivelse af en shift";
+            test.Description = "Dette er ikke bare for sjov til en beskivelse af en shift";
             test.LengthInHours = 4;
             AllShifts.Add(test);
 
