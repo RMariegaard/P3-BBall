@@ -14,7 +14,7 @@ namespace VolunteerSystem
 
         public void CreateNewShift(DateTime time, string task, int volunteersNeeded)
         {
-            _shifts.Add(new Shift(time, task, volunteersNeeded));
+            _shifts.Add(new Shift(time, task, volunteersNeeded, ""));
         }
 
         public Schedule(int year)
