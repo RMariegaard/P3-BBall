@@ -11,6 +11,7 @@ namespace VolunteerSystem
         static void Main(string[] args)
         {
             Console.WriteLine(Database.DBConnection.Connection.Database);
+            Notifier.InformVolunteer();
             Console.Read();
         }
     }
