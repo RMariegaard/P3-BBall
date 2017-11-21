@@ -20,6 +20,29 @@ namespace VolunteerSystem
             throw new NotImplementedException();
         }
 
+        public List<Request> GetAllRequests()
+        {
+            List<Request> requests = new List<Request>();
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
+
+            return requests;
+            //return _schedule.Requests;
+        }
+
         public List<Shift> GetAllShifts()
         {
             return _schedule.Shifts;

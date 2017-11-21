@@ -27,6 +27,15 @@ namespace VolunteerSystem
             }
         }
 
+        private List<Request> _requests;
+        public List<Request> Requests
+        {
+            get
+            {
+                return _requests;
+            }
+        }
+
         public void CreateNewShift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded)
         {
             _shifts.Add(new Shift(startTime, endTime, task, volunteersNeeded, ""));
@@ -41,7 +50,5 @@ namespace VolunteerSystem
             _year = year;
             _shifts = new List<Shift>();
         }
-
-
     }
 }

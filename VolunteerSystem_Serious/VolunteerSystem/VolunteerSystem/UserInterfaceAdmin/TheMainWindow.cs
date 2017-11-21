@@ -122,5 +122,10 @@ namespace VolunteerSystem.UserInterface
         {
             throw new NotImplementedException();
         }
+
+        public void DisplayVolunteerOnHomepage(Volunteer volunteer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

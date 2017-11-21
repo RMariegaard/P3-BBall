@@ -12,6 +12,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
         ScheduleController GetController();
         void DisplayHomepage();
         void DisplayVolunteerOverview();
+        void DisplayVolunteerOnHomepage(Volunteer volunteer);
         void DisplaySettings();
         void DisplayGeneralError(string body);
         void DisplayPressedOnShift(Shift shift);

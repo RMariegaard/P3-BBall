@@ -56,6 +56,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             pendingRequestPanel.Location = new Point(schedulePanel.Location.X + schedulePanel.Size.Width + 2, 0);
             pendingRequestPanel.Size = new Size(_mainHomepagePanel.Size.Width - schedulePanel.Size.Width, (_mainHomepagePanel.Size.Height / 100) * 70);
             pendingRequestPanel.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+            RequestPanelElements.MainRequestPanelElement requestPanel = new RequestPanelElements.MainRequestPanelElement(_mainWindowUI);
+            pendingRequestPanel.Controls.Add(requestPanel.GetPanel(pendingRequestPanel.Size));
 
             //Volunteer panel
             VolunteerPanel = new Panel();

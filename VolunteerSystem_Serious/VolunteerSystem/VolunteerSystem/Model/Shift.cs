@@ -77,9 +77,9 @@ namespace VolunteerSystem
             throw new NotImplementedException();
         }
 
-        public void CreateRequest()
+        public void CreateRequest(Volunteer volunteer)
         {
-            _requests.Add(new Request());
+            _requests.Add(new Request(volunteer, this));
         }
 
         public string GetInformation()
