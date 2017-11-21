@@ -17,10 +17,10 @@ namespace VolunteerSystem
             throw new NotImplementedException();
         }
 
-        public static void InformVolunteer()
+        public static void InformVolunteer(Volunteer volunteer)
         {
             var fromAddress = new MailAddress("cazzcasper@gmail.com", "From Name");
-            var toAddress = new MailAddress("cpede16@student.aau.dk", "To Name");
+            var toAddress = new MailAddress(volunteer.Email, volunteer.Name);
             string fromPassword = "";
             string subject = "Subject";
             string body = "Body";

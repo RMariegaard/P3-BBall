@@ -12,6 +12,11 @@ namespace VolunteerSystem
         protected string _name;
         protected string _email;
 
+        public string Email { get { return _email; } }
+        public string Name { get { return _name; } }
+
+
+
         public Worker(string name, string email)
         {
             this._name = name;
