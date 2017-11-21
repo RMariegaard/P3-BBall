@@ -14,6 +14,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
         void DisplayVolunteerOverview();
         void DisplaySettings();
         void DisplayGeneralError(string body);
+        void DisplayPressedOnShift(Shift shift);
         Shift DisplayCreateNewShift();
         string DisplayCreateNewTask();
         void Start();

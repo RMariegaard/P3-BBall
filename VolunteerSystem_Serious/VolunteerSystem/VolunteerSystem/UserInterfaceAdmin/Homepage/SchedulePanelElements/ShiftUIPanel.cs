@@ -10,24 +10,26 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 {
     class ShiftUIPanel
     {
-        public static Panel ShiftUI(Shift shift, Panel forRefence, int hourHeight)
+        IVolunteerMainUI volunteerMainUI;
+        Shift shift;
+
+        public ShiftUIPanel(IVolunteerMainUI volunteerMainUI, Shift shift)
+        {
+            this.volunteerMainUI = volunteerMainUI;
+            this.shift = shift;
+        }
+
+        public Panel ShiftUI(Panel forRefence, int hourHeight)
         {
             float LengthInHours = 0;
-            if (shift.StartTime.Minute != 0)
-            {
-                LengthInHours += (1 / 60) * (60 - shift.StartTime.Minute);
-                LengthInHours -= 1;
-            }
-            if (shift.EndTime.Minute != 0)
-                LengthInHours += (1 / 60) * shift.EndTime.Minute;
-
-            LengthInHours += (shift.EndTime.Hour - shift.StartTime.Hour);
-            
+            TimeSpan timeSpan = shift.EndTime - shift.StartTime;
 
             Panel shiftPanel = new Panel();
             shiftPanel.Location = new Point(0, (shift.StartTime.Hour - 1) * hourHeight);
             shiftPanel.Size = new Size(forRefence.Size.Width, (int)(LengthInHours * hourHeight));
             shiftPanel.BackColor = Color.AliceBlue;
+            shiftPanel.BorderStyle = BorderStyle.FixedSingle;
+            shiftPanel.Click += panel_clicked;
 
             Label headder = new Label();
             headder.Text = $"{shift.NumberOfVolunteers().ToString()}/{shift.VolunteersNeeded}";
@@ -36,7 +38,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
             Label Time = new Label();
             Time.Location = new Point(0, headder.Location.Y + headder.Size.Height + 1);
-            Time.Text = $"{shift.StartTime.Hour}.00 - {shift.StartTime.Hour + LengthInHours}.00";
+            Time.Text = $"{shift.StartTime.Hour}.{shift.StartTime.Minute} - {shift.EndTime.Hour}.{shift.EndTime.Minute}";
             Time.AutoSize = true;
 
             Label Desciption = new Label();
@@ -50,6 +52,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             shiftPanel.Controls.Add(Desciption);
 
             return shiftPanel;
+        }
+
+        private void panel_clicked(object sender, EventArgs e)
+        {
+            volunteerMainUI.DisplayPressedOnShift(shift);
         }
     }
 }

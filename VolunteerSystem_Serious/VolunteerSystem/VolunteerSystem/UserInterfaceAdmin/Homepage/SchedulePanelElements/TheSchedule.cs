@@ -15,11 +15,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         string day;
         int hourHeight;
 
-        public TheSchedule(IVolunteerMainUI mainWindowUI, string Day)
+        public TheSchedule(IVolunteerMainUI mainWindowUI, string day)
         {
             _mainWindowUI = mainWindowUI;
             _mainPanel = new Panel();
-            day = Day;
+            this.day = day;
 
             hourHeight = 50; //schedulePanel.Size.Height / 23;
         }
@@ -36,8 +36,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             List<string> Tasks = _mainWindowUI.GetController().GetAllTasks();
             for (int i = 0; i < Tasks.Count; i++)
             {
-                TasksPanels tempTaskPanel = new TasksPanels();
-                
+                TasksPanels tempTaskPanel = new TasksPanels(_mainWindowUI);
+
                 //Create
                 _mainPanel.Controls.Add(tempTaskPanel.GetATaskPanel(Tasks[i], AllShifts.Where(x => x.Task == Tasks[i] && x.StartTime.DayOfWeek.ToString() == day).ToList(), new Size(widthOfTask, schedulePanel.Height), new Point((i * (widthOfTask + 5)) + 50, 0), hourHeight));
             }

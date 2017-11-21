@@ -117,5 +117,10 @@ namespace VolunteerSystem.UserInterface
         {
             return _controller;
         }
+
+        public void DisplayPressedOnShift(Shift shift)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
