@@ -10,9 +10,16 @@ namespace VolunteerSystem
     {
         static void Main(string[] args)
         {
+            /*
             Console.WriteLine(Database.DBConnection.Connection.Database);
             Notifier.InformVolunteer();
             Console.Read();
+            */
+
+            Schedule schedule = new Schedule(2018);
+            ScheduleController controller = new ScheduleController(schedule);
+            UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(controller);
+            Ui.Start();
         }
     }
 }

@@ -9,6 +9,11 @@ namespace VolunteerSystem
     public class ScheduleController
     {
         private Schedule _schedule;
+
+        public ScheduleController(Schedule schedule)
+        {
+            _schedule = schedule;
+        }
         
         public void CreateSchedule()
         {
@@ -25,14 +30,14 @@ namespace VolunteerSystem
             return _schedule.Tasks;
         }
 
-        public void CreateShift()
+        public void CreateShift(Shift shift)
         {
-            throw new NotImplementedException();
+            _schedule.Shifts.Add(shift);
         }
 
-        public void CreateTask()
+        public void CreateTask(string task)
         {
-            throw new NotImplementedException();
+            _schedule.Tasks.Add(task);
         }
 
         public void EditShift()

@@ -12,6 +12,14 @@ namespace VolunteerSystem.UserInterface
 {
     public partial class TheMainWindow : Form
     {
+        private Panel _mainPanel;
+        private Panel _menuButtonPanel;
+
+        Size fullClientWindowSize;
+
+        Button createNewShiftButton;
+        Button createNewTaskbutton;
+
         private ScheduleController _controller;
         public TheMainWindow(ScheduleController controller)
         {
@@ -20,6 +28,65 @@ namespace VolunteerSystem.UserInterface
             Height = 800;
 
             _controller = controller;
+
+            fullClientWindowSize = RectangleToScreen(this.ClientRectangle).Size;
+
+            int buttonPanelHeight = 50;
+
+            //Button panel
+            _menuButtonPanel = new Panel();
+            _menuButtonPanel.Size = new Size(fullClientWindowSize.Width - 10, buttonPanelHeight);
+            _menuButtonPanel.Location = new Point(5, 5);
+            _menuButtonPanel.BackColor = Color.Green;
+            _menuButtonPanel.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
+
+            //Main panel
+            _mainPanel = new Panel();
+            _mainPanel.Size = new Size(fullClientWindowSize.Width - 10, fullClientWindowSize.Height - (_menuButtonPanel.Location.Y + _menuButtonPanel.Height) - 10);
+            _mainPanel.Location = new Point(5, _menuButtonPanel.Location.Y + _menuButtonPanel.Height + 5);
+            _mainPanel.BackColor = Color.Blue;
+            _mainPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+
+            //Test Buttons
+            createNewShiftButton = new Button();
+            createNewShiftButton.Text = "Create Shift";
+            createNewShiftButton.Location = new Point(10, 10);
+            createNewShiftButton.AutoSize = true;
+            createNewShiftButton.Click += createShift_Clicked;
+
+            createNewTaskbutton = new Button();
+            createNewTaskbutton.Text = "Create Task";
+            createNewTaskbutton.Location = new Point(10, 50);
+            createNewTaskbutton.AutoSize = true;
+            createNewTaskbutton.Click += createTask_Clicked;
+            
+            //Adds to main panel
+            _mainPanel.Controls.Add(createNewTaskbutton);
+            _mainPanel.Controls.Add(createNewShiftButton);
+            //Adds to the window
+            Controls.Add(_mainPanel);
+            Controls.Add(_menuButtonPanel);
+        }
+
+        public void createShift_Clicked(object sender, EventArgs e)
+        {
+            Shift shift = DisplayCreateNewShift();
+
+            if (shift != null)
+                _controller.CreateShift(shift);
+            else
+                DisplayPopup("Error", "Could not create a new shift.. ");
+            
+        }
+
+        public void createTask_Clicked(object sender, EventArgs e)
+        {
+            string task = DisplayCreateNewTask();
+
+            if (task != null)
+                _controller.CreateTask(task);
+            else
+                DisplayPopup("Error", "Could not create a new task.. ");
         }
 
         public void Start()
@@ -79,6 +146,5 @@ namespace VolunteerSystem.UserInterface
         {
             throw new NotImplementedException();
         }
-
     }
 }

@@ -29,12 +29,12 @@ namespace VolunteerSystem.UserInterface
 
         public Shift Result;
 
-        public CreateNewShiftUI(List<String> Tasks)
+        public CreateNewShiftUI(List<String> tasks)
         {
             InitializeComponent();
 
             Height = 300;
-            Width = 400;
+            Width = 500;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
 
@@ -46,7 +46,7 @@ namespace VolunteerSystem.UserInterface
 
             desciptionLabel = new Label();
             desciptionLabel.Text = "Desiption: ";
-            desciptionLabel.Location = new Point(YForLabels, (heightBewtweenElements * 1) + 10);
+            desciptionLabel.Location = new Point(YForLabels, (heightBewtweenElements * 5) + 10);
             desciptionLabel.AutoSize = true;
 
             endTimeLabel = new Label();
@@ -66,20 +66,20 @@ namespace VolunteerSystem.UserInterface
 
             numberOfVolunteersLabel = new Label();
             numberOfVolunteersLabel.Text = "Max number of volunteers: ";
-            numberOfVolunteersLabel.Location = new Point(YForLabels, (heightBewtweenElements * 5) + 10);
+            numberOfVolunteersLabel.Location = new Point(YForLabels, (heightBewtweenElements * 1) + 10);
             numberOfVolunteersLabel.AutoSize = true;
 
             desciptionTextBox = new TextBox();
-            desciptionTextBox.Location = new Point(YForTextBoxandStuff, (heightBewtweenElements * 1) + 10);
+            desciptionTextBox.Location = new Point(YForTextBoxandStuff, (heightBewtweenElements * 5) + 10);
             desciptionTextBox.Size = new Size(200, desciptionTextBox.Size.Height);
             
             numberOfVolunteersTextBox = new TextBox();
-            numberOfVolunteersTextBox.Location = new Point(YForTextBoxandStuff, (heightBewtweenElements * 5) + 10);
+            numberOfVolunteersTextBox.Location = new Point(YForTextBoxandStuff, (heightBewtweenElements * 1) + 10);
             numberOfVolunteersTextBox.Size = new Size(200, desciptionTextBox.Size.Height);
 
             TasksComboBox = new ComboBox();
             TasksComboBox.Location = new Point(YForTextBoxandStuff, (heightBewtweenElements * 4) + 10);
-            foreach (string task in Tasks)
+            foreach (string task in tasks)
                 TasksComboBox.Items.Add(task);
             TasksComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             TasksComboBox.Size = new Size(200, desciptionTextBox.Size.Height);

@@ -35,7 +35,10 @@ namespace VolunteerSystem
         public Schedule(int year)
         {
             //Assign ID??
-            throw new NotImplementedException();
+            _shifts = new List<Shift>();
+            _tasks = new List<string>();
+            _id = year;
+            _year = year;
             _shifts = new List<Shift>();
         }
 
