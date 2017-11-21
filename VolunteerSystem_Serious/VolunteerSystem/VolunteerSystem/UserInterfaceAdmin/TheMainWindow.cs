@@ -12,11 +12,14 @@ namespace VolunteerSystem.UserInterface
 {
     public partial class TheMainWindow : Form
     {
-        public TheMainWindow()
+        private ScheduleController _controller;
+        public TheMainWindow(ScheduleController controller)
         {
             InitializeComponent();
             Width = 1600;
             Height = 800;
+
+            _controller = controller;
         }
 
         public void Start()
@@ -54,7 +57,7 @@ namespace VolunteerSystem.UserInterface
         
         public Shift DisplayCreateNewShift()
         {
-            CreateNewShiftUI createNewShiftUIPopup = new CreateNewShiftUI(null);
+            CreateNewShiftUI createNewShiftUIPopup = new CreateNewShiftUI(_controller.GetAllTasks());
             createNewShiftUIPopup.ShowDialog();
             if (createNewShiftUIPopup.DialogResult == DialogResult.OK)
                 return createNewShiftUIPopup.Result;

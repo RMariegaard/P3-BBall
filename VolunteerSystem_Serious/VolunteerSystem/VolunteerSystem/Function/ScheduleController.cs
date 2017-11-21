@@ -9,18 +9,28 @@ namespace VolunteerSystem
     public class ScheduleController
     {
         private Schedule _schedule;
-
+        
         public void CreateSchedule()
         {
             throw new NotImplementedException();
         }
 
-        public void ViewFullSchedule()
+        public List<Shift> GetFullSchedule()
+        {
+            return _schedule.Shifts;
+        }
+
+        public List<String> GetAllTasks()
+        {
+            return _schedule.Tasks;
+        }
+
+        public void CreateShift()
         {
             throw new NotImplementedException();
         }
 
-        public void CreateShift()
+        public void CreateTask()
         {
             throw new NotImplementedException();
         }
@@ -62,6 +72,5 @@ namespace VolunteerSystem
         {
             throw new NotImplementedException();
         }
-
     }
 }

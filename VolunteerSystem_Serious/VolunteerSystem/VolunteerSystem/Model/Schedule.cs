@@ -11,10 +11,25 @@ namespace VolunteerSystem
         private int _id;
         private int _year;
         private List<Shift> _shifts;
-
-        public void CreateNewShift(DateTime time, string task, int volunteersNeeded)
+        public List<Shift> Shifts
         {
-            _shifts.Add(new Shift(time, task, volunteersNeeded, ""));
+            get
+            {
+                return _shifts;
+            }
+        }
+        private List<String> _tasks;
+        public List<String> Tasks
+        {
+            get
+            {
+                return _tasks;
+            }
+        }
+
+        public void CreateNewShift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded)
+        {
+            _shifts.Add(new Shift(startTime, endTime, task, volunteersNeeded, ""));
         }
 
         public Schedule(int year)
