@@ -14,7 +14,7 @@ namespace VolunteerSystem.UserInterface
     {
         private Panel _mainPanel;
         private Panel _menuButtonPanel;
-
+       
         Size fullClientWindowSize;
 
         private UserInterfaceAdmin.Homepage.Homepage _homepage;
@@ -40,7 +40,7 @@ namespace VolunteerSystem.UserInterface
             _menuButtonPanel.Location = new Point(5, 5);
             _menuButtonPanel.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
 
-            //Main panel
+            //Main panel - schedule
             _mainPanel = new Panel();
             _mainPanel.Size = new Size(fullClientWindowSize.Width - 10, fullClientWindowSize.Height - (_menuButtonPanel.Location.Y + _menuButtonPanel.Height) - 10);
             _mainPanel.Location = new Point(5, _menuButtonPanel.Location.Y + _menuButtonPanel.Height + 5);

@@ -54,7 +54,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 else
                     temp.BackColor = Color.FromArgb(200, Color.LightGray);
                 temp.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top;
-                
+
                 Label tempLabel = new Label();
                 tempLabel.Location = new Point(2, 2);
                 tempLabel.Text = i + 1 >= 10 ? $"{i + 1}.00" : $"0{i + 1}.00";
@@ -65,7 +65,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 alternatingColor.Add(temp);
                 _mainPanel.Controls.Add(temp);
             }
-
             _mainPanel.AutoScroll = true;
             return _mainPanel;
         }
