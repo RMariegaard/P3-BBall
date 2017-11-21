@@ -68,13 +68,13 @@ namespace VolunteerSystem.UserInterface
 
             //End Time  - Label
             endTimeLabel = new Label();
-            endTimeLabel.Text = "End time: (F.eks.: '8:30')";
+            endTimeLabel.Text = "End time: (F.eks.: '12:00')";
             endTimeLabel.Location = new Point(YForLabels, (heightBewtweenElements * endTimePosition) + 10);
             endTimeLabel.AutoSize = true;
 
             //Start Time  - Label
             startTimeLabel = new Label();
-            startTimeLabel.Text = "Time of start: (F.eks.: '12:00')";
+            startTimeLabel.Text = "Time of start: (F.eks.: '8:30')";
             startTimeLabel.Location = new Point(YForLabels, (heightBewtweenElements * startTimePosition) + 10);
             startTimeLabel.AutoSize = true;
 
