@@ -22,7 +22,6 @@ namespace VolunteerSystem
 
         public void CreateShift()
         {
-
             throw new NotImplementedException();
         }
 
@@ -50,8 +49,7 @@ namespace VolunteerSystem
         {
             throw new NotImplementedException();
         }
-
-
+        
         public void SendRequest()
         {
             throw new NotImplementedException();

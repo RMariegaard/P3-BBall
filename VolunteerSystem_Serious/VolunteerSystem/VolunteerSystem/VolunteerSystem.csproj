@@ -34,6 +34,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +56,30 @@
     <Compile Include="Model\Volunteer.cs" />
     <Compile Include="Model\Worker.cs" />
     <Compile Include="Function\ScheduleController.cs" />
+    <Compile Include="UserInterface\CreateNewShiftUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\CreateNewShiftUI.Designer.cs">
+      <DependentUpon>CreateNewShiftUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\CreateNewTaskUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\CreateNewTaskUI.Designer.cs">
+      <DependentUpon>CreateNewTaskUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\PopupUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\PopupUI.Designer.cs">
+      <DependentUpon>PopupUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\TheMainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\TheMainWindow.Designer.cs">
+      <DependentUpon>TheMainWindow.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

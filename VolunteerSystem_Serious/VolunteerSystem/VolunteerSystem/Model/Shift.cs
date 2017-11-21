@@ -8,7 +8,8 @@ namespace VolunteerSystem
 {
     public class Shift
     {
-        private DateTime _time;
+        private DateTime _startTime;
+        private DateTime _endTime;
         private string _task;
         private int _volunteersNeeded;
         private List<Worker> _workers;
@@ -18,13 +19,12 @@ namespace VolunteerSystem
         public bool IsFilled() => NumberOfVolunteers() >= _volunteersNeeded;
         public int NumberOfVolunteers() => _workers.Count;
         public int NumberOfRequests() => _requests.Count;
+        
 
- 
-
-
-        public Shift(DateTime time, string task, int volunteersNeeded, string description)
+        public Shift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded, string description)
         {
-            this._time = time;
+            this._startTime = startTime;
+            this._endTime = endTime;
             this._task = task;
             this._volunteersNeeded = volunteersNeeded;
             this._description = description;
