@@ -19,6 +19,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
         public List<String> days;
         public string selectedDay;
         
+        public Volunteer ShownVolunteer;
+
         private IVolunteerMainUI _mainWindowUI;
 
         public Homepage(IVolunteerMainUI mainWindowUI)
@@ -64,6 +66,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             VolunteerPanel.Location = new Point(schedulePanel.Location.X + schedulePanel.Size.Width + 2, pendingRequestPanel.Location.Y + pendingRequestPanel.Size.Height + 2);
             VolunteerPanel.Size = new Size(_mainHomepagePanel.Size.Width - schedulePanel.Size.Width - 2, _mainHomepagePanel.Size.Height - pendingRequestPanel.Height - 2);
             VolunteerPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            VolunteerSmallOverview.VolunteerHomapageOverview volunteerOverviewSmall = new VolunteerSmallOverview.VolunteerHomapageOverview(_mainWindowUI, this);
+            VolunteerPanel.Controls.Add(volunteerOverviewSmall.GetPanel(VolunteerPanel.Size));
 
             //Adds to main panel
             _mainHomepagePanel.Controls.Add(schedulePanel);

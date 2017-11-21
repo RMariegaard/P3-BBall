@@ -13,6 +13,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
         void DisplayHomepage();
         void DisplayVolunteerOverview();
         void DisplayVolunteerOnHomepage(Volunteer volunteer);
+        void DisplayVolunteerInVolunteerOverview(Volunteer volunteer);
         void DisplaySettings();
         void DisplayGeneralError(string body);
         void DisplayPressedOnShift(Shift shift);

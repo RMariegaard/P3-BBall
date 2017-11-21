@@ -75,6 +75,7 @@
     <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\ShiftUIPanel.cs" />
     <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\TasksPanels.cs" />
     <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\TheSchedule.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\VolunteerSmallOverview\VolunteerHomapageOverview.cs" />
     <Compile Include="UserInterfaceAdmin\IVolunteerMainUI.cs" />
     <Compile Include="UserInterfaceAdmin\PopupUI.cs">
       <SubType>Form</SubType>

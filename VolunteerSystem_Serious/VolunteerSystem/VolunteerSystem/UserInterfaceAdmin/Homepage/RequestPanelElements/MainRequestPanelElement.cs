@@ -25,6 +25,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
 
         public Panel GetPanel(Size forRefference)
         {
+            _mainPanel.Controls.Clear();
             _mainPanel.Size = forRefference;
             titleTopLabel.Location = new Point(10, 0);
             titleTopLabel.Text = "Pending Requests";

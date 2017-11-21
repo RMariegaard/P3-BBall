@@ -15,16 +15,15 @@ namespace VolunteerSystem
         public string Email { get { return _email; } }
         public string Name { get { return _name; } }
 
-
-
+        
         public Worker(string name, string email)
         {
             this._name = name;
             this._email = email;
         }
 
-        public string GetInformation() {
-
+        public string GetInformation()
+        {
             throw new NotImplementedException();
         }
     }

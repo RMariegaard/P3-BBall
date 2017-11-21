@@ -125,6 +125,12 @@ namespace VolunteerSystem.UserInterface
 
         public void DisplayVolunteerOnHomepage(Volunteer volunteer)
         {
+            _homepage.ShownVolunteer = volunteer;
+            UpdateUI();
+        }
+
+        public void DisplayVolunteerInVolunteerOverview(Volunteer volunteer)
+        {
             throw new NotImplementedException();
         }
     }
