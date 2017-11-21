@@ -1,5 +1,5 @@
 ﻿
-#menu-bar {
+.menu {
     width: 95%;
     margin: 0px 0px 0px 0px;
     padding: 6px 6px 4px 6px;
@@ -11,7 +11,7 @@
     position: relative;
 }
 
-    #menu-bar li {
+    .menu li {
         margin: 0px 0px 0px 0px;
         padding: 0px 6px 0px 0px;
         float: left;
@@ -19,7 +19,7 @@
         list-style: none;
     }
 
-    #menu-bar a {
+    .menu a {
         font-weight: bold;
         font-family: arial;
         font-style: normal;
@@ -34,12 +34,13 @@
     }
 
 
-    #menu-bar .active a, #menu-bar li:hover > a {
+    .menu .active a, #menu li:hover > a {
         background-color: darkgray;
     }
 
 .timeline ul {
     padding: 20px 0px 0px 0px;
+    width: 2000px;
 }
 
 .timeline li {
@@ -52,20 +53,38 @@
 
 #container {
     position: relative;
-    width: 800px;
     height: 600px;
-    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: scroll;
     margin-left: 20px;
+    width: 1000px;
 }
 
-.shift{
+.tasks{
     position: absolute;
     top: 0px;
     left: 80px;
+    width:2000px;
+}
+
+.task{
     background-color: white;
-    border: 2px solid red;
+    border: 2px solid black;
     width: 200px;
     height: 1166px;
+    float:left;
+    position:relative;
+}
+
+.task p{
+    margin: 0px 0px 16px 0px;
+}
+
+.shift{
+    border: 1px solid red;
+    width:100%;
+    position: absolute;
+
 }
 
 

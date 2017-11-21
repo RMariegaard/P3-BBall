@@ -9,12 +9,11 @@
 </head>
 <body>
     <form id="form1" runat="server">
- <ul id="menu-bar">
+ <ul id="menu" class="menu" runat="server">
  <li class="active"><a href="#">Schedule</a></li>
- <li><a href="#">My Shifts</a></li>
- <li><a href="#">Account</a></li>
+
 </ul>
-    <h1>Aarhus Basketball Festival Volunteer Schedule</h1>
+    <h1 id="hej" runat="server">Aarhus Basketball Festival Volunteer Schedule</h1>
         <div id="container">
 	<div class="timeline">
 		<ul>
@@ -39,7 +38,22 @@
 			<li><span>24:00</span></li>
 		</ul>
 	</div>
-        <div class="shift"><span>KITCHEN</span></div>
+        <div class="tasks" id="tasks" runat="server">
+            <!-- 34 px is 6.00 - 60px is one hour-->
+            <div class="task">
+                <p>KITCHEN</p>
+                <div class="shift" style="height: 60px; top: 94px;">Shift1</div>
+                <div class="shift" style="height: 120px; top: 214px;">Shift2</div>
+                <div class="shift" style="height: 60px; top: 34px;">Shift3</div>
+
+
+            </div>
+            <div class="task">
+                <p>KICHEN</p>
+
+            </div>
+
+        </div> 
 
         </div>
 

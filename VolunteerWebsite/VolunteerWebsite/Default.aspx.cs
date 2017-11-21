@@ -7,8 +7,22 @@ using System.Web.UI.WebControls;
 
 public partial class _Default : System.Web.UI.Page
 {
+    private bool _isLoggedIn;
     protected void Page_Load(object sender, EventArgs e)
     {
+        _isLoggedIn = false;
+        if (_isLoggedIn)
+        {
+            menu.InnerHtml +=  "<li><a href=\"#\"> My Shifts </a></li> <li><a href=\"#\"> Account </a></li>";
+        }
+
+        string[] strings = { "Gym", "Eating" };
+
+        foreach (var str in strings)
+        {
+            tasks.InnerHtml += $"<div class=\"task\"><span>{str}</span></div>\n";
+        }
+        
 
     }
 }
