@@ -68,6 +68,13 @@
     <Compile Include="UserInterfaceAdmin\CreateNewTaskUI.Designer.cs">
       <DependentUpon>CreateNewTaskUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterfaceAdmin\Homepage\Homepage.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\ButtonsBottom.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\DaysLeftNavigation.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\ShiftUIPanel.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\TasksPanels.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\TheSchedule.cs" />
+    <Compile Include="UserInterfaceAdmin\IVolunteerMainUI.cs" />
     <Compile Include="UserInterfaceAdmin\PopupUI.cs">
       <SubType>Form</SubType>
     </Compile>

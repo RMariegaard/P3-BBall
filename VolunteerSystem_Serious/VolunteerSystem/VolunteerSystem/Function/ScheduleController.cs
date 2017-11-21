@@ -20,7 +20,7 @@ namespace VolunteerSystem
             throw new NotImplementedException();
         }
 
-        public List<Shift> GetFullSchedule()
+        public List<Shift> GetAllShifts()
         {
             return _schedule.Shifts;
         }

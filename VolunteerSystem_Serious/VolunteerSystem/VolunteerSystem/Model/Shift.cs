@@ -9,12 +9,47 @@ namespace VolunteerSystem
     public class Shift
     {
         private DateTime _startTime;
+        public DateTime StartTime
+        {
+            get
+            {
+                return _startTime;
+            }
+        }
         private DateTime _endTime;
+        public DateTime EndTime
+        {
+            get
+            {
+                return _endTime;
+            }
+        }
         private string _task;
+        public string Task
+        {
+            get
+            {
+                return _task;
+            }
+        }
         private int _volunteersNeeded;
+        public int VolunteersNeeded
+        {
+            get
+            {
+                return _volunteersNeeded;
+            }
+        }
         private List<Worker> _workers;
         private List<Request> _requests;
         private string _description;
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+        }
 
         public bool IsFilled() => NumberOfVolunteers() >= _volunteersNeeded;
         public int NumberOfVolunteers() => _workers.Count;
