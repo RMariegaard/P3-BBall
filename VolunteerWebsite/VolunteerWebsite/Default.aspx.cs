@@ -16,12 +16,14 @@ public partial class _Default : System.Web.UI.Page
             menu.InnerHtml +=  "<li><a href=\"#\"> My Shifts </a></li> <li><a href=\"#\"> Account </a></li>";
         }
 
-        string[] strings = { "Gym", "Eating" };
+        string[] strings = { "Kitchen", "Gym", "Eating" };
 
         foreach (var str in strings)
         {
             tasks.InnerHtml += $"<div class=\"task\"><span>{str}</span></div>\n";
-        }
+             }
+
+
 
 
         shift1.ServerClick += ShiftClick;

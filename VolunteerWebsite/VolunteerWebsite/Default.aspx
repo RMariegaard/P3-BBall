@@ -57,14 +57,19 @@
 	</div>
 
 
-          <div class="shifttasks">
+          <div class="shifttasks" id="shifttasks1" runat="server">
             <!-- 34 px is 6.00 - 60px is one hour-->
-            <div class="shifttask">
-                <a id ="shift1" runat="server" href="#hej"><div class="shift" style="height: 60px; top: 94px;">Shift1</div></a>
+            <div class="shifttask" runat="server">
+                
                 <div class="shift" style="height: 90px; top: 214px;">Shift2</div>
                 <div class="shift" style="height: 60px; top: 34px;">Shift3</div>
 
-            </div>
+                <a id ="shift1" runat="server" href="#hej" style="display: block;">
+                <div class="shift" style="height: 60px; top: 94px; left: 206px;">Shift1</div>
+                </a>
+                <div class="shift" style="height: 90px; top: 214px; left: 206px;">Shift2</div>
+                <div class="shift" style="height: 60px; top: 34px; left: 206px;">Shift3</div>
+
 
         </div> 
     </div>

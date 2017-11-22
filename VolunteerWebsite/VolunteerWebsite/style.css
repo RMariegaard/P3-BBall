@@ -86,11 +86,14 @@
     margin: 0px 0px 16px 0px;
 }
 
-.shift{
+.shift {
     background: red;
-    width:100%;
     position: absolute;
     border: 2px solid black;
+    width: 200px;
+    height: 1166px;
+    float: left;
+    position: absolute;
 }
 .shifttasks {
     width: 2000px;
@@ -98,10 +101,7 @@
 }
 
 .shifttask {
-    width: 200px;
-    height: 1166px;
-    float: left;
-    position: absolute;
+
 }
 
 /* The Modal (background) */
