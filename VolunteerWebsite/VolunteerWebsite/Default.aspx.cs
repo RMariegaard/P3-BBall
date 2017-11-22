@@ -20,7 +20,7 @@ public partial class _Default : System.Web.UI.Page
 
         foreach (var str in strings)
         {
-            tasks.InnerHtml += $"<div class=\"task\"><span>{str}</span></div>\n";
+            tasks.InnerHtml += "<div class=\"task\"><span>"+ str +"</span></div>\n";
              }
 
 
