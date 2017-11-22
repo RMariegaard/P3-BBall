@@ -39,6 +39,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             if (volunteer != null)
             {
                 _mainPanel.Controls.Add(getVolunteerInformationPanel(new Point(5, 40), new Size((_mainPanel.Width/3) - 5, _mainPanel.Height - 50), volunteer));
+                _mainPanel.Controls.Add(getVolunteerShiftPanel(new Point((_mainPanel.Width / 3) +5, 40), new Size((2*_mainPanel.Width / 3) - 10, (_mainPanel.Height/2) - 22), volunteer));
             }
             _mainPanel.Controls.Add(titleTopLabel);
 
@@ -85,12 +86,25 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             volunteerMainUI.DisplayVolunteerInVolunteerOverview(volunteer);
         }
 
-        private Panel getVolunteerShiftPanel()
+        private Panel getVolunteerShiftPanel(Point location, Size size, Worker worker)
         {
             Panel volunteerShiftPanel = new Panel();
-            
+            volunteerShiftPanel.Location = location;
+            volunteerShiftPanel.Size = size;
+            volunteerShiftPanel.BorderStyle = BorderStyle.FixedSingle;
+
+            //foreach (Shift shift in worker)
+
             return volunteerShiftPanel;
         }
+
+        private Panel getSingleShiftPanel(Point location, Size size, Shift shift)
+        {
+            Panel panel = new Panel();
+
+            return panel;
+        }
+
         private Panel getVolunteerRequestPanel()
         {
             throw new NotImplementedException();
