@@ -9,6 +9,18 @@ namespace VolunteerSystem
     public class WorkerController
     {
         private List<Worker> _wokers;
+        public List<Worker> Workers
+        {
+            get
+            {
+                return _wokers;
+            }
+        }
+
+        public WorkerController()
+        {
+            _wokers = new List<Worker>();
+        }
 
         public void CreateWorker()
         {

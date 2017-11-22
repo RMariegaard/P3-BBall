@@ -91,7 +91,6 @@ namespace VolunteerSystem.UserInterface
         {
             //Approve it
             request.ApproveRequest();
-            _controller.GetAllRequests().Remove(request);
 
             //Update ui
             _homepage.UpdateSchedulePanel();
@@ -102,7 +101,6 @@ namespace VolunteerSystem.UserInterface
         {
             //Deny it
             request.DenieRequest();
-            _controller.GetAllRequests().Remove(request);
 
             //Update ui
             _homepage.UpdatePendingRequestPanel();

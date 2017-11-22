@@ -26,13 +26,14 @@ namespace VolunteerSystem
                 return _tasks;
             }
         }
-
-        private List<Request> _requests;
+        
         public List<Request> Requests
         {
             get
             {
-                return _requests;
+                List<Request> requests = new List<Request>();
+                Shifts.ForEach(x => x.Requests.ForEach(y => requests.Add(y)));
+                return requests;
             }
         }
 
@@ -49,7 +50,6 @@ namespace VolunteerSystem
             _id = year;
             _year = year;
             _shifts = new List<Shift>();
-            _requests = new List<Request>();
         }
     }
 }

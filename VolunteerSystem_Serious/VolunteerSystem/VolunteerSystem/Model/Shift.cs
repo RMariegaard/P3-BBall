@@ -50,6 +50,14 @@ namespace VolunteerSystem
         }
 
         private List<Request> _requests;
+        public List<Request> Requests
+        {
+            get
+            {
+                return _requests;
+            }
+        }
+
         private string _description;
         public string Description
         {
