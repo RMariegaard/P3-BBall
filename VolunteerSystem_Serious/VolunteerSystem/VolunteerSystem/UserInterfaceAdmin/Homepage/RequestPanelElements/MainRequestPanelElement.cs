@@ -78,11 +78,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
                 if (i % 2 == 0)
                     tempPanel.BackColor = Color.LightGray;
 
-                tempPanel.Controls.Add(getVolunteerName(new Point((_mainPanel.Size.Width / 5) * 0 - 2, 2), request, request.Worker));
-                tempPanel.Controls.Add(getDateItWasSent(new Point((_mainPanel.Size.Width / 5) * 1 - 2, 2), request));
-                tempPanel.Controls.Add(getShiftInformation(new Point((_mainPanel.Size.Width / 5) * 2 - 2, 2), request));
-                tempPanel.Controls.Add(getAccept(new Point((_mainPanel.Size.Width / 5) * 3 - 2, 2), request));
-                tempPanel.Controls.Add(getDeny(new Point((_mainPanel.Size.Width / 5) * 4 - 2, 2), request));
+                tempPanel.Controls.Add(getVolunteerName(new Point((_mainPanel.Size.Width / 5) * 0 + 2, 2), request, request.Worker));
+                tempPanel.Controls.Add(getDateItWasSent(new Point((_mainPanel.Size.Width / 5) * 1 + 2, 2), request));
+                tempPanel.Controls.Add(getShiftInformation(new Point((_mainPanel.Size.Width / 5) * 2 + 2, 2), request));
+                tempPanel.Controls.Add(getAccept(new Point((_mainPanel.Size.Width / 5) * 3 + 2, 2), request));
+                tempPanel.Controls.Add(getDeny(new Point((_mainPanel.Size.Width / 5) * 4 + 2, 2), request));
 
                 _mainPanel.Controls.Add(tempPanel);
                 i++;
