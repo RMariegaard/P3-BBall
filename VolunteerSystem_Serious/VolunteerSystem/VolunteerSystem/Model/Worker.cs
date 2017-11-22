@@ -24,7 +24,7 @@ namespace VolunteerSystem
 
         public string GetInformation()
         {
-            throw new NotImplementedException();
+            return Name + "\t" + Email;
         }
     }
 }

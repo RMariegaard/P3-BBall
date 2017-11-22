@@ -37,11 +37,19 @@ namespace VolunteerSystem
 
         public Volunteer(string name, string email, string assosiation) : base(name, email)
         {
+            this._dateCreated = DateTime.Now;
             this._assosiation = assosiation;
             this._yearsWorked = new List<int>();
         }
 
-        public bool IsValidForSeasonTickets() => throw new NotImplementedException();
+        public bool IsValidForSeasonTickets()
+        {
+            int thisYear = DateTime.Now.Year;
+            int lastYear = thisYear - 1;
+
+            return thisYear == YearsWorked.Last() && lastYear == YearsWorked[YearsWorked.Count - 1];
+            
+        }
         
         
     }
