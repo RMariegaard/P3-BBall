@@ -31,23 +31,23 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
 
             Label nameLabel = new Label();
             nameLabel.Text = "Name";
-            nameLabel.Location = new Point((_mainPanel.Size.Width / 5) * 0 - 2, 2);
+            nameLabel.Location = new Point((_mainPanel.Size.Width / 5) * 0 + 2, 2);
 
             Label dateSentLabel = new Label();
             dateSentLabel.Text = "Request Sent";
-            dateSentLabel.Location = new Point((_mainPanel.Size.Width / 5) * 1 - 2, 2);
+            dateSentLabel.Location = new Point((_mainPanel.Size.Width / 5) * 1 + 2, 2);
 
             Label shiftInfoLabel = new Label();
             shiftInfoLabel.Text = "Shift Info";
-            shiftInfoLabel.Location = new Point((_mainPanel.Size.Width / 5) * 2 - 2, 2);
+            shiftInfoLabel.Location = new Point((_mainPanel.Size.Width / 5) * 2 + 2, 2);
 
             Label acceptButtonLabel = new Label();
             acceptButtonLabel.Text = "Accept";
-            acceptButtonLabel.Location = new Point((_mainPanel.Size.Width / 5) * 3 - 2, 2);
+            acceptButtonLabel.Location = new Point((_mainPanel.Size.Width / 5) * 3 + 2, 2);
 
             Label denyButtonLabel = new Label();
             denyButtonLabel.Text = "Deny";
-            denyButtonLabel.Location = new Point((_mainPanel.Size.Width / 5) * 4 - 2, 2);
+            denyButtonLabel.Location = new Point((_mainPanel.Size.Width / 5) * 4 + 2, 2);
 
 
             panel.Controls.Add(nameLabel);
@@ -101,6 +101,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             volunteerNameLabel.Text = request.Worker.Name;
             volunteerNameLabel.Tag = worker;
             volunteerNameLabel.Click += volunteerLabel_clicked;
+            volunteerNameLabel.AutoSize = true;
 
             return volunteerNameLabel;
         }
@@ -115,7 +116,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             Label dateSent = new Label();
             dateSent.Location = location;
             dateSent.Text = request.TimeSent.ToShortDateString();
-            
+            dateSent.AutoSize = true;
+
             return dateSent;
         }
 
@@ -124,7 +126,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             Label shiftInformationLabel = new Label();
             shiftInformationLabel.Location = location;
             shiftInformationLabel.Text = request.Shift.Task;
-            
+            shiftInformationLabel.AutoSize = true;
+
             //Mangler at skrive dato og klokslet på
             return shiftInformationLabel;
         }
@@ -136,7 +139,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             acceptButton.AutoSize = true;
             acceptButton.Click += acceptButton_Clicked;
             acceptButton.Tag = request;
-
+            
             return acceptButton;
         }
 
