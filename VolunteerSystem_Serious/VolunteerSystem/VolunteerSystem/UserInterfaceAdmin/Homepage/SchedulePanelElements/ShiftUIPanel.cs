@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 {
-    class ShiftUIPanel
+    public class ShiftUIPanel
     {
         IVolunteerMainUI volunteerMainUI;
         Shift shift;
@@ -57,7 +57,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
         private void panel_clicked(object sender, EventArgs e)
         {
-            volunteerMainUI.DisplayPressedOnShift(shift);
+            volunteerMainUI.DisplayPressedOnShift(this);
         }
     }
 }
