@@ -14,17 +14,17 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         IVolunteerMainUI _mainWindowUI;
         string day;
         int hourHeight;
-        Panel test;
+        Panel colorAndShiftPanel;
 
         public TheSchedule(IVolunteerMainUI mainWindowUI, string day)
         {
             _mainWindowUI = mainWindowUI;
             _mainPanel = new Panel();
             _mainPanel.BorderStyle = BorderStyle.FixedSingle;
-            test = new Panel();
+            colorAndShiftPanel = new Panel();
             this.day = day;
             hourHeight = 50; //schedulePanel.Size.Height / 23
-
+            
             //Add Numbers to Panel. this needs only to be done once
             for (int i = 0; i < 24; i++)
             {
@@ -32,7 +32,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 tempLabel.Location = new Point(0, (i * hourHeight));
                 tempLabel.Text = i + 1 >= 10 ? $"{i + 1}.00" : $"0{i + 1}.00";
                 tempLabel.AutoSize = true;
-                test.Controls.Add(tempLabel);
+                colorAndShiftPanel.Controls.Add(tempLabel);
             }
         }
 
@@ -43,9 +43,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             _mainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             _mainPanel.AutoScroll = true;
             
-            test.Location = new Point(0, 0);
-            test.Size = new Size(schedulePanel.Size.Width-20, 24 * hourHeight);
-            test.Paint += alternatingColors_Paint;
+            colorAndShiftPanel.Location = new Point(0, 0);
+            colorAndShiftPanel.Size = new Size(schedulePanel.Size.Width-20, 24 * hourHeight);
+            colorAndShiftPanel.Paint += alternatingColors_Paint;
             
             //Adds Tasks and shifts
             int widthOfTask = 100;
@@ -56,10 +56,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 TasksPanels tempTaskPanel = new TasksPanels(_mainWindowUI);
 
                 //Create
-                test.Controls.Add(tempTaskPanel.GetATaskPanel(Tasks[i], AllShifts.Where(x => x.Task == Tasks[i] && x.StartTime.DayOfWeek.ToString() + " " + x.StartTime.ToShortDateString() == day).ToList(), new Size(widthOfTask, test.Height), new Point((i * (widthOfTask + 5)) + 50, 0), hourHeight));
+                colorAndShiftPanel.Controls.Add(tempTaskPanel.GetATaskPanel(Tasks[i], AllShifts.Where(x => x.Task == Tasks[i] && x.StartTime.DayOfWeek.ToString() + " " + x.StartTime.ToShortDateString() == day).ToList(), new Size(widthOfTask, colorAndShiftPanel.Height), new Point((i * (widthOfTask + 5)) + 50, 0), hourHeight));
             }
 
-            _mainPanel.Controls.Add(test);
+            _mainPanel.Controls.Add(colorAndShiftPanel);
             return _mainPanel;
         }
 
