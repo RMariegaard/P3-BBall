@@ -38,6 +38,7 @@ namespace VolunteerSystem
 
         public Request(Worker worker, Shift shift)
         {
+            _timeSent = DateTime.Now;
             _worker = worker;
             _shift = shift;
         }
