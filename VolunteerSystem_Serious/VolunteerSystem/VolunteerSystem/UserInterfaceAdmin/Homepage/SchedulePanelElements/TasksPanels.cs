@@ -21,7 +21,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             Panel taskPanel = new Panel();
             taskPanel.Location = location;
             taskPanel.Size = size;
-            taskPanel.BackColor = Color.LightCyan;
+            taskPanel.BackColor = Color.FromArgb(100, Color.LightCyan);
             taskPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left;
             taskPanel.BorderStyle = BorderStyle.FixedSingle;
 

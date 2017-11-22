@@ -41,6 +41,14 @@ namespace VolunteerSystem
             }
         }
         private List<Worker> _workers;
+        public List<Worker> Workers
+        {
+            get
+            {
+                return _workers;
+            }
+        }
+
         private List<Request> _requests;
         private string _description;
         public string Description

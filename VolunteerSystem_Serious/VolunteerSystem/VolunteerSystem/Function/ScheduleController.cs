@@ -13,6 +13,7 @@ namespace VolunteerSystem
         public ScheduleController(Schedule schedule)
         {
             _schedule = schedule;
+            justForTesting();
         }
         
         public void CreateSchedule()
@@ -22,25 +23,7 @@ namespace VolunteerSystem
 
         public List<Request> GetAllRequests()
         {
-            List<Request> requests = new List<Request>();
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-            requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), new Shift(new DateTime(2017, 6, 26), new DateTime(2017, 6, 27), "Kitchen", 5, "Nope")));
-
-            return requests;
-            //return _schedule.Requests;
+            return _schedule.Requests;
         }
 
         public List<Shift> GetAllShifts()
@@ -99,6 +82,40 @@ namespace VolunteerSystem
         public void DenyRequest()
         {
             throw new NotImplementedException();
+        }
+
+        private void justForTesting()
+        {
+            
+            
+            _schedule.Tasks.Add("Kitchen");
+            _schedule.Tasks.Add("Accomadation");
+            _schedule.Tasks.Add("Sleeping");
+            _schedule.Tasks.Add("Security");
+
+            _schedule.Shifts.Add(new Shift(new DateTime(2017, 6, 26, 8, 30, 0), new DateTime(2017, 6, 26, 12, 30, 0), _schedule.Tasks[0], 5, "Nope"));
+            _schedule.Shifts.Add(new Shift(new DateTime(2017, 6, 27, 8, 0, 0), new DateTime(2017, 6, 27, 10, 30, 0), _schedule.Tasks[0], 5, "Nope"));
+            _schedule.Shifts.Add(new Shift(new DateTime(2017, 6, 27, 12, 30, 0), new DateTime(2017, 6, 27, 18, 30, 0), _schedule.Tasks[1], 5, "Nope"));
+            _schedule.Shifts.Add(new Shift(new DateTime(2017, 6, 27, 2, 0, 0), new DateTime(2017, 6, 27, 5, 30, 0), _schedule.Tasks[1], 5, "Nope"));
+            _schedule.Shifts.Add(new Shift(new DateTime(2017, 6, 27, 18, 0, 0), new DateTime(2017, 6, 27, 22, 30, 0), _schedule.Tasks[3], 5, "Nope"));
+            _schedule.Shifts.Add(new Shift(new DateTime(2017, 6, 27, 9, 20, 0), new DateTime(2017, 6, 27, 14, 30, 0), _schedule.Tasks[3], 5, "Nope"));
+            _schedule.Shifts.Add(new Shift(new DateTime(2017, 6, 27, 17, 10, 0), new DateTime(2017, 6, 27, 23, 0, 0), _schedule.Tasks[2], 5, "Nope"));
+
+
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[0]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[1]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[2]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[3]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[4]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[5]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[6]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[0]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[1]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[2]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[3]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[4]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[5]));
+            _schedule.Requests.Add(new Request(new Volunteer("Casper", "casnie16@student.aau.dk", "U12 drenge"), _schedule.Shifts[6]));
         }
     }
 }

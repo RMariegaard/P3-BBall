@@ -27,28 +27,28 @@ namespace VolunteerSystem
             }
         }
 
-        private Volunteer _volunteer;
-        public Volunteer Volunteer
+        private Worker _worker;
+        public Worker Worker
         {
             get
             {
-                return _volunteer;
+                return _worker;
             }
         }
 
-        public Request(Volunteer volunteer, Shift shift)
+        public Request(Worker worker, Shift shift)
         {
-            _volunteer = volunteer;
+            _worker = worker;
             _shift = shift;
         }
 
         public void ApproveRequest()
         {
-            throw new NotImplementedException();
+            Shift.Workers.Add(_worker);
         }
         public void DenieRequest()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

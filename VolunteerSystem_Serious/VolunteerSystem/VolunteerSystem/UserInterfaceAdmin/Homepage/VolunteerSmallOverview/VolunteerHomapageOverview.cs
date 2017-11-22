@@ -55,10 +55,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 
             Label information = new Label();
             String informationString = 
-                $"Name: {volunteer.Name}\n" +
-                $"Emil: {volunteer.Email}\n" +
-                $"Team: {volunteer.Assosiation}\n" +
-                $"Created: {volunteer.DateCreated.ToShortDateString()}\n" +
+                $"Name: {volunteer.Name}\n\n" +
+                $"Emil: {volunteer.Email}\n\n" +
+                $"Team: {volunteer.Assosiation}\n\n" +
+                $"Created: {volunteer.DateCreated.ToShortDateString()}\n\n" +
                 $"Years Participated: \n";
             foreach(int year in volunteer.YearsWorked)
             {
@@ -66,14 +66,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             }
             information.Text = informationString;
             information.Location = new Point(2, 10);
-            information.MaximumSize = new Size(size.Width - 4,0);
+            information.MaximumSize = new Size(size.Width - 10,0);
             information.AutoSize = true;
 
             Button fullProfileButton = new Button();
             fullProfileButton.Click += fullProfileButton_Clicked;
             fullProfileButton.Text = "Full Profile";
             fullProfileButton.AutoSize = true;
-            fullProfileButton.Location = new Point((size.Width - fullProfileButton.Size.Width) / 2, information.Location.Y + information.Size.Height + 20);
+            fullProfileButton.Location = new Point((size.Width - fullProfileButton.Size.Width) / 2, information.Bottom + 10/*_mainPanel.Size.Height - 100*/);
 
             volunteerInformationPanel.Controls.Add(fullProfileButton);
             volunteerInformationPanel.Controls.Add(information);

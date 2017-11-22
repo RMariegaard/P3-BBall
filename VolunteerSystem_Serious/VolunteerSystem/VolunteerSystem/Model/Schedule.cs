@@ -49,6 +49,7 @@ namespace VolunteerSystem
             _id = year;
             _year = year;
             _shifts = new List<Shift>();
+            _requests = new List<Request>();
         }
     }
 }

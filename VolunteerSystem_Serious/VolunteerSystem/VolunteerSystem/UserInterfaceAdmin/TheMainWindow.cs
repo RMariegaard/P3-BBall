@@ -87,6 +87,27 @@ namespace VolunteerSystem.UserInterface
             throw new NotImplementedException();
         }
         
+        public void AcceptWorkerRequest(Request request)
+        {
+            //Approve it
+            request.ApproveRequest();
+            _controller.GetAllRequests().Remove(request);
+
+            //Update ui
+            _homepage.UpdateSchedulePanel();
+            _homepage.UpdatePendingRequestPanel();
+        }
+
+        public void DenyWorkerRequest(Request request)
+        {
+            //Deny it
+            request.DenieRequest();
+            _controller.GetAllRequests().Remove(request);
+
+            //Update ui
+            _homepage.UpdatePendingRequestPanel();
+        }
+
         public Shift DisplayCreateNewShift()
         {
             CreateNewShiftUI createNewShiftUIPopup = new CreateNewShiftUI(_controller.GetAllTasks());
