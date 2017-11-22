@@ -14,14 +14,25 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         IVolunteerMainUI _mainWindowUI;
         string day;
         int hourHeight;
+        Panel test;
 
         public TheSchedule(IVolunteerMainUI mainWindowUI, string day)
         {
             _mainWindowUI = mainWindowUI;
             _mainPanel = new Panel();
+            test = new Panel();
             this.day = day;
+            hourHeight = 50; //schedulePanel.Size.Height / 23
 
-            hourHeight = 50; //schedulePanel.Size.Height / 23;
+            //Add Numbers to Panel. this needs only to be done once
+            for (int i = 0; i < 24; i++)
+            {
+                Label tempLabel = new Label();
+                tempLabel.Location = new Point(0, (i * hourHeight));
+                tempLabel.Text = i + 1 >= 10 ? $"{i + 1}.00" : $"0{i + 1}.00";
+                tempLabel.AutoSize = true;
+                test.Controls.Add(tempLabel);
+            }
         }
 
         public Panel GetPanel(Panel schedulePanel)
@@ -29,7 +40,12 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             _mainPanel.Size = schedulePanel.Size;
             _mainPanel.Location = new Point(0, 0);
             _mainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-
+            _mainPanel.AutoScroll = true;
+            
+            test.Location = new Point(0, 0);
+            test.Size = new Size(schedulePanel.Size.Width-20, 24 * hourHeight);
+            test.Paint += alternatingColors_Paint;
+            
             //Adds Tasks and shifts
             int widthOfTask = 100;
             List<Shift> AllShifts = _mainWindowUI.GetController().GetAllShifts();
@@ -39,34 +55,28 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 TasksPanels tempTaskPanel = new TasksPanels(_mainWindowUI);
 
                 //Create
-                _mainPanel.Controls.Add(tempTaskPanel.GetATaskPanel(Tasks[i], AllShifts.Where(x => x.Task == Tasks[i] && x.StartTime.DayOfWeek.ToString() == day).ToList(), new Size(widthOfTask, schedulePanel.Height), new Point((i * (widthOfTask + 5)) + 50, 0), hourHeight));
+                test.Controls.Add(tempTaskPanel.GetATaskPanel(Tasks[i], AllShifts.Where(x => x.Task == Tasks[i] && x.StartTime.DayOfWeek.ToString() == day).ToList(), new Size(widthOfTask, test.Height), new Point((i * (widthOfTask + 5)) + 50, 0), hourHeight));
             }
 
-            //Alternating color:
-            List<Panel> alternatingColor = new List<Panel>();
+            _mainPanel.Controls.Add(test);
+            return _mainPanel;
+        }
+
+        private void alternatingColors_Paint(object sender, PaintEventArgs e)
+        {
             for (int i = 0; i < 24; i++)
             {
-                Panel temp = new Panel();
-                temp.Size = new Size(_mainPanel.Size.Width, hourHeight);
-                temp.Location = new Point(0, (hourHeight) * i);
-                if (i % 2 == 0)
-                    temp.BackColor = Color.FromArgb(200, Color.Gray);
+                Rectangle rc = _mainPanel.ClientRectangle;
+                rc.Size = new Size(_mainPanel.Size.Width-10, hourHeight);
+                rc.Location = new Point(0, (i*hourHeight));
+                Brush brush1 = new SolidBrush(Color.LightGray);
+                Brush brush2 = new SolidBrush(Color.Gray);
+
+                if (i%2 == 0)
+                    e.Graphics.FillRectangle(brush1, rc);
                 else
-                    temp.BackColor = Color.FromArgb(200, Color.LightGray);
-                temp.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top;
-
-                Label tempLabel = new Label();
-                tempLabel.Location = new Point(2, 2);
-                tempLabel.Text = i + 1 >= 10 ? $"{i + 1}.00" : $"0{i + 1}.00";
-                tempLabel.AutoSize = true;
-
-                temp.Controls.Add(tempLabel);
-
-                alternatingColor.Add(temp);
-                _mainPanel.Controls.Add(temp);
+                    e.Graphics.FillRectangle(brush2, rc);
             }
-            _mainPanel.AutoScroll = true;
-            return _mainPanel;
         }
     }
 }

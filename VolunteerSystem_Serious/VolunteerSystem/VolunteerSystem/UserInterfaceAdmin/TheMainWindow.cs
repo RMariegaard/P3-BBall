@@ -126,7 +126,7 @@ namespace VolunteerSystem.UserInterface
         public void DisplayVolunteerOnHomepage(Volunteer volunteer)
         {
             _homepage.ShownVolunteer = volunteer;
-            UpdateUI();
+            _homepage.UpdateVolunteerPanel();
         }
 
         public void DisplayVolunteerInVolunteerOverview(Volunteer volunteer)

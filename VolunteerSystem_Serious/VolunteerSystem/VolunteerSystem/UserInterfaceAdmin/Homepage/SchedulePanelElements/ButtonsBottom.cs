@@ -12,11 +12,13 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
     {
         IVolunteerMainUI _mainWindowUI;
         Panel _mainPanel;
+        Homepage _homepage;
 
-        public ButtonsBottom(IVolunteerMainUI mainWindowUI)
+        public ButtonsBottom(IVolunteerMainUI mainWindowUI, Homepage homepage)
         {
             _mainWindowUI = mainWindowUI;
             _mainPanel = new Panel();
+            _homepage = homepage;
         }
 
         public Panel GetPanel()
@@ -45,7 +47,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             if (shift != null)
             {
                 _mainWindowUI.GetController().CreateShift(shift);
-                _mainWindowUI.UpdateUI();
+                _homepage.UpdateSchedulePanel();
             }
             else
                 _mainWindowUI.DisplayPopup("Error", "Could not create a new shift.. ");
@@ -59,7 +61,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             if (task != null)
             {
                 _mainWindowUI.GetController().CreateTask(task);
-                _mainWindowUI.UpdateUI();
+                _homepage.UpdateSchedulePanel();
             }
             else
                 _mainWindowUI.DisplayPopup("Error", "Could not create a new task.. ");

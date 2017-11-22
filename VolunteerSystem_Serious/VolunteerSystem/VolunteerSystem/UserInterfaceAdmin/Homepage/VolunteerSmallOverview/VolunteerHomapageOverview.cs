@@ -30,7 +30,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             _mainPanel.Size = size;
 
             titleTopLabel.Location = new Point(10, 0);
-            titleTopLabel.Text = "Pending Requests";
+            titleTopLabel.Text = "View a single volunteer";
             titleTopLabel.Font = new Font("Arial", 24, FontStyle.Bold);
             titleTopLabel.AutoSize = true;
 

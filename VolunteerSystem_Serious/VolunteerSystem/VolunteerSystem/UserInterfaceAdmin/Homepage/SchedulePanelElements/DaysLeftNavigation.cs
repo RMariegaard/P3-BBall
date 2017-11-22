@@ -57,7 +57,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             _homepage.selectedDay = pressedButton.Text;
 
             //Update UI
-            mainWindowUI.UpdateUI();
+            _homepage.UpdateSchedulePanel();
         }
     }
 }
