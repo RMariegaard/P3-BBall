@@ -22,7 +22,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         public Panel GetPanel(Size forRefferece)
         {
             mainPanel = new Panel();
-            int heightOfButtons = 20;
+            int heightOfButtons = 40;
             mainPanel.Size = forRefferece;
 
             for (int i = 0; i < _homepage.days.Count; i++)

@@ -19,8 +19,8 @@ namespace VolunteerSystem.UserInterfaceAdmin
         void DenyWorkerRequest(Request request);
         void DisplayGeneralError(string body);
         void DisplayPressedOnShift(Shift shift);
-        Shift DisplayCreateNewShift();
-        string DisplayCreateNewTask();
+        void DisplayCreateNewShift();
+        void DisplayCreateNewTask();
         void Start();
         void UpdateUI();
     }

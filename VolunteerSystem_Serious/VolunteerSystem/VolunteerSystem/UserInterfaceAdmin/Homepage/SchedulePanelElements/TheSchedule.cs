@@ -20,6 +20,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         {
             _mainWindowUI = mainWindowUI;
             _mainPanel = new Panel();
+            _mainPanel.BorderStyle = BorderStyle.FixedSingle;
             test = new Panel();
             this.day = day;
             hourHeight = 50; //schedulePanel.Size.Height / 23
@@ -55,7 +56,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 TasksPanels tempTaskPanel = new TasksPanels(_mainWindowUI);
 
                 //Create
-                test.Controls.Add(tempTaskPanel.GetATaskPanel(Tasks[i], AllShifts.Where(x => x.Task == Tasks[i] && x.StartTime.DayOfWeek.ToString() == day).ToList(), new Size(widthOfTask, test.Height), new Point((i * (widthOfTask + 5)) + 50, 0), hourHeight));
+                test.Controls.Add(tempTaskPanel.GetATaskPanel(Tasks[i], AllShifts.Where(x => x.Task == Tasks[i] && x.StartTime.DayOfWeek.ToString() + " " + x.StartTime.ToShortDateString() == day).ToList(), new Size(widthOfTask, test.Height), new Point((i * (widthOfTask + 5)) + 50, 0), hourHeight));
             }
 
             _mainPanel.Controls.Add(test);

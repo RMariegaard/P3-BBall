@@ -42,29 +42,12 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
         public void createShift_Clicked(object sender, EventArgs e)
         {
-            Shift shift = _mainWindowUI.DisplayCreateNewShift();
-
-            if (shift != null)
-            {
-                _mainWindowUI.GetController().CreateShift(shift);
-                _homepage.UpdateSchedulePanel();
-            }
-            else
-                _mainWindowUI.DisplayPopup("Error", "Could not create a new shift.. ");
-
+            _mainWindowUI.DisplayCreateNewShift();
         }
 
         public void createTask_Clicked(object sender, EventArgs e)
         {
-            string task = _mainWindowUI.DisplayCreateNewTask();
-
-            if (task != null)
-            {
-                _mainWindowUI.GetController().CreateTask(task);
-                _homepage.UpdateSchedulePanel();
-            }
-            else
-                _mainWindowUI.DisplayPopup("Error", "Could not create a new task.. ");
+            _mainWindowUI.DisplayCreateNewTask();
         }
     }
 }

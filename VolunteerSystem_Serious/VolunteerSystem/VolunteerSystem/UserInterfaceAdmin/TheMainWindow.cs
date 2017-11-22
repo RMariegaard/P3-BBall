@@ -106,24 +106,26 @@ namespace VolunteerSystem.UserInterface
             _homepage.UpdatePendingRequestPanel();
         }
 
-        public Shift DisplayCreateNewShift()
+        public void DisplayCreateNewShift()
         {
             CreateNewShiftUI createNewShiftUIPopup = new CreateNewShiftUI(_controller.GetAllTasks());
             createNewShiftUIPopup.ShowDialog();
             if (createNewShiftUIPopup.DialogResult == DialogResult.OK)
-                return createNewShiftUIPopup.Result;
-            else
-                return null;
+            {
+                _controller.CreateShift(createNewShiftUIPopup.Result);
+                _homepage.UpdateSchedulePanel();
+            }
         }
 
-        public string DisplayCreateNewTask()
+        public void DisplayCreateNewTask()
         {
             CreateNewTaskUI createNewTaskUIPopup = new CreateNewTaskUI();
             createNewTaskUIPopup.ShowDialog();
             if (createNewTaskUIPopup.DialogResult == DialogResult.OK)
-                return createNewTaskUIPopup.Result;
-            else
-                return null;
+            {
+                _controller.CreateTask(createNewTaskUIPopup.Result);
+                _homepage.UpdateSchedulePanel();
+            }
         }
 
         public void UpdateUI()

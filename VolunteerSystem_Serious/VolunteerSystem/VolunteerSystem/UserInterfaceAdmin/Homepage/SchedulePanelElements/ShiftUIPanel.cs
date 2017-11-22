@@ -38,7 +38,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
             Label Time = new Label();
             Time.Location = new Point(0, headder.Location.Y + headder.Size.Height + 1);
-            Time.Text = $"{shift.StartTime.Hour}.{shift.StartTime.Minute} - {shift.EndTime.Hour}.{shift.EndTime.Minute}";
+            string text = shift.StartTime.Hour + "." + shift.StartTime.Minute + "-" + shift.EndTime.Hour + "." + shift.EndTime.Minute;
+            Time.Text = text;
             Time.AutoSize = true;
 
             Label Desciption = new Label();
