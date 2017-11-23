@@ -11,13 +11,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
     class ButtonsBottom
     {
         IVolunteerMainUI _mainWindowUI;
-        Panel _mainPanel;
+        Panel _buttonsatBottomMainPanel;
         Homepage _homepage;
 
         public ButtonsBottom(IVolunteerMainUI mainWindowUI, Homepage homepage)
         {
             _mainWindowUI = mainWindowUI;
-            _mainPanel = new Panel();
+            _buttonsatBottomMainPanel = new Panel();
+            _buttonsatBottomMainPanel.Name = "_buttonsatBottomMainPanel";
             _homepage = homepage;
         }
 
@@ -35,9 +36,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             createTaskButton.AutoSize = true;
             createTaskButton.Click += createTask_Clicked;
 
-            _mainPanel.Controls.Add(createShiftButton);
-            _mainPanel.Controls.Add(createTaskButton);
-            return _mainPanel;
+            _buttonsatBottomMainPanel.Controls.Add(createShiftButton);
+            _buttonsatBottomMainPanel.Controls.Add(createTaskButton);
+            return _buttonsatBottomMainPanel;
         }
 
         public void createShift_Clicked(object sender, EventArgs e)

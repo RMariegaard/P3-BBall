@@ -18,9 +18,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             _volunteerMainUI = volunteerMainUI;
         }
 
-        public Panel GetPanel(SchedulePanelElements.ShiftUIPanel shiftUIPanel)
+        public Panel GetPressedOnShiftPanel(SchedulePanelElements.ShiftUIPanel shiftUIPanel)
         {
             Panel panel = new Panel();
+            panel.Name = "PressedOnShiftPanel";
             panel.BackColor = Color.FromArgb(100, Color.DarkGray);
             panel.Size = _volunteerMainUI.GetFullClientWindowSize();
             panel.Location = new Point(0, 0);

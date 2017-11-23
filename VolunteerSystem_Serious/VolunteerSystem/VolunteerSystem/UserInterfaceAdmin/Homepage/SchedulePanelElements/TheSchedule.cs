@@ -10,7 +10,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 {
     class TheSchedule
     {
-        Panel _mainPanel;
+        Panel _theSchedulemainPanel;
         IVolunteerMainUI _mainWindowUI;
         string day;
         int hourHeight;
@@ -19,9 +19,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         public TheSchedule(IVolunteerMainUI mainWindowUI, string day)
         {
             _mainWindowUI = mainWindowUI;
-            _mainPanel = new Panel();
-            _mainPanel.BorderStyle = BorderStyle.FixedSingle;
+            _theSchedulemainPanel = new Panel();
+            _theSchedulemainPanel.Name = "_theSchedulemainPanel";
+            _theSchedulemainPanel.BorderStyle = BorderStyle.FixedSingle;
             colorAndShiftPanel = new Panel();
+            colorAndShiftPanel.Name = "colorAndShiftPanel";
             this.day = day;
             hourHeight = 50; //schedulePanel.Size.Height / 23
             
@@ -38,10 +40,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
         public Panel GetPanel(Panel schedulePanel)
         {
-            _mainPanel.Size = schedulePanel.Size;
-            _mainPanel.Location = new Point(0, 0);
-            _mainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            _mainPanel.AutoScroll = true;
+            _theSchedulemainPanel.Size = schedulePanel.Size;
+            _theSchedulemainPanel.Location = new Point(0, 0);
+            _theSchedulemainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            _theSchedulemainPanel.AutoScroll = true;
             
             colorAndShiftPanel.Location = new Point(0, 0);
             colorAndShiftPanel.Size = new Size(schedulePanel.Size.Width-20, 24 * hourHeight);
@@ -59,16 +61,16 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 colorAndShiftPanel.Controls.Add(tempTaskPanel.GetATaskPanel(Tasks[i], AllShifts.Where(x => x.Task == Tasks[i] && x.StartTime.DayOfWeek.ToString() + " " + x.StartTime.ToShortDateString() == day).ToList(), new Size(widthOfTask, colorAndShiftPanel.Height), new Point((i * (widthOfTask + 5)) + 50, 0), hourHeight));
             }
 
-            _mainPanel.Controls.Add(colorAndShiftPanel);
-            return _mainPanel;
+            _theSchedulemainPanel.Controls.Add(colorAndShiftPanel);
+            return _theSchedulemainPanel;
         }
 
         private void alternatingColors_Paint(object sender, PaintEventArgs e)
         {
             for (int i = 0; i < 24; i++)
             {
-                Rectangle rc = _mainPanel.ClientRectangle;
-                rc.Size = new Size(_mainPanel.Size.Width-10, hourHeight);
+                Rectangle rc = _theSchedulemainPanel.ClientRectangle;
+                rc.Size = new Size(_theSchedulemainPanel.Size.Width-10, hourHeight);
                 rc.Location = new Point(0, (i*hourHeight));
                 Brush brush1 = new SolidBrush(Color.LightGray);
                 Brush brush2 = new SolidBrush(Color.Gray);

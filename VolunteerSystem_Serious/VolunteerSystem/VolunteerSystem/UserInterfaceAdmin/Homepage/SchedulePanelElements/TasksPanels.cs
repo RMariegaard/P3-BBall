@@ -19,6 +19,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         public Panel GetATaskPanel(string headline, List<Shift> shifts, Size size, Point location, int hourHeight)
         {
             Panel taskPanel = new Panel();
+            taskPanel.Name = "taskPanel";
             taskPanel.Location = location;
             taskPanel.Size = size;
             taskPanel.BackColor = Color.FromArgb(100, Color.LightCyan);

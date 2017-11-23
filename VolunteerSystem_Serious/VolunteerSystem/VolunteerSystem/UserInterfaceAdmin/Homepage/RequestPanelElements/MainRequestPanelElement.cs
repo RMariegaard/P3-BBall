@@ -11,57 +11,59 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
     
     class MainRequestPanelElement
     {
-        private Panel _mainPanel;
+        private Panel _mainRequestPanel;
         private IVolunteerMainUI _volunteerMainUI;
         private Label titleTopLabel;
 
         public MainRequestPanelElement(IVolunteerMainUI volunteerMainUI)
         {
             _volunteerMainUI = volunteerMainUI;
-            _mainPanel = new Panel();
-            _mainPanel.AutoScroll = true;
+            _mainRequestPanel = new Panel();
+            _mainRequestPanel.Name = "_mainRequestPanel";
+            _mainRequestPanel.AutoScroll = true;
             titleTopLabel = new Label();
         }
 
         private Panel getTopBarPanel(Size size)
         {
-            Panel panel = new Panel();
-            panel.Location = new Point(0, 40);
-            panel.Size = size;
+            Panel TopBarPanel = new Panel();
+            TopBarPanel.Name = "TopBarPanel";
+            TopBarPanel.Location = new Point(0, 40);
+            TopBarPanel.Size = size;
 
             Label nameLabel = new Label();
             nameLabel.Text = "Name";
-            nameLabel.Location = new Point((_mainPanel.Size.Width / 5) * 0 + 2, 2);
+            nameLabel.Location = new Point((_mainRequestPanel.Size.Width / 5) * 0 + 2, 2);
 
             Label dateSentLabel = new Label();
             dateSentLabel.Text = "Request Sent";
-            dateSentLabel.Location = new Point((_mainPanel.Size.Width / 5) * 1 + 2, 2);
+            dateSentLabel.Location = new Point((_mainRequestPanel.Size.Width / 5) * 1 + 2, 2);
 
             Label shiftInfoLabel = new Label();
             shiftInfoLabel.Text = "Shift Info";
-            shiftInfoLabel.Location = new Point((_mainPanel.Size.Width / 5) * 2 + 2, 2);
+            shiftInfoLabel.Location = new Point((_mainRequestPanel.Size.Width / 5) * 2 + 2, 2);
 
             Label acceptButtonLabel = new Label();
             acceptButtonLabel.Text = "Accept";
-            acceptButtonLabel.Location = new Point((_mainPanel.Size.Width / 5) * 3 + 2, 2);
+            acceptButtonLabel.Location = new Point((_mainRequestPanel.Size.Width / 5) * 3 + 2, 2);
 
             Label denyButtonLabel = new Label();
             denyButtonLabel.Text = "Deny";
-            denyButtonLabel.Location = new Point((_mainPanel.Size.Width / 5) * 4 + 2, 2);
+            denyButtonLabel.Location = new Point((_mainRequestPanel.Size.Width / 5) * 4 + 2, 2);
 
 
-            panel.Controls.Add(nameLabel);
-            panel.Controls.Add(dateSentLabel);
-            panel.Controls.Add(shiftInfoLabel);
-            panel.Controls.Add(acceptButtonLabel);
-            panel.Controls.Add(denyButtonLabel);
-            return panel;
+            TopBarPanel.Controls.Add(nameLabel);
+            TopBarPanel.Controls.Add(dateSentLabel);
+            TopBarPanel.Controls.Add(shiftInfoLabel);
+            TopBarPanel.Controls.Add(acceptButtonLabel);
+            TopBarPanel.Controls.Add(denyButtonLabel);
+            return TopBarPanel;
         }
 
-        public Panel GetPanel(Size forRefference)
+        public Panel GetRequestPanel(Size forRefference)
         {
-            _mainPanel.Controls.Clear();
-            _mainPanel.Size = forRefference;
+            _mainRequestPanel.Controls.Clear();
+            _mainRequestPanel.Size = forRefference;
             titleTopLabel.Location = new Point(10, 0);
             titleTopLabel.Text = "Pending Requests";
             titleTopLabel.Font = new Font("Arial", 24, FontStyle.Bold);
@@ -71,27 +73,28 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             int panelHeight = 40;
             foreach (Request request in _volunteerMainUI.GetScheduleController().GetAllRequests())
             {
-                Panel tempPanel = new Panel();
-                tempPanel.Location = new Point(0, (i * panelHeight) + 20);
-                tempPanel.Size = new Size(_mainPanel.Width-20, panelHeight);
-                tempPanel.BorderStyle = BorderStyle.FixedSingle;
+                Panel requestPanel = new Panel();
+                requestPanel.Name = "requestPanel";
+                requestPanel.Location = new Point(0, (i * panelHeight) + 20);
+                requestPanel.Size = new Size(_mainRequestPanel.Width-20, panelHeight);
+                requestPanel.BorderStyle = BorderStyle.FixedSingle;
                 if (i % 2 == 0)
-                    tempPanel.BackColor = Color.LightGray;
+                    requestPanel.BackColor = Color.LightGray;
 
-                tempPanel.Controls.Add(getVolunteerName(new Point((_mainPanel.Size.Width / 5) * 0 + 2, 2), request, request.Worker));
-                tempPanel.Controls.Add(getDateItWasSent(new Point((_mainPanel.Size.Width / 5) * 1 + 2, 2), request));
-                tempPanel.Controls.Add(getShiftInformation(new Point((_mainPanel.Size.Width / 5) * 2 + 2, 2), request));
-                tempPanel.Controls.Add(getAccept(new Point((_mainPanel.Size.Width / 5) * 3 + 2, 2), request));
-                tempPanel.Controls.Add(getDeny(new Point((_mainPanel.Size.Width / 5) * 4 + 2, 2), request));
+                requestPanel.Controls.Add(getVolunteerName(new Point((_mainRequestPanel.Size.Width / 5) * 0 + 2, 2), request, request.Worker));
+                requestPanel.Controls.Add(getDateItWasSent(new Point((_mainRequestPanel.Size.Width / 5) * 1 + 2, 2), request));
+                requestPanel.Controls.Add(getShiftInformation(new Point((_mainRequestPanel.Size.Width / 5) * 2 + 2, 2), request));
+                requestPanel.Controls.Add(getAccept(new Point((_mainRequestPanel.Size.Width / 5) * 3 + 2, 2), request));
+                requestPanel.Controls.Add(getDeny(new Point((_mainRequestPanel.Size.Width / 5) * 4 + 2, 2), request));
 
-                _mainPanel.Controls.Add(tempPanel);
+                _mainRequestPanel.Controls.Add(requestPanel);
                 i++;
             }
 
-            _mainPanel.Controls.Add(getTopBarPanel(new Size(_mainPanel.Size.Width - 20, panelHeight)));
-            _mainPanel.Controls.Add(titleTopLabel);
+            _mainRequestPanel.Controls.Add(getTopBarPanel(new Size(_mainRequestPanel.Size.Width - 20, panelHeight)));
+            _mainRequestPanel.Controls.Add(titleTopLabel);
 
-            return _mainPanel;
+            return _mainRequestPanel;
         }
 
         private Label getVolunteerName(Point location, Request request, Worker worker)

@@ -13,7 +13,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
     public partial class PressedOnShiftPopup : Form
     {
         Shift shift;
-        Panel mainPanel;
+        Panel _pressedOnShiftPopupMainPanel;
         Size fullClientSize;
 
         public PressedOnShiftPopup(Shift shift)
@@ -27,9 +27,10 @@ namespace VolunteerSystem.UserInterfaceAdmin
             this.shift = shift;
             fullClientSize = RectangleToScreen(this.ClientRectangle).Size;
 
-            mainPanel = new Panel();
-            mainPanel.Size = fullClientSize;
-            mainPanel.Location = new Point(0, 0);
+            _pressedOnShiftPopupMainPanel = new Panel();
+            _pressedOnShiftPopupMainPanel.Name = "_pressedOnShiftPopupMainPanel";
+            _pressedOnShiftPopupMainPanel.Size = fullClientSize;
+            _pressedOnShiftPopupMainPanel.Location = new Point(0, 0);
 
             Label shiftInfo = new Label();
             shiftInfo.Text = $" Task: {shift.Task}\n Starts: {shift.StartTime}\n Ends: {shift.EndTime}\n Volunteers Needed: {shift.VolunteersNeeded}\n Description: {shift.Description}\n";
@@ -41,14 +42,14 @@ namespace VolunteerSystem.UserInterfaceAdmin
             Button cancelButton = new Button();
             cancelButton.Text = "Cancel";
             cancelButton.AutoSize = true;
-            cancelButton.Location = new Point(5, mainPanel.Size.Height - cancelButton.Size.Height - 5);
+            cancelButton.Location = new Point(5, _pressedOnShiftPopupMainPanel.Size.Height - cancelButton.Size.Height - 5);
             cancelButton.DialogResult = DialogResult.Cancel;
 
 
             Button editShiftButton = new Button();
             editShiftButton.Text = "Edit Shift";
             editShiftButton.AutoSize = true;
-            editShiftButton.Location = new Point(cancelButton.Width + 5, mainPanel.Size.Height - editShiftButton.Size.Height - 5);
+            editShiftButton.Location = new Point(cancelButton.Width + 5, _pressedOnShiftPopupMainPanel.Size.Height - editShiftButton.Size.Height - 5);
 
 
 
@@ -93,15 +94,15 @@ namespace VolunteerSystem.UserInterfaceAdmin
             requestsList.AutoSize = true;
 
 
-            mainPanel.Controls.Add(workerLabel);
-            mainPanel.Controls.Add(cancelButton);
+            _pressedOnShiftPopupMainPanel.Controls.Add(workerLabel);
+            _pressedOnShiftPopupMainPanel.Controls.Add(cancelButton);
             //hvorfor virker det kun når jeg tilføger den til this og ikke mainPanel???
            this.Controls.Add(workersList);
             this.Controls.Add(requestsList);
             this.Controls.Add(requestLabel);
             this.Controls.Add(shiftInfo);
             this.Controls.Add(editShiftButton);
-            Controls.Add(mainPanel);
+            Controls.Add(_pressedOnShiftPopupMainPanel);
         }
 
     }

@@ -45,12 +45,14 @@ namespace VolunteerSystem.UserInterface
             
             //Button panel
             _menuButtonPanel = new Panel();
+            _menuButtonPanel.Name = "_menuButtonPanel";
             _menuButtonPanel.Size = new Size(fullClientWindowSize.Width - 10, buttonPanelHeight);
             _menuButtonPanel.Location = new Point(5, 5);
             _menuButtonPanel.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
 
             //Main panel - schedule
             _mainPanel = new Panel();
+            _mainPanel.Name = "_mainPanel";
             _mainPanel.Size = new Size(fullClientWindowSize.Width - 10, fullClientWindowSize.Height - (_menuButtonPanel.Location.Y + _menuButtonPanel.Height) - 10);
             _mainPanel.Location = new Point(5, _menuButtonPanel.Location.Y + _menuButtonPanel.Height + 5);
             _mainPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;

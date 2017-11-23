@@ -10,7 +10,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 {
     class SeachAndVolunteers
     {
-        Panel mainPanel;
+        Panel _searchAndVolunteerMainPanel;
         WorkerController workerController;
 
         TextBox searchTextBox;
@@ -18,7 +18,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         public SeachAndVolunteers(WorkerController workerController)
         {
             this.workerController = workerController;
-            mainPanel = new Panel();
+            _searchAndVolunteerMainPanel = new Panel();
+            _searchAndVolunteerMainPanel.Name = "_searchAndVolunteerMainPanel";
         }
 
         public Panel GetPanel(Size size)
@@ -30,8 +31,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 
 
             
-            mainPanel.Controls.Add(searchTextBox);
-            return mainPanel;
+            _searchAndVolunteerMainPanel.Controls.Add(searchTextBox);
+            return _searchAndVolunteerMainPanel;
         }
 
         private void searchTextBox_Changed(object sender, EventArgs e)
@@ -42,6 +43,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         private Panel namesPanel(Size size, Point location)
         {
             Panel namesPanel = new Panel();
+            namesPanel.Name = "namesPanel";
             namesPanel.Size = size;
             namesPanel.Location = location;
 

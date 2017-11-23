@@ -10,7 +10,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 {
     class VolunteerHomapageOverview
     {
-        Panel _mainPanel;
+        Panel _volunteerHomapageOverviewMainPanel;
         Volunteer volunteer;
         IVolunteerMainUI volunteerMainUI;
         Label titleTopLabel;
@@ -18,7 +18,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 
         public VolunteerHomapageOverview(IVolunteerMainUI volunteerMainUI, Homepage homepage)
         {
-            _mainPanel = new Panel();
+            _volunteerHomapageOverviewMainPanel = new Panel();
+            _volunteerHomapageOverviewMainPanel.Name = "_volunteerHomapageOverviewMainPanel";
             this.volunteerMainUI = volunteerMainUI;
             titleTopLabel = new Label();
             _homepage = homepage;
@@ -26,8 +27,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 
         public Panel GetPanel(Size size)
         {
-            _mainPanel.Controls.Clear();
-            _mainPanel.Size = size;
+            _volunteerHomapageOverviewMainPanel.Controls.Clear();
+            _volunteerHomapageOverviewMainPanel.Size = size;
 
             titleTopLabel.Location = new Point(10, 0);
             titleTopLabel.Text = "View a single volunteer";
@@ -38,18 +39,19 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 
             if (volunteer != null)
             {
-                _mainPanel.Controls.Add(getVolunteerInformationPanel(new Point(5, 40), new Size((_mainPanel.Width/3) - 5, _mainPanel.Height - 50), volunteer));
-                _mainPanel.Controls.Add(getVolunteerShiftPanel(new Point((_mainPanel.Width / 3) +5, 40), new Size((2*_mainPanel.Width / 3) - 10, (_mainPanel.Height/2) - 22), volunteer));
-                _mainPanel.Controls.Add(getVolunteerRequestPanel(new Point((_mainPanel.Width / 3) + 5, 40 + (_mainPanel.Height / 2) - 22), new Size((2 * _mainPanel.Width / 3) - 10, (_mainPanel.Height / 2) - 22), volunteer));
+                _volunteerHomapageOverviewMainPanel.Controls.Add(getVolunteerInformationPanel(new Point(5, 40), new Size((_volunteerHomapageOverviewMainPanel.Width/3) - 5, _volunteerHomapageOverviewMainPanel.Height - 50), volunteer));
+                _volunteerHomapageOverviewMainPanel.Controls.Add(getVolunteerShiftPanel(new Point((_volunteerHomapageOverviewMainPanel.Width / 3) +5, 40), new Size((2*_volunteerHomapageOverviewMainPanel.Width / 3) - 10, (_volunteerHomapageOverviewMainPanel.Height/2) - 22), volunteer));
+                _volunteerHomapageOverviewMainPanel.Controls.Add(getVolunteerRequestPanel(new Point((_volunteerHomapageOverviewMainPanel.Width / 3) + 5, 40 + (_volunteerHomapageOverviewMainPanel.Height / 2) - 22), new Size((2 * _volunteerHomapageOverviewMainPanel.Width / 3) - 10, (_volunteerHomapageOverviewMainPanel.Height / 2) - 22), volunteer));
             }
-            _mainPanel.Controls.Add(titleTopLabel);
+            _volunteerHomapageOverviewMainPanel.Controls.Add(titleTopLabel);
 
-            return _mainPanel;
+            return _volunteerHomapageOverviewMainPanel;
         }
 
         private Panel getVolunteerInformationPanel(Point location, Size size, Volunteer volunteer)
         {
             Panel volunteerInformationPanel = new Panel();
+            volunteerInformationPanel.Name = "volunteerInformationPanel";
             volunteerInformationPanel.Location = location;
             volunteerInformationPanel.Size = size;
             volunteerInformationPanel.BorderStyle = BorderStyle.FixedSingle;
@@ -90,6 +92,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
         private Panel getVolunteerShiftPanel(Point location, Size size, Worker worker)
         {
             Panel volunteerShiftPanel = new Panel();
+            volunteerShiftPanel.Name = "volunteerShiftPanel";
             volunteerShiftPanel.Location = location;
             volunteerShiftPanel.Size = size;
             volunteerShiftPanel.AutoScroll = true;
@@ -114,6 +117,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
         private Panel getVolunteerRequestPanel(Point location, Size size, Worker worker)
         {
             Panel volunteerRequestPanel = new Panel();
+            volunteerRequestPanel.Name = "volunteerRequestPanel";
             volunteerRequestPanel.Location = location;
             volunteerRequestPanel.Size = size;
             volunteerRequestPanel.AutoScroll = true;
@@ -137,10 +141,12 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 
         private Panel getSingleShiftPanel(Point location, Size size, Shift shift)
         {
-            Panel panel = new Panel();
-            panel.Size = size;
-            panel.Location = location;
-            panel.BorderStyle = BorderStyle.FixedSingle;
+            Panel singleShiftPanel = new Panel();
+            singleShiftPanel.Name = "singleShiftPanel";
+
+            singleShiftPanel.Size = size;
+            singleShiftPanel.Location = location;
+            singleShiftPanel.BorderStyle = BorderStyle.FixedSingle;
 
             Label information = new Label();
             information.Location = new Point(2, 2);
@@ -151,8 +157,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
                 $"{shift.StartTime.DayOfWeek}\n" +
                 $"{shift.StartTime.Hour}:{shift.StartTime.Minute} - {shift.EndTime.Hour}:{shift.EndTime.Minute}";
 
-            panel.Controls.Add(information);
-            return panel;
+            singleShiftPanel.Controls.Add(information);
+            return singleShiftPanel;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 {
     class DaysLeftNavigation
     {
-        Panel mainPanel;
+        Panel _daysLeftNavigationMainPanel;
         IVolunteerMainUI mainWindowUI;
         Homepage _homepage;
         public DaysLeftNavigation(IVolunteerMainUI mainWindowUI, Homepage homepage)
@@ -21,9 +21,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
         public Panel GetPanel(Size forRefferece)
         {
-            mainPanel = new Panel();
+            _daysLeftNavigationMainPanel = new Panel();
+            _daysLeftNavigationMainPanel.Name = "_daysLeftNavigationMainPanel";
             int heightOfButtons = 40;
-            mainPanel.Size = forRefferece;
+            _daysLeftNavigationMainPanel.Size = forRefferece;
 
             for (int i = 0; i < _homepage.days.Count; i++)
             {
@@ -43,10 +44,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                     tempButton.Location = new Point(10, (i * heightOfButtons) + 2);
                 }
                 tempButton.Click += buttonClicked;
-                mainPanel.Controls.Add(tempButton);
+                _daysLeftNavigationMainPanel.Controls.Add(tempButton);
             }
 
-            return mainPanel;
+            return _daysLeftNavigationMainPanel;
         }
 
         private void buttonClicked(object sender, EventArgs e)
