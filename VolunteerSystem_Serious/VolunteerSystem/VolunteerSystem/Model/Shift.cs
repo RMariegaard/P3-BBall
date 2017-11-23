@@ -107,5 +107,14 @@ namespace VolunteerSystem
         {
             throw new NotImplementedException();
         }
+        public void ApproveRequest(Request request)
+        {
+            this.Workers.Add(request.Worker);
+            RemoveRequest(request);
+        }
+        public void DenieRequest(Request request)
+        {
+            RemoveRequest(request);
+        }
     }
 }

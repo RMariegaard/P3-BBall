@@ -21,7 +21,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
         void AcceptWorkerRequest(Request request);
         void DenyWorkerRequest(Request request);
         void DisplayGeneralError(string body);
-        void DisplayPressedOnShift(ShiftUIPanel shiftUI);
+        void DisplayPressedOnShift(Shift shift);
         Size GetFullClientWindowSize();
         void DisplayCreateNewShift();
         void DisplayCreateNewTask();

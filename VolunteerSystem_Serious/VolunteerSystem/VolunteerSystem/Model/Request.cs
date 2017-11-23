@@ -42,15 +42,5 @@ namespace VolunteerSystem
             _worker = worker;
             _shift = shift;
         }
-
-        public void ApproveRequest()
-        {
-            Shift.Workers.Add(_worker);
-            Shift.RemoveRequest(this);
-        }
-        public void DenieRequest()
-        {
-            Shift.RemoveRequest(this);
-        }
     }
 }

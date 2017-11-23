@@ -79,11 +79,11 @@ namespace VolunteerSystem
         }
         public void ApproveRequest(Request request)
         {
-            request.ApproveRequest();
+            GetAllShifts().Find(x => x.Requests.Contains(request)).ApproveRequest(request);
         }
         public void DenyRequest(Request request)
         {
-            request.DenieRequest();
+            GetAllShifts().Find(x => x.Requests.Contains(request)).DenieRequest(request);
         }
 
         private void justForTesting()

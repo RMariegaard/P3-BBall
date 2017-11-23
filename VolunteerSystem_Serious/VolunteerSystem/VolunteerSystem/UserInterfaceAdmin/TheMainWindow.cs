@@ -147,9 +147,10 @@ namespace VolunteerSystem.UserInterface
             return ScheduleController;
         }
 
-        public void DisplayPressedOnShift(UserInterfaceAdmin.Homepage.SchedulePanelElements.ShiftUIPanel shift)
+        public void DisplayPressedOnShift(Shift shift)
         {
-            throw new NotImplementedException();
+            UserInterfaceAdmin.PressedOnShiftPopup pressedOnShiftPopup = new UserInterfaceAdmin.PressedOnShiftPopup(shift);
+            pressedOnShiftPopup.ShowDialog();
         }
 
         public void DisplayVolunteerOnHomepage(Volunteer volunteer)

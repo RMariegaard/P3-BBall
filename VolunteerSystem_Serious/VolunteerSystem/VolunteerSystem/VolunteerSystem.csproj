@@ -87,6 +87,12 @@
     <Compile Include="UserInterfaceAdmin\PopupUI.Designer.cs">
       <DependentUpon>PopupUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterfaceAdmin\PressedOnShiftPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\PressedOnShiftPopup.Designer.cs">
+      <DependentUpon>PressedOnShiftPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserInterfaceAdmin\TheMainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

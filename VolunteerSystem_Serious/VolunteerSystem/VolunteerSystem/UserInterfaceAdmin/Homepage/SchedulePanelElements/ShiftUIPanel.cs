@@ -57,7 +57,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
         private void panel_clicked(object sender, EventArgs e)
         {
-            volunteerMainUI.DisplayPressedOnShift(this);
+            volunteerMainUI.DisplayPressedOnShift(shift);
         }
     }
 }
