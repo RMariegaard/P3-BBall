@@ -18,15 +18,6 @@ namespace VolunteerSystem
             }
         }
 
-        private Shift _shift;
-        public Shift Shift
-        {
-            get
-            {
-                return _shift;
-            }
-        }
-
         private Worker _worker;
         public Worker Worker
         {
@@ -36,11 +27,10 @@ namespace VolunteerSystem
             }
         }
 
-        public Request(Worker worker, Shift shift)
+        public Request(Worker worker)
         {
             _timeSent = DateTime.Now;
             _worker = worker;
-            _shift = shift;
         }
     }
 }

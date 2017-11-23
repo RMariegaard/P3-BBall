@@ -86,6 +86,11 @@ namespace VolunteerSystem
             GetAllShifts().Find(x => x.Requests.Contains(request)).DenieRequest(request);
         }
 
+        public Shift FindSingleShift(Predicate<Shift> predicate)
+        {
+            return _schedule.Shifts.Find(predicate);
+        }
+
         private void justForTesting()
         {
             

@@ -127,11 +127,13 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
         private Shift pressedShift;
         private Label getShiftInformation(Point location, Request request)
         {
+
+            pressedShift = _volunteerMainUI.GetScheduleController().FindSingleShift(x => x.Requests.Contains(request));
             Label shiftInformationLabel = new Label();
             shiftInformationLabel.Location = location;
-            shiftInformationLabel.Text = request.Shift.Task;
+
+            shiftInformationLabel.Text = pressedShift.Task;
             shiftInformationLabel.AutoSize = true;
-            pressedShift = request.Shift;
             shiftInformationLabel.Click += getShiftInformation_Clicked;
 
             //Mangler at skrive dato og klokslet på
