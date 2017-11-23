@@ -27,16 +27,6 @@ namespace VolunteerSystem
             }
         }
         
-        public List<Request> Requests
-        {
-            get
-            {
-                List<Request> requests = new List<Request>();
-                Shifts.ForEach(x => requests.AddRange(x.Requests));
-                return requests;
-            }
-        }
-
         public void CreateNewShift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded)
         {
             _shifts.Add(new Shift(startTime, endTime, task, volunteersNeeded, ""));

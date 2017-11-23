@@ -95,6 +95,8 @@ namespace VolunteerSystem.UserInterface
             //Update ui
             _homepage.UpdateSchedulePanel();
             _homepage.UpdatePendingRequestPanel();
+            if (_homepage.ShownVolunteer.Name == request.Worker.Name)
+                _homepage.UpdateVolunteerPanel();
         }
 
         public void DenyWorkerRequest(Request request)
@@ -139,7 +141,7 @@ namespace VolunteerSystem.UserInterface
             return _controller;
         }
 
-        public void DisplayPressedOnShift(Shift shift)
+        public void DisplayPressedOnShift(UserInterfaceAdmin.Homepage.SchedulePanelElements.ShiftUIPanel shift)
         {
             throw new NotImplementedException();
         }
@@ -153,6 +155,11 @@ namespace VolunteerSystem.UserInterface
         public void DisplayVolunteerInVolunteerOverview(Volunteer volunteer)
         {
             throw new NotImplementedException();
+        }
+
+        public Size GetFullClientWindowSize()
+        {
+            return fullClientWindowSize;
         }
     }
 }

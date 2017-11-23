@@ -92,8 +92,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             volunteerShiftPanel.Location = location;
             volunteerShiftPanel.Size = size;
             volunteerShiftPanel.BorderStyle = BorderStyle.FixedSingle;
+            volunteerShiftPanel.AutoScroll = true;
 
-            //foreach (Shift shift in worker)
+            List<Shift> workerShifts = volunteerMainUI.GetController().GetAllShifts().Where(x => x.Workers.Exists(y => y.Name == worker.Name)).ToList();
+            int widthOfShiftElement = 100;
+            for (int i = 0; i < workerShifts.Count; i++)
+            {
+                volunteerShiftPanel.Controls.Add(getSingleShiftPanel(new Point((i * widthOfShiftElement), 0), new Size(widthOfShiftElement, volunteerShiftPanel.Size.Height - 10), workerShifts[i]));
+            }
 
             return volunteerShiftPanel;
         }
@@ -101,7 +107,20 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
         private Panel getSingleShiftPanel(Point location, Size size, Shift shift)
         {
             Panel panel = new Panel();
+            panel.Size = size;
+            panel.Location = location;
+            panel.BorderStyle = BorderStyle.FixedSingle;
 
+            Label information = new Label();
+            information.Location = new Point(2, 2);
+            information.MaximumSize = new Size(size.Width - 4, size.Height - 4);
+            information.AutoSize = true;
+            information.Text = 
+                $"{shift.Task} \n" +
+                $"{shift.StartTime.DayOfWeek}\n" +
+                $"{shift.StartTime.TimeOfDay} - {shift.EndTime.TimeOfDay}";
+
+            panel.Controls.Add(information);
             return panel;
         }
 

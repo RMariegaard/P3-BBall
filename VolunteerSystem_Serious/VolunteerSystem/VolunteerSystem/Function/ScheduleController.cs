@@ -23,9 +23,11 @@ namespace VolunteerSystem
 
         public List<Request> GetAllRequests()
         {
-            return _schedule.Requests;
+            List<Request> requests = new List<Request>();
+            _schedule.Shifts.ForEach(x => requests.AddRange(x.Requests));
+            return requests;
         }
-
+        
         public List<Shift> GetAllShifts()
         {
             return _schedule.Shifts;
