@@ -19,8 +19,10 @@ namespace VolunteerSystem.UserInterfaceAdmin
         public PressedOnShiftPopup(Shift shift)
         {
             InitializeComponent();
-            Width = 800;
+            Width = 400;
             Height = 400;
+
+            
 
             this.shift = shift;
             fullClientSize = RectangleToScreen(this.ClientRectangle).Size;
@@ -29,34 +31,78 @@ namespace VolunteerSystem.UserInterfaceAdmin
             mainPanel.Size = fullClientSize;
             mainPanel.Location = new Point(0, 0);
 
+            Label shiftInfo = new Label();
+            shiftInfo.Text = $" Task: {shift.Task}\n Starts: {shift.StartTime}\n Ends: {shift.EndTime}\n Volunteers Needed: {shift.VolunteersNeeded}\n Description: {shift.Description}\n";
+            shiftInfo.AutoSize = true;
+            shiftInfo.Location = new Point();
+            
+
+
             Button cancelButton = new Button();
             cancelButton.Text = "Cancel";
             cancelButton.AutoSize = true;
             cancelButton.Location = new Point(5, mainPanel.Size.Height - cancelButton.Size.Height - 5);
             cancelButton.DialogResult = DialogResult.Cancel;
 
-            Label textLabel = new Label();
-            textLabel.Location = new Point();
-            textLabel.MaximumSize = new Size(300, 0);
-            textLabel.Text = $"You have now pressed on a shift. This window is under constucktion so please dont mind all the mess. " +
-                $"This will be adressed within the near future, so don't panic, and don't come running to Casper all the time and ask if he has created this window yet." +
-                $"He Is On IT ;) \n\n" +
-                $"The shift you have pressed on is this:\n" +
-                $"{shift.Task}\n" +
-                $"{shift.StartTime.ToShortDateString()} {shift.StartTime.ToShortTimeString()}\n" +
-                $"{shift.EndTime.ToShortDateString()} {shift.EndTime.ToShortTimeString()}\n" +
-                $"Desciption: {shift.Description}\n\n" +
-                $"Volunteers added to the shift: \n";
-            foreach (Worker worker in shift.Workers)
-                textLabel.Text += $" - {worker.Name}\n";
-            textLabel.Text += "\n\nAnd all the requests: \n";
-            foreach (Request request in shift.Requests)
-                textLabel.Text += $" - {request.Worker.Name}\n";
-            textLabel.AutoSize = true;
 
-            mainPanel.Controls.Add(textLabel);
+            Button editShiftButton = new Button();
+            editShiftButton.Text = "Edit Shift";
+            editShiftButton.AutoSize = true;
+            editShiftButton.Location = new Point(cancelButton.Width + 5, mainPanel.Size.Height - editShiftButton.Size.Height - 5);
+
+
+
+
+
+            Label workerLabel = new Label();
+            workerLabel.Location = new Point(5, shiftInfo.Location.Y + shiftInfo.PreferredHeight);
+            workerLabel.MaximumSize = new Size(300, 0);
+            workerLabel.Text = "Workers:";
+            workerLabel.AutoSize = true;
+
+            ListBox workersList = new ListBox();
+            workersList.Text = "Workers";
+            workersList.Size = new Size(300, 100);
+            workersList.Location = new Point(5,workerLabel.Location.Y + workerLabel.GetPreferredSize(Size.Empty).Height);
+            workersList.BorderStyle = BorderStyle.FixedSingle;
+            workersList.BeginUpdate();
+            foreach (var w in shift.Workers)
+            {
+                workersList.Items.Add($"{w.Name} - {w.Email}");
+            }
+            workersList.EndUpdate();
+            workersList.AutoSize = true;
+
+            Label requestLabel = new Label();
+            requestLabel.Location = new Point(0, workersList.Location.Y + workersList.Height);
+            requestLabel.MaximumSize = new Size(300, 0);
+            requestLabel.Text = "Requests:";
+            requestLabel.AutoSize = true;
+
+            ListBox requestsList = new ListBox();
+            requestsList.Text = "Requests";
+            requestsList.Size = new Size(300, 100);
+            requestsList.Location = new Point(5, requestLabel.Location.Y + requestLabel.PreferredSize.Height);
+            requestsList.BorderStyle = BorderStyle.FixedSingle;
+            requestsList.BeginUpdate();
+            foreach (var r in shift.Requests)
+            {
+               requestsList.Items.Add($"{r.TimeSent} - {r.Worker.Name} - {r.Worker.Email}");
+            }
+            requestsList.EndUpdate();
+            requestsList.AutoSize = true;
+
+
+            mainPanel.Controls.Add(workerLabel);
             mainPanel.Controls.Add(cancelButton);
+            //hvorfor virker det kun når jeg tilføger den til this og ikke mainPanel???
+           this.Controls.Add(workersList);
+            this.Controls.Add(requestsList);
+            this.Controls.Add(requestLabel);
+            this.Controls.Add(shiftInfo);
+            this.Controls.Add(editShiftButton);
             Controls.Add(mainPanel);
         }
+
     }
 }

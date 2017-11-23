@@ -104,5 +104,10 @@
     <None Include="App.config" />
     <Compile Include="Database\DBConnection.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UserInterfaceAdmin\PressedOnShiftPopup.resx">
+      <DependentUpon>PressedOnShiftPopup.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
