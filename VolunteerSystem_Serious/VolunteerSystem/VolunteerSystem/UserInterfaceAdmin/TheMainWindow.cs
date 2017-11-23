@@ -18,6 +18,10 @@ namespace VolunteerSystem.UserInterface
         Size fullClientWindowSize;
 
         private UserInterfaceAdmin.Homepage.Homepage _homepage;
+        private UserInterfaceAdmin.VolunteerOverview.VolunteerOverview _volunteerOverview;
+
+        enum ShownPage { Homepage, VolunteerOverview, Settings };
+        ShownPage shownPage;
 
         public ScheduleController ScheduleController;
         WorkerController WorkerController;
@@ -34,8 +38,11 @@ namespace VolunteerSystem.UserInterface
 
             int buttonPanelHeight = 50;
 
+            _volunteerOverview = new UserInterfaceAdmin.VolunteerOverview.VolunteerOverview(this, workerController);
             _homepage = new UserInterfaceAdmin.Homepage.Homepage(this);
 
+            shownPage = new ShownPage();
+            
             //Button panel
             _menuButtonPanel = new Panel();
             _menuButtonPanel.Size = new Size(fullClientWindowSize.Width - 10, buttonPanelHeight);
@@ -49,7 +56,8 @@ namespace VolunteerSystem.UserInterface
             _mainPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
             //Start on homepage
-            DisplayHomepage();
+            shownPage = ShownPage.Homepage;
+            UpdateUI();
 
             //Adds to the window
             Controls.Add(_mainPanel);
@@ -86,7 +94,7 @@ namespace VolunteerSystem.UserInterface
 
         public void DisplayVolunteerOverview()
         {
-            throw new NotImplementedException();
+            _mainPanel.Controls.Add(_volunteerOverview.GetPanel(_mainPanel.Size));
         }
         
         public void AcceptWorkerRequest(Request request)
@@ -139,7 +147,19 @@ namespace VolunteerSystem.UserInterface
         public void UpdateUI()
         {
             _mainPanel.Controls.Clear();
-            DisplayHomepage();
+
+            switch (shownPage)
+            {
+                case ShownPage.Homepage:
+                    DisplayHomepage();
+                    break;
+                case ShownPage.VolunteerOverview:
+                    DisplayVolunteerOverview();
+                    break;
+                case ShownPage.Settings:
+                    DisplaySettings();
+                    break;
+            }
         }
 
         public ScheduleController GetScheduleController()
