@@ -32,13 +32,7 @@ namespace VolunteerSystem
             get
             {
                 List<Request> requests = new List<Request>();
-                foreach(Shift shift in _shifts)
-                {
-                    foreach(Request request in shift.Requests)
-                    {
-                        requests.Add(request);
-                    }
-                }
+                Shifts.ForEach(x => requests.AddRange(x.Requests));
                 return requests;
             }
         }
