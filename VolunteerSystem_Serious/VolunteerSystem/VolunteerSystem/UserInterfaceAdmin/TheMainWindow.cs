@@ -106,6 +106,8 @@ namespace VolunteerSystem.UserInterface
 
             //Update ui
             _homepage.UpdatePendingRequestPanel();
+            if (_homepage.ShownVolunteer.Name == request.Worker.Name)
+                _homepage.UpdateVolunteerPanel();
         }
 
         public void DisplayCreateNewShift()

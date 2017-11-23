@@ -40,6 +40,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             {
                 _mainPanel.Controls.Add(getVolunteerInformationPanel(new Point(5, 40), new Size((_mainPanel.Width/3) - 5, _mainPanel.Height - 50), volunteer));
                 _mainPanel.Controls.Add(getVolunteerShiftPanel(new Point((_mainPanel.Width / 3) +5, 40), new Size((2*_mainPanel.Width / 3) - 10, (_mainPanel.Height/2) - 22), volunteer));
+                _mainPanel.Controls.Add(getVolunteerRequestPanel(new Point((_mainPanel.Width / 3) + 5, 40 + (_mainPanel.Height / 2) - 22), new Size((2 * _mainPanel.Width / 3) - 10, (_mainPanel.Height / 2) - 22), volunteer));
             }
             _mainPanel.Controls.Add(titleTopLabel);
 
@@ -91,17 +92,47 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             Panel volunteerShiftPanel = new Panel();
             volunteerShiftPanel.Location = location;
             volunteerShiftPanel.Size = size;
-            volunteerShiftPanel.BorderStyle = BorderStyle.FixedSingle;
             volunteerShiftPanel.AutoScroll = true;
+            volunteerShiftPanel.BorderStyle = BorderStyle.FixedSingle;
+
+            Label shiftLabel = new Label();
+            shiftLabel.Text = "Shifts:";
+            shiftLabel.Location = new Point(0, 0);
+            shiftLabel.AutoSize = true;
 
             List<Shift> workerShifts = volunteerMainUI.GetController().GetAllShifts().Where(x => x.Workers.Exists(y => y.Name == worker.Name)).ToList();
             int widthOfShiftElement = 100;
             for (int i = 0; i < workerShifts.Count; i++)
             {
-                volunteerShiftPanel.Controls.Add(getSingleShiftPanel(new Point((i * widthOfShiftElement), 0), new Size(widthOfShiftElement, volunteerShiftPanel.Size.Height - 10), workerShifts[i]));
+                volunteerShiftPanel.Controls.Add(getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height-2), new Size(widthOfShiftElement, volunteerShiftPanel.Size.Height - 50), workerShifts[i]));
             }
 
+            volunteerShiftPanel.Controls.Add(shiftLabel);
             return volunteerShiftPanel;
+        }
+        
+        private Panel getVolunteerRequestPanel(Point location, Size size, Worker worker)
+        {
+            Panel volunteerRequestPanel = new Panel();
+            volunteerRequestPanel.Location = location;
+            volunteerRequestPanel.Size = size;
+            volunteerRequestPanel.AutoScroll = true;
+            volunteerRequestPanel.BorderStyle = BorderStyle.FixedSingle;
+
+            Label shiftLabel = new Label();
+            shiftLabel.Text = "Requests:";
+            shiftLabel.Location = new Point(0, 0);
+            shiftLabel.AutoSize = true;
+
+            List<Shift> workerShifts = volunteerMainUI.GetController().GetAllShifts().Where(x => x.Requests.Any(y => y.Worker.Name == worker.Name) ).ToList();
+            int widthOfShiftElement = 100;
+            for (int i = 0; i < workerShifts.Count; i++)
+            {
+                volunteerRequestPanel.Controls.Add(getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height - 2), new Size(widthOfShiftElement, volunteerRequestPanel.Size.Height - 50), workerShifts[i]));
+            }
+
+            volunteerRequestPanel.Controls.Add(shiftLabel);
+            return volunteerRequestPanel;
         }
 
         private Panel getSingleShiftPanel(Point location, Size size, Shift shift)
@@ -115,18 +146,13 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             information.Location = new Point(2, 2);
             information.MaximumSize = new Size(size.Width - 4, size.Height - 4);
             information.AutoSize = true;
-            information.Text = 
+            information.Text =
                 $"{shift.Task} \n" +
                 $"{shift.StartTime.DayOfWeek}\n" +
                 $"{shift.StartTime.TimeOfDay} - {shift.EndTime.TimeOfDay}";
 
             panel.Controls.Add(information);
             return panel;
-        }
-
-        private Panel getVolunteerRequestPanel()
-        {
-            throw new NotImplementedException();
         }
     }
 }
