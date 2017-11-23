@@ -8,6 +8,19 @@ namespace VolunteerSystem
 {
     public class Shift
     {
+        public Shift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded, string description)
+        {
+            this._startTime = startTime;
+            this._endTime = endTime;
+            this._task = task;
+            this._volunteersNeeded = volunteersNeeded;
+            this._description = description;
+            _workers = new List<Worker>();
+            _requests = new List<Request>();
+            ID = _id++;
+        }
+        private static int _id = 0;
+        public int ID { get; private set; }
         private DateTime _startTime;
         public DateTime StartTime
         {
@@ -72,16 +85,6 @@ namespace VolunteerSystem
         public int NumberOfRequests() => _requests.Count;
         
 
-        public Shift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded, string description)
-        {
-            this._startTime = startTime;
-            this._endTime = endTime;
-            this._task = task;
-            this._volunteersNeeded = volunteersNeeded;
-            this._description = description;
-            _workers = new List<Worker>();
-            _requests = new List<Request>();
-        }
 
         public void EditShift()
         {

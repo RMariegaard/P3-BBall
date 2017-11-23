@@ -101,11 +101,22 @@ namespace VolunteerSystem.UserInterface
         
         public void AcceptWorkerRequest(Request request)
         {
+            Shift shiftToedit = ScheduleController.FindSingleShift(x => x.Requests.Contains(request));
             //Approve it
+
             ScheduleController.ApproveRequest(request);
+            _homepage.UpdateShiftPanel(shiftToedit);
+            //Update ui
+
+
+                
+
+
+            //Approve it
+            // ScheduleController.ApproveRequest(request);
 
             //Update ui
-            _homepage.UpdateSchedulePanel();
+            //_homepage.UpdateSchedulePanel();
             _homepage.UpdatePendingRequestPanel();
             if (_homepage.ShownVolunteer != null)
                 if (_homepage.ShownVolunteer.Name == request.Worker.Name)

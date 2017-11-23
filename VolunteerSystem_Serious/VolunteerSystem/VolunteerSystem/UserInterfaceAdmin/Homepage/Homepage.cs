@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 {
-    class Homepage
+    class Homepage : AccessibleObject
     {
         Panel _mainHomepagePanel;
 
@@ -59,6 +59,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
         public void UpdateSchedulePanel()
         {
+            _mainHomepagePanel.SuspendLayout();
             _mainHomepagePanel.Controls.Remove(schedulePanel);
             
             //Finding the dates
@@ -79,6 +80,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             schedulePanel.AutoScroll = true;
             threeSchedulePanels();
             _mainHomepagePanel.Controls.Add(schedulePanel);
+            _mainHomepagePanel.ResumeLayout();
         }
         public void UpdatePendingRequestPanel()
         {
@@ -107,6 +109,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
         private void threeSchedulePanels()
         {
+            schedulePanel.SuspendLayout();
             Panel DaysLeft = new Panel();
             Panel TheSchedule = new Panel();
             Panel ButtonsBottumPanel = new Panel();
@@ -142,6 +145,60 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             schedulePanel.Controls.Add(DaysLeft);
             schedulePanel.Controls.Add(TheSchedule);
             schedulePanel.Controls.Add(ButtonsBottumPanel);
+            schedulePanel.ResumeLayout();
         }
+
+
+        public void UpdateShiftPanel(Shift shift)
+        {
+
+            var controlList = GetControlHierarchy(_mainHomepagePanel).ToList();
+
+            //Form print = new Form();
+            //ListBox list = new ListBox();
+            //list.BeginUpdate();
+            //foreach(var item in controlList)
+            //{
+            //    list.Items.Add(item.Name);
+            //}
+            //list.EndUpdate();
+            //print.Controls.Add(list);
+
+            //print.Show();
+
+
+            //Kan godt blive et problem at man søger efter id?
+            Control test = controlList.Find(x => x.Name == "Shift " + shift.ID.ToString());
+
+            if (test != null)
+            {
+                Control parent = test.Parent;
+                test.Dispose();
+                SchedulePanelElements.ShiftUIPanel temp = new SchedulePanelElements.ShiftUIPanel(_mainWindowUI, shift);
+                parent.Controls.Add(temp.ShiftUI(parent as Panel, 50));
+            }
+        }
+        private IEnumerable<Control> GetControlHierarchy(Control root)
+        {
+            var queue = new Queue<Control>();
+
+            queue.Enqueue(root);
+
+            do
+            {
+                var control = queue.Dequeue();
+
+                yield return control;
+
+                foreach (var child in control.Controls.OfType<Panel>())
+                    if (child is Panel)
+                        queue.Enqueue(child);
+
+            } while (queue.Count > 0);
+
+        }
+
+
+
     }
 }

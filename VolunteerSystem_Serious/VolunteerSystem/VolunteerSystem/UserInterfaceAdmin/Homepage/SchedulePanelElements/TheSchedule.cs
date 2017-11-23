@@ -48,7 +48,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             colorAndShiftPanel.Location = new Point(0, 0);
             colorAndShiftPanel.Size = new Size(schedulePanel.Size.Width-20, 24 * hourHeight);
             colorAndShiftPanel.Paint += alternatingColors_Paint;
-            
+                
             //Adds Tasks and shifts
             int widthOfTask = 100;
             List<Shift> AllShifts = _mainWindowUI.GetScheduleController().GetAllShifts();
