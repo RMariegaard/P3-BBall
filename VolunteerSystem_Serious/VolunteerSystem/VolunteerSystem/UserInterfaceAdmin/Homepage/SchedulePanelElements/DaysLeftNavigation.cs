@@ -31,11 +31,20 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 Button tempButton = new Button();
                 tempButton.Text = _homepage.days[i];
                 tempButton.FlatStyle = FlatStyle.Flat;
-                if (_homepage.days[i] == _homepage.selectedDay)
+                if (_homepage.selectedDay != null && _homepage.days[i] == _homepage.selectedDay.Text)
                 {
                     tempButton.BackColor = Color.Gray;
                     tempButton.Size = new Size(forRefferece.Width, heightOfButtons);
                     tempButton.Location = new Point(0, (i * heightOfButtons) + 2);
+                }
+                else if (_homepage.selectedDay == null)
+                {
+                    //Goes inhere if there is no button already picked, this means it picks the first button
+                    tempButton.BackColor = Color.Gray;
+                    tempButton.Size = new Size(forRefferece.Width, heightOfButtons);
+                    tempButton.Location = new Point(0, (i * heightOfButtons) + 2);
+                    _homepage.selectedDay = tempButton;
+
                 }
                 else
                 {
@@ -55,7 +64,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             Button pressedButton = (Button)sender;
 
             //Edit the selected
-            _homepage.selectedDay = pressedButton.Text;
+            _homepage.selectedDay = pressedButton;
 
             //Update UI
             _homepage.UpdateSchedulePanel();

@@ -17,7 +17,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
         public Panel VolunteerPanel;
 
         public List<String> days;
-        public string selectedDay;
+        public Button selectedDay;
         
         public Volunteer ShownVolunteer;
 
@@ -124,6 +124,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             DaysLeft.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom;
             SchedulePanelElements.DaysLeftNavigation daysLeftNavigation = new SchedulePanelElements.DaysLeftNavigation(_mainWindowUI, this);
             DaysLeft.Controls.Add(daysLeftNavigation.GetPanel(DaysLeft.Size));
+            
             
             TheSchedule.Location = new Point(DaysLeft.Location.X + DaysLeft.Size.Width, 0);
             TheSchedule.Size = new Size(schedulePanel.Size.Width - DaysLeft.Size.Width, schedulePanel.Size.Height - 50);
