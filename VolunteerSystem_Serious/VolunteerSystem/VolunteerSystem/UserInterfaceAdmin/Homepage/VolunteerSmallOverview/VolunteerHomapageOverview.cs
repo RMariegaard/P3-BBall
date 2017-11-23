@@ -149,7 +149,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             information.Text =
                 $"{shift.Task} \n" +
                 $"{shift.StartTime.DayOfWeek}\n" +
-                $"{shift.StartTime.TimeOfDay} - {shift.EndTime.TimeOfDay}";
+                $"{shift.StartTime.Hour}:{shift.StartTime.Minute} - {shift.EndTime.Hour}:{shift.EndTime.Minute}";
 
             panel.Controls.Add(information);
             return panel;

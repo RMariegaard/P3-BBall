@@ -12,9 +12,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
     {
         Panel _mainHomepagePanel;
 
-        Panel schedulePanel;
-        Panel pendingRequestPanel;
-        Panel VolunteerPanel;
+        public Panel schedulePanel;
+        public Panel pendingRequestPanel;
+        public Panel VolunteerPanel;
 
         public List<String> days;
         public string selectedDay;
@@ -27,6 +27,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
         {
             _mainWindowUI = mainWindowUI;
             _mainHomepagePanel = new Panel();
+
+            pendingRequestPanel = new Panel();
+            VolunteerPanel = new Panel();
+            schedulePanel = new Panel();
         }
 
         public Panel GetHomepagePanel(Panel forRefrence)
@@ -63,7 +67,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             }
 
             //Schedule panel
-            schedulePanel = new Panel();
+            schedulePanel.Controls.Clear();
             schedulePanel.Location = new Point(0, 0);
             schedulePanel.Size = new Size((_mainHomepagePanel.Size.Width / 100) * 70 - 2, _mainHomepagePanel.Height);
             schedulePanel.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right;
@@ -75,7 +79,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
         {
             _mainHomepagePanel.Controls.Remove(pendingRequestPanel);
             //Pending request panel
-            pendingRequestPanel = new Panel();
+            pendingRequestPanel.Controls.Clear();
             pendingRequestPanel.Location = new Point(schedulePanel.Location.X + schedulePanel.Size.Width + 2, 0);
             pendingRequestPanel.Size = new Size(_mainHomepagePanel.Size.Width - schedulePanel.Size.Width, (_mainHomepagePanel.Size.Height / 100) * 70);
             pendingRequestPanel.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
@@ -87,7 +91,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
         {
             _mainHomepagePanel.Controls.Remove(VolunteerPanel);
             //Volunteer panel
-            VolunteerPanel = new Panel();
+            VolunteerPanel.Controls.Clear();
             VolunteerPanel.Location = new Point(schedulePanel.Location.X + schedulePanel.Size.Width + 2, pendingRequestPanel.Location.Y + pendingRequestPanel.Size.Height + 2);
             VolunteerPanel.Size = new Size(_mainHomepagePanel.Size.Width - schedulePanel.Size.Width - 2, _mainHomepagePanel.Size.Height - pendingRequestPanel.Height - 2);
             VolunteerPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements;
 
 namespace VolunteerSystem.UserInterfaceAdmin
@@ -26,5 +27,6 @@ namespace VolunteerSystem.UserInterfaceAdmin
         void DisplayCreateNewTask();
         void Start();
         void UpdateUI();
+        void ScrollToControlOnSchedule(Control control);
     }
 }

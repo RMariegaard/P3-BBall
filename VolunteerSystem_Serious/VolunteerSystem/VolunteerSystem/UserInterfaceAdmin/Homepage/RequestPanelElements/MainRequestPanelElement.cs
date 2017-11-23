@@ -121,16 +121,24 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             return dateSent;
         }
 
+        private Shift pressedShift;
         private Label getShiftInformation(Point location, Request request)
         {
             Label shiftInformationLabel = new Label();
             shiftInformationLabel.Location = location;
             shiftInformationLabel.Text = request.Shift.Task;
             shiftInformationLabel.AutoSize = true;
+            pressedShift = request.Shift;
+            shiftInformationLabel.Click += getShiftInformation_Clicked;
 
             //Mangler at skrive dato og klokslet på
             return shiftInformationLabel;
         }
+        private void getShiftInformation_Clicked(object sender, EventArgs e)
+        {
+            //_volunteerMainUI.ScrollToControlOnSchedule(pressedShift.);
+        }
+
         private Button getAccept(Point location, Request request)
         {
             Button acceptButton = new Button();

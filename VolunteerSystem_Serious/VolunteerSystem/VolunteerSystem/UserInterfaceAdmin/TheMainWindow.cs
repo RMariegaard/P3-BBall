@@ -95,8 +95,9 @@ namespace VolunteerSystem.UserInterface
             //Update ui
             _homepage.UpdateSchedulePanel();
             _homepage.UpdatePendingRequestPanel();
-            if (_homepage.ShownVolunteer.Name == request.Worker.Name)
-                _homepage.UpdateVolunteerPanel();
+            if (_homepage.ShownVolunteer != null)
+                if (_homepage.ShownVolunteer.Name == request.Worker.Name)
+                    _homepage.UpdateVolunteerPanel();
         }
 
         public void DenyWorkerRequest(Request request)
@@ -106,8 +107,9 @@ namespace VolunteerSystem.UserInterface
 
             //Update ui
             _homepage.UpdatePendingRequestPanel();
-            if (_homepage.ShownVolunteer.Name == request.Worker.Name)
-                _homepage.UpdateVolunteerPanel();
+            if (_homepage.ShownVolunteer != null)
+                if (_homepage.ShownVolunteer.Name == request.Worker.Name)
+                    _homepage.UpdateVolunteerPanel();
         }
 
         public void DisplayCreateNewShift()
@@ -163,5 +165,12 @@ namespace VolunteerSystem.UserInterface
         {
             return fullClientWindowSize;
         }
+
+        public void ScrollToControlOnSchedule(Control control)
+        {
+            //_homepage.selectedDay = ;
+            _homepage.schedulePanel.ScrollControlIntoView(control);
+        }
+
     }
 }
