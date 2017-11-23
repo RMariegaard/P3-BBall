@@ -69,7 +69,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             
             int i = 1;
             int panelHeight = 40;
-            foreach (Request request in _volunteerMainUI.GetController().GetAllRequests())
+            foreach (Request request in _volunteerMainUI.GetScheduleController().GetAllRequests())
             {
                 Panel tempPanel = new Panel();
                 tempPanel.Location = new Point(0, (i * panelHeight) + 20);

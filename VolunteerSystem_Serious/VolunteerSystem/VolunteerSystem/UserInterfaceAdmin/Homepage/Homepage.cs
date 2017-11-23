@@ -58,7 +58,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             
             //Finding the dates
             days = new List<string>();
-            foreach (Shift shift in _mainWindowUI.GetController().GetAllShifts().OrderBy(x => x.StartTime))
+            foreach (Shift shift in _mainWindowUI.GetScheduleController().GetAllShifts().OrderBy(x => x.StartTime))
             {
                 if (!days.Contains(shift.StartTime.DayOfWeek.ToString() + " " + shift.StartTime.ToShortDateString()))
                 {

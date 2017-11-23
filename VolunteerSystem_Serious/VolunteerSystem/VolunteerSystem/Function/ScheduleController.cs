@@ -77,13 +77,13 @@ namespace VolunteerSystem
         {
             throw new NotImplementedException();
         }
-        public void ApproveRequest()
+        public void ApproveRequest(Request request)
         {
-            throw new NotImplementedException();
+            request.ApproveRequest();
         }
-        public void DenyRequest()
+        public void DenyRequest(Request request)
         {
-            throw new NotImplementedException();
+            request.DenieRequest();
         }
 
         private void justForTesting()

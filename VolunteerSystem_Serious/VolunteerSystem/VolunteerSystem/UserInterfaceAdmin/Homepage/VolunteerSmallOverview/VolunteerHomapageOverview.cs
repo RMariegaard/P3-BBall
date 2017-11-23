@@ -100,7 +100,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             shiftLabel.Location = new Point(0, 0);
             shiftLabel.AutoSize = true;
 
-            List<Shift> workerShifts = volunteerMainUI.GetController().GetAllShifts().Where(x => x.Workers.Exists(y => y.Name == worker.Name)).ToList();
+            List<Shift> workerShifts = volunteerMainUI.GetScheduleController().GetAllShifts().Where(x => x.Workers.Exists(y => y.Name == worker.Name)).ToList();
             int widthOfShiftElement = 100;
             for (int i = 0; i < workerShifts.Count; i++)
             {
@@ -124,7 +124,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             shiftLabel.Location = new Point(0, 0);
             shiftLabel.AutoSize = true;
 
-            List<Shift> workerShifts = volunteerMainUI.GetController().GetAllShifts().Where(x => x.Requests.Any(y => y.Worker.Name == worker.Name) ).ToList();
+            List<Shift> workerShifts = volunteerMainUI.GetScheduleController().GetAllShifts().Where(x => x.Requests.Any(y => y.Worker.Name == worker.Name) ).ToList();
             int widthOfShiftElement = 100;
             for (int i = 0; i < workerShifts.Count; i++)
             {

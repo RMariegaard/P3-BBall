@@ -12,7 +12,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
     public interface IVolunteerMainUI
     {
         void DisplayPopup(string header, string body);
-        ScheduleController GetController();
+        ScheduleController GetScheduleController();
         void DisplayHomepage();
         void DisplayVolunteerOverview();
         void DisplayVolunteerOnHomepage(Volunteer volunteer);

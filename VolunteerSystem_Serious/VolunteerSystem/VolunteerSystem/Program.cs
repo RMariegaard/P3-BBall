@@ -17,8 +17,9 @@ namespace VolunteerSystem
             */
 
             Schedule schedule = new Schedule(2018);
-            ScheduleController controller = new ScheduleController(schedule);
-            UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(controller);
+            ScheduleController scheduleController = new ScheduleController(schedule);
+            WorkerController workerController = new WorkerController();
+            UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
             
             Ui.Start();
         }

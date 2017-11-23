@@ -19,14 +19,16 @@ namespace VolunteerSystem.UserInterface
 
         private UserInterfaceAdmin.Homepage.Homepage _homepage;
 
-        public ScheduleController _controller;
-        public TheMainWindow(ScheduleController controller)
+        public ScheduleController ScheduleController;
+        WorkerController WorkerController;
+        public TheMainWindow(ScheduleController scheduleController, WorkerController workerController)
         {
             InitializeComponent();
             Width = 1600;
             Height = 800;
 
-            _controller = controller;
+            WorkerController = workerController;
+            ScheduleController = scheduleController;
 
             fullClientWindowSize = RectangleToScreen(this.ClientRectangle).Size;
 
@@ -90,7 +92,7 @@ namespace VolunteerSystem.UserInterface
         public void AcceptWorkerRequest(Request request)
         {
             //Approve it
-            request.ApproveRequest();
+            ScheduleController.ApproveRequest(request);
 
             //Update ui
             _homepage.UpdateSchedulePanel();
@@ -103,7 +105,7 @@ namespace VolunteerSystem.UserInterface
         public void DenyWorkerRequest(Request request)
         {
             //Deny it
-            request.DenieRequest();
+            ScheduleController.DenyRequest(request);
 
             //Update ui
             _homepage.UpdatePendingRequestPanel();
@@ -114,11 +116,11 @@ namespace VolunteerSystem.UserInterface
 
         public void DisplayCreateNewShift()
         {
-            CreateNewShiftUI createNewShiftUIPopup = new CreateNewShiftUI(_controller.GetAllTasks());
+            CreateNewShiftUI createNewShiftUIPopup = new CreateNewShiftUI(ScheduleController.GetAllTasks());
             createNewShiftUIPopup.ShowDialog();
             if (createNewShiftUIPopup.DialogResult == DialogResult.OK)
             {
-                _controller.CreateShift(createNewShiftUIPopup.Result);
+                ScheduleController.CreateShift(createNewShiftUIPopup.Result);
                 _homepage.UpdateSchedulePanel();
             }
         }
@@ -129,7 +131,7 @@ namespace VolunteerSystem.UserInterface
             createNewTaskUIPopup.ShowDialog();
             if (createNewTaskUIPopup.DialogResult == DialogResult.OK)
             {
-                _controller.CreateTask(createNewTaskUIPopup.Result);
+                ScheduleController.CreateTask(createNewTaskUIPopup.Result);
                 _homepage.UpdateSchedulePanel();
             }
         }
@@ -140,9 +142,9 @@ namespace VolunteerSystem.UserInterface
             DisplayHomepage();
         }
 
-        public ScheduleController GetController()
+        public ScheduleController GetScheduleController()
         {
-            return _controller;
+            return ScheduleController;
         }
 
         public void DisplayPressedOnShift(UserInterfaceAdmin.Homepage.SchedulePanelElements.ShiftUIPanel shift)
@@ -171,6 +173,5 @@ namespace VolunteerSystem.UserInterface
             //_homepage.selectedDay = ;
             _homepage.schedulePanel.ScrollControlIntoView(control);
         }
-
     }
 }
