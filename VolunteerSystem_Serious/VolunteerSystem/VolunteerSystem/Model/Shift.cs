@@ -95,7 +95,7 @@ namespace VolunteerSystem
 
         public void CreateRequest(Volunteer volunteer)
         {
-            _requests.Add(new Request(volunteer, this));
+            _requests.Add(new Request(volunteer));
         }
 
         public void RemoveRequest(Request request)
