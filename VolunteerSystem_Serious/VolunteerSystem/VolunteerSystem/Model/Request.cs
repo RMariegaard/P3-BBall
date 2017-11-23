@@ -46,11 +46,11 @@ namespace VolunteerSystem
         public void ApproveRequest()
         {
             Shift.Workers.Add(_worker);
-            Shift.Requests.Remove(this);
+            Shift.RemoveRequest(this);
         }
         public void DenieRequest()
         {
-            Shift.Requests.Remove(this);
+            Shift.RemoveRequest(this);
         }
     }
 }

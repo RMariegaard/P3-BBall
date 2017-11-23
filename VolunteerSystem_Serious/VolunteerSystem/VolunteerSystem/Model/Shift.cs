@@ -50,7 +50,7 @@ namespace VolunteerSystem
         }
 
         private List<Request> _requests;
-        public List<Request> Requests
+        public IEnumerable<Request> Requests
         {
             get
             {
@@ -96,6 +96,11 @@ namespace VolunteerSystem
         public void CreateRequest(Volunteer volunteer)
         {
             _requests.Add(new Request(volunteer, this));
+        }
+
+        public void RemoveRequest(Request request)
+        {
+            _requests.Remove(request);
         }
 
         public string GetInformation()
