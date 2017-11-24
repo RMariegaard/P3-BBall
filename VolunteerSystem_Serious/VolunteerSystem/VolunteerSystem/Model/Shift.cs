@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 
 namespace VolunteerSystem
 {
-    public class Shift
+    public class Shift : INotifyPropertyChanged
     {
         public Shift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded, string description)
         {
@@ -72,6 +73,9 @@ namespace VolunteerSystem
         }
 
         private string _description;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public string Description
         {
             get
@@ -81,9 +85,10 @@ namespace VolunteerSystem
         }
 
         public bool IsFilled() => NumberOfVolunteers() >= _volunteersNeeded;
+
         public int NumberOfVolunteers() => _workers.Count;
         public int NumberOfRequests() => _requests.Count;
-        
+        public string GetNumberOfVolunteers { get { return _workers.Count.ToString(); } }
 
 
         public void EditShift()
@@ -114,6 +119,8 @@ namespace VolunteerSystem
         {
             this.Workers.Add(request.Worker);
             RemoveRequest(request);
+            if(PropertyChanged != null)
+                PropertyChanged(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
         public void DenieRequest(Request request)
         {

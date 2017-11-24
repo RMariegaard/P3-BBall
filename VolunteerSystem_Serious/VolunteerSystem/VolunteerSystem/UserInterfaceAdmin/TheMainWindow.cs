@@ -105,11 +105,10 @@ namespace VolunteerSystem.UserInterface
             //Approve it
 
             ScheduleController.ApproveRequest(request);
-            _homepage.UpdateShiftPanel(shiftToedit);
+            //_homepage.UpdateShiftPanel(shiftToedit);
             //Update ui
 
 
-                
 
 
             //Approve it
