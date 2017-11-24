@@ -19,7 +19,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             this.shift = shift;
         }
 
-        BindingSource bs = new BindingSource();
+        
 
         public Control ShiftUI(Panel forRefence, int hourHeight)
         {
@@ -35,13 +35,20 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             shiftPanel.BorderStyle = BorderStyle.FixedSingle;
             shiftPanel.Click += panel_clicked;
 
-
+            //////////////////////////DATABINDING LETS GO/////////////////////
+            BindingSource bs = new BindingSource();
             bs.DataSource = typeof(Shift);
             bs.Add(shift);
 
+            var binding = new Binding("Text", bs, "GetNumberOfVolunteers");
+            binding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
+            {
+                convertEventArgs.Value =  convertEventArgs.Value + "/"+shift.VolunteersNeeded;
+            };
 
+            ////////////////////////////////////////////////
             Label headder = new Label();
-            headder.DataBindings.Add(new Binding("Text", bs, "GetNumberOfVolunteers",false,DataSourceUpdateMode.OnPropertyChanged));
+            headder.DataBindings.Add(binding);
             //headder.Text = $"{shift.NumberOfVolunteers().ToString()}/{shift.VolunteersNeeded}";
             headder.Location = new Point(0, 0);
             headder.AutoSize = true;
