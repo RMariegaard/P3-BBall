@@ -8,7 +8,6 @@ namespace VolunteerSystem
 {
     public abstract class Worker
     {
-        protected int _id;
         protected string _name;
         protected string _email;
 
@@ -20,7 +19,12 @@ namespace VolunteerSystem
         {
             this._name = name;
             this._email = email;
+            ID = _id++;
         }
+
+        private static int _id = 0;
+        public int ID { get; private set; }
+
 
         public string GetInformation()
         {

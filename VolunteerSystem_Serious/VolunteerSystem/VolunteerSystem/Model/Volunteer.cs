@@ -41,6 +41,7 @@ namespace VolunteerSystem
             this._assosiation = assosiation;
             this._yearsWorked = new List<int>();
         }
+ 
 
         public bool IsValidForSeasonTickets()
         {
