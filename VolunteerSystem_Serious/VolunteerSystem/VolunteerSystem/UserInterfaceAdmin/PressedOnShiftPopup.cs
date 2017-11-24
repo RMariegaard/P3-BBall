@@ -21,7 +21,6 @@ namespace VolunteerSystem.UserInterfaceAdmin
             InitializeComponent();
             Width = 400;
             Height = 400;
-
             
 
             this.shift = shift;

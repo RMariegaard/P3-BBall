@@ -167,9 +167,17 @@ namespace VolunteerSystem.UserInterface
             {
                 DateTime startDateTime = new DateTime(DateTimePicker.Value.Year, DateTimePicker.Value.Month, DateTimePicker.Value.Day, startHour, startMinut, 0);
                 DateTime endDateTime = new DateTime(DateTimePicker.Value.Year, DateTimePicker.Value.Month, DateTimePicker.Value.Day, endHour, endMinut, 0);
+                if(startDateTime < endDateTime)
+                {
+                    Result = new Shift(startDateTime, endDateTime, TasksComboBox.SelectedItem.ToString(), int.Parse(numberOfVolunteersTextBox.Text), desciptionTextBox.Text);
+                    DialogResult = DialogResult.OK;
+                }
+                else
+                {
 
-                Result = new Shift(startDateTime, endDateTime, TasksComboBox.SelectedItem.ToString(), int.Parse(numberOfVolunteersTextBox.Text), desciptionTextBox.Text);
-                DialogResult = DialogResult.OK;
+                    PopupUI popup = new PopupUI("Invalid information", "The start of the shift has to be before the end of shift");
+                    popup.Show();
+                }
             }
         }
         
@@ -179,7 +187,7 @@ namespace VolunteerSystem.UserInterface
             //Check tasks comboBox
             if (TasksComboBox.SelectedItem == null)
             {
-                PopupUI popup = new PopupUI("Uncorrect information", "Please select the task");
+                PopupUI popup = new PopupUI("Invalid information", "Please select the task");
                 popup.Show();
                 return false;
             }
@@ -187,7 +195,7 @@ namespace VolunteerSystem.UserInterface
             //Check number of volunteers
             if (!numberOfVolunteersTextBox.Text.All(x => char.IsNumber(x)) || numberOfVolunteersTextBox.Text == "" || numberOfVolunteersTextBox == null)
             {
-                PopupUI popup = new PopupUI("Uncorrect information", "Number of volunteers field, must be a number, and not start with '0'.");
+                PopupUI popup = new PopupUI("Invalid information", "Number of volunteers field, must be a number, and not start with '0'.");
                 popup.Show();
                 return false;
             }
@@ -198,20 +206,20 @@ namespace VolunteerSystem.UserInterface
             {
                 if (!int.TryParse(startTextBoxSplittet[0], out startHour))
                 {
-                    PopupUI popup = new PopupUI("Uncorrect information", "The hours in start time must be numbers");
+                    PopupUI popup = new PopupUI("Invalid information", "The hours in start time must be numbers");
                     popup.Show();
                     return false;
                 }
                 if (!int.TryParse(startTextBoxSplittet[1], out startMinut))
                 {
-                    PopupUI popup = new PopupUI("Uncorrect information", "The minuts in start time must be numbers");
+                    PopupUI popup = new PopupUI("Invalid information", "The minuts in start time must be numbers");
                     popup.Show();
                     return false;
                 }
             }
             else
             {
-                PopupUI popup = new PopupUI("Uncorrect information", "Start time must be of the format xx:xx, and only contain numbers, apart from the kolon that seperates the hours from the minuts");
+                PopupUI popup = new PopupUI("Invalid information", "Start time must be of the format xx:xx, and only contain numbers, apart from the kolon that seperates the hours from the minuts");
                 popup.Show();
                 return false;
             }
@@ -222,23 +230,40 @@ namespace VolunteerSystem.UserInterface
             {
                 if (!int.TryParse(endTextBoxSplittet[0], out endHour))
                 {
-                    PopupUI popup = new PopupUI("Uncorrect information", "The hours in end time must be numbers");
+                    PopupUI popup = new PopupUI("Invalid information", "The hours in end time must be numbers");
                     popup.Show();
                     return false;
                 }
                 if (!int.TryParse(endTextBoxSplittet[1], out endMinut))
                 {
-                    PopupUI popup = new PopupUI("Uncorrect information", "The minuts in end time must be numbers");
+                    PopupUI popup = new PopupUI("Invalid information", "The minuts in end time must be numbers");
                     popup.Show();
                     return false;
                 }
             }
             else
             {
-                PopupUI popup = new PopupUI("Uncorrect information", "End time must be of the format xx:xx, and only contain numbers, apart from the kolon that seperates the hours from the minuts");
+                PopupUI popup = new PopupUI("Invalid information", "End time must be of the format xx:xx, and only contain numbers, apart from the kolon that seperates the hours from the minuts");
                 popup.Show();
                 return false;
             }
+
+
+            //if starttime or endtime is not a between 0 and 24
+            if( (startHour > 23 || startHour < 0) || (startMinut >= 60 || startMinut < 0)){
+
+                PopupUI popup = new PopupUI("Invalid information", "You did not enter a valid start time");
+                popup.Show();
+                return false;
+            }
+            if((endHour > 24 || endHour < 0) || (endMinut >= 60 || endMinut < 0)){
+
+                PopupUI popup = new PopupUI("Invalid information", "You did not enter a valid end time");
+                popup.Show();
+                return false;
+            }
+
+
 
             return true;
         }
