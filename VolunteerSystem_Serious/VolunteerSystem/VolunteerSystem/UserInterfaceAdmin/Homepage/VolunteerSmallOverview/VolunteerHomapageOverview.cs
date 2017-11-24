@@ -77,7 +77,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             fullProfileButton.Click += fullProfileButton_Clicked;
             fullProfileButton.Text = "Full Profile";
             fullProfileButton.AutoSize = true;
-            fullProfileButton.Location = new Point((size.Width - fullProfileButton.Size.Width) / 2, information.Bottom + 10/*_mainPanel.Size.Height - 100*/);
+            fullProfileButton.Location = new Point((size.Width - fullProfileButton.Size.Width) / 2, information.Bottom + 170/*_mainPanel.Size.Height - 100*/);
 
             volunteerInformationPanel.Controls.Add(fullProfileButton);
             volunteerInformationPanel.Controls.Add(information);
