@@ -26,7 +26,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             
             Panel shiftPanel = new Panel();
             shiftPanel.Name = "Shift " + shift.ID.ToString();
-
+           
             shiftPanel.Location = new Point(0, (int)(((shift.StartTime.Hour*60) + shift.StartTime.Minute) * ((double)hourHeight/60)));
             shiftPanel.Size = new Size(forRefence.Size.Width, (int)(LengthInminuts * ((double)hourHeight/60)));
             shiftPanel.BackColor = Color.AliceBlue;
