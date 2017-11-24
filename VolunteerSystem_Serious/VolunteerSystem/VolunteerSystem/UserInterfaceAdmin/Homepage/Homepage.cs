@@ -168,7 +168,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
             //Kan godt blive et problem at man søger efter id?
 
-            Control test = _mainHomepagePanel.Controls.Find("Shift " + shift.ID.ToString(), true).First();
+            Control test = _mainHomepagePanel.Controls.Find("Shift " + shift.ID.ToString(), true).FirstOrDefault();
 
             if (test != null)
             {
