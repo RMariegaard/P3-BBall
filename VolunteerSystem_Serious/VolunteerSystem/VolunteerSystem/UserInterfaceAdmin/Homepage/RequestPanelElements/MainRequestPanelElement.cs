@@ -97,18 +97,17 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             return _mainRequestPanel;
         }
 
-        private Label getVolunteerName(Point location, Request request, Worker worker)
+        private LinkLabel getVolunteerName(Point location, Request request, Worker worker)
         {
-            Label volunteerNameLabel = new Label();
+            LinkLabel volunteerNameLabel = new LinkLabel();
             volunteerNameLabel.Location = location;
             volunteerNameLabel.Text = request.Worker.Name;
-            volunteerNameLabel.ForeColor = Color.Blue;
-            volunteerNameLabel.Font = new Font(volunteerNameLabel.Font,FontStyle.Underline);
 
             volunteerNameLabel.Tag = worker;
             volunteerNameLabel.Click += volunteerLabel_clicked;
             volunteerNameLabel.AutoSize = true;
-
+            volunteerNameLabel.LinkColor = Color.Black;
+            volunteerNameLabel.LinkBehavior = LinkBehavior.HoverUnderline;
             return volunteerNameLabel;
         }
         public void volunteerLabel_clicked(object sender, EventArgs e)
@@ -128,12 +127,13 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
         }
 
         private Shift pressedShift;
-        private Label getShiftInformation(Point location, Request request)
+        private LinkLabel getShiftInformation(Point location, Request request)
         {
 
             pressedShift = _volunteerMainUI.GetScheduleController().FindSingleShift(x => x.Requests.Contains(request));
-            Label shiftInformationLabel = new Label();
+            LinkLabel shiftInformationLabel = new LinkLabel();
             shiftInformationLabel.Location = location;
+
 
             shiftInformationLabel.Text = pressedShift.Task + " \n" + 
                                          pressedShift.StartTime.DayOfWeek +  " " +
@@ -141,7 +141,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             shiftInformationLabel.AutoSize = true;
             shiftInformationLabel.Click += getShiftInformation_Clicked;
 
-            //Mangler at skrive dato og klokslet på
+            shiftInformationLabel.LinkColor = Color.Black;
+
+            shiftInformationLabel.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+
+            //Mangler at skrive dato og klokslet på. Ikke længere
             return shiftInformationLabel;
         }
         private void getShiftInformation_Clicked(object sender, EventArgs e)
