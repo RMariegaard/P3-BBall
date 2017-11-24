@@ -102,6 +102,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             Label volunteerNameLabel = new Label();
             volunteerNameLabel.Location = location;
             volunteerNameLabel.Text = request.Worker.Name;
+            volunteerNameLabel.ForeColor = Color.Blue;
+            volunteerNameLabel.Font = new Font(volunteerNameLabel.Font,FontStyle.Underline);
+
             volunteerNameLabel.Tag = worker;
             volunteerNameLabel.Click += volunteerLabel_clicked;
             volunteerNameLabel.AutoSize = true;
@@ -132,7 +135,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             Label shiftInformationLabel = new Label();
             shiftInformationLabel.Location = location;
 
-            shiftInformationLabel.Text = pressedShift.Task;
+            shiftInformationLabel.Text = pressedShift.Task + " \n" + 
+                                         pressedShift.StartTime.DayOfWeek +  " " +
+                                         pressedShift.StartTime.TimeOfDay.ToString("hh\\:mm");
             shiftInformationLabel.AutoSize = true;
             shiftInformationLabel.Click += getShiftInformation_Clicked;
 
