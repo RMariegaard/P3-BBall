@@ -139,7 +139,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
                                          pressedShift.StartTime.DayOfWeek +  " " +
                                          pressedShift.StartTime.TimeOfDay.ToString("hh\\:mm");
             shiftInformationLabel.AutoSize = true;
-            shiftInformationLabel.Click += getShiftInformation_Clicked;
+            //Hvis du bare bruger presseddShift, så vil den altid vise den sidste shift der er tilføjet.
+            shiftInformationLabel.Click += delegate (object sender, EventArgs e) { getShiftInformation_Clicked(sender, _volunteerMainUI.GetScheduleController().FindSingleShift(x => x.Requests.Contains(request))); };
 
             shiftInformationLabel.LinkColor = Color.Black;
 
@@ -148,9 +149,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             //Mangler at skrive dato og klokslet på. Ikke længere
             return shiftInformationLabel;
         }
-        private void getShiftInformation_Clicked(object sender, EventArgs e)
+
+        private void getShiftInformation_Clicked(object sender, Shift shift)
         {
-            //_volunteerMainUI.ScrollToControlOnSchedule(pressedShift.);
+            //Kan ikke få den til at vise shiften i skemaet...
+            //Control temp = _volunteerMainUI.FindSpecificControl("Shift " + shift.ID.ToString());
+            //if(temp != null)
+            //    _volunteerMainUI.ScrollToControlOnSchedule(temp);
+            _volunteerMainUI.DisplayPressedOnShift(shift);
         }
 
         private Button getAccept(Point location, Request request)
