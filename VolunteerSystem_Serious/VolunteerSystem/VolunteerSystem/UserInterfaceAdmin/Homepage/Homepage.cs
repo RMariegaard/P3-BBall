@@ -152,7 +152,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
         public void UpdateShiftPanel(Shift shift)
         {
 
-            var controlList = GetControlHierarchy(_mainHomepagePanel).ToList();
 
             //Form print = new Form();
             //ListBox list = new ListBox();
@@ -168,7 +167,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
 
             //Kan godt blive et problem at man søger efter id?
-            Control test = controlList.Find(x => x.Name == "Shift " + shift.ID.ToString());
+
+            Control test = _mainHomepagePanel.Controls.Find("Shift " + shift.ID.ToString(), true).First();
 
             if (test != null)
             {
@@ -178,26 +178,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
                 parent.Controls.Add(temp.ShiftUI(parent as Panel, 50));
             }
         }
-        private IEnumerable<Control> GetControlHierarchy(Control root)
-        {
-            var queue = new Queue<Control>();
-
-            queue.Enqueue(root);
-
-            do
-            {
-                var control = queue.Dequeue();
-
-                yield return control;
-
-                foreach (var child in control.Controls.OfType<Panel>())
-                    if (child is Panel)
-                        queue.Enqueue(child);
-
-            } while (queue.Count > 0);
-
-        }
-
 
 
     }
