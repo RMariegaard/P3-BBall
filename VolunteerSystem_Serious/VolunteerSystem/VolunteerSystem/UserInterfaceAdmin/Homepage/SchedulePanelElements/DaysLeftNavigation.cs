@@ -29,6 +29,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             for (int i = 0; i < _homepage.days.Count; i++)
             {
                 Button tempButton = new Button();
+                tempButton.TabStop = false;
                 tempButton.Text = _homepage.days[i];
                 tempButton.FlatStyle = FlatStyle.Flat;
                 if (_homepage.selectedDay != null && _homepage.days[i] == _homepage.selectedDay.Text)

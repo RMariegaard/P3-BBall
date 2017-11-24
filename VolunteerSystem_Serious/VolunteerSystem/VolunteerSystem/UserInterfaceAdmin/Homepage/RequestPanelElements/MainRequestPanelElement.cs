@@ -157,6 +157,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             acceptButton.AutoSize = true;
             acceptButton.Click += acceptButton_Clicked;
             acceptButton.Tag = request;
+            acceptButton.TabStop = false;
             
             return acceptButton;
         }
@@ -175,6 +176,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             denyButton.AutoSize = true;
             denyButton.Click += denyButton_Clicked;
             denyButton.Tag = request;
+            denyButton.TabStop = false;
 
             return denyButton;
         }
