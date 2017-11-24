@@ -28,11 +28,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             hourHeight = 50; //schedulePanel.Size.Height / 23
             
             //Add Numbers to Panel. this needs only to be done once
-            for (int i = 0; i < 24; i++)
+            for (int i = 0; i <= 24; i++)
             {
                 Label tempLabel = new Label();
                 tempLabel.Location = new Point(0, (i * hourHeight));
-                tempLabel.Text = i + 1 >= 10 ? $"{i + 1}.00" : $"0{i + 1}.00";
+                tempLabel.Text = i + 1 >= 10 ? $"{i}.00" : $"0{i}.00";
                 tempLabel.AutoSize = true;
                 colorAndShiftPanel.Controls.Add(tempLabel);
             }
