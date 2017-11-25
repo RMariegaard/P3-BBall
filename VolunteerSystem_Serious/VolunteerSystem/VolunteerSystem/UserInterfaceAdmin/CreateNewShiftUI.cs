@@ -12,28 +12,28 @@ namespace VolunteerSystem.UserInterface
 {
     public partial class CreateNewShiftUI : Form
     {
-        private Label desciptionLabel;
-        private Label endTimeLabel;
-        private Label startTimeLabel;
-        private Label dateLabel;
-        private Label TaskLabel;
-        private Label numberOfVolunteersLabel;
+        protected Label desciptionLabel;
+        protected Label endTimeLabel;
+        protected Label startTimeLabel;
+        protected Label dateLabel;
+        protected Label TaskLabel;
+        protected Label numberOfVolunteersLabel;
 
-        private TextBox desciptionTextBox;
-        private TextBox numberOfVolunteersTextBox;
-        private TextBox startHourMinutTextBox;
-        private TextBox endHourMinutTextBox;
-        private ComboBox TasksComboBox;
-        private DateTimePicker DateTimePicker;
+        protected TextBox desciptionTextBox;
+        protected TextBox numberOfVolunteersTextBox;
+        protected TextBox startHourMinutTextBox;
+        protected TextBox endHourMinutTextBox;
+        protected ComboBox TasksComboBox;
+        protected DateTimePicker DateTimePicker;
 
-        private Button createShiftButton;
-        private Button regretButton;
+        protected Button createShiftButton;
+        protected Button regretButton;
 
-        int startHour;
-        int startMinut;
+        protected int startHour;
+        protected int startMinut;
 
-        int endHour;
-        int endMinut;
+        protected int endHour;
+        protected int endMinut;
 
         public Shift Result;
 
@@ -161,7 +161,7 @@ namespace VolunteerSystem.UserInterface
             Controls.Add(regretButton);
         }
 
-        private void createShift_Clicked(object sender, EventArgs e)
+        protected virtual void createShift_Clicked(object sender, EventArgs e)
         {
             if (correctInformation())
             {
@@ -182,7 +182,7 @@ namespace VolunteerSystem.UserInterface
         }
         
 
-        private bool correctInformation()
+        protected bool correctInformation()
         {
             //Check tasks comboBox
             if (TasksComboBox.SelectedItem == null)

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VolunteerSystem.UserInterface;
 
 namespace VolunteerSystem.UserInterfaceAdmin
 {
@@ -15,6 +16,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
         Shift shift;
         Panel _pressedOnShiftPopupMainPanel;
         Size fullClientSize;
+
 
         public PressedOnShiftPopup(Shift shift)
         {
@@ -49,7 +51,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             editShiftButton.Text = "Edit Shift";
             editShiftButton.AutoSize = true;
             editShiftButton.Location = new Point(cancelButton.Width + 5, _pressedOnShiftPopupMainPanel.Size.Height - editShiftButton.Size.Height - 5);
-
+            editShiftButton.Click += EditShift_Clicked;
 
 
 
@@ -104,5 +106,16 @@ namespace VolunteerSystem.UserInterfaceAdmin
             Controls.Add(_pressedOnShiftPopupMainPanel);
         }
 
+        private void EditShift_Clicked(object sender, EventArgs e)
+        {
+            List<string> list = new List<string>();
+            list.Add(shift.Task);
+            EditShiftUI editShiftUI = new EditShiftUI(list, shift);
+            editShiftUI.ShowDialog();
+            if (editShiftUI.DialogResult == DialogResult.OK)
+            {
+                //how t´he fuck=
+            }
+        }
     }
 }
