@@ -181,7 +181,7 @@ namespace VolunteerSystem.UserInterface
 
         public void DisplayPressedOnShift(Shift shift)
         {
-            UserInterfaceAdmin.PressedOnShiftPopup pressedOnShiftPopup = new UserInterfaceAdmin.PressedOnShiftPopup(shift);
+            UserInterfaceAdmin.PressedOnShiftPopup pressedOnShiftPopup = new UserInterfaceAdmin.PressedOnShiftPopup(shift, this);
             pressedOnShiftPopup.ShowDialog();
         }
 

@@ -16,15 +16,16 @@ namespace VolunteerSystem.UserInterfaceAdmin
         Shift shift;
         Panel _pressedOnShiftPopupMainPanel;
         Size fullClientSize;
+        IVolunteerMainUI volunteerMainUI;
 
 
-        public PressedOnShiftPopup(Shift shift)
+        public PressedOnShiftPopup(Shift shift, IVolunteerMainUI volunteerMainUI)
         {
             InitializeComponent();
             Width = 400;
             Height = 400;
-            
 
+            this.volunteerMainUI = volunteerMainUI;
             this.shift = shift;
             fullClientSize = RectangleToScreen(this.ClientRectangle).Size;
 
@@ -114,7 +115,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             editShiftUI.ShowDialog();
             if (editShiftUI.DialogResult == DialogResult.OK)
             {
-                //how t´he fuck=
+                volunteerMainUI.GetScheduleController().EditShift(shift.ID, editShiftUI.Result);
             }
         }
     }
