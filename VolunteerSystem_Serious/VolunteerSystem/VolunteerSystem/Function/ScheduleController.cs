@@ -48,9 +48,43 @@ namespace VolunteerSystem
             _schedule.Tasks.Add(task);
         }
 
-        public void EditShift()
+        public void EditShift(int oldShiftID, Shift newShift)
         {
-            throw new NotImplementedException();
+            Shift oldShift = FindSingleShift(x => x.ID == oldShiftID);
+            string[] changes = FindShiftChanges(oldShift, newShift);
+            foreach (Volunteer volunteer in (IEnumerable<Volunteer>) oldShift.Workers.Where(x => x.GetType() == typeof(Volunteer))){
+               // Notifier.InformVolunteer(volunteer, oldShift, newShift, changes);
+            }
+
+        }
+
+        private string[] FindShiftChanges(Shift oldShift, Shift newShift)
+        {
+            List<string> changes = new List<string>();
+
+            if(oldShift.StartTime != newShift.StartTime)
+            {
+                changes.Add("Starttime");
+            }
+            if(oldShift.EndTime != newShift.EndTime)
+            {
+                changes.Add("Endtime");
+            }
+            if(oldShift.Description != newShift.Description)
+            {
+                changes.Add("Description");
+            }
+            if(oldShift.GetNumberOfVolunteers != newShift.GetNumberOfVolunteers)
+            {
+                changes.Add("Number of volunteers");
+            }
+            if(oldShift.Task != newShift.Task)
+            {
+                changes.Add("Task");
+            }
+
+
+            return changes.ToArray();
         }
 
         public void AddWorkerToShift()

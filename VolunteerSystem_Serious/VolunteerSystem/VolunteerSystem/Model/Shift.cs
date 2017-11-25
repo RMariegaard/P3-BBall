@@ -91,14 +91,19 @@ namespace VolunteerSystem
         public string GetNumberOfVolunteers { get { return _workers.Count.ToString(); } }
 
 
-        public void EditShift()
+        public void EditShift(Shift newShift)
         {
-            throw new NotImplementedException();
+            this._volunteersNeeded = newShift.VolunteersNeeded;
+            this._task = newShift.Task;
+            this._startTime = newShift._startTime;
+            this._endTime = newShift._endTime;
+            this._description = newShift.Description;
+
         }
 
-        public void RemoveWorker()
+        public void RemoveWorker(Worker worker)
         {
-            throw new NotImplementedException();
+            _workers.Remove(worker);
         }
 
         public void CreateRequest(Volunteer volunteer)

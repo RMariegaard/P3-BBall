@@ -17,13 +17,13 @@ namespace VolunteerSystem
             throw new NotImplementedException();
         }
 
-        public static void InformVolunteer(Volunteer volunteer)
+        public static void InformVolunteer(Volunteer volunteer, string messageContent)
         {
             var fromAddress = new MailAddress("cazzcasper@gmail.com", "From Name");
             var toAddress = new MailAddress(volunteer.Email, volunteer.Name);
             string fromPassword = "";
             string subject = "Subject";
-            string body = "Body";
+            string body = messageContent;
 
             var smtp = new SmtpClient
             {
@@ -42,6 +42,11 @@ namespace VolunteerSystem
             {
                 smtp.Send(message);
             }
+        }
+
+        public static void InformVolunteer(Volunteer volunteer, Shift oldShift, Shift newShift, string[] changes)
+        {
+            throw new NotImplementedException();
         }
 
     }
