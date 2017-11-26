@@ -74,7 +74,7 @@ namespace VolunteerSystem
 
         private string _description;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+
 
         public string Description
         {
@@ -90,6 +90,8 @@ namespace VolunteerSystem
         public int NumberOfRequests() => _requests.Count;
         public string GetNumberOfVolunteers { get { return _workers.Count.ToString()+"/"+_volunteersNeeded; } }
 
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void EditShift(Shift newShift)
         {
@@ -133,5 +135,13 @@ namespace VolunteerSystem
         {
             RemoveRequest(request);
         }
+
+        public string TimeInterval { get
+            {
+                return _startTime.ToString("HH\\:mm") + "-" + _endTime.ToString("HH\\:mm");
+            }
+        }
+ 
+
     }
 }
