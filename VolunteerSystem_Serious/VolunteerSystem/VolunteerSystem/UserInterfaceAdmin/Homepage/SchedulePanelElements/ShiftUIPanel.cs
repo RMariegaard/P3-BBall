@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
+
 namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 {
     public class ShiftUIPanel
@@ -36,15 +37,17 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             shiftPanel.Click += panel_clicked;
 
             //////////////////////////DATABINDING LETS GO/////////////////////
+
             BindingSource bs = new BindingSource();
             bs.DataSource = typeof(Shift);
             bs.Add(shift);
 
             var binding = new Binding("Text", bs, "GetNumberOfVolunteers");
-            binding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
-            {
-                convertEventArgs.Value =  convertEventArgs.Value + "/"+shift.VolunteersNeeded;
-            };
+            //Ikke længere nødvendig
+            //binding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
+            //{
+            //    convertEventArgs.Value =  convertEventArgs.Value + "/"+shift.VolunteersNeeded;
+            //};
 
             ////////////////////////////////////////////////
             Label headder = new Label();

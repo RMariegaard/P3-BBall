@@ -88,7 +88,7 @@ namespace VolunteerSystem
 
         public int NumberOfVolunteers() => _workers.Count;
         public int NumberOfRequests() => _requests.Count;
-        public string GetNumberOfVolunteers { get { return _workers.Count.ToString(); } }
+        public string GetNumberOfVolunteers { get { return _workers.Count.ToString()+"/"+_volunteersNeeded; } }
 
 
         public void EditShift(Shift newShift)
@@ -98,6 +98,8 @@ namespace VolunteerSystem
             this._startTime = newShift._startTime;
             this._endTime = newShift._endTime;
             this._description = newShift.Description;
+            if (PropertyChanged != null)
+                PropertyChanged(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
 
         }
 
