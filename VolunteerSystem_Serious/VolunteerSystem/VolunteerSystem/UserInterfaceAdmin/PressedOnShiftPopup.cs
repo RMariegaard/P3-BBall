@@ -50,7 +50,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             var shiftInfoBinding = new Binding("Text", shiftBindingSource, "Task");
             shiftInfoBinding.Format += delegate (object sender, ConvertEventArgs e)
             {
-                e.Value = $" Task: {shift.Task}\n Starts: {shift.StartTime}\n Ends: {shift.EndTime}\n Volunteers Needed: {shift.VolunteersNeeded}\n Description: {shift.Description}\n";
+                e.Value = $" Task: {shift.Task}\n Starts: {shift.StartTime.ToString("MM/dd/yyyy hh:mm")}\n Ends: {shift.EndTime.ToString("MM/dd/yyyy hh:mm")}\n Volunteers Needed: {shift.VolunteersNeeded}\n Description: {shift.Description}\n";
             };
             shiftInfo.DataBindings.Add(shiftInfoBinding);
 
