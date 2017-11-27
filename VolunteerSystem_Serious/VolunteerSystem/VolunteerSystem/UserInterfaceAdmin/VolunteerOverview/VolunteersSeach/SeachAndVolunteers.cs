@@ -15,6 +15,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         VolunteerOverview _volunteerOverview;
         TextBox searchTextBox;
         Size _size;
+        Panel panelNames;
 
         public SeachAndVolunteers(WorkerController workerController, VolunteerOverview volunteerOverview)
         {
@@ -47,9 +48,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 
         public void UpdateNamesPanel()
         {
-            Panel panel = namesPanel(new Size(_size.Width, _size.Height - searchTextBox.Height), new Point(2, searchTextBox.Location.Y + searchTextBox.Size.Height));
-            _searchAndVolunteerMainPanel.Controls.Remove(panel);
-            _searchAndVolunteerMainPanel.Controls.Add(panel);
+            _searchAndVolunteerMainPanel.Controls.Remove(panelNames);
+            panelNames = namesPanel(new Size(_size.Width, _size.Height - searchTextBox.Height), new Point(2, searchTextBox.Location.Y + searchTextBox.Size.Height));
+            _searchAndVolunteerMainPanel.Controls.Add(panelNames);
         }
 
         private Panel namesPanel(Size size, Point location)
@@ -59,8 +60,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             namesPanel.Size = size;
             namesPanel.Location = location;
 
-            List<Worker> workersList = workerController.Workers;
-            workersList.Where(x => x.Name.Contains(searchTextBox.Text)).OrderBy(x => x.Name);
+            List<Worker> workersList = workerController.Workers.Where(x => x.Name.ToLower().Contains(searchTextBox.Text.ToLower())).OrderBy(x => x.Name).ToList();
+
             for (int i = 0; i < workersList.Count; i++)
             {
                 Panel panel = new Panel();
@@ -74,15 +75,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 
                 Label label = new Label();
                 label.Location = new Point(2, 2);
-                label.Text = workerController.Workers[i].Name;
+                label.Text = workersList[i].Name;
                 label.AutoSize = true;
 
                 panel.Controls.Add(label);
 
                 namesPanel.Controls.Add(panel);
             }
-
-
+            
             return namesPanel;
         }
     }
