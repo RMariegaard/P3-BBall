@@ -61,10 +61,12 @@ namespace VolunteerSystem.UserInterface
             int buttonPosition = 7;
 
             //Desciption - label
-            desciptionLabel = new Label();
-            desciptionLabel.Text = "Desiption: ";
-            desciptionLabel.Location = new Point(YForLabels, (heightBewtweenElements * desciptionPosition) + 10);
-            desciptionLabel.AutoSize = true;
+            desciptionLabel = new Label
+            {
+                Text = "Desiption: ",
+                Location = new Point(YForLabels, (heightBewtweenElements * desciptionPosition) + 10),
+                AutoSize = true
+            };
 
             //End Time  - Label
             endTimeLabel = new Label();
