@@ -52,6 +52,36 @@ namespace VolunteerSystem.UserInterface
                 Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left
             };
 
+            //Buttons
+            Button _homepageButton = new Button()
+            {
+                Location = new Point(0, 0),
+                Text = "Homepage",
+                Size = new Size(_menuButtonPanel.Size.Width/3, _menuButtonPanel.Size.Height),
+                FlatStyle = FlatStyle.Flat
+            };
+            _homepageButton.Click += _homepageButton_Clicked;
+            Button _volunteerOverviewButton = new Button()
+            {
+                Location = new Point(_homepageButton.Location.X + _homepageButton.Size.Width, 0),
+                Text = "Volunteer Overview",
+                Size = new Size(_menuButtonPanel.Size.Width / 3, _menuButtonPanel.Size.Height),
+                FlatStyle = FlatStyle.Flat
+            };
+            _volunteerOverviewButton.Click += _volunteerOverviewButton_Clicked;
+            Button _settingsButton = new Button()
+            {
+                Location = new Point(_volunteerOverviewButton.Location.X + _volunteerOverviewButton.Size.Width, 0),
+                Text = "Settings",
+                Size = new Size(_menuButtonPanel.Size.Width / 3, _menuButtonPanel.Size.Height),
+                FlatStyle = FlatStyle.Flat
+            };
+            _settingsButton.Click += _settingsButton_Clicked;
+
+            _menuButtonPanel.Controls.Add(_homepageButton);
+            _menuButtonPanel.Controls.Add(_volunteerOverviewButton);
+            _menuButtonPanel.Controls.Add(_settingsButton);
+            
             //Main panel - schedule
             _mainPanel = new Panel
             {
@@ -70,6 +100,22 @@ namespace VolunteerSystem.UserInterface
             Controls.Add(_menuButtonPanel);
         }
         
+        private void _homepageButton_Clicked(object sender, EventArgs e)
+        {
+            shownPage = ShownPage.Homepage;
+            UpdateUI();
+        }
+        private void _volunteerOverviewButton_Clicked(object sender, EventArgs e)
+        {
+            shownPage = ShownPage.VolunteerOverview;
+            UpdateUI();
+        }
+        private void _settingsButton_Clicked(object sender, EventArgs e)
+        {
+            shownPage = ShownPage.Settings;
+            UpdateUI();
+        }
+
         public void Start()
         {
             Application.EnableVisualStyles();
