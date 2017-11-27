@@ -17,36 +17,42 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         public ButtonsBottom(IVolunteerMainUI mainWindowUI, Homepage homepage)
         {
             _mainWindowUI = mainWindowUI;
-            _buttonsatBottomMainPanel = new Panel();
-            _buttonsatBottomMainPanel.Name = "_buttonsatBottomMainPanel";
+            _buttonsatBottomMainPanel = new Panel
+            {
+                Name = "_buttonsatBottomMainPanel"
+            };
             _homepage = homepage;
         }
 
         public Panel GetPanel()
         {
-            Button createShiftButton = new Button();
-            createShiftButton.Location = new Point(0, 0);
-            createShiftButton.Text = "Create Shift";
-            createShiftButton.AutoSize = true;
-            createShiftButton.Click += createShift_Clicked;
+            Button createShiftButton = new Button
+            {
+                Location = new Point(0, 0),
+                Text = "Create Shift",
+                AutoSize = true
+            };
+            createShiftButton.Click += CreateShift_Clicked;
 
-            Button createTaskButton = new Button();
-            createTaskButton.Location = new Point(createShiftButton.Location.X + createShiftButton.Size.Width, 0);
-            createTaskButton.Text = "Create Task";
-            createTaskButton.AutoSize = true;
-            createTaskButton.Click += createTask_Clicked;
+            Button createTaskButton = new Button
+            {
+                Location = new Point(createShiftButton.Location.X + createShiftButton.Size.Width, 0),
+                Text = "Create Task",
+                AutoSize = true
+            };
+            createTaskButton.Click += CreateTask_Clicked;
 
             _buttonsatBottomMainPanel.Controls.Add(createShiftButton);
             _buttonsatBottomMainPanel.Controls.Add(createTaskButton);
             return _buttonsatBottomMainPanel;
         }
 
-        public void createShift_Clicked(object sender, EventArgs e)
+        public void CreateShift_Clicked(object sender, EventArgs e)
         {
             _mainWindowUI.DisplayCreateNewShift();
         }
 
-        public void createTask_Clicked(object sender, EventArgs e)
+        public void CreateTask_Clicked(object sender, EventArgs e)
         {
             _mainWindowUI.DisplayCreateNewTask();
         }

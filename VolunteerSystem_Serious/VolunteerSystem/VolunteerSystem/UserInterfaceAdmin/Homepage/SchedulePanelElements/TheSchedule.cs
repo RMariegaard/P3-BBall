@@ -19,21 +19,27 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         public TheSchedule(IVolunteerMainUI mainWindowUI, Button day)
         {
             _mainWindowUI = mainWindowUI;
-            _theSchedulemainPanel = new Panel();
-            _theSchedulemainPanel.Name = "_theSchedulemainPanel";
-            _theSchedulemainPanel.BorderStyle = BorderStyle.FixedSingle;
-            colorAndShiftPanel = new Panel();
-            colorAndShiftPanel.Name = "colorAndShiftPanel";
+            _theSchedulemainPanel = new Panel
+            {
+                Name = "_theSchedulemainPanel",
+                BorderStyle = BorderStyle.FixedSingle
+            };
+            colorAndShiftPanel = new Panel
+            {
+                Name = "colorAndShiftPanel"
+            };
             this.day = day.Text;
             hourHeight = 50; //schedulePanel.Size.Height / 23
             
             //Add Numbers to Panel. this needs only to be done once
             for (int i = 0; i <= 24; i++)
             {
-                Label tempLabel = new Label();
-                tempLabel.Location = new Point(0, (i * hourHeight));
-                tempLabel.Text = i + 1 >= 10 ? $"{i}.00" : $"0{i}.00";
-                tempLabel.AutoSize = true;
+                Label tempLabel = new Label
+                {
+                    Location = new Point(0, (i * hourHeight)),
+                    Text = i + 1 >= 10 ? $"{i}.00" : $"0{i}.00",
+                    AutoSize = true
+                };
                 colorAndShiftPanel.Controls.Add(tempLabel);
             }
         }
@@ -47,7 +53,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             
             colorAndShiftPanel.Location = new Point(0, 0);
             colorAndShiftPanel.Size = new Size(schedulePanel.Size.Width-20, 24 * hourHeight);
-            colorAndShiftPanel.Paint += alternatingColors_Paint;
+            colorAndShiftPanel.Paint += _alternatingColors_Paint;
                 
             //Adds Tasks and shifts
             int widthOfTask = 100;
@@ -65,7 +71,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             return _theSchedulemainPanel;
         }
 
-        private void alternatingColors_Paint(object sender, PaintEventArgs e)
+        private void _alternatingColors_Paint(object sender, PaintEventArgs e)
         {
             for (int i = 0; i < 24; i++)
             {

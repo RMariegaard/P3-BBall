@@ -78,7 +78,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             schedulePanel.Size = new Size((_mainHomepagePanel.Size.Width / 100) * 70 - 2, _mainHomepagePanel.Height);
             schedulePanel.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right;
             schedulePanel.AutoScroll = true;
-            threeSchedulePanels();
+            _threeSchedulePanels();
             _mainHomepagePanel.Controls.Add(schedulePanel);
             _mainHomepagePanel.ResumeLayout();
         }
@@ -107,7 +107,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             _mainHomepagePanel.Controls.Add(VolunteerPanel);
         }
 
-        private void threeSchedulePanels()
+        private void _threeSchedulePanels()
         {
             schedulePanel.SuspendLayout();
             Panel DaysLeft = new Panel();

@@ -13,7 +13,7 @@ namespace VolunteerSystem
         public ScheduleController(Schedule schedule)
         {
             _schedule = schedule;
-            justForTesting();
+            _justForTesting();
         }
         
         public void CreateSchedule()
@@ -126,7 +126,7 @@ namespace VolunteerSystem
             return _schedule.Shifts.Find(predicate);
         }
 
-        private void justForTesting()
+        private void _justForTesting()
         {
             
             

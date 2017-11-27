@@ -100,8 +100,7 @@ namespace VolunteerSystem
             this._startTime = newShift._startTime;
             this._endTime = newShift._endTime;
             this._description = newShift.Description;
-            if (PropertyChanged != null)
-                PropertyChanged(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
+            PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
 
         }
 
@@ -128,8 +127,7 @@ namespace VolunteerSystem
         {
             this.Workers.Add(request.Worker);
             RemoveRequest(request);
-            if(PropertyChanged != null)
-                PropertyChanged(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
+            PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
         public void DenieRequest(Request request)
         {

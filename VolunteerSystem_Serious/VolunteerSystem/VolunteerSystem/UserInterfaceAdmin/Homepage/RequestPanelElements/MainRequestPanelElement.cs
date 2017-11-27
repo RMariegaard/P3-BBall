@@ -18,38 +18,52 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
         public MainRequestPanelElement(IVolunteerMainUI volunteerMainUI)
         {
             _volunteerMainUI = volunteerMainUI;
-            _mainRequestPanel = new Panel();
-            _mainRequestPanel.Name = "_mainRequestPanel";
-            _mainRequestPanel.AutoScroll = true;
+            _mainRequestPanel = new Panel
+            {
+                Name = "_mainRequestPanel",
+                AutoScroll = true
+            };
             titleTopLabel = new Label();
         }
 
-        private Panel getTopBarPanel(Size size)
+        private Panel _getTopBarPanel(Size size)
         {
-            Panel TopBarPanel = new Panel();
-            TopBarPanel.Name = "TopBarPanel";
-            TopBarPanel.Location = new Point(0, 40);
-            TopBarPanel.Size = size;
+            Panel TopBarPanel = new Panel
+            {
+                Name = "TopBarPanel",
+                Location = new Point(0, 40),
+                Size = size
+            };
 
-            Label nameLabel = new Label();
-            nameLabel.Text = "Name";
-            nameLabel.Location = new Point((_mainRequestPanel.Size.Width / 5) * 0 + 2, 2);
+            Label nameLabel = new Label
+            {
+                Text = "Name",
+                Location = new Point((_mainRequestPanel.Size.Width / 5) * 0 + 2, 2)
+            };
 
-            Label dateSentLabel = new Label();
-            dateSentLabel.Text = "Request Sent";
-            dateSentLabel.Location = new Point((_mainRequestPanel.Size.Width / 5) * 1 + 2, 2);
+            Label dateSentLabel = new Label
+            {
+                Text = "Request Sent",
+                Location = new Point((_mainRequestPanel.Size.Width / 5) * 1 + 2, 2)
+            };
 
-            Label shiftInfoLabel = new Label();
-            shiftInfoLabel.Text = "Shift Info";
-            shiftInfoLabel.Location = new Point((_mainRequestPanel.Size.Width / 5) * 2 + 2, 2);
+            Label shiftInfoLabel = new Label
+            {
+                Text = "Shift Info",
+                Location = new Point((_mainRequestPanel.Size.Width / 5) * 2 + 2, 2)
+            };
 
-            Label acceptButtonLabel = new Label();
-            acceptButtonLabel.Text = "Accept";
-            acceptButtonLabel.Location = new Point((_mainRequestPanel.Size.Width / 5) * 3 + 2, 2);
+            Label acceptButtonLabel = new Label
+            {
+                Text = "Accept",
+                Location = new Point((_mainRequestPanel.Size.Width / 5) * 3 + 2, 2)
+            };
 
-            Label denyButtonLabel = new Label();
-            denyButtonLabel.Text = "Deny";
-            denyButtonLabel.Location = new Point((_mainRequestPanel.Size.Width / 5) * 4 + 2, 2);
+            Label denyButtonLabel = new Label
+            {
+                Text = "Deny",
+                Location = new Point((_mainRequestPanel.Size.Width / 5) * 4 + 2, 2)
+            };
 
 
             TopBarPanel.Controls.Add(nameLabel);
@@ -73,74 +87,82 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             int panelHeight = 40;
             foreach (Request request in _volunteerMainUI.GetScheduleController().GetAllRequests())
             {
-                Panel requestPanel = new Panel();
-                requestPanel.Name = "requestPanel";
-                requestPanel.Location = new Point(0, (i * panelHeight) + 20);
-                requestPanel.Size = new Size(_mainRequestPanel.Width-20, panelHeight);
-                requestPanel.BorderStyle = BorderStyle.FixedSingle;
+                Panel requestPanel = new Panel
+                {
+                    Name = "requestPanel",
+                    Location = new Point(0, (i * panelHeight) + 20),
+                    Size = new Size(_mainRequestPanel.Width - 20, panelHeight),
+                    BorderStyle = BorderStyle.FixedSingle
+                };
                 if (i % 2 == 0)
                     requestPanel.BackColor = Color.LightGray;
 
-                requestPanel.Controls.Add(getVolunteerName(new Point((_mainRequestPanel.Size.Width / 5) * 0 + 2, 2), request, request.Worker));
-                requestPanel.Controls.Add(getDateItWasSent(new Point((_mainRequestPanel.Size.Width / 5) * 1 + 2, 2), request));
-                requestPanel.Controls.Add(getShiftInformation(new Point((_mainRequestPanel.Size.Width / 5) * 2 + 2, 2), request));
-                requestPanel.Controls.Add(getAccept(new Point((_mainRequestPanel.Size.Width / 5) * 3 + 2, 2), request));
-                requestPanel.Controls.Add(getDeny(new Point((_mainRequestPanel.Size.Width / 5) * 4 + 2, 2), request));
+                requestPanel.Controls.Add(_getVolunteerName(new Point((_mainRequestPanel.Size.Width / 5) * 0 + 2, 2), request, request.Worker));
+                requestPanel.Controls.Add(_getDateItWasSent(new Point((_mainRequestPanel.Size.Width / 5) * 1 + 2, 2), request));
+                requestPanel.Controls.Add(_getShiftInformation(new Point((_mainRequestPanel.Size.Width / 5) * 2 + 2, 2), request));
+                requestPanel.Controls.Add(_getAccept(new Point((_mainRequestPanel.Size.Width / 5) * 3 + 2, 2), request));
+                requestPanel.Controls.Add(_getDeny(new Point((_mainRequestPanel.Size.Width / 5) * 4 + 2, 2), request));
 
                 _mainRequestPanel.Controls.Add(requestPanel);
                 i++;
             }
 
-            _mainRequestPanel.Controls.Add(getTopBarPanel(new Size(_mainRequestPanel.Size.Width - 20, panelHeight)));
+            _mainRequestPanel.Controls.Add(_getTopBarPanel(new Size(_mainRequestPanel.Size.Width - 20, panelHeight)));
             _mainRequestPanel.Controls.Add(titleTopLabel);
 
             return _mainRequestPanel;
         }
 
-        private LinkLabel getVolunteerName(Point location, Request request, Worker worker)
+        private LinkLabel _getVolunteerName(Point location, Request request, Worker worker)
         {
-            LinkLabel volunteerNameLabel = new LinkLabel();
-            volunteerNameLabel.Location = location;
-            volunteerNameLabel.Text = request.Worker.Name;
+            LinkLabel volunteerNameLabel = new LinkLabel
+            {
+                Location = location,
+                Text = request.Worker.Name,
 
-            volunteerNameLabel.Tag = worker;
-            volunteerNameLabel.Click += volunteerLabel_clicked;
+                Tag = worker
+            };
+            volunteerNameLabel.Click += VolunteerLabel_clicked;
             volunteerNameLabel.AutoSize = true;
             volunteerNameLabel.LinkColor = Color.Black;
             volunteerNameLabel.LinkBehavior = LinkBehavior.HoverUnderline;
             return volunteerNameLabel;
         }
-        public void volunteerLabel_clicked(object sender, EventArgs e)
+        public void VolunteerLabel_clicked(object sender, EventArgs e)
         {
             Volunteer volunteer = (Volunteer)((Label)sender).Tag;
             _volunteerMainUI.DisplayVolunteerOnHomepage(volunteer);
         }
 
-        private Label getDateItWasSent(Point location, Request request)
+        private Label _getDateItWasSent(Point location, Request request)
         {
-            Label dateSent = new Label();
-            dateSent.Location = location;
-            dateSent.Text = request.TimeSent.ToShortDateString();
-            dateSent.AutoSize = true;
+            Label dateSent = new Label
+            {
+                Location = location,
+                Text = request.TimeSent.ToShortDateString(),
+                AutoSize = true
+            };
 
             return dateSent;
         }
 
         private Shift pressedShift;
-        private LinkLabel getShiftInformation(Point location, Request request)
+        private LinkLabel _getShiftInformation(Point location, Request request)
         {
 
             pressedShift = _volunteerMainUI.GetScheduleController().FindSingleShift(x => x.Requests.Contains(request));
-            LinkLabel shiftInformationLabel = new LinkLabel();
-            shiftInformationLabel.Location = location;
+            LinkLabel shiftInformationLabel = new LinkLabel
+            {
+                Location = location,
 
 
-            shiftInformationLabel.Text = pressedShift.Task + " \n" + 
-                                         pressedShift.StartTime.DayOfWeek +  " " +
-                                         pressedShift.StartTime.TimeOfDay.ToString("hh\\:mm");
-            shiftInformationLabel.AutoSize = true;
+                Text = pressedShift.Task + " \n" +
+                                         pressedShift.StartTime.DayOfWeek + " " +
+                                         pressedShift.StartTime.TimeOfDay.ToString("hh\\:mm"),
+                AutoSize = true
+            };
             //Hvis du bare bruger presseddShift, så vil den altid vise den sidste shift der er tilføjet.
-            shiftInformationLabel.Click += delegate (object sender, EventArgs e) { getShiftInformation_Clicked(sender, _volunteerMainUI.GetScheduleController().FindSingleShift(x => x.Requests.Contains(request))); };
+            shiftInformationLabel.Click += delegate (object sender, EventArgs e) { _getShiftInformation_Clicked(sender, _volunteerMainUI.GetScheduleController().FindSingleShift(x => x.Requests.Contains(request))); };
 
             shiftInformationLabel.LinkColor = Color.Black;
 
@@ -150,7 +172,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             return shiftInformationLabel;
         }
 
-        private void getShiftInformation_Clicked(object sender, Shift shift)
+        private void _getShiftInformation_Clicked(object sender, Shift shift)
         {
             //Kan ikke få den til at vise shiften i skemaet...
             //Control temp = _volunteerMainUI.FindSpecificControl("Shift " + shift.ID.ToString());
@@ -159,39 +181,43 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             _volunteerMainUI.DisplayPressedOnShift(shift);
         }
 
-        private Button getAccept(Point location, Request request)
+        private Button _getAccept(Point location, Request request)
         {
-            Button acceptButton = new Button();
-            acceptButton.Location = location;
-            acceptButton.Text = "Accept";
-            acceptButton.AutoSize = true;
-            acceptButton.Click += acceptButton_Clicked;
+            Button acceptButton = new Button
+            {
+                Location = location,
+                Text = "Accept",
+                AutoSize = true
+            };
+            acceptButton.Click += _acceptButton_Clicked;
             acceptButton.Tag = request;
             acceptButton.TabStop = false;
             
             return acceptButton;
         }
 
-        private void acceptButton_Clicked(object sender, EventArgs e)
+        private void _acceptButton_Clicked(object sender, EventArgs e)
         {
             Request request = (Request)((Button)sender).Tag;
             _volunteerMainUI.AcceptWorkerRequest(request);
         }
 
-        private Button getDeny(Point location, Request request)
+        private Button _getDeny(Point location, Request request)
         {
-            Button denyButton = new Button();
-            denyButton.Location = location;
-            denyButton.Text = "Deny";
-            denyButton.AutoSize = true;
-            denyButton.Click += denyButton_Clicked;
+            Button denyButton = new Button
+            {
+                Location = location,
+                Text = "Deny",
+                AutoSize = true
+            };
+            denyButton.Click += _denyButton_Clicked;
             denyButton.Tag = request;
             denyButton.TabStop = false;
 
             return denyButton;
         }
 
-        private void denyButton_Clicked(object sender, EventArgs e)
+        private void _denyButton_Clicked(object sender, EventArgs e)
         {
             Request request = (Request)((Button)sender).Tag;
             _volunteerMainUI.DenyWorkerRequest(request);

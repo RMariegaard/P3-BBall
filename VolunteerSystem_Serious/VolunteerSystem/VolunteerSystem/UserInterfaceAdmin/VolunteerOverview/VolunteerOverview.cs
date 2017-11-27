@@ -21,12 +21,16 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview
         public VolunteerOverview(IVolunteerMainUI volunteerMainUI, WorkerController workerController)
         {
             this.volunteerMainUI = volunteerMainUI;
-            _volunteerOverviewMainPanel = new Panel();
-            _volunteerOverviewMainPanel.Name = "_volunteerOverviewMainPanel";
+            _volunteerOverviewMainPanel = new Panel
+            {
+                Name = "_volunteerOverviewMainPanel"
+            };
 
             this.workerController = workerController;
-            volunteersAndSeachPanel = new Panel();
-            volunteersAndSeachPanel.Name = "volunteersAndSeachPanel";
+            volunteersAndSeachPanel = new Panel
+            {
+                Name = "volunteersAndSeachPanel"
+            };
 
         }
 

@@ -18,8 +18,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 
         public VolunteerHomapageOverview(IVolunteerMainUI volunteerMainUI, Homepage homepage)
         {
-            _volunteerHomapageOverviewMainPanel = new Panel();
-            _volunteerHomapageOverviewMainPanel.Name = "_volunteerHomapageOverviewMainPanel";
+            _volunteerHomapageOverviewMainPanel = new Panel
+            {
+                Name = "_volunteerHomapageOverviewMainPanel"
+            };
             this.volunteerMainUI = volunteerMainUI;
             titleTopLabel = new Label();
             _homepage = homepage;
@@ -39,23 +41,25 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 
             if (volunteer != null)
             {
-                _volunteerHomapageOverviewMainPanel.Controls.Add(getVolunteerInformationPanel(new Point(5, 40), new Size((_volunteerHomapageOverviewMainPanel.Width/3) - 5, _volunteerHomapageOverviewMainPanel.Height - 50), volunteer));
-                _volunteerHomapageOverviewMainPanel.Controls.Add(getVolunteerShiftPanel(new Point((_volunteerHomapageOverviewMainPanel.Width / 3) +5, 40), new Size((2*_volunteerHomapageOverviewMainPanel.Width / 3) - 10, (_volunteerHomapageOverviewMainPanel.Height/2) - 22), volunteer));
-                _volunteerHomapageOverviewMainPanel.Controls.Add(getVolunteerRequestPanel(new Point((_volunteerHomapageOverviewMainPanel.Width / 3) + 5, 40 + (_volunteerHomapageOverviewMainPanel.Height / 2) - 22), new Size((2 * _volunteerHomapageOverviewMainPanel.Width / 3) - 10, (_volunteerHomapageOverviewMainPanel.Height / 2) - 22), volunteer));
+                _volunteerHomapageOverviewMainPanel.Controls.Add(_getVolunteerInformationPanel(new Point(5, 40), new Size((_volunteerHomapageOverviewMainPanel.Width/3) - 5, _volunteerHomapageOverviewMainPanel.Height - 50), volunteer));
+                _volunteerHomapageOverviewMainPanel.Controls.Add(_getVolunteerShiftPanel(new Point((_volunteerHomapageOverviewMainPanel.Width / 3) +5, 40), new Size((2*_volunteerHomapageOverviewMainPanel.Width / 3) - 10, (_volunteerHomapageOverviewMainPanel.Height/2) - 22), volunteer));
+                _volunteerHomapageOverviewMainPanel.Controls.Add(_getVolunteerRequestPanel(new Point((_volunteerHomapageOverviewMainPanel.Width / 3) + 5, 40 + (_volunteerHomapageOverviewMainPanel.Height / 2) - 22), new Size((2 * _volunteerHomapageOverviewMainPanel.Width / 3) - 10, (_volunteerHomapageOverviewMainPanel.Height / 2) - 22), volunteer));
             }
             _volunteerHomapageOverviewMainPanel.Controls.Add(titleTopLabel);
 
             return _volunteerHomapageOverviewMainPanel;
         }
 
-        private Panel getVolunteerInformationPanel(Point location, Size size, Volunteer volunteer)
+        private Panel _getVolunteerInformationPanel(Point location, Size size, Volunteer volunteer)
         {
-            Panel volunteerInformationPanel = new Panel();
-            volunteerInformationPanel.Name = "volunteerInformationPanel";
-            volunteerInformationPanel.Location = location;
-            volunteerInformationPanel.Size = size;
-            volunteerInformationPanel.BorderStyle = BorderStyle.FixedSingle;
-            volunteerInformationPanel.AutoScroll = true;
+            Panel volunteerInformationPanel = new Panel
+            {
+                Name = "volunteerInformationPanel",
+                Location = location,
+                Size = size,
+                BorderStyle = BorderStyle.FixedSingle,
+                AutoScroll = true
+            };
 
             Label information = new Label();
             String informationString = 
@@ -74,7 +78,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             information.AutoSize = true;
 
             Button fullProfileButton = new Button();
-            fullProfileButton.Click += fullProfileButton_Clicked;
+            fullProfileButton.Click += _fullProfileButton_Clicked;
             fullProfileButton.Text = "Full Profile";
             fullProfileButton.AutoSize = true;
             fullProfileButton.Location = new Point((size.Width - fullProfileButton.Size.Width) / 2, information.Bottom + 170/*_mainPanel.Size.Height - 100*/);
@@ -84,78 +88,90 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             return volunteerInformationPanel;
         }
 
-        private void fullProfileButton_Clicked(object sender, EventArgs e)
+        private void _fullProfileButton_Clicked(object sender, EventArgs e)
         {
             volunteerMainUI.DisplayVolunteerInVolunteerOverview(volunteer);
         }
 
-        private Panel getVolunteerShiftPanel(Point location, Size size, Worker worker)
+        private Panel _getVolunteerShiftPanel(Point location, Size size, Worker worker)
         {
-            Panel volunteerShiftPanel = new Panel();
-            volunteerShiftPanel.Name = "volunteerShiftPanel";
-            volunteerShiftPanel.Location = location;
-            volunteerShiftPanel.Size = size;
-            volunteerShiftPanel.AutoScroll = true;
-            volunteerShiftPanel.BorderStyle = BorderStyle.FixedSingle;
+            Panel volunteerShiftPanel = new Panel
+            {
+                Name = "volunteerShiftPanel",
+                Location = location,
+                Size = size,
+                AutoScroll = true,
+                BorderStyle = BorderStyle.FixedSingle
+            };
 
-            Label shiftLabel = new Label();
-            shiftLabel.Text = "Shifts:";
-            shiftLabel.Location = new Point(0, 0);
-            shiftLabel.AutoSize = true;
+            Label shiftLabel = new Label
+            {
+                Text = "Shifts:",
+                Location = new Point(0, 0),
+                AutoSize = true
+            };
 
             List<Shift> workerShifts = volunteerMainUI.GetScheduleController().GetAllShifts().Where(x => x.Workers.Exists(y => y.ID == worker.ID)).ToList();
             int widthOfShiftElement = 100;
             for (int i = 0; i < workerShifts.Count; i++)
             {
-                volunteerShiftPanel.Controls.Add(getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height-2), new Size(widthOfShiftElement, volunteerShiftPanel.Size.Height - 50), workerShifts[i]));
+                volunteerShiftPanel.Controls.Add(_getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height-2), new Size(widthOfShiftElement, volunteerShiftPanel.Size.Height - 50), workerShifts[i]));
             }
 
             volunteerShiftPanel.Controls.Add(shiftLabel);
             return volunteerShiftPanel;
         }
         
-        private Panel getVolunteerRequestPanel(Point location, Size size, Worker worker)
+        private Panel _getVolunteerRequestPanel(Point location, Size size, Worker worker)
         {
-            Panel volunteerRequestPanel = new Panel();
-            volunteerRequestPanel.Name = "volunteerRequestPanel";
-            volunteerRequestPanel.Location = location;
-            volunteerRequestPanel.Size = size;
-            volunteerRequestPanel.AutoScroll = true;
-            volunteerRequestPanel.BorderStyle = BorderStyle.FixedSingle;
+            Panel volunteerRequestPanel = new Panel
+            {
+                Name = "volunteerRequestPanel",
+                Location = location,
+                Size = size,
+                AutoScroll = true,
+                BorderStyle = BorderStyle.FixedSingle
+            };
 
-            Label shiftLabel = new Label();
-            shiftLabel.Text = "Requests:";
-            shiftLabel.Location = new Point(0, 0);
-            shiftLabel.AutoSize = true;
+            Label shiftLabel = new Label
+            {
+                Text = "Requests:",
+                Location = new Point(0, 0),
+                AutoSize = true
+            };
 
             List<Shift> workerShifts = volunteerMainUI.GetScheduleController().GetAllShifts().Where(x => x.Requests.Any(y => y.Worker.ID == worker.ID) ).ToList();
             int widthOfShiftElement = 100;
             for (int i = 0; i < workerShifts.Count; i++)
             {
-                volunteerRequestPanel.Controls.Add(getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height - 2), new Size(widthOfShiftElement, volunteerRequestPanel.Size.Height - 50), workerShifts[i]));
+                volunteerRequestPanel.Controls.Add(_getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height - 2), new Size(widthOfShiftElement, volunteerRequestPanel.Size.Height - 50), workerShifts[i]));
             }
 
             volunteerRequestPanel.Controls.Add(shiftLabel);
             return volunteerRequestPanel;
         }
 
-        private Panel getSingleShiftPanel(Point location, Size size, Shift shift)
+        private Panel _getSingleShiftPanel(Point location, Size size, Shift shift)
         {
-            Panel singleShiftPanel = new Panel();
-            singleShiftPanel.Name = "singleShiftPanel";
+            Panel singleShiftPanel = new Panel
+            {
+                Name = "singleShiftPanel",
 
-            singleShiftPanel.Size = size;
-            singleShiftPanel.Location = location;
-            singleShiftPanel.BorderStyle = BorderStyle.FixedSingle;
+                Size = size,
+                Location = location,
+                BorderStyle = BorderStyle.FixedSingle
+            };
 
-            Label information = new Label();
-            information.Location = new Point(2, 2);
-            information.MaximumSize = new Size(size.Width - 4, size.Height - 4);
-            information.AutoSize = true;
-            information.Text =
+            Label information = new Label
+            {
+                Location = new Point(2, 2),
+                MaximumSize = new Size(size.Width - 4, size.Height - 4),
+                AutoSize = true,
+                Text =
                 $"{shift.Task} \n" +
                 $"{shift.StartTime.DayOfWeek}\n" +
-                $"{shift.StartTime.Hour}:{shift.StartTime.Minute} - {shift.EndTime.Hour}:{shift.EndTime.Minute}";
+                $"{shift.StartTime.Hour}:{shift.StartTime.Minute} - {shift.EndTime.Hour}:{shift.EndTime.Minute}"
+            };
 
             singleShiftPanel.Controls.Add(information);
             return singleShiftPanel;

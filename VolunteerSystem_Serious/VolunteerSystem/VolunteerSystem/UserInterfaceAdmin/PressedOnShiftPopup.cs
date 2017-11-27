@@ -29,45 +29,57 @@ namespace VolunteerSystem.UserInterfaceAdmin
             this.shift = shift;
             fullClientSize = RectangleToScreen(this.ClientRectangle).Size;
 
-            _pressedOnShiftPopupMainPanel = new Panel();
-            _pressedOnShiftPopupMainPanel.Name = "_pressedOnShiftPopupMainPanel";
-            _pressedOnShiftPopupMainPanel.Size = fullClientSize;
-            _pressedOnShiftPopupMainPanel.Location = new Point(0, 0);
+            _pressedOnShiftPopupMainPanel = new Panel
+            {
+                Name = "_pressedOnShiftPopupMainPanel",
+                Size = fullClientSize,
+                Location = new Point(0, 0)
+            };
 
-            Label shiftInfo = new Label();
-            shiftInfo.Text = $" Task: {shift.Task}\n Starts: {shift.StartTime}\n Ends: {shift.EndTime}\n Volunteers Needed: {shift.VolunteersNeeded}\n Description: {shift.Description}\n";
-            shiftInfo.AutoSize = true;
-            shiftInfo.Location = new Point();
-            
+            Label shiftInfo = new Label
+            {
+                Text = $" Task: {shift.Task}\n Starts: {shift.StartTime}\n Ends: {shift.EndTime}\n Volunteers Needed: {shift.VolunteersNeeded}\n Description: {shift.Description}\n",
+                AutoSize = true,
+                Location = new Point()
+            };
 
 
-            Button cancelButton = new Button();
-            cancelButton.Text = "Cancel";
-            cancelButton.AutoSize = true;
+
+            Button cancelButton = new Button
+            {
+                Text = "Cancel",
+                AutoSize = true
+            };
             cancelButton.Location = new Point(5, _pressedOnShiftPopupMainPanel.Size.Height - cancelButton.Size.Height - 5);
             cancelButton.DialogResult = DialogResult.Cancel;
 
 
-            Button editShiftButton = new Button();
-            editShiftButton.Text = "Edit Shift";
-            editShiftButton.AutoSize = true;
+            Button editShiftButton = new Button
+            {
+                Text = "Edit Shift",
+                AutoSize = true
+            };
             editShiftButton.Location = new Point(cancelButton.Width + 5, _pressedOnShiftPopupMainPanel.Size.Height - editShiftButton.Size.Height - 5);
             editShiftButton.Click += EditShift_Clicked;
 
 
 
 
-            Label workerLabel = new Label();
-            workerLabel.Location = new Point(5, shiftInfo.Location.Y + shiftInfo.PreferredHeight);
-            workerLabel.MaximumSize = new Size(300, 0);
-            workerLabel.Text = "Workers:";
-            workerLabel.AutoSize = true;
+            Label workerLabel = new Label
+            {
+                Location = new Point(5, shiftInfo.Location.Y + shiftInfo.PreferredHeight),
+                MaximumSize = new Size(300, 0),
+                Text = "Workers:",
+                AutoSize = true
+            };
 
-            ListBox workersList = new ListBox();
-            workersList.Text = "Workers";
-            workersList.Size = new Size(300, 100);
-            workersList.Location = new Point(5,workerLabel.Location.Y + workerLabel.GetPreferredSize(Size.Empty).Height);
-            workersList.BorderStyle = BorderStyle.FixedSingle;
+            ListBox workersList = new ListBox
+            {
+                Text = "Workers",
+                Size = new Size(300, 100),
+                Location = new Point(5, workerLabel.Location.Y + workerLabel.GetPreferredSize(Size.Empty).Height),
+                BorderStyle = BorderStyle.FixedSingle
+            };
             workersList.BeginUpdate();
             foreach (var w in shift.Workers)
             {
@@ -76,17 +88,21 @@ namespace VolunteerSystem.UserInterfaceAdmin
             workersList.EndUpdate();
             workersList.AutoSize = true;
 
-            Label requestLabel = new Label();
-            requestLabel.Location = new Point(0, workersList.Location.Y + workersList.Height);
-            requestLabel.MaximumSize = new Size(300, 0);
-            requestLabel.Text = "Requests:";
-            requestLabel.AutoSize = true;
+            Label requestLabel = new Label
+            {
+                Location = new Point(0, workersList.Location.Y + workersList.Height),
+                MaximumSize = new Size(300, 0),
+                Text = "Requests:",
+                AutoSize = true
+            };
 
-            ListBox requestsList = new ListBox();
-            requestsList.Text = "Requests";
-            requestsList.Size = new Size(300, 100);
-            requestsList.Location = new Point(5, requestLabel.Location.Y + requestLabel.PreferredSize.Height);
-            requestsList.BorderStyle = BorderStyle.FixedSingle;
+            ListBox requestsList = new ListBox
+            {
+                Text = "Requests",
+                Size = new Size(300, 100),
+                Location = new Point(5, requestLabel.Location.Y + requestLabel.PreferredSize.Height),
+                BorderStyle = BorderStyle.FixedSingle
+            };
             requestsList.BeginUpdate();
             foreach (var r in shift.Requests)
             {
@@ -109,8 +125,10 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
         private void EditShift_Clicked(object sender, EventArgs e)
         {
-            List<string> list = new List<string>();
-            list.Add(shift.Task);
+            List<string> list = new List<string>
+            {
+                shift.Task
+            };
             EditShiftUI editShiftUI = new EditShiftUI(list, shift);
             editShiftUI.ShowDialog();
             if (editShiftUI.DialogResult == DialogResult.OK)

@@ -24,14 +24,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
         public Control ShiftUI(Panel forRefence, int hourHeight)
         {
-            BindingSource bs = new BindingSource();
-            bs.DataSource = typeof(Shift);
+            BindingSource bs = new BindingSource
+            {
+                DataSource = typeof(Shift)
+            };
             bs.Add(shift);
 
             //////////////////ShiftPanel////////////////////////
 
-            Panel shiftPanel = new Panel();
-            shiftPanel.Name = "Shift " + shift.ID.ToString();
+            Panel shiftPanel = new Panel
+            {
+                Name = "Shift " + shift.ID.ToString(),
+                BackColor = Color.AliceBlue,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+            shiftPanel.Click += _panel_clicked;
 
             //Binds the location to starttime, so whenever this is edited, the position of the shift will be changed in the schedule
             var locationBinding = new Binding("Location", bs, "StartTime");
@@ -53,9 +60,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             shiftPanel.DataBindings.Add(locationBinding);
             shiftPanel.DataBindings.Add(SizeBinding);
 
-            shiftPanel.BackColor = Color.AliceBlue;
-            shiftPanel.BorderStyle = BorderStyle.FixedSingle;
-            shiftPanel.Click += panel_clicked;
 
 
             //////////////////NumberOfVolunteerLabel////////////////////////
@@ -73,17 +77,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
             //////////////////TimeLabel////////////////////////
             var timeBinding = new Binding("Text", bs, "TimeInterval");
-            Label Time = new Label();
-            Time.Location = new Point(0, headder.Location.Y + headder.Size.Height + 1);
+            Label Time = new Label
+            {
+                Location = new Point(0, headder.Location.Y + headder.Size.Height + 1)
+            };
             Time.DataBindings.Add(timeBinding);
             Time.AutoSize = true;
 
             //////////////////DescriptionLabel////////////////////////
-            Label Desciption = new Label();
-            Desciption.Location = new Point(0, Time.Location.Y + Time.Size.Height + 1);
-            Desciption.Text = shift.Description;
-            Desciption.MaximumSize = new Size(100, 0);
-            Desciption.AutoSize = true;
+            Label Desciption = new Label
+            {
+                Location = new Point(0, Time.Location.Y + Time.Size.Height + 1),
+                Text = shift.Description,
+                MaximumSize = new Size(100, 0),
+                AutoSize = true
+            };
 
             shiftPanel.Controls.Add(headder);
             shiftPanel.Controls.Add(Time);
@@ -92,7 +100,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             return shiftPanel;
         }
 
-        private void panel_clicked(object sender, EventArgs e)
+        private void _panel_clicked(object sender, EventArgs e)
         {
             volunteerMainUI.DisplayPressedOnShift(shift);
         }
