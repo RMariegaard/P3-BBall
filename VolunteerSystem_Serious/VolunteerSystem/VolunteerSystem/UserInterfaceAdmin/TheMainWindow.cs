@@ -62,7 +62,7 @@ namespace VolunteerSystem.UserInterface
             };
 
             //Start on homepage
-            shownPage = ShownPage.VolunteerOverview;
+            shownPage = ShownPage.Homepage;
             UpdateUI();
 
             //Adds to the window
