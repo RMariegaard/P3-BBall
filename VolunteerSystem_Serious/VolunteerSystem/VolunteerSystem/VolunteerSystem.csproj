@@ -59,6 +59,7 @@
     <Compile Include="Model\Volunteer.cs" />
     <Compile Include="Model\Worker.cs" />
     <Compile Include="Function\ScheduleController.cs" />
+    <Compile Include="UserInterfaceAdmin\ColorAndStyle.cs" />
     <Compile Include="UserInterfaceAdmin\CreateNewShiftUI.cs">
       <SubType>Form</SubType>
     </Compile>

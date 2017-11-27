@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VolunteerSystem.UserInterfaceAdmin;
 
 namespace VolunteerSystem.UserInterface
 {
@@ -14,7 +15,11 @@ namespace VolunteerSystem.UserInterface
     {
         private Panel _mainPanel;
         private Panel _menuButtonPanel;
-       
+
+        Button _homepageButton;
+        Button _volunteerOverviewButton;
+        Button _settingsButton;
+
         Size fullClientWindowSize;
 
         private UserInterfaceAdmin.Homepage.Homepage _homepage;
@@ -53,7 +58,7 @@ namespace VolunteerSystem.UserInterface
             };
 
             //Buttons
-            Button _homepageButton = new Button()
+            _homepageButton = new Button()
             {
                 Location = new Point(0, 0),
                 Text = "Homepage",
@@ -61,7 +66,9 @@ namespace VolunteerSystem.UserInterface
                 FlatStyle = FlatStyle.Flat
             };
             _homepageButton.Click += _homepageButton_Clicked;
-            Button _volunteerOverviewButton = new Button()
+            _homepageButton.Paint += ColorAndStyle.OnPaintDrawRect;
+            _homepageButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _homepageButton.Size, 10));
+            _volunteerOverviewButton = new Button()
             {
                 Location = new Point(_homepageButton.Location.X + _homepageButton.Size.Width, 0),
                 Text = "Volunteer Overview",
@@ -69,7 +76,9 @@ namespace VolunteerSystem.UserInterface
                 FlatStyle = FlatStyle.Flat
             };
             _volunteerOverviewButton.Click += _volunteerOverviewButton_Clicked;
-            Button _settingsButton = new Button()
+            _volunteerOverviewButton.Paint += ColorAndStyle.OnPaintDrawRect;
+            _volunteerOverviewButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _volunteerOverviewButton.Size, 10));
+            _settingsButton = new Button()
             {
                 Location = new Point(_volunteerOverviewButton.Location.X + _volunteerOverviewButton.Size.Width, 0),
                 Text = "Settings",
@@ -77,6 +86,8 @@ namespace VolunteerSystem.UserInterface
                 FlatStyle = FlatStyle.Flat
             };
             _settingsButton.Click += _settingsButton_Clicked;
+            _settingsButton.Paint += ColorAndStyle.OnPaintDrawRect;
+            _settingsButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _settingsButton.Size, 10));
 
             _menuButtonPanel.Controls.Add(_homepageButton);
             _menuButtonPanel.Controls.Add(_volunteerOverviewButton);
@@ -102,18 +113,26 @@ namespace VolunteerSystem.UserInterface
         
         private void _homepageButton_Clicked(object sender, EventArgs e)
         {
-            shownPage = ShownPage.Homepage;
-            UpdateUI();
+            if (shownPage != ShownPage.Homepage)
+            {
+                shownPage = ShownPage.Homepage;
+                UpdateUI();
+            }
         }
         private void _volunteerOverviewButton_Clicked(object sender, EventArgs e)
         {
-            shownPage = ShownPage.VolunteerOverview;
-            UpdateUI();
+            if (shownPage != ShownPage.VolunteerOverview) {
+                shownPage = ShownPage.VolunteerOverview;
+                UpdateUI();
+            }
         }
         private void _settingsButton_Clicked(object sender, EventArgs e)
         {
-            shownPage = ShownPage.Settings;
-            UpdateUI();
+            if (shownPage != ShownPage.Settings)
+            {
+                shownPage = ShownPage.Settings;
+                UpdateUI();
+            }
         }
 
         public void Start()
@@ -214,16 +233,23 @@ namespace VolunteerSystem.UserInterface
         {
             _mainPanel.Controls.Clear();
 
+            _homepageButton.BackColor = Color.White;
+            _volunteerOverviewButton.BackColor = Color.White;
+            _settingsButton.BackColor = Color.White;
+
             switch (shownPage)
             {
                 case ShownPage.Homepage:
                     DisplayHomepage();
+                    _homepageButton.BackColor = Color.Yellow;
                     break;
                 case ShownPage.VolunteerOverview:
                     DisplayVolunteerOverview();
+                    _volunteerOverviewButton.BackColor = Color.Yellow;
                     break;
                 case ShownPage.Settings:
                     DisplaySettings();
+                    _settingsButton.BackColor = Color.Yellow;
                     break;
             }
         }
