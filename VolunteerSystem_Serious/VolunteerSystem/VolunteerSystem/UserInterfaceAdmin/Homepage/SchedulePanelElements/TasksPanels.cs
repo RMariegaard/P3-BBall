@@ -23,7 +23,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 Name = headline,
                 Location = location,
                 Size = size,
-                BackColor = Color.FromArgb(100, Color.LightCyan),
+                BackColor = ColorAndStyle.SecondaryColor(true),
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left,
                 BorderStyle = BorderStyle.FixedSingle
             };

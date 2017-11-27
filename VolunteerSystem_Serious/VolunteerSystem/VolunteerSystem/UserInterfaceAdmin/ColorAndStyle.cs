@@ -11,6 +11,40 @@ namespace VolunteerSystem.UserInterfaceAdmin
 {
     public static class ColorAndStyle
     {
+        public static Color AlternatingColorsONE()
+        {
+            return Color.LightGray;
+        }
+        public static Color AlternatingColorsTWO()
+        {
+            return Color.Gray;
+        }
+
+        public static Color PrimaryColor()
+        {
+            return Color.Blue;
+        }
+
+        public static Color SecondaryColor()
+        {
+            return Color.AliceBlue;
+        }
+
+        public static Color PrimaryColor(bool transparrent)
+        {
+            if (transparrent)
+                return Color.FromArgb(100, PrimaryColor());
+            else
+                return PrimaryColor();
+        }
+
+        public static Color SecondaryColor(bool transparrent)
+        {
+            if (transparrent)
+                return Color.FromArgb(100, SecondaryColor());
+            else
+                return SecondaryColor();
+        }
 
         public static void OnPaintDrawRect(object sender, PaintEventArgs e)
         {

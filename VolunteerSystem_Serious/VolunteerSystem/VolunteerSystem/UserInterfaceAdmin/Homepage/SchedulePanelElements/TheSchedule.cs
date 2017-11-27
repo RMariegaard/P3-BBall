@@ -78,8 +78,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 Rectangle rc = _theSchedulemainPanel.ClientRectangle;
                 rc.Size = new Size(_theSchedulemainPanel.Size.Width-10, hourHeight);
                 rc.Location = new Point(0, (i*hourHeight));
-                Brush brush1 = new SolidBrush(Color.LightGray);
-                Brush brush2 = new SolidBrush(Color.Gray);
+                Brush brush1 = new SolidBrush(ColorAndStyle.AlternatingColorsONE());
+                Brush brush2 = new SolidBrush(ColorAndStyle.AlternatingColorsTWO());
 
                 if (i%2 == 0)
                     e.Graphics.FillRectangle(brush1, rc);

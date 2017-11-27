@@ -249,15 +249,15 @@ namespace VolunteerSystem.UserInterface
             {
                 case ShownPage.Homepage:
                     DisplayHomepage();
-                    _homepageButton.BackColor = Color.Yellow;
+                    _homepageButton.BackColor = ColorAndStyle.PrimaryColor();
                     break;
                 case ShownPage.VolunteerOverview:
                     DisplayVolunteerOverview();
-                    _volunteerOverviewButton.BackColor = Color.Yellow;
+                    _volunteerOverviewButton.BackColor = ColorAndStyle.PrimaryColor();
                     break;
                 case ShownPage.Settings:
                     DisplaySettings();
-                    _settingsButton.BackColor = Color.Yellow;
+                    _settingsButton.BackColor = ColorAndStyle.PrimaryColor();
                     break;
             }
         }
