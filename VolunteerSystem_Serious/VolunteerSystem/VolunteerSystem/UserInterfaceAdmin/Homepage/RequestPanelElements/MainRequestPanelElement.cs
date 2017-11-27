@@ -81,21 +81,28 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
 
         public Panel GetRequestPanel(Size forRefference)
         {
+            int panelHeight = 40;
+
             _mainRequestPanel.Controls.Clear();
             _mainRequestPanel.Size = forRefference;
             titleTopLabel.Location = new Point(10, 0);
             titleTopLabel.Text = "Pending Requests";
             titleTopLabel.Font = new Font("Arial", 24, FontStyle.Bold);
             titleTopLabel.AutoSize = true;
-            
-            int i = 1;
-            int panelHeight = 40;
+
+            Panel theRequestsPanel = new Panel();
+            theRequestsPanel.Location = new Point(_mainRequestPanel.Location.X, panelHeight + 15);
+            theRequestsPanel.Size = new Size(_mainRequestPanel.Width, _mainRequestPanel.Height - theRequestsPanel.Location.Y);
+            theRequestsPanel.AutoScroll = true;
+            theRequestsPanel.BorderStyle = BorderStyle.FixedSingle;
+
+            int i = 0;
             foreach (Request request in _volunteerMainUI.GetScheduleController().GetAllRequests())
             {
                 Panel requestPanel = new Panel
                 {
                     Name = "requestPanel",
-                    Location = new Point(0, (i * panelHeight) + 20),
+                    Location = new Point(0, (i * panelHeight)),
                     Size = new Size(_mainRequestPanel.Width - 20, panelHeight),
                     BorderStyle = BorderStyle.FixedSingle
                 };
@@ -110,10 +117,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
                 requestPanel.Controls.Add(_getAccept(new Point((_mainRequestPanel.Size.Width / 5) * 3 + 2, 2), request));
                 requestPanel.Controls.Add(_getDeny(new Point((_mainRequestPanel.Size.Width / 5) * 4 + 2, 2), request));
 
-                _mainRequestPanel.Controls.Add(requestPanel);
+                theRequestsPanel.Controls.Add(requestPanel);
                 i++;
             }
 
+            _mainRequestPanel.Controls.Add(theRequestsPanel);
             _mainRequestPanel.Controls.Add(_getTopBarPanel(new Size(_mainRequestPanel.Size.Width - 20, panelHeight)));
             _mainRequestPanel.Controls.Add(titleTopLabel);
 
