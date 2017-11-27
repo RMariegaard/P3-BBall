@@ -37,7 +37,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 Label tempLabel = new Label
                 {
                     Location = new Point(0, (i * hourHeight)),
-                    Text = i + 1 >= 10 ? $"{i}.00" : $"0{i}.00",
+                    Text = i + 1 > 10 ? $"{i}.00" : $"0{i}.00",
                     AutoSize = true
                 };
                 colorAndShiftPanel.Controls.Add(tempLabel);
