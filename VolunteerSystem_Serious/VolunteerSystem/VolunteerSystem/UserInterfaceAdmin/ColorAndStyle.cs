@@ -20,6 +20,15 @@ namespace VolunteerSystem.UserInterfaceAdmin
             return Color.Gray;
         }
 
+        public static Color SmallAlternatingColorsONE()
+        {
+            return Color.LightGray;
+        }
+        public static Color SmallAlternatingColorsTWO()
+        {
+            return Color.White;
+        }
+
         public static Color PrimaryColor()
         {
             return Color.Blue;
@@ -27,7 +36,12 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
         public static Color SecondaryColor()
         {
-            return Color.AliceBlue;
+            return Color.Gold;
+        }
+
+        public static Color SmallButtonColor()
+        {
+            return Color.White;
         }
 
         public static Color PrimaryColor(bool transparrent)

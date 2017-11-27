@@ -69,9 +69,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
                 panel.Size = new Size(namesPanel.Width - 10, 30);
                 panel.BorderStyle = BorderStyle.FixedSingle;
                 if (i % 2 == 0)
-                    panel.BackColor = ColorAndStyle.AlternatingColorsONE();
+                    panel.BackColor = ColorAndStyle.SmallAlternatingColorsONE();
                 else
-                    panel.BackColor = ColorAndStyle.AlternatingColorsTWO();
+                    panel.BackColor = ColorAndStyle.SmallAlternatingColorsTWO();
 
                 Label label = new Label();
                 label.Location = new Point(2, 2);

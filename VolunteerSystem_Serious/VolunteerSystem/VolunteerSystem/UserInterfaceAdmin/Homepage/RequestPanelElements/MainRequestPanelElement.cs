@@ -100,9 +100,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
                     BorderStyle = BorderStyle.FixedSingle
                 };
                 if (i % 2 != 0)
-                    requestPanel.BackColor = ColorAndStyle.AlternatingColorsONE();
+                    requestPanel.BackColor = ColorAndStyle.SmallAlternatingColorsONE();
                 else
-                    requestPanel.BackColor = ColorAndStyle.AlternatingColorsTWO();
+                    requestPanel.BackColor = ColorAndStyle.SmallAlternatingColorsTWO();
 
                 requestPanel.Controls.Add(_getVolunteerName(new Point((_mainRequestPanel.Size.Width / 5) * 0 + 2, 2), request, request.Worker));
                 requestPanel.Controls.Add(_getDateItWasSent(new Point((_mainRequestPanel.Size.Width / 5) * 1 + 2, 2), request));
