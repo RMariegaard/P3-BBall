@@ -194,7 +194,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             {
                 Location = location,
                 Text = "Accept",
-                AutoSize = true
+                AutoSize = true,
+                BackColor = Color.LightGray,
+                FlatStyle = FlatStyle.System
             };
             acceptButton.Click += _acceptButton_Clicked;
             acceptButton.Tag = request;
@@ -215,7 +217,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             {
                 Location = location,
                 Text = "Deny",
-                AutoSize = true
+                AutoSize = true,
+                BackColor = Color.LightGray,
+                FlatStyle = FlatStyle.System
             };
             denyButton.Click += _denyButton_Clicked;
             denyButton.Tag = request;
