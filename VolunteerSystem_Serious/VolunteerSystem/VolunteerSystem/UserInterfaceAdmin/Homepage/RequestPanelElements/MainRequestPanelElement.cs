@@ -59,12 +59,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             Label acceptButtonLabel = new Label
             {
                 Text = "Accept",
+                AutoSize = true,
                 Location = new Point((_mainRequestPanel.Size.Width / 5) * 3 + 2, 2)
             };
 
             Label denyButtonLabel = new Label
             {
                 Text = "Deny",
+                AutoSize = true,
                 Location = new Point((_mainRequestPanel.Size.Width / 5) * 4 + 2, 2)
             };
 
