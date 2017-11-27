@@ -38,12 +38,21 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
             Label shiftInfo = new Label
             {
-                Text = $" Task: {shift.Task}\n Starts: {shift.StartTime}\n Ends: {shift.EndTime}\n Volunteers Needed: {shift.VolunteersNeeded}\n Description: {shift.Description}\n",
                 AutoSize = true,
+                Text = $" Task: {shift.Task}\n Starts: {shift.StartTime}\n Ends: {shift.EndTime}\n Volunteers Needed: {shift.VolunteersNeeded}\n Description: {shift.Description}\n",
                 Location = new Point()
             };
-
-
+            var shiftBindingSource = new BindingSource()
+            {
+                DataSource = typeof(Shift)
+            };
+            shiftBindingSource.Add(shift);
+            var shiftInfoBinding = new Binding("Text", shiftBindingSource, "Task");
+            shiftInfoBinding.Format += delegate (object sender, ConvertEventArgs e)
+            {
+                e.Value = $" Task: {shift.Task}\n Starts: {shift.StartTime}\n Ends: {shift.EndTime}\n Volunteers Needed: {shift.VolunteersNeeded}\n Description: {shift.Description}\n";
+            };
+            shiftInfo.DataBindings.Add(shiftInfoBinding);
 
             Button cancelButton = new Button
             {

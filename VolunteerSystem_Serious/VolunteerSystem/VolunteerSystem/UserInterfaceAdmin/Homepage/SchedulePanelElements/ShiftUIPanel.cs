@@ -24,11 +24,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
         public Control ShiftUI(Panel forRefence, int hourHeight)
         {
-            BindingSource bs = new BindingSource
+            BindingSource shiftBindingSource = new BindingSource
             {
                 DataSource = typeof(Shift)
             };
-            bs.Add(shift);
+            shiftBindingSource.Add(shift);
 
             //////////////////ShiftPanel////////////////////////
 
@@ -41,13 +41,13 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             shiftPanel.Click += _panel_clicked;
 
             //Binds the location to starttime, so whenever this is edited, the position of the shift will be changed in the schedule
-            var locationBinding = new Binding("Location", bs, "StartTime");
+            var locationBinding = new Binding("Location", shiftBindingSource, "StartTime");
             locationBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
                 convertEventArgs.Value = new Point(0, (int)(((shift.StartTime.Hour * 60) + shift.StartTime.Minute) * ((double)hourHeight / 60))); 
             };
 
-            var SizeBinding = new Binding("Size", bs, "EndTime");
+            var SizeBinding = new Binding("Size", shiftBindingSource, "EndTime");
             SizeBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
                 TimeSpan timeSpan = shift.EndTime - shift.StartTime;
@@ -63,7 +63,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
 
             //////////////////NumberOfVolunteerLabel////////////////////////
-            var numberOfVolunteerBinding = new Binding("Text", bs, "GetNumberOfVolunteers");
+            var numberOfVolunteerBinding = new Binding("Text", shiftBindingSource, "GetNumberOfVolunteers");
             //Ikke længere nødvendig
             //binding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             //{
@@ -76,7 +76,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             headder.AutoSize = true;
 
             //////////////////TimeLabel////////////////////////
-            var timeBinding = new Binding("Text", bs, "TimeInterval");
+            var timeBinding = new Binding("Text", shiftBindingSource, "TimeInterval");
             Label Time = new Label
             {
                 Location = new Point(0, headder.Location.Y + headder.Size.Height + 1)
@@ -88,10 +88,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             Label Desciption = new Label
             {
                 Location = new Point(0, Time.Location.Y + Time.Size.Height + 1),
-                Text = shift.Description,
                 MaximumSize = new Size(100, 0),
                 AutoSize = true
             };
+            var descriptionBinding = new Binding("Text", shiftBindingSource, "Description");
+            Desciption.DataBindings.Add(descriptionBinding);
 
             shiftPanel.Controls.Add(headder);
             shiftPanel.Controls.Add(Time);
