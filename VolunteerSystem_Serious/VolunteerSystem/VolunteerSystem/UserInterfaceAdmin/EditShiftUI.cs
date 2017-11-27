@@ -28,8 +28,27 @@ namespace VolunteerSystem.UserInterface
 
 
         }
+        protected override void createShift_Clicked(object sender, EventArgs e)
+        {
+            if (correctInformation())
+            {
+                DateTime startDateTime = new DateTime(DateTimePicker.Value.Year, DateTimePicker.Value.Month, DateTimePicker.Value.Day, startHour, startMinut, 0);
+                DateTime endDateTime = new DateTime(DateTimePicker.Value.Year, DateTimePicker.Value.Month, DateTimePicker.Value.Day, endHour, endMinut, 0);
+                if (startDateTime < endDateTime)
+                {
+                    Result = new Shift(startDateTime, endDateTime, TasksComboBox.SelectedItem.ToString(), int.Parse(numberOfVolunteersTextBox.Text), desciptionTextBox.Text);
+                    DialogResult = DialogResult.OK;
+ 
+                }
+                else
+                {
 
-      
+                    PopupUI popup = new PopupUI("Invalid information", "The start of the shift has to be before the end of shift");
+                    popup.Show();
+                }
+            }
+        }
+
 
     }
 }

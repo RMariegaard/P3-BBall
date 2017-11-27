@@ -134,15 +134,21 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
         private void EditShift_Clicked(object sender, EventArgs e)
         {
-            List<string> list = new List<string>
-            {
-                shift.Task
-            };
+            List<string> list = volunteerMainUI.GetScheduleController().GetAllTasks();
+
             EditShiftUI editShiftUI = new EditShiftUI(list, shift);
             editShiftUI.ShowDialog();
+
+            //Det fucking langsomt men what ever.
+            string task = shift.Task;
+            int time = shift.StartTime.Day;
             if (editShiftUI.DialogResult == DialogResult.OK)
             {
                 volunteerMainUI.GetScheduleController().EditShift(shift.ID, editShiftUI.Result);
+            }
+            if (task != shift.Task || time != shift.StartTime.Day)
+            {
+                volunteerMainUI.UpdateSchedule();
             }
         }
     }

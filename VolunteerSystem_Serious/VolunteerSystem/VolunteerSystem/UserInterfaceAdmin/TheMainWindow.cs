@@ -92,6 +92,10 @@ namespace VolunteerSystem.UserInterface
         {
             _mainPanel.Controls.Add(_homepage.GetHomepagePanel(_mainPanel));
         }
+        public void UpdateSchedule()
+        {
+            _homepage.UpdateSchedulePanel();
+        }
 
         public void DisplaySettings()
         {
