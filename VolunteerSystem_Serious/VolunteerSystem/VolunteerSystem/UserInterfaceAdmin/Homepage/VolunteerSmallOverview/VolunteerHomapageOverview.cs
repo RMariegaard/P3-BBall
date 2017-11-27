@@ -170,7 +170,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
                 Text =
                 $"{shift.Task} \n" +
                 $"{shift.StartTime.DayOfWeek}\n" +
-                $"{shift.StartTime.Hour}:{shift.StartTime.Minute} - {shift.EndTime.Hour}:{shift.EndTime.Minute}"
+                shift.StartTime.ToString("HH:mm") + " - " + shift.EndTime.ToString("HH:mm")
             };
 
             singleShiftPanel.Controls.Add(information);
