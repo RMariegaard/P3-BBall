@@ -151,9 +151,17 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             return volunteerRequestPanel;
         }
 
+
+
         private Panel _getSingleShiftPanel(Point location, Size size, Shift shift)
         {
-            Panel singleShiftPanel = new Panel
+            BindingSource shiftBindingSource = new BindingSource
+            {
+                DataSource = typeof(Shift)
+            };
+            shiftBindingSource.Add(shift);
+
+                Panel singleShiftPanel = new Panel
             {
                 Name = "singleShiftPanel",
 
@@ -167,11 +175,16 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
                 Location = new Point(2, 2),
                 MaximumSize = new Size(size.Width - 4, size.Height - 4),
                 AutoSize = true,
-                Text =
-                $"{shift.Task} \n" +
-                $"{shift.StartTime.DayOfWeek}\n" +
-                shift.StartTime.ToString("HH:mm") + " - " + shift.EndTime.ToString("HH:mm")
+
             };
+            var textBinding = new Binding("Text", shiftBindingSource, "Task");
+            textBinding.Format += delegate (object sender, ConvertEventArgs convertEventArgs)
+            {
+                convertEventArgs.Value = $"{convertEventArgs.Value} \n" +
+                $"{shift.StartTime.DayOfWeek}\n" +
+                shift.StartTime.ToString("HH:mm") + " - " + shift.EndTime.ToString("HH:mm");
+            };
+            information.DataBindings.Add(textBinding);
 
             singleShiftPanel.Controls.Add(information);
             return singleShiftPanel;
