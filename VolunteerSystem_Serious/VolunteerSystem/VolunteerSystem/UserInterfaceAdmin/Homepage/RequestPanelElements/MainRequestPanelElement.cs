@@ -38,18 +38,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             Label nameLabel = new Label
             {
                 Text = "Name",
+                AutoSize = true,
                 Location = new Point((_mainRequestPanel.Size.Width / 5) * 0 + 2, 2)
             };
 
             Label dateSentLabel = new Label
             {
                 Text = "Request Sent",
+                AutoSize = true,
                 Location = new Point((_mainRequestPanel.Size.Width / 5) * 1 + 2, 2)
             };
 
             Label shiftInfoLabel = new Label
             {
                 Text = "Shift Info",
+                AutoSize = true,
                 Location = new Point((_mainRequestPanel.Size.Width / 5) * 2 + 2, 2)
             };
 
