@@ -21,23 +21,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview
         public VolunteerOverview(IVolunteerMainUI volunteerMainUI, WorkerController workerController)
         {
             this.volunteerMainUI = volunteerMainUI;
-            _volunteerOverviewMainPanel = new Panel
-            {
-                Name = "_volunteerOverviewMainPanel"
-            };
+            _volunteerOverviewMainPanel = new Panel();
+            _volunteerOverviewMainPanel.Name = "_volunteerOverviewMainPanel";
 
             this.workerController = workerController;
-            volunteersAndSeachPanel = new Panel
-            {
-                Name = "volunteersAndSeachPanel"
-            };
+            volunteersAndSeachPanel = new Panel();
+            volunteersAndSeachPanel.Name = "volunteersAndSeachPanel";
 
         }
 
         public Panel GetPanel(Size size)
         {
+            _volunteerOverviewMainPanel.Size = size;
+
             UpdateSeachAndVolunteerElement();
-            
+
             return _volunteerOverviewMainPanel;
         }
 
@@ -47,11 +45,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview
 
             volunteersAndSeachPanel.Controls.Clear();
             volunteersAndSeachPanel.Location = new Point(0, 0);
-            volunteersAndSeachPanel.Size = new Size(_volunteerOverviewMainPanel.Size.Width / 6, _volunteerOverviewMainPanel.Size.Height);
+            volunteersAndSeachPanel.Size = new Size((_volunteerOverviewMainPanel.Size.Width / 5), _volunteerOverviewMainPanel.Size.Height);
             volunteersAndSeachPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            VolunteersSeach.SeachAndVolunteers seachAndVolunteers = new VolunteersSeach.SeachAndVolunteers(workerController);
+            VolunteersSeach.SeachAndVolunteers seachAndVolunteers = new VolunteersSeach.SeachAndVolunteers(workerController, this);
             volunteersAndSeachPanel.Controls.Add(seachAndVolunteers.GetPanel(volunteersAndSeachPanel.Size));
-            
+
             _volunteerOverviewMainPanel.Controls.Add(volunteersAndSeachPanel);
         }
     }

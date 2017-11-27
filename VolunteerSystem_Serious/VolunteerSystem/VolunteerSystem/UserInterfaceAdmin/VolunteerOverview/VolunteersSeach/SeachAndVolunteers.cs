@@ -12,32 +12,44 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
     {
         Panel _searchAndVolunteerMainPanel;
         WorkerController workerController;
-
+        VolunteerOverview _volunteerOverview;
         TextBox searchTextBox;
+        Size _size;
 
-        public SeachAndVolunteers(WorkerController workerController)
+        public SeachAndVolunteers(WorkerController workerController, VolunteerOverview volunteerOverview)
         {
             this.workerController = workerController;
+            _volunteerOverview = volunteerOverview;
             _searchAndVolunteerMainPanel = new Panel();
             _searchAndVolunteerMainPanel.Name = "_searchAndVolunteerMainPanel";
+            searchTextBox = new TextBox();
         }
 
         public Panel GetPanel(Size size)
         {
-            searchTextBox = new TextBox();
+            _size = size;
+            _searchAndVolunteerMainPanel.Size = _size;
+            _searchAndVolunteerMainPanel.BorderStyle = BorderStyle.FixedSingle;
+
             searchTextBox.Location = new Point(5, 5);
-            searchTextBox.Size = new Size(size.Width - 10, 30);
+            searchTextBox.Size = new Size(_size.Width - 10, 0);
             searchTextBox.TextChanged += searchTextBox_Changed;
 
-
-            
+            UpdateNamesPanel();
             _searchAndVolunteerMainPanel.Controls.Add(searchTextBox);
             return _searchAndVolunteerMainPanel;
         }
 
         private void searchTextBox_Changed(object sender, EventArgs e)
         {
+            UpdateNamesPanel();
+        }
 
+        public void UpdateNamesPanel()
+        {
+            Panel panel = namesPanel(new Size(_size.Width, _size.Height - searchTextBox.Height), new Point(2, searchTextBox.Location.Y + searchTextBox.Size.Height));
+            _searchAndVolunteerMainPanel.Controls.Remove(panel);
+            _searchAndVolunteerMainPanel.Controls.Add(panel);
         }
 
         private Panel namesPanel(Size size, Point location)
@@ -46,6 +58,29 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             namesPanel.Name = "namesPanel";
             namesPanel.Size = size;
             namesPanel.Location = location;
+
+            List<Worker> workersList = workerController.Workers;
+            workersList.Where(x => x.Name.Contains(searchTextBox.Text)).OrderBy(x => x.Name);
+            for (int i = 0; i < workersList.Count; i++)
+            {
+                Panel panel = new Panel();
+                panel.Location = new Point(namesPanel.Location.X, namesPanel.Location.Y + (i * 32));
+                panel.Size = new Size(namesPanel.Width - 10, 30);
+                panel.BorderStyle = BorderStyle.FixedSingle;
+                if (i % 2 == 0)
+                    panel.BackColor = Color.LightGray;
+                else
+                    panel.BackColor = Color.Gray;
+
+                Label label = new Label();
+                label.Location = new Point(2, 2);
+                label.Text = workerController.Workers[i].Name;
+                label.AutoSize = true;
+
+                panel.Controls.Add(label);
+
+                namesPanel.Controls.Add(panel);
+            }
 
 
             return namesPanel;
