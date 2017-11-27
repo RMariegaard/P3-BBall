@@ -10,7 +10,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 {
     class Homepage : AccessibleObject
     {
-        Panel _mainHomepagePanel;
+        public Panel _mainHomepagePanel;
 
         public Panel schedulePanel;
         public Panel pendingRequestPanel;

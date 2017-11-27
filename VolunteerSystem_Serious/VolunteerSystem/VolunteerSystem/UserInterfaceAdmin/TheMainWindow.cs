@@ -119,7 +119,11 @@ namespace VolunteerSystem.UserInterface
         public void Start()
         {
             Application.EnableVisualStyles();
+
+            _mainPanel.Controls.Add(_homepage.GetHomepagePanel(_mainPanel));
+            _mainPanel.Controls.Add(_volunteerOverview.GetPanel(_mainPanel.Size));
             Application.Run(this);
+
         }
 
         public void DisplayPopup(string Header, string body)
@@ -136,7 +140,9 @@ namespace VolunteerSystem.UserInterface
 
         public void DisplayHomepage()
         {
-            _mainPanel.Controls.Add(_homepage.GetHomepagePanel(_mainPanel));
+            _homepage.GetHomepagePanel(_mainPanel).BringToFront();
+            //_homepage.GetHomepagePanel(_mainPanel).Visible = true;
+            //_volunteerOverview.GetPanel(_mainPanel.Size).Visible = false;
         }
         public void UpdateSchedule()
         {
@@ -150,7 +156,10 @@ namespace VolunteerSystem.UserInterface
 
         public void DisplayVolunteerOverview()
         {
-            _mainPanel.Controls.Add(_volunteerOverview.GetPanel(_mainPanel.Size));
+            //_volunteerOverview.GetPanel(_mainPanel.Size).Visible = true;
+            //_homepage.GetHomepagePanel(_mainPanel).Visible = false;
+            _volunteerOverview.GetPanel(_mainPanel.Size).BringToFront();
+
         }
         
         public void AcceptWorkerRequest(Request request)
@@ -212,7 +221,6 @@ namespace VolunteerSystem.UserInterface
 
         public void UpdateUI()
         {
-            _mainPanel.Controls.Clear();
 
             switch (shownPage)
             {
