@@ -281,7 +281,9 @@ namespace VolunteerSystem.UserInterface
 
         public void DisplayVolunteerInVolunteerOverview(Volunteer volunteer)
         {
-            throw new NotImplementedException();
+            _volunteerOverview.SelectedWorker = volunteer;
+            shownPage = ShownPage.VolunteerOverview;
+            UpdateUI();
         }
 
         public Size GetFullClientWindowSize()

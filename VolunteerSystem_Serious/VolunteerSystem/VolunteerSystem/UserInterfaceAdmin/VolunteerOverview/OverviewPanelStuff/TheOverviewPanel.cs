@@ -196,6 +196,70 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                 AutoSize = true
             };
 
+            Worker worker = volunteerOverview.SelectedWorker;
+            int panelHeight = 150;
+            if (worker != null)
+            {
+                List<Shift> requestedShifts = scheduleController.GetAllShifts().Where(x => x.Requests.Any(y => y.Worker.ID == worker.ID)).ToList();
+                for (int i = 0; i < requestedShifts.Count(); i++)
+                {
+                    Panel panel = new Panel
+                    {
+                        Size = new Size(size.Width - 10, panelHeight),
+                        Location = new Point(5, (panelHeight * i +2) + 40),
+                        BorderStyle = BorderStyle.FixedSingle,
+                    };
+
+                    Shift shift = requestedShifts[i];
+                    string informationString =
+                        $"{shift.StartTime.DayOfWeek}\n" +
+                        $"{shift.Task}\n" +
+                        $"{shift.StartTime.ToShortTimeString()} - {shift.EndTime.ToShortTimeString()}";
+
+                    Label label = new Label
+                    {
+                        Text = informationString,
+                        Location = new Point(5, 5),
+                        MaximumSize = new Size(panel.Size.Width - 10, 0),
+                        AutoSize = true
+                    };
+                    panel.Controls.Add(label);
+
+                    int buttonHeight = 40;
+                    Button acceptButton = new Button()
+                    {
+                        Text = "Accept",
+                        Size = new Size(panel.Size.Width - 10, buttonHeight),
+                        Location = new Point(5, panel.Size.Height - (2 * buttonHeight + 2)),
+                        Tag = requestedShifts[i]
+                    };
+                    acceptButton.Click += delegate (object sender, EventArgs e)
+                    {
+                        scheduleController.ApproveRequest(((Shift)((Control)sender).Tag).Requests.First(x => x.Worker == volunteerOverview.SelectedWorker));
+                        updateShiftInformationPanel();
+                        updateRequestInformaitonPanel();
+                    };
+                    panel.Controls.Add(acceptButton);
+
+                    Button denyButton = new Button()
+                    {
+                        Text = "Deny",
+                        Size = new Size(panel.Size.Width - 10, buttonHeight),
+                        Location = new Point(5, panel.Size.Height - (1 * buttonHeight + 2)),
+                        Tag = requestedShifts[i]
+                    };
+                    denyButton.Click += delegate (object sender, EventArgs e)
+                    {
+                        scheduleController.DenyRequest(((Shift)((Control)sender).Tag).Requests.First(x => x.Worker == volunteerOverview.SelectedWorker));
+                        updateShiftInformationPanel();
+                        updateRequestInformaitonPanel();
+                    };
+                    panel.Controls.Add(denyButton);
+
+                    requestInforationPanel.Controls.Add(panel);
+                }
+            }
+
             requestInforationPanel.Controls.Add(titleTopLabel);
             return requestInforationPanel;
         }
