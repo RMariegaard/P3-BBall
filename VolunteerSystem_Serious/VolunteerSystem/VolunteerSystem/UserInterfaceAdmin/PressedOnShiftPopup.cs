@@ -141,7 +141,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
         private void DeleteButton_clicked(object sender, EventArgs e)
         {
-            DeleteFormPopUp deletePopup = new DeleteFormPopUp();
+            DeleteFormPopUp deletePopup = new DeleteFormPopUp("Are you sure you want to delete this shift?");
             deletePopup.ShowDialog();
             if(deletePopup.DialogResult == DialogResult.OK)
             {

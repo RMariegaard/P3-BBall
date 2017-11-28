@@ -104,7 +104,7 @@ namespace VolunteerSystem.UserInterface
 
             //Start on homepage
             shownPage = ShownPage.Homepage;
-            UpdateUI();
+            //UpdateUI();
 
             //Adds to the window
             Controls.Add(_mainPanel);

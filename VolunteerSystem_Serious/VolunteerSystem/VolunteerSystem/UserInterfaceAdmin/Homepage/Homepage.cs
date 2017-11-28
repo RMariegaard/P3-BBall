@@ -52,9 +52,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
         public void UpdateAllPanels()
         {
+            _mainHomepagePanel.SuspendLayout();
             UpdateSchedulePanel();
             UpdatePendingRequestPanel();
             UpdateVolunteerPanel();
+            _mainHomepagePanel.PerformLayout();
         }
 
         public void UpdateSchedulePanel()
@@ -109,7 +111,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
         private void _threeSchedulePanels()
         {
-            schedulePanel.SuspendLayout();
             Panel DaysLeft = new Panel();
             Panel TheSchedule = new Panel();
             Panel ButtonsBottumPanel = new Panel();
@@ -145,7 +146,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             schedulePanel.Controls.Add(DaysLeft);
             schedulePanel.Controls.Add(TheSchedule);
             schedulePanel.Controls.Add(ButtonsBottumPanel);
-            schedulePanel.ResumeLayout();
         }
 
 

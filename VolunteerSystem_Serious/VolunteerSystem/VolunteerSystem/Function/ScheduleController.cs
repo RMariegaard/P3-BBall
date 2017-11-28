@@ -46,6 +46,10 @@ namespace VolunteerSystem
         {
             _schedule.Tasks.Add(task);
         }
+        public void RemoveTask(string task)
+        {
+            _schedule.Tasks.Remove(task);
+        }
 
         public void EditShift(int oldShiftID, Shift newShift)
         {
@@ -59,7 +63,8 @@ namespace VolunteerSystem
         }
         public void DeleteShift(int shiftID)
         {
-            _schedule.Shifts.Remove(_schedule.Shifts.Find(x => x.ID == shiftID));
+            Shift shift = _schedule.Shifts.Find(x => x.ID == shiftID);
+            _schedule.Shifts.Remove(shift);
         }
 
 
