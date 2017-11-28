@@ -12,8 +12,10 @@ namespace VolunteerSystem.UserInterfaceAdmin
 {
     public partial class DeleteFormPopUp : Form
     {
-        public DeleteFormPopUp()
+        string _text;
+        public DeleteFormPopUp(string text)
         {
+            _text = text;
             InitializeComponent();
             button1.DialogResult = DialogResult.OK;
             button2.DialogResult = DialogResult.Abort;

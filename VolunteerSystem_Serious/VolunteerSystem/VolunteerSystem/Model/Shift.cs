@@ -139,7 +139,7 @@ namespace VolunteerSystem
                 return _startTime.ToString("HH\\:mm") + "-" + _endTime.ToString("HH\\:mm");
             }
         }
- 
+
 
     }
 }
