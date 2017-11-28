@@ -45,7 +45,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             var locationBinding = new Binding("Location", shiftBindingSource, "StartTime");
             locationBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
-                convertEventArgs.Value = new Point(0, (int)(((shift.StartTime.Hour * 60) + shift.StartTime.Minute) * ((double)hourHeight / 60))); 
+                convertEventArgs.Value = new Point(0, (int)(((shift.StartTime.Hour * 60 + 60) + shift.StartTime.Minute) * ((double)hourHeight / 60))); 
             };
 
             var SizeBinding = new Binding("Size", shiftBindingSource, "EndTime");

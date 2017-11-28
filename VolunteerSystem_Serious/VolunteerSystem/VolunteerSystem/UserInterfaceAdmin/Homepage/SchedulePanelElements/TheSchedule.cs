@@ -29,15 +29,15 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 Name = "colorAndShiftPanel"
             };
             this.day = day.Text;
-            hourHeight = 50; //schedulePanel.Size.Height / 23
+            hourHeight = 25;
             
             //Add Numbers to Panel. this needs only to be done once
-            for (int i = 0; i <= 24; i++)
+            for (int i = 1; i <= 25; i++)
             {
                 Label tempLabel = new Label
                 {
                     Location = new Point(0, (i * hourHeight)),
-                    Text = i + 1 > 10 ? $"{i}.00" : $"0{i}.00",
+                    Text = i > 10 ? $"{i-1}.00" : $"0{i-1}.00",
                     AutoSize = true
                 };
                 colorAndShiftPanel.Controls.Add(tempLabel);
@@ -52,7 +52,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             _theSchedulemainPanel.AutoScroll = true;
             
             colorAndShiftPanel.Location = new Point(0, 0);
-            colorAndShiftPanel.Size = new Size(schedulePanel.Size.Width-20, 24 * hourHeight);
+            colorAndShiftPanel.Size = new Size(schedulePanel.Size.Width-20, 25 * hourHeight);
             colorAndShiftPanel.Paint += _alternatingColors_Paint;
                 
             //Adds Tasks and shifts
@@ -73,7 +73,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
         private void _alternatingColors_Paint(object sender, PaintEventArgs e)
         {
-            for (int i = 0; i < 24; i++)
+            for (int i = 0; i < 25; i++)
             {
                 Rectangle rc = _theSchedulemainPanel.ClientRectangle;
                 rc.Size = new Size(_theSchedulemainPanel.Size.Width-10, hourHeight);

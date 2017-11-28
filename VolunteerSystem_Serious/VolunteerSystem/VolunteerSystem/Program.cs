@@ -34,11 +34,13 @@ namespace VolunteerSystem
 
             scheduleController.CreateTask("Kitchen");
             scheduleController.CreateTask("Accomadation");
-            scheduleController.CreateTask("Sleeping");
-            scheduleController.CreateTask("Security");
+            scheduleController.CreateTask("Koisk");
+            scheduleController.CreateTask("Dinning Hall");
+            scheduleController.CreateTask("DishWash");
+            scheduleController.CreateTask("Car");
 
-            scheduleController.CreateShift(new Shift(new DateTime(2017, 6, 26, 8, 30, 0), new DateTime(2017, 6, 26, 12, 30, 0), scheduleController.GetAllTasks()[0], 5, "Nope"));
-            scheduleController.CreateShift(new Shift(new DateTime(2017, 6, 27, 8, 0, 0), new DateTime(2017, 6, 27, 10, 30, 0), scheduleController.GetAllTasks()[0], 5, "Nope"));
+            scheduleController.CreateShift(new Shift(new DateTime(2017, 4, 13, 6, 15, 0), new DateTime(2017, 4, 13, 10, 00, 0), scheduleController.GetAllTasks()[0], 7, "Nope"));
+            scheduleController.CreateShift(new Shift(new DateTime(2017, 4, 13, 11, 00, 0), new DateTime(2017, 4, 13, 15, 00, 0), scheduleController.GetAllTasks()[0], 7, "Nope"));
             scheduleController.CreateShift(new Shift(new DateTime(2017, 6, 27, 12, 30, 0), new DateTime(2017, 6, 27, 18, 30, 0), scheduleController.GetAllTasks()[1], 5, "Nope"));
             scheduleController.CreateShift(new Shift(new DateTime(2017, 6, 27, 2, 0, 0), new DateTime(2017, 6, 27, 5, 30, 0), scheduleController.GetAllTasks()[1], 5, "Nope"));
             scheduleController.CreateShift(new Shift(new DateTime(2017, 6, 27, 18, 0, 0), new DateTime(2017, 6, 27, 22, 30, 0), scheduleController.GetAllTasks()[3], 5, "Nope"));
