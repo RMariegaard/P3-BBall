@@ -79,10 +79,16 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
                     panel.BackColor = ColorAndStyle.SmallAlternatingColorsTWO();
                 panel.Click += Panel_Click;
 
-                Label label = new Label();
-                label.Location = new Point(2, 2);
-                label.Text = workersList[i].Name;
-                label.AutoSize = true;
+                LinkLabel label = new LinkLabel
+                {
+                    Location = new Point(2, 2),
+                    Text = workersList[i].Name,
+                    AutoSize = true,
+                    LinkBehavior = LinkBehavior.HoverUnderline,
+                    LinkColor = Color.Black,
+                    Tag = workersList[i]
+                };
+                label.Click += Panel_Click;
 
                 panel.Controls.Add(label);
                 namesPanel.Controls.Add(panel);
@@ -94,9 +100,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         private void Panel_Click(object sender, EventArgs e)
         {
             Worker worker = (Worker)((Control)sender).Tag;
-            if (_volunteerOverview.SelectedWorker != (Worker)((Control)sender).Tag)
+            if (_volunteerOverview.SelectedWorker != worker)
             {
-                _volunteerOverview.SelectedWorker = (Worker)((Control)sender).Tag;
+                _volunteerOverview.SelectedWorker = worker;
                 UpdateNamesPanel();
             }
 
