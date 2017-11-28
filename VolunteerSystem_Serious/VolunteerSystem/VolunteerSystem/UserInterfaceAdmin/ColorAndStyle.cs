@@ -36,7 +36,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
         public static Color SecondaryColor()
         {
-            return Color.Gold;
+            return Color.Teal;
         }
 
         public static Color ShiftColorCompletelyFree()
