@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VolunteerSystem.UserInterface;
+using System.IO;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace VolunteerSystem.UserInterfaceAdmin
 {
@@ -47,6 +50,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
                 DataSource = typeof(Shift)
             };
             shiftBindingSource.Add(shift);
+
             var shiftInfoBinding = new Binding("Text", shiftBindingSource, "Task");
             shiftInfoBinding.Format += delegate (object sender, ConvertEventArgs e)
             {
@@ -130,9 +134,19 @@ namespace VolunteerSystem.UserInterfaceAdmin
             requestsList.EndUpdate();
             requestsList.AutoSize = true;
 
+            Button addWorkerButton = new Button()
+            {
+
+                Location = new Point(workersList.Location.X + workersList.Width + 5, workersList.Location.Y + workersList.Height - 60 - 5),
+                Image = ResizeImage(System.Drawing.Image.FromFile(Directory.GetCurrentDirectory() + "\\addVolunteerImage.PNG"), 25, 25),
+                Size = new Size(35, 35),
+            };
+
+
 
             _pressedOnShiftPopupMainPanel.Controls.Add(workerLabel);
             _pressedOnShiftPopupMainPanel.Controls.Add(cancelButton);
+            _pressedOnShiftPopupMainPanel.Controls.Add(addWorkerButton);
             //hvorfor virker det kun når jeg tilføger den til this og ikke mainPanel???
            this.Controls.Add(workersList);
             this.Controls.Add(requestsList);
@@ -177,6 +191,31 @@ namespace VolunteerSystem.UserInterfaceAdmin
             {
                 volunteerMainUI.UpdateSchedule();
             }
+        }
+
+        public static Bitmap ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
         }
     }
 }
