@@ -54,7 +54,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             var shiftInfoBinding = new Binding("Text", shiftBindingSource, "Task");
             shiftInfoBinding.Format += delegate (object sender, ConvertEventArgs e)
             {
-                e.Value = $" Task: {shift.Task}\n Starts: {shift.StartTime.ToString("dd/MM/yyyy hh:mm")}\n Ends: {shift.EndTime.ToString("dd/MM/yyyy hh:mm")}\n Volunteers Needed: {shift.VolunteersNeeded}\n Description: {shift.Description}\n";
+                e.Value = $" Task: {shift.Task}\n Starts: {shift.StartTime.ToString("dd/MM/yyyy HH:mm")}\n Ends: {shift.EndTime.ToString("dd/MM/yyyy HH:mm")}\n Volunteers Needed: {shift.VolunteersNeeded}\n Description: {shift.Description}\n";
             };
             shiftInfo.DataBindings.Add(shiftInfoBinding);
 
@@ -129,7 +129,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             requestsList.BeginUpdate();
             foreach (var r in shift.Requests)
             {
-               requestsList.Items.Add($"{r.TimeSent.ToString("dd/MM/yyyy hh:mm")} - {r.Worker.Name} - {r.Worker.Email}");
+               requestsList.Items.Add($"{r.TimeSent.ToString("dd/MM/yyyy HH:mm")} - {r.Worker.Name} - {r.Worker.Email}");
             }
             requestsList.EndUpdate();
             requestsList.AutoSize = true;
