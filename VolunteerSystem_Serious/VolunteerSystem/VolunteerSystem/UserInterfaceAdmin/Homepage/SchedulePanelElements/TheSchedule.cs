@@ -56,9 +56,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             colorAndShiftPanel.Paint += _alternatingColors_Paint;
                 
             //Adds Tasks and shifts
-            int widthOfTask = 100;
             List<Shift> AllShifts = _mainWindowUI.GetScheduleController().GetAllShifts();
             List<string> Tasks = _mainWindowUI.GetScheduleController().GetAllTasks();
+            int widthOfTask = (_theSchedulemainPanel.Size.Width / Tasks.Count()) - 20;//100;
             for (int i = 0; i < Tasks.Count; i++)
             {
                 TasksPanels tempTaskPanel = new TasksPanels(_mainWindowUI);
