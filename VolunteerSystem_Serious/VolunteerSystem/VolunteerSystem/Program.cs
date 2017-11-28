@@ -59,6 +59,15 @@ namespace VolunteerSystem
             scheduleController.GetAllShifts()[4].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[5].CreateRequest((Volunteer)workerController.Workers[1]);
             scheduleController.GetAllShifts()[6].CreateRequest((Volunteer)workerController.Workers[2]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
+
 
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
             

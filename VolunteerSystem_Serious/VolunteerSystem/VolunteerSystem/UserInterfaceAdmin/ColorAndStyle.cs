@@ -39,6 +39,21 @@ namespace VolunteerSystem.UserInterfaceAdmin
             return Color.Gold;
         }
 
+        public static Color ShiftColorCompletelyFree()
+        {
+            return Color.Green;
+        }
+
+        public static Color ShiftColorEnoughRequests()
+        {
+            return Color.Yellow;
+        }
+
+        public static Color ShiftColorWhenFull()
+        {
+            return Color.Red;
+        }
+
         public static Color SmallButtonColor()
         {
             return Color.White;
