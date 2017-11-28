@@ -73,6 +73,12 @@
     <Compile Include="UserInterfaceAdmin\CreateNewTaskUI.Designer.cs">
       <DependentUpon>CreateNewTaskUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterfaceAdmin\DeleteFormPopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\DeleteFormPopUp.Designer.cs">
+      <DependentUpon>DeleteFormPopUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserInterfaceAdmin\EditShiftUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,7 +86,6 @@
       <DependentUpon>EditShiftUI.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterfaceAdmin\Homepage\Homepage.cs" />
-    <Compile Include="UserInterfaceAdmin\Homepage\PressedOnShiftPanel.cs" />
     <Compile Include="UserInterfaceAdmin\Homepage\RequestPanelElements\MainRequestPanelElement.cs" />
     <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\ButtonsBottom.cs" />
     <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\DaysLeftNavigation.cs" />
@@ -115,6 +120,9 @@
     <Compile Include="Database\DBConnection.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UserInterfaceAdmin\DeleteFormPopUp.resx">
+      <DependentUpon>DeleteFormPopUp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserInterfaceAdmin\PressedOnShiftPopup.resx">
       <DependentUpon>PressedOnShiftPopup.cs</DependentUpon>
     </EmbeddedResource>

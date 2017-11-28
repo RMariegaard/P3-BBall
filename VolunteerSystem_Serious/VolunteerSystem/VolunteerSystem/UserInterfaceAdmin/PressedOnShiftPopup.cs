@@ -71,8 +71,14 @@ namespace VolunteerSystem.UserInterfaceAdmin
             editShiftButton.Location = new Point(cancelButton.Width + 5, _pressedOnShiftPopupMainPanel.Size.Height - editShiftButton.Size.Height - 5);
             editShiftButton.Click += EditShift_Clicked;
 
-
-
+            Button deleteButton = new Button
+            {
+                Text = "Delete Shift",
+                AutoSize = true,
+                
+            };
+            deleteButton.Location = new Point(_pressedOnShiftPopupMainPanel.Size.Width - deleteButton.Size.Width - 5, _pressedOnShiftPopupMainPanel.Size.Height - deleteButton.Size.Height - 5);
+            deleteButton.Click += DeleteButton_clicked;
 
             Label workerLabel = new Label
             {
@@ -129,7 +135,23 @@ namespace VolunteerSystem.UserInterfaceAdmin
             this.Controls.Add(requestLabel);
             this.Controls.Add(shiftInfo);
             this.Controls.Add(editShiftButton);
+            this.Controls.Add(deleteButton);
             Controls.Add(_pressedOnShiftPopupMainPanel);
+        }
+
+        private void DeleteButton_clicked(object sender, EventArgs e)
+        {
+            DeleteFormPopUp deletePopup = new DeleteFormPopUp();
+            deletePopup.ShowDialog();
+            if(deletePopup.DialogResult == DialogResult.OK)
+            {
+                this.Close();
+                volunteerMainUI.GetScheduleController().DeleteShift(shift.ID);
+                volunteerMainUI.UpdateSchedule();
+   
+            }
+
+
         }
 
         private void EditShift_Clicked(object sender, EventArgs e)
@@ -145,6 +167,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             if (editShiftUI.DialogResult == DialogResult.OK)
             {
                 volunteerMainUI.GetScheduleController().EditShift(shift.ID, editShiftUI.Result);
+                this.Close();
             }
             if (task != shift.Task || time != shift.StartTime.Day)
             {

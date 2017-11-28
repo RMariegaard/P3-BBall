@@ -57,6 +57,12 @@ namespace VolunteerSystem
             oldShift.EditShift(newShift);
 
         }
+        public void DeleteShift(int shiftID)
+        {
+            _schedule.Shifts.Remove(_schedule.Shifts.Find(x => x.ID == shiftID));
+        }
+
+
 
         private string[] FindShiftChanges(Shift oldShift, Shift newShift)
         {
