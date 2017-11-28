@@ -134,11 +134,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             {
                 Location = location,
                 Text = request.Worker.Name,
-
+                AutoSize = false,
                 Tag = worker
             };
             volunteerNameLabel.Click += VolunteerLabel_clicked;
-            volunteerNameLabel.AutoSize = true;
             volunteerNameLabel.LinkColor = Color.Black;
             volunteerNameLabel.LinkBehavior = LinkBehavior.HoverUnderline;
             return volunteerNameLabel;
