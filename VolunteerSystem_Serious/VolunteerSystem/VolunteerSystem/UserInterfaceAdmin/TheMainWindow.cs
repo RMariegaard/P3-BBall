@@ -159,7 +159,9 @@ namespace VolunteerSystem.UserInterface
 
         public void DisplayHomepage()
         {
-            _homepage.GetHomepagePanel(_mainPanel).BringToFront();
+           
+            _volunteerOverview.GetPanel(_mainPanel.Size).Visible = false;
+            //_homepage.GetHomepagePanel(_mainPanel).BringToFront();
             //_homepage.GetHomepagePanel(_mainPanel).Visible = true;
             //_volunteerOverview.GetPanel(_mainPanel.Size).Visible = false;
         }
@@ -178,6 +180,7 @@ namespace VolunteerSystem.UserInterface
             //_volunteerOverview.GetPanel(_mainPanel.Size).Visible = true;
             //_homepage.GetHomepagePanel(_mainPanel).Visible = false;
             _volunteerOverview.GetPanel(_mainPanel.Size).BringToFront();
+            _volunteerOverview.GetPanel(_mainPanel.Size).Visible = true;
 
         }
         
