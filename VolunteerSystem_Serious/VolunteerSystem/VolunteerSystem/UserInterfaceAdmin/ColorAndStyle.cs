@@ -31,7 +31,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
         public static Color PrimaryColor()
         {
-            return Color.Blue;
+            return Color.MediumAquamarine;
         }
 
         public static Color SecondaryColor()

@@ -62,12 +62,12 @@ namespace VolunteerSystem.UserInterface
             {
                 Location = new Point(0, 0),
                 Text = "Homepage",
-                Size = new Size(_menuButtonPanel.Size.Width/3, _menuButtonPanel.Size.Height),
+                Size = new Size(_menuButtonPanel.Size.Width / 3, _menuButtonPanel.Size.Height),
                 FlatStyle = FlatStyle.Flat
             };
             _homepageButton.Click += _homepageButton_Clicked;
-            _homepageButton.Paint += ColorAndStyle.OnPaintDrawRect;
-            _homepageButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _homepageButton.Size, 10));
+            //_homepageButton.Paint += ColorAndStyle.OnPaintDrawRect;
+            //_homepageButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _homepageButton.Size, 10));
             _volunteerOverviewButton = new Button()
             {
                 Location = new Point(_homepageButton.Location.X + _homepageButton.Size.Width, 0),
@@ -76,8 +76,8 @@ namespace VolunteerSystem.UserInterface
                 FlatStyle = FlatStyle.Flat
             };
             _volunteerOverviewButton.Click += _volunteerOverviewButton_Clicked;
-            _volunteerOverviewButton.Paint += ColorAndStyle.OnPaintDrawRect;
-            _volunteerOverviewButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _volunteerOverviewButton.Size, 10));
+            //_volunteerOverviewButton.Paint += ColorAndStyle.OnPaintDrawRect;
+            //_volunteerOverviewButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _volunteerOverviewButton.Size, 10));
             _settingsButton = new Button()
             {
                 Location = new Point(_volunteerOverviewButton.Location.X + _volunteerOverviewButton.Size.Width, 0),
@@ -86,8 +86,8 @@ namespace VolunteerSystem.UserInterface
                 FlatStyle = FlatStyle.Flat
             };
             _settingsButton.Click += _settingsButton_Clicked;
-            _settingsButton.Paint += ColorAndStyle.OnPaintDrawRect;
-            _settingsButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _settingsButton.Size, 10));
+            //_settingsButton.Paint += ColorAndStyle.OnPaintDrawRect;
+            //_settingsButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _settingsButton.Size, 10));
 
             _menuButtonPanel.Controls.Add(_homepageButton);
             _menuButtonPanel.Controls.Add(_volunteerOverviewButton);
