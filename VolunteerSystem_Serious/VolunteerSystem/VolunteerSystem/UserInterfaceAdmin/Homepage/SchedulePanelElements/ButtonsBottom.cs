@@ -19,7 +19,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             _mainWindowUI = mainWindowUI;
             _buttonsatBottomMainPanel = new Panel
             {
-                Name = "_buttonsatBottomMainPanel"
+                Name = "_buttonsatBottomMainPanel",
+                Anchor = AnchorStyles.Left | AnchorStyles.Bottom
             };
             _homepage = homepage;
         }

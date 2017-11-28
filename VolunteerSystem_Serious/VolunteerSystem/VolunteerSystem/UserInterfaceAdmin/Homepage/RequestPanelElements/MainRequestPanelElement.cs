@@ -21,7 +21,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             _mainRequestPanel = new Panel
             {
                 Name = "_mainRequestPanel",
-                AutoScroll = true
+                AutoScroll = true,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom
             };
             titleTopLabel = new Label();
         }
@@ -95,6 +96,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             theRequestsPanel.Size = new Size(_mainRequestPanel.Width, _mainRequestPanel.Height - theRequestsPanel.Location.Y);
             theRequestsPanel.AutoScroll = true;
             theRequestsPanel.BorderStyle = BorderStyle.FixedSingle;
+            theRequestsPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
             int i = 0;
             foreach (Request request in _volunteerMainUI.GetScheduleController().GetAllRequests())

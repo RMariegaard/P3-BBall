@@ -22,39 +22,47 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             _theSchedulemainPanel = new Panel
             {
                 Name = "_theSchedulemainPanel",
-                BorderStyle = BorderStyle.FixedSingle
+                BorderStyle = BorderStyle.FixedSingle,
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
+                AutoScroll = true
             };
             colorAndShiftPanel = new Panel
             {
-                Name = "colorAndShiftPanel"
+                Name = "colorAndShiftPanel",
+                Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom,
+                AutoScroll = true
             };
             this.day = day.Text;
-            hourHeight = 25;
-            
+
+            hourHeight = 25;//schedulePanel.Size.Height / 25;
+
             //Add Numbers to Panel. this needs only to be done once
             for (int i = 1; i <= 25; i++)
             {
                 Label tempLabel = new Label
                 {
                     Location = new Point(0, (i * hourHeight)),
-                    Text = i > 10 ? $"{i-1}.00" : $"0{i-1}.00",
+                    Text = i > 10 ? $"{i - 1}.00" : $"0{i - 1}.00",
                     AutoSize = true
                 };
                 colorAndShiftPanel.Controls.Add(tempLabel);
             }
+
         }
 
         public Panel GetPanel(Panel schedulePanel)
         {
             _theSchedulemainPanel.Size = schedulePanel.Size;
             _theSchedulemainPanel.Location = new Point(0, 0);
-            _theSchedulemainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             _theSchedulemainPanel.AutoScroll = true;
+            _theSchedulemainPanel.Dock = DockStyle.Fill;
+            //_theSchedulemainPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             
             colorAndShiftPanel.Location = new Point(0, 0);
             colorAndShiftPanel.Size = new Size(schedulePanel.Size.Width-20, 25 * hourHeight);
             colorAndShiftPanel.Paint += _alternatingColors_Paint;
-                
+            colorAndShiftPanel.Dock = DockStyle.Fill;    
+
             //Adds Tasks and shifts
             List<Shift> AllShifts = _mainWindowUI.GetScheduleController().GetAllShifts();
             List<string> Tasks = _mainWindowUI.GetScheduleController().GetAllTasks();

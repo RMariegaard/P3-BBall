@@ -43,7 +43,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             _mainHomepagePanel.Size = forRefrence.Size;
             _mainHomepagePanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             _mainHomepagePanel.Controls.Clear();
-            
+
             //Updates the panels
             UpdateAllPanels();
 
@@ -52,11 +52,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
         public void UpdateAllPanels()
         {
-            _mainHomepagePanel.SuspendLayout();
+            //_mainHomepagePanel.SuspendLayout();
             UpdateSchedulePanel();
             UpdatePendingRequestPanel();
             UpdateVolunteerPanel();
-            _mainHomepagePanel.PerformLayout();
+            //_mainHomepagePanel.PerformLayout();
         }
 
         public void UpdateSchedulePanel()
