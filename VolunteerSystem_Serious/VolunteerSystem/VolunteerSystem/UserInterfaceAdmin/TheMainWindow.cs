@@ -21,7 +21,7 @@ namespace VolunteerSystem.UserInterface
         Button _settingsButton;
 
         Size fullClientWindowSize;
-
+        
         private UserInterfaceAdmin.Homepage.Homepage _homepage;
         private UserInterfaceAdmin.VolunteerOverview.VolunteerOverview _volunteerOverview;
 
@@ -35,6 +35,7 @@ namespace VolunteerSystem.UserInterface
             InitializeComponent();
             Width = 1600;
             Height = 800;
+            this.MinimumSize = new Size(1200 ,800);
 
             WorkerController = workerController;
             ScheduleController = scheduleController;
@@ -92,7 +93,7 @@ namespace VolunteerSystem.UserInterface
             _menuButtonPanel.Controls.Add(_homepageButton);
             _menuButtonPanel.Controls.Add(_volunteerOverviewButton);
             _menuButtonPanel.Controls.Add(_settingsButton);
-            
+
             //Main panel - schedule
             _mainPanel = new Panel
             {
