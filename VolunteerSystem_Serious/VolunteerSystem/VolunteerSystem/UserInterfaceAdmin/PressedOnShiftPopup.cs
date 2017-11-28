@@ -138,7 +138,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             {
 
                 Location = new Point(workersList.Location.X + workersList.Width + 5, workersList.Location.Y + workersList.Height - 60 - 5),
-                Image = ResizeImage(System.Drawing.Image.FromFile(Directory.GetCurrentDirectory() + "\\addVolunteerImage.PNG"), 25, 25),
+                Image = ResizeImage(System.Drawing.Image.FromFile(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\addVolunteerImage.PNG"), 25, 25),
                 Size = new Size(35, 35),
             };
 
