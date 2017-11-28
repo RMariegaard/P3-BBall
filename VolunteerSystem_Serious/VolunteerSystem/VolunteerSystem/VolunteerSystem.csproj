@@ -112,6 +112,7 @@
     <Compile Include="UserInterfaceAdmin\TheMainWindow.Designer.cs">
       <DependentUpon>TheMainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterfaceAdmin\VolunteerOverview\OverviewPanelStuff\TheOverviewPanel.cs" />
     <Compile Include="UserInterfaceAdmin\VolunteerOverview\VolunteerOverview.cs" />
     <Compile Include="UserInterfaceAdmin\VolunteerOverview\VolunteersSeach\SeachAndVolunteers.cs" />
   </ItemGroup>

@@ -43,7 +43,7 @@ namespace VolunteerSystem.UserInterface
 
             int buttonPanelHeight = 50;
 
-            _volunteerOverview = new UserInterfaceAdmin.VolunteerOverview.VolunteerOverview(this, workerController);
+            _volunteerOverview = new UserInterfaceAdmin.VolunteerOverview.VolunteerOverview(this, workerController, ScheduleController);
             _homepage = new UserInterfaceAdmin.Homepage.Homepage(this);
 
             shownPage = new ShownPage();

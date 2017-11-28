@@ -98,9 +98,9 @@ namespace VolunteerSystem
             throw new NotImplementedException();
         }
 
-        public void RemoveWorkerFromShift()
+        public void RemoveWorkerFromShift(Worker worker, Shift shift)
         {
-            throw new NotImplementedException();
+            shift.RemoveWorker(worker);
         }
 
         public void ViewShiftInformation()

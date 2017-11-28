@@ -64,14 +64,20 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 
             for (int i = 0; i < workersList.Count; i++)
             {
-                Panel panel = new Panel();
-                panel.Location = new Point(namesPanel.Location.X, namesPanel.Location.Y + (i * 32));
-                panel.Size = new Size(namesPanel.Width - 10, 30);
-                panel.BorderStyle = BorderStyle.FixedSingle;
-                if (i % 2 == 0)
+                Panel panel = new Panel
+                {
+                    Location = new Point(namesPanel.Location.X, namesPanel.Location.Y + (i * 32)),
+                    Size = new Size(namesPanel.Width - 10, 30),
+                    BorderStyle = BorderStyle.FixedSingle,
+                    Tag = workersList[i]
+                };
+                if (_volunteerOverview.SelectedWorker == workersList[i])
+                    panel.BackColor = ColorAndStyle.PrimaryColor();
+                else if (i % 2 == 0)
                     panel.BackColor = ColorAndStyle.SmallAlternatingColorsONE();
                 else
                     panel.BackColor = ColorAndStyle.SmallAlternatingColorsTWO();
+                panel.Click += Panel_Click;
 
                 Label label = new Label();
                 label.Location = new Point(2, 2);
@@ -79,11 +85,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
                 label.AutoSize = true;
 
                 panel.Controls.Add(label);
-
                 namesPanel.Controls.Add(panel);
             }
             
             return namesPanel;
+        }
+
+        private void Panel_Click(object sender, EventArgs e)
+        {
+            Worker worker = (Worker)((Control)sender).Tag;
+            if (_volunteerOverview.SelectedWorker != (Worker)((Control)sender).Tag)
+            {
+                _volunteerOverview.SelectedWorker = (Worker)((Control)sender).Tag;
+                UpdateNamesPanel();
+            }
+
         }
     }
 }
