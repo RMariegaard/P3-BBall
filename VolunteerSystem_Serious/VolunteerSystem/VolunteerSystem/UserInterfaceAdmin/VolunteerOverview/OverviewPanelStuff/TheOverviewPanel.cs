@@ -143,6 +143,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                     };
 
                     Shift shift = workerShifts[i];
+
+                    Panel colorPanel = new Panel()
+                    {
+                        Location = new Point(0, 0),
+                        Size = new Size(panel.Size.Width, 10),
+                        BorderStyle = BorderStyle.FixedSingle
+                    };
+                    if (shift.Requests.Count() + shift.Workers.Count() < shift.VolunteersNeeded)
+                        colorPanel.BackColor = ColorAndStyle.ShiftColorCompletelyFree();
+                    else if ((shift.Workers.Count() < shift.VolunteersNeeded) && (shift.Workers.Count() + shift.Requests.Count() > shift.VolunteersNeeded))
+                        colorPanel.BackColor = ColorAndStyle.ShiftColorEnoughRequests();
+                    else if (shift.Workers.Count() >= shift.VolunteersNeeded)
+                        colorPanel.BackColor = ColorAndStyle.ShiftColorWhenFull();
+                    panel.Controls.Add(colorPanel);
+
                     string informationString =
                         $"{shift.StartTime.DayOfWeek}\n" +
                         $"{shift.Task}\n" +
@@ -151,7 +166,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                     Label label = new Label
                     {
                         Text = informationString,
-                        Location = new Point(5, 5),
+                        Location = new Point(5, 15),
                         MaximumSize = new Size(panel.Size.Width - 10, 0),
                         AutoSize = true
                     };
@@ -211,15 +226,29 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                     };
 
                     Shift shift = requestedShifts[i];
+
+                    Panel colorPanel = new Panel()
+                    {
+                        Location = new Point(0, 0),
+                        Size = new Size(panel.Size.Width, 10),
+                        BorderStyle = BorderStyle.FixedSingle
+                    };
+                    if (shift.Requests.Count() + shift.Workers.Count() < shift.VolunteersNeeded)
+                        colorPanel.BackColor = ColorAndStyle.ShiftColorCompletelyFree();
+                    else if ((shift.Workers.Count() < shift.VolunteersNeeded) && (shift.Workers.Count() + shift.Requests.Count() > shift.VolunteersNeeded))
+                        colorPanel.BackColor = ColorAndStyle.ShiftColorEnoughRequests();
+                    else if (shift.Workers.Count() >= shift.VolunteersNeeded)
+                        colorPanel.BackColor = ColorAndStyle.ShiftColorWhenFull();
+                    panel.Controls.Add(colorPanel);
+
                     string informationString =
                         $"{shift.StartTime.DayOfWeek}\n" +
                         $"{shift.Task}\n" +
                         $"{shift.StartTime.ToShortTimeString()} - {shift.EndTime.ToShortTimeString()}";
-
                     Label label = new Label
                     {
                         Text = informationString,
-                        Location = new Point(5, 5),
+                        Location = new Point(5, 15),
                         MaximumSize = new Size(panel.Size.Width - 10, 0),
                         AutoSize = true
                     };
