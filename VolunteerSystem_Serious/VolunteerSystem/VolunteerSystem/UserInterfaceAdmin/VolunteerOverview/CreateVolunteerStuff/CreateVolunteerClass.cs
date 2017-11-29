@@ -18,6 +18,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
         List<LabelAndTextBox> labelAndTextBoxList;
         CheckBox externalCheckBox;
         VolunteerOverview volunteerOverview;
+        Panel thePanel;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,10 +33,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
         {
             return getThePanels(size);
         }
-
+        Panel panel;
         private Panel getThePanels(Size size)
         {
-            Panel panel = new Panel()
+            panel = new Panel()
             {
                 Location = new Point(0, 0),
                 BorderStyle = BorderStyle.FixedSingle,
@@ -56,25 +57,68 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
                 Location = new Point(externalWorkerLabel.Location.X + externalWorkerLabel.Width + 5, 5),
                 AutoSize = true,
             };
+<<<<<<< HEAD
             
             externalCheckBox.Click += ExternalCheckBox_Click;
+=======
+            externalCheckBox.CheckedChanged += ExternalCheckBox_CheckedChanged;
+>>>>>>> b95d87996436db0f800c64ab2ad2390eac2ae957
             panel.Controls.Add(externalCheckBox);
+
+            //Textbox and labels
+            updateThePanel();
+
+            //Button
+            Button createButton = new Button
+            {
+                Size = new Size(panel.Size.Width-10, 40),
+                Location = new Point(5, panel.Height - 45),
+                Text = "Create Volunteer"
+            };
+            createButton.Click += CreateButton_Click;
+            panel.Controls.Add(createButton);
+
+            return panel;
+        }
+        
+        private void updateThePanel()
+        {
+            panel.Controls.Remove(thePanel);
+            thePanel = new Panel()
+            {
+                Location = new Point(0, externalCheckBox.Location.Y + externalCheckBox.Size.Height + 5),
+                Size = new Size(panel.Width, panel.Height - externalCheckBox.Location.Y - externalCheckBox.Height - 50),
+            };
+            thePanel.Controls.Add(AddTextBoxAndLabels(thePanel.Size));
+
+            panel.Controls.Add(thePanel);
+
+        }
+
+        private Panel AddTextBoxAndLabels(Size size)
+        {
+            Panel labelTextBoxPanel = new Panel()
+            {
+                Size = size,
+                Location = new Point(0, 0)
+            };
 
             //The labels and textboxes
             labelAndTextBoxList = new List<LabelAndTextBox>();
             int labelandTextBoxHeight = 40;
             LabelAndTextBox nameLabelandTextBox = new LabelAndTextBox("Name");
-            panel.Controls.Add(nameLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 1) + 2), new Point(2, 2), new Point((panel.Width / 10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
+            labelTextBoxPanel.Controls.Add(nameLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 0) + 2), new Point(2, 2), new Point((labelTextBoxPanel.Width / 10) * 3, 2), new Size(labelTextBoxPanel.Width, labelandTextBoxHeight), true, externalCheckBox.Checked));
             labelAndTextBoxList.Add(nameLabelandTextBox);
 
             LabelAndTextBox emailLabelandTextBox = new LabelAndTextBox("Email");
-            panel.Controls.Add(emailLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 2) + 2), new Point(2, 2), new Point((panel.Width / 10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
+            labelTextBoxPanel.Controls.Add(emailLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 1) + 2), new Point(2, 2), new Point((labelTextBoxPanel.Width / 10) * 3, 2), new Size(labelTextBoxPanel.Width, labelandTextBoxHeight), true, externalCheckBox.Checked));
             labelAndTextBoxList.Add(emailLabelandTextBox);
 
             BindingSource teamBinding = new BindingSource { DataSource = externalCheckBox };
 
 
             LabelAndTextBox teamLabelandTextBox = new LabelAndTextBox("Team");
+<<<<<<< HEAD
             var binding = new Binding("Enabled", teamBinding, "Checked");
             binding.Format += delegate (object s, ConvertEventArgs e)
             {
@@ -126,8 +170,29 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
             };
             createButton.Click += CreateButton_Click;
             panel.Controls.Add(createButton);
+=======
+            labelTextBoxPanel.Controls.Add(teamLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 2) + 2), new Point(2, 2), new Point((labelTextBoxPanel.Width / 10) * 3, 2), new Size(labelTextBoxPanel.Width, labelandTextBoxHeight), false, externalCheckBox.Checked));
+            labelAndTextBoxList.Add(teamLabelandTextBox);
+            
+            LabelAndTextBox ageLabelandTextBox = new LabelAndTextBox("Age");
+            labelTextBoxPanel.Controls.Add(ageLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 3)+2), new Point(2, 2), new Point((labelTextBoxPanel.Width / 10) * 3, 2), new Size(labelTextBoxPanel.Width, labelandTextBoxHeight), false, externalCheckBox.Checked));
+            labelAndTextBoxList.Add(ageLabelandTextBox);
 
-            return panel;
+            LabelAndTextBox phoneLabelandTextBox = new LabelAndTextBox("Phone Number");
+            labelTextBoxPanel.Controls.Add(phoneLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 4)+2), new Point(2, 2), new Point((labelTextBoxPanel.Width / 10) * 3, 2), new Size(labelTextBoxPanel.Width, labelandTextBoxHeight), false, externalCheckBox.Checked));
+            labelAndTextBoxList.Add(phoneLabelandTextBox);
+            
+            LabelAndTextBox passwordLabelandTextBox = new LabelAndTextBox("Password");
+            labelTextBoxPanel.Controls.Add(passwordLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 5)+2), new Point(2, 2), new Point((labelTextBoxPanel.Width /10) * 3, 2), new Size(labelTextBoxPanel.Width, labelandTextBoxHeight), false, externalCheckBox.Checked));
+            labelAndTextBoxList.Add(passwordLabelandTextBox);
+            
+            return labelTextBoxPanel;
+        }
+>>>>>>> b95d87996436db0f800c64ab2ad2390eac2ae957
+
+        private void ExternalCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            updateThePanel();
         }
 
         private void ExternalCheckBox_Click(object sender, EventArgs e)
@@ -179,7 +244,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
             this.labelText = labelText;
         }
 
-        public Panel GetLabelAndTextPanel(Point panelLocation, Point labelLocation, Point TextBoxLocation, Size sizeTotal)
+        public Panel GetLabelAndTextPanel(Point panelLocation, Point labelLocation, Point TextBoxLocation, Size sizeTotal, bool alsoExternalWorker, bool checkState)
         {
             Panel labelandTextBoxPanel = new Panel()
             {
@@ -198,7 +263,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
             {
                 Location = TextBoxLocation,
                 Size = new Size(sizeTotal.Width - TextBoxLocation.X - 10, sizeTotal.Height),
+                Enabled = true,
             };
+            if (!alsoExternalWorker && checkState)
+                TextBox.Enabled = false;
 
             labelandTextBoxPanel.Controls.Add(Label);
             labelandTextBoxPanel.Controls.Add(TextBox);
