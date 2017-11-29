@@ -53,6 +53,7 @@
             this.CancelAddWorker.TabIndex = 3;
             this.CancelAddWorker.Text = "Cancel";
             this.CancelAddWorker.UseVisualStyleBackColor = true;
+            this.CancelAddWorker.Click += new System.EventHandler(this.CancelAddWorker_Click);
             // 
             // label1
             // 

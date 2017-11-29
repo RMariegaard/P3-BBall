@@ -58,5 +58,10 @@ namespace VolunteerSystem.UserInterfaceAdmin
             volunteerMainUI.GetScheduleController().AddWorkerToShift(shift, workersList.Where(x => x.Name == (string)listOfWorkersBox.SelectedItem).FirstOrDefault());
             this.Close();
         }
+
+        private void CancelAddWorker_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
