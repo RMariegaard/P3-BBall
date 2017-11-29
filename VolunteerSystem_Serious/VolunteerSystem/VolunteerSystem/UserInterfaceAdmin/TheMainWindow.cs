@@ -168,6 +168,7 @@ namespace VolunteerSystem.UserInterface
         {
            
             _volunteerOverview.GetPanel(_mainPanel.Size).Visible = false;
+            _settings.GetPanel(_mainPanel.Size).Visible = false;
             //_homepage.GetHomepagePanel(_mainPanel).BringToFront();
             //_homepage.GetHomepagePanel(_mainPanel).Visible = true;
             //_volunteerOverview.GetPanel(_mainPanel.Size).Visible = false;
@@ -183,6 +184,7 @@ namespace VolunteerSystem.UserInterface
         public void DisplaySettings()
         {
             _settings.GetPanel(_mainPanel.Size).BringToFront();
+            _settings.GetPanel(_mainPanel.Size).Visible = true;
         }
 
         public void DisplayVolunteerOverview()
