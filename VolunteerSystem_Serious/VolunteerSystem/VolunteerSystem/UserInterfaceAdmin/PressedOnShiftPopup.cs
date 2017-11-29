@@ -141,7 +141,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
                 Image = ResizeImage(System.Drawing.Image.FromFile(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\addVolunteerImage.PNG"), 25, 25),
                 Size = new Size(35, 35),
             };
-            addWorkerButton.Click += _addWorkerButton_Clicked;
+
 
 
             _pressedOnShiftPopupMainPanel.Controls.Add(workerLabel);
@@ -155,11 +155,6 @@ namespace VolunteerSystem.UserInterfaceAdmin
             this.Controls.Add(editShiftButton);
             this.Controls.Add(deleteButton);
             Controls.Add(_pressedOnShiftPopupMainPanel);
-        }
-
-        private void _addWorkerButton_Clicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         private void DeleteButton_clicked(object sender, EventArgs e)

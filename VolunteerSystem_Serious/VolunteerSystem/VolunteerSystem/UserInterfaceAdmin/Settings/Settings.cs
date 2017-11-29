@@ -37,9 +37,23 @@ namespace VolunteerSystem.UserInterfaceAdmin.Settings
         public Panel GetPanel(Size size)
         {
             this._settingsMainPanel.Size = size;
+            TitleLabel();
             return this._settingsMainPanel;
         }
 
-        
+        public void TitleLabel()
+        {
+            _settingsMainPanel.Controls.Remove(_titleLabel);
+            _titleLabel = new Label()
+            {
+                Location = new Point(5, 5),
+                Text = "Settings",
+                AutoSize = true,
+                Size = new Size(200, 200)
+            
+
+            };
+            _settingsMainPanel.Controls.Add(_titleLabel);
+        }
     }
 }
