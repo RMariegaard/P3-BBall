@@ -98,10 +98,12 @@ namespace VolunteerSystem
             return changes.ToArray();
         }
 
-        public void AddWorkerToShift()
+        public void AddWorkerToShift(Shift shift, Worker worker)
         {
-            throw new NotImplementedException();
+            shift.AddWorker(worker);
+
         }
+
 
         public void RemoveWorkerFromShift(Worker worker, Shift shift)
         {

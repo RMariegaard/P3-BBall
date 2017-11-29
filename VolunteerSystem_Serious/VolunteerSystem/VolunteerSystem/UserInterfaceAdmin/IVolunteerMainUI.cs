@@ -16,6 +16,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
         void HomepageChangeDay(string day);
         void DisplayPopup(string header, string body);
         ScheduleController GetScheduleController();
+        WorkerController GetWorkController();
         void DisplayHomepage();
         void DisplayVolunteerOverview();
         void DisplayVolunteerOnHomepage(Volunteer volunteer);

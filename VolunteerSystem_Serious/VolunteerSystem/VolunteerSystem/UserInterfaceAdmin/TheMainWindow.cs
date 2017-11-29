@@ -273,11 +273,7 @@ namespace VolunteerSystem.UserInterface
             }
         }
 
-        public ScheduleController GetScheduleController()
-        {
-            return ScheduleController;
-        }
-
+ 
         public void DisplayPressedOnShift(Shift shift)
         {
             UserInterfaceAdmin.PressedOnShiftPopup pressedOnShiftPopup = new UserInterfaceAdmin.PressedOnShiftPopup(shift, this);
@@ -310,6 +306,17 @@ namespace VolunteerSystem.UserInterface
         public void HomepageChangeDay(string day)
         {
             _homepage.ChangeButtonSelected(day);
+        }
+
+        public ScheduleController GetScheduleController()
+        {
+            return ScheduleController;
+        }
+
+
+        public WorkerController GetWorkController()
+        {
+            return WorkerController;
         }
     }
 }

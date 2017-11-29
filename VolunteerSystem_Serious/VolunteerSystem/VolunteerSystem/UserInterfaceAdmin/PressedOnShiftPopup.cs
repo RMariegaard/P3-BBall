@@ -99,15 +99,19 @@ namespace VolunteerSystem.UserInterfaceAdmin
                 Location = new Point(5, workerLabel.Location.Y + workerLabel.GetPreferredSize(Size.Empty).Height),
                 BorderStyle = BorderStyle.FixedSingle
             };
-            workersList.BeginUpdate();
-            foreach (var w in shift.Workers)
-            {
-                if( w is Volunteer)
-                {
-                    workersList.Items.Add($"{((Volunteer)w).Assosiation} - {w.Name} - {w.Email}");
-                }
+          
+            
 
-            }
+            workersList.BeginUpdate();
+            workersList.DataSource = shift.Workers;
+            //foreach (var w in shift.Workers)
+            //{
+            //    if( w is Volunteer)
+            //    {
+            //        workersList.Items.Add($"{((Volunteer)w).Assosiation} - {w.Name} - {w.Email}");
+            //    }
+                
+            //}
             workersList.EndUpdate();
             workersList.AutoSize = true;
 
@@ -159,7 +163,8 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
         private void _addWorkerButton_Clicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            AddWorkerManuallyButtonPopUp workerForm = new AddWorkerManuallyButtonPopUp(volunteerMainUI, shift);
+            workerForm.Show();
         }
 
         private void DeleteButton_clicked(object sender, EventArgs e)

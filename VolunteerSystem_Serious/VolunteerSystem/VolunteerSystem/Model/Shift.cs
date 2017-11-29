@@ -107,8 +107,13 @@ namespace VolunteerSystem
         public void RemoveWorker(Worker worker)
         {
             _workers.Remove(worker);
+            PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
-
+        public void AddWorker(Worker worker)
+        {
+            _workers.Add(worker);
+            PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
+        }
         public void CreateRequest(Volunteer volunteer)
         {
             _requests.Add(new Request(volunteer));
@@ -125,7 +130,7 @@ namespace VolunteerSystem
         }
         public void ApproveRequest(Request request)
         {
-            this.Workers.Add(request.Worker);
+            _workers.Add(request.Worker);
             RemoveRequest(request);
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
