@@ -118,12 +118,15 @@
     <Compile Include="UserInterfaceAdmin\PressedOnShiftPopup.Designer.cs">
       <DependentUpon>PressedOnShiftPopup.cs</DependentUpon>
     </Compile>
+<Compile Include="UserInterfaceAdmin\Settings\Settings.cs" />
+
     <Compile Include="UserInterfaceAdmin\TheMainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserInterfaceAdmin\TheMainWindow.Designer.cs">
       <DependentUpon>TheMainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterfaceAdmin\VolunteerOverview\CreateVolunteerStuff\CreateVolunteerClass.cs" />
     <Compile Include="UserInterfaceAdmin\VolunteerOverview\OverviewPanelStuff\TheOverviewPanel.cs" />
     <Compile Include="UserInterfaceAdmin\VolunteerOverview\VolunteerOverview.cs" />
     <Compile Include="UserInterfaceAdmin\VolunteerOverview\VolunteersSeach\SeachAndVolunteers.cs" />
