@@ -13,6 +13,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
     {
         void UpdateSchedule();
         void UpdateAllHomepage();
+        void HomepageChangeDay(string day);
         void DisplayPopup(string header, string body);
         ScheduleController GetScheduleController();
         void DisplayHomepage();

@@ -194,6 +194,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             //Control temp = _volunteerMainUI.FindSpecificControl("Shift " + shift.ID.ToString());
             //if(temp != null)
             //    _volunteerMainUI.ScrollToControlOnSchedule(temp);
+            _volunteerMainUI.HomepageChangeDay(shift.StartTime.DayOfWeek.ToString() + " " + shift.StartTime.ToShortDateString());
             _volunteerMainUI.DisplayPressedOnShift(shift);
         }
 

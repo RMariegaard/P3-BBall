@@ -47,7 +47,11 @@ namespace VolunteerSystem.UserInterface
             _volunteerOverview = new UserInterfaceAdmin.VolunteerOverview.VolunteerOverview(this, workerController, ScheduleController);
             _homepage = new UserInterfaceAdmin.Homepage.Homepage(this);
 
+
             shownPage = new ShownPage();
+
+            //Start on homepage
+            shownPage = ShownPage.Homepage;
 
             //Button panel
             _menuButtonPanel = new Panel
@@ -64,7 +68,8 @@ namespace VolunteerSystem.UserInterface
                 Location = new Point(0, 0),
                 Text = "Homepage",
                 Size = new Size(_menuButtonPanel.Size.Width / 3, _menuButtonPanel.Size.Height),
-                FlatStyle = FlatStyle.Flat
+                FlatStyle = FlatStyle.Flat,
+                BackColor = ColorAndStyle.PrimaryColor()
             };
             _homepageButton.Click += _homepageButton_Clicked;
             //_homepageButton.Paint += ColorAndStyle.OnPaintDrawRect;
@@ -103,8 +108,7 @@ namespace VolunteerSystem.UserInterface
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
             };
 
-            //Start on homepage
-            shownPage = ShownPage.Homepage;
+
             //UpdateUI();
 
             //Adds to the window
@@ -302,6 +306,10 @@ namespace VolunteerSystem.UserInterface
         {
             //_homepage.selectedDay = ;
             _homepage.schedulePanel.ScrollControlIntoView(control);
+        }
+        public void HomepageChangeDay(string day)
+        {
+            _homepage.ChangeButtonSelected(day);
         }
     }
 }

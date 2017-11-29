@@ -16,7 +16,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
         public Panel pendingRequestPanel;
         public Panel VolunteerPanel;
 
-        public List<String> days;
+        public List<string> days;
         public Button selectedDay;
         
         public Volunteer ShownVolunteer;
@@ -147,6 +147,18 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             schedulePanel.Controls.Add(TheSchedule);
             schedulePanel.Controls.Add(ButtonsBottumPanel);
         }
+
+        public void ChangeButtonSelected(string day)
+        {
+            if(day != selectedDay.Name)
+            {
+                Control button = schedulePanel.Controls.Find(day, true).FirstOrDefault();
+
+                ((Button)button).PerformClick();
+            }
+
+        }
+
 
 
         public void UpdateShiftPanel(Shift shift)

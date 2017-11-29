@@ -27,7 +27,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             InitializeComponent();
             Width = 400;
             Height = 400;
-
+            this.StartPosition = FormStartPosition.CenterParent;
             this.volunteerMainUI = volunteerMainUI;
             this.shift = shift;
             fullClientSize = RectangleToScreen(this.ClientRectangle).Size;
