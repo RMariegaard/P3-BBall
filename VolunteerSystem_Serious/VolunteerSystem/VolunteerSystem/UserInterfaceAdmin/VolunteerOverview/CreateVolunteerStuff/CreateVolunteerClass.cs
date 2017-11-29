@@ -56,15 +56,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
                 Location = new Point(externalWorkerLabel.Location.X + externalWorkerLabel.Width + 5, 5),
                 AutoSize = true,
             };
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-            
+
             externalCheckBox.Click += ExternalCheckBox_Click;
-=======
-            externalCheckBox.CheckedChanged += ExternalCheckBox_CheckedChanged;
->>>>>>> b95d87996436db0f800c64ab2ad2390eac2ae957
->>>>>>> 9f8889ab21c30a622a9a0e4970f33aac96358b2c
             panel.Controls.Add(externalCheckBox);
 
             //The labels and textboxes
@@ -79,23 +72,16 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
             labelAndTextBoxList.Add(emailLabelandTextBox);
 
             BindingSource teamBinding = new BindingSource { DataSource = externalCheckBox };
-
-
+            
             LabelAndTextBox teamLabelandTextBox = new LabelAndTextBox("Team");
-<<<<<<< HEAD
-            panel.Controls.Add(teamLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 3) + 2), new Point(2, 2), new Point((panel.Width / 10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
-=======
-<<<<<<< HEAD
             var binding = new Binding("Enabled", teamBinding, "Checked");
             binding.Format += delegate (object s, ConvertEventArgs e)
             {
                 e.Value = !(bool)e.Value;
             };
-            binding.DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
             panel.Controls.Add(teamLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 3) + 2), new Point(2, 2), new Point((panel.Width / 10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
             teamLabelandTextBox.TextBox.DataBindings.Add(binding);
             labelAndTextBoxList.Add(teamLabelandTextBox);
-            
             
             LabelAndTextBox ageLabelandTextBox = new LabelAndTextBox("Age");
             var ageBinding = new Binding("Enabled", teamBinding, "Checked");
@@ -127,41 +113,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
             passwordLabelandTextBox.TextBox.DataBindings.Add(passwordBinding);
             labelAndTextBoxList.Add(passwordLabelandTextBox);
             
-
-            //Button
-            Button createButton = new Button
-            {
-                Size = new Size(panel.Size.Width-10, 40),
-                Location = new Point(5, panel.Height - 45),
-                Text = "Create Volunteer"
-            };
-            createButton.Click += CreateButton_Click;
-            panel.Controls.Add(createButton);
-=======
-            labelTextBoxPanel.Controls.Add(teamLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 2) + 2), new Point(2, 2), new Point((labelTextBoxPanel.Width / 10) * 3, 2), new Size(labelTextBoxPanel.Width, labelandTextBoxHeight), false, externalCheckBox.Checked));
->>>>>>> 9f8889ab21c30a622a9a0e4970f33aac96358b2c
-            labelAndTextBoxList.Add(teamLabelandTextBox);
-            
-            /*
-            LabelAndTextBox ageLabelandTextBox = new LabelAndTextBox("Age");
-            panel.Controls.Add(ageLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 4)+2), new Point(2, 2), new Point((panel.Width / 10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
-            labelAndTextBoxList.Add(ageLabelandTextBox);
-
-            LabelAndTextBox phoneLabelandTextBox = new LabelAndTextBox("Phone Number");
-            panel.Controls.Add(phoneLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 5)+2), new Point(2, 2), new Point((panel.Width / 10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
-            labelAndTextBoxList.Add(phoneLabelandTextBox);
-            
-            LabelAndTextBox passwordLabelandTextBox = new LabelAndTextBox("Password");
-            panel.Controls.Add(passwordLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 6)+2), new Point(2, 2), new Point((panel.Width /10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
-            labelAndTextBoxList.Add(passwordLabelandTextBox);
-<<<<<<< HEAD
-            */
-=======
-            
-            return labelTextBoxPanel;
-        }
->>>>>>> b95d87996436db0f800c64ab2ad2390eac2ae957
->>>>>>> 9f8889ab21c30a622a9a0e4970f33aac96358b2c
 
             //Button
             Button createButton = new Button
