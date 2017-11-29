@@ -66,7 +66,13 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             //Adds Tasks and shifts
             List<Shift> AllShifts = _mainWindowUI.GetScheduleController().GetAllShifts();
             List<string> Tasks = _mainWindowUI.GetScheduleController().GetAllTasks();
-            int widthOfTask = (_theSchedulemainPanel.Size.Width / Tasks.Count()) - 20;//100;
+
+            int widthOfTask;
+            if (Tasks.Count() != 0)
+                widthOfTask = (_theSchedulemainPanel.Size.Width / Tasks.Count()) - 20;
+            else
+                widthOfTask = 100;
+
             for (int i = 0; i < Tasks.Count; i++)
             {
                 TasksPanels tempTaskPanel = new TasksPanels(_mainWindowUI);

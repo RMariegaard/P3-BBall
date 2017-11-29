@@ -117,7 +117,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
             {
                 Location = location,
                 Size = size,
-                BorderStyle = BorderStyle.FixedSingle
+                BorderStyle = BorderStyle.FixedSingle,
+                AutoScroll = true
             };
 
             Label titleTopLabel = new Label
@@ -131,13 +132,22 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
             Worker worker = volunteerOverview.SelectedWorker;
             if (worker != null)
             {
-                List<Shift> workerShifts = scheduleController.GetAllShifts().Where(x => x.Workers.Exists(y => y.ID == worker.ID)).ToList();
+                List<Shift> workerShifts = new List<Shift>();
+                foreach (Shift shift in scheduleController.GetAllShifts())
+                {
+                    foreach(Worker work in shift.Workers.Where(x => x.Name == worker.Name))
+                    {
+                        if (worker.ID == work.ID)
+                            workerShifts.Add(shift);
+                    }
+                }
+                
                 int panelHeight = 100;
                 for (int i = 0; i < workerShifts.Count(); i++)
                 {
                     Panel panel = new Panel
                     {
-                        Size = new Size(size.Width - 10, panelHeight),
+                        Size = new Size(size.Width - 30, panelHeight),
                         Location = new Point(5, (panelHeight * i) + 40),
                         BorderStyle = BorderStyle.FixedSingle,
                     };
@@ -200,7 +210,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
             {
                 Location = location,
                 Size = size,
-                BorderStyle = BorderStyle.FixedSingle
+                BorderStyle = BorderStyle.FixedSingle,
+                AutoScroll = true
             };
 
             Label titleTopLabel = new Label
@@ -215,12 +226,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
             int panelHeight = 150;
             if (worker != null)
             {
-                List<Shift> requestedShifts = scheduleController.GetAllShifts().Where(x => x.Requests.Any(y => y.Worker.ID == worker.ID)).ToList();
+                List<Shift> requestedShifts = new List<Shift>();
+                foreach (Shift shift in scheduleController.GetAllShifts())
+                {
+                    foreach (Request request in shift.Requests)
+                    {
+                        if (worker.ID == request.Worker.ID)
+                            requestedShifts.Add(shift);
+                    }
+                }
+
                 for (int i = 0; i < requestedShifts.Count(); i++)
                 {
                     Panel panel = new Panel
                     {
-                        Size = new Size(size.Width - 10, panelHeight),
+                        Size = new Size(size.Width - 30, panelHeight),
                         Location = new Point(5, (panelHeight * i +2) + 40),
                         BorderStyle = BorderStyle.FixedSingle,
                     };
