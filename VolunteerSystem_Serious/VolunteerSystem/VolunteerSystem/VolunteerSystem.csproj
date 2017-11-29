@@ -38,14 +38,7 @@
     <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -59,9 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Database\DatabaseFinal.cs" />
     <Compile Include="Database\DataConnection.cs" />
     <Compile Include="Database\Interfaces\IDataAccesss.cs" />
+=======
+>>>>>>> 1e86ad594ff3c0396f8f38cd158802269f77a894
     <Compile Include="Function\AccountController.cs" />
     <Compile Include="Database\DataAccess.cs" />
     <Compile Include="Model\ExternalWorker.cs" />
@@ -76,6 +72,12 @@
     <Compile Include="Model\Volunteer.cs" />
     <Compile Include="Model\Worker.cs" />
     <Compile Include="Function\ScheduleController.cs" />
+    <Compile Include="UserInterfaceAdmin\AddWorkerManuallyButtonPopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\AddWorkerManuallyButtonPopUp.Designer.cs">
+      <DependentUpon>AddWorkerManuallyButtonPopUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserInterfaceAdmin\ColorAndStyle.cs" />
     <Compile Include="UserInterfaceAdmin\CreateNewShiftUI.cs">
       <SubType>Form</SubType>
@@ -122,7 +124,8 @@
     <Compile Include="UserInterfaceAdmin\PressedOnShiftPopup.Designer.cs">
       <DependentUpon>PressedOnShiftPopup.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterfaceAdmin\Settings\Settings.cs" />
+<Compile Include="UserInterfaceAdmin\Settings\Settings.cs" />
+
     <Compile Include="UserInterfaceAdmin\TheMainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +142,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UserInterfaceAdmin\AddWorkerManuallyButtonPopUp.resx">
+      <DependentUpon>AddWorkerManuallyButtonPopUp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserInterfaceAdmin\DeleteFormPopUp.resx">
       <DependentUpon>DeleteFormPopUp.cs</DependentUpon>
     </EmbeddedResource>
