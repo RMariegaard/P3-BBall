@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\DatabaseFinal.cs" />
     <Compile Include="Database\DataConnection.cs" />
     <Compile Include="Database\Interfaces\IDataAccesss.cs" />
     <Compile Include="Function\AccountController.cs" />
