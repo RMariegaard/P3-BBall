@@ -99,7 +99,16 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
         {
             if (externalCheckBox.Checked)
             {
+                string name = labelAndTextBoxList.First(x => x.Label.Text == "Name").TextBox.Text;
+                string email = labelAndTextBoxList.First(x => x.Label.Text == "Email").TextBox.Text;
+                ExternalWorker externalWorker = new ExternalWorker(name, email)
+                {
 
+                };
+
+                workerController.CreateWorker(externalWorker);
+                volunteerOverview.UpdateCreateVolunteerElement();
+                volunteerOverview.UpdateSeachAndVolunteerElement();
             }
             else
             {
@@ -108,18 +117,13 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
                 string team = labelAndTextBoxList.First(x => x.Label.Text == "Team").TextBox.Text;
 
                 Volunteer volunteer = new Volunteer(name, email, team)
-                {
-                    
+                {  
+
                 };
 
-                if (volunteer == null)
-                {
-                    throw new Exception("Noooo");
-                }
-                else
-                {
-                    workerController.CreateWorker(volunteer);
-                }
+                workerController.CreateWorker(volunteer);
+                volunteerOverview.UpdateCreateVolunteerElement();
+                volunteerOverview.UpdateSeachAndVolunteerElement();
             }
         }
     }

@@ -82,16 +82,27 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
             String informationString = "";
             if (volunteerOverview.SelectedWorker != null)
             {
-                Volunteer volunteer = (Volunteer)volunteerOverview.SelectedWorker;
-                informationString =
-                    $"Name: {volunteer.Name}\n\n" +
-                    $"Emil: {volunteer.Email}\n\n" +
-                    $"Team: {volunteer.Assosiation}\n\n" +
-                    $"Created: {volunteer.DateCreated.ToShortDateString()}\n\n" +
-                    $"Years Participated: \n";
-                foreach (int year in volunteer.YearsWorked)
+                if (volunteerOverview.SelectedWorker.GetType() == typeof(Volunteer))
                 {
-                    informationString += $"  - {year} \n";
+                    Volunteer volunteer = (Volunteer)volunteerOverview.SelectedWorker;
+                    informationString =
+                        $"Name: {volunteer.Name}\n\n" +
+                        $"Emil: {volunteer.Email}\n\n" +
+                        $"Team: {volunteer.Assosiation}\n\n" +
+                        $"Created: {volunteer.DateCreated.ToShortDateString()}\n\n" +
+                        $"Years Participated: \n";
+                    foreach (int year in volunteer.YearsWorked)
+                    {
+                        informationString += $"  - {year} \n";
+                    }
+                }
+                else
+                {
+                    ExternalWorker externalWorker = (ExternalWorker)volunteerOverview.SelectedWorker;
+                    informationString =
+                        $"This is an external worker!\n\n" +
+                        $"Name: {externalWorker.Name}\n\n" +
+                        $"Emil: {externalWorker.Email}\n\n";
                 }
             }
             else

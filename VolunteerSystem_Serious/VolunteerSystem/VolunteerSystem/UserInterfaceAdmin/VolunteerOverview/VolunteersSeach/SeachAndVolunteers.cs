@@ -49,7 +49,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         public void UpdateNamesPanel()
         {
             _searchAndVolunteerMainPanel.Controls.Remove(panelNames);
-            panelNames = namesPanel(new Size(_size.Width, _size.Height - searchTextBox.Height), new Point(2, searchTextBox.Location.Y + searchTextBox.Size.Height));
+            panelNames = namesPanel(new Size(_size.Width -10, _size.Height - searchTextBox.Height - 10), new Point(2, searchTextBox.Location.Y + searchTextBox.Size.Height));
             _searchAndVolunteerMainPanel.Controls.Add(panelNames);
         }
 
@@ -59,6 +59,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             namesPanel.Name = "namesPanel";
             namesPanel.Size = size;
             namesPanel.Location = location;
+            namesPanel.AutoScroll = true;
 
             List<Worker> workersList = workerController.Workers.Where(x => x.Name.ToLower().Contains(searchTextBox.Text.ToLower())).OrderBy(x => x.Name).ToList();
 
@@ -67,7 +68,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
                 Panel panel = new Panel
                 {
                     Location = new Point(namesPanel.Location.X, namesPanel.Location.Y + (i * 32)),
-                    Size = new Size(namesPanel.Width - 10, 30),
+                    Size = new Size(namesPanel.Width - 20, 30),
                     BorderStyle = BorderStyle.FixedSingle,
                     Tag = workersList[i]
                 };
