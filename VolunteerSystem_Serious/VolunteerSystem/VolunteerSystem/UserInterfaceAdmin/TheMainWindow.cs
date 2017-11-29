@@ -11,7 +11,7 @@ using VolunteerSystem.UserInterfaceAdmin;
 
 namespace VolunteerSystem.UserInterface
 {
-    public partial class TheMainWindow : Form, UserInterfaceAdmin.IVolunteerMainUI
+    public partial class TheMainWindow : Form, IVolunteerMainUI
     {
         private Panel _mainPanel;
         private Panel _menuButtonPanel;

@@ -17,6 +17,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview
 
         Panel volunteersAndSeachPanel;
         Panel volunteerOverviewPanel;
+        Panel createVolunteerPanel;
 
         private Worker _selectedWorker;
         public Worker SelectedWorker
@@ -42,6 +43,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview
             volunteersAndSeachPanel = new Panel();
             volunteersAndSeachPanel.Name = "volunteersAndSeachPanel";
             volunteerOverviewPanel = new Panel();
+            createVolunteerPanel = new Panel();
 
             this.scheduleController = scheduleController;
         }
@@ -52,8 +54,23 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview
 
             UpdateSeachAndVolunteerElement();
             UpdateVolunteerOverviewElement();
+            UpdateCreateVolunteerElement();
 
             return _volunteerOverviewMainPanel;
+        }
+        
+        public void UpdateSeachAndVolunteerElement()
+        {
+            _volunteerOverviewMainPanel.Controls.Remove(volunteersAndSeachPanel);
+
+            volunteersAndSeachPanel.Controls.Clear();
+            volunteersAndSeachPanel.Location = new Point(0, 0);
+            volunteersAndSeachPanel.Size = new Size((_volunteerOverviewMainPanel.Size.Width / 5), _volunteerOverviewMainPanel.Size.Height);
+            volunteersAndSeachPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            VolunteersSeach.SeachAndVolunteers seachAndVolunteers = new VolunteersSeach.SeachAndVolunteers(workerController, this);
+            volunteersAndSeachPanel.Controls.Add(seachAndVolunteers.GetPanel(volunteersAndSeachPanel.Size));
+
+            _volunteerOverviewMainPanel.Controls.Add(volunteersAndSeachPanel);
         }
 
         public void UpdateVolunteerOverviewElement()
@@ -73,18 +90,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview
             _volunteerOverviewMainPanel.Controls.Add(volunteerOverviewPanel);
         }
 
-        public void UpdateSeachAndVolunteerElement()
+        public void UpdateCreateVolunteerElement()
         {
-            _volunteerOverviewMainPanel.Controls.Remove(volunteersAndSeachPanel);
 
-            volunteersAndSeachPanel.Controls.Clear();
-            volunteersAndSeachPanel.Location = new Point(0, 0);
-            volunteersAndSeachPanel.Size = new Size((_volunteerOverviewMainPanel.Size.Width / 5), _volunteerOverviewMainPanel.Size.Height);
-            volunteersAndSeachPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            VolunteersSeach.SeachAndVolunteers seachAndVolunteers = new VolunteersSeach.SeachAndVolunteers(workerController, this);
-            volunteersAndSeachPanel.Controls.Add(seachAndVolunteers.GetPanel(volunteersAndSeachPanel.Size));
+            _volunteerOverviewMainPanel.Controls.Remove(createVolunteerPanel);
 
-            _volunteerOverviewMainPanel.Controls.Add(volunteersAndSeachPanel);
+            createVolunteerPanel = new Panel
+            {
+                Location = new Point(volunteerOverviewPanel.Location.X + volunteerOverviewPanel.Width + 5, _volunteerOverviewMainPanel.Height/2),
+                Size = new Size((((_volunteerOverviewMainPanel.Size.Width / 5) * 1) -20), _volunteerOverviewMainPanel.Size.Height/2),
+                BorderStyle = BorderStyle.FixedSingle,
+            };
+            CreateVolunteerStuff.CreateVolunteerClass createVolunteerClass = new CreateVolunteerStuff.CreateVolunteerClass(workerController, this);
+            createVolunteerPanel.Controls.Add(createVolunteerClass.GetPanel(createVolunteerPanel.Size));
+
+            _volunteerOverviewMainPanel.Controls.Add(createVolunteerPanel);
         }
     }
 }

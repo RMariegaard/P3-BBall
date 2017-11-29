@@ -22,10 +22,9 @@ namespace VolunteerSystem
             _wokers = new List<Worker>();
         }
 
-        public void CreateWorker()
+        public void CreateWorker(Worker worker)
         {
-
-            throw new NotImplementedException();
+            _wokers.Add(worker);
         }
 
         public List<Worker> SearchWorkers()
