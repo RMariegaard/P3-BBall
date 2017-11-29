@@ -103,9 +103,15 @@ namespace VolunteerSystem
             scheduleController.CreateShift(new Shift(new DateTime(2017, 4, 14, 20, 0, 0), new DateTime(2017, 4, 14, 23, 59, 0), scheduleController.GetAllTasks()[1], 7, "Nope"));
             scheduleController.CreateShift(new Shift(new DateTime(2017, 4, 14, 00, 0, 0), new DateTime(2017, 4, 14, 8, 00, 0), scheduleController.GetAllTasks()[1], 7, "Nope"));
 
+            for (int i = 1; i <= 7; i++)
+            {
+                scheduleController.AddWorkerToShift(scheduleController.FindSingleShift(x => x.ID == 12), workerController.Workers[i]);
+            }
 
-
-
+            for (int i = 1; i <= 7; i++)
+            {
+                scheduleController.AddWorkerToShift(scheduleController.FindSingleShift(x => x.ID == 15), workerController.Workers[i]);
+            }
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[1].CreateRequest((Volunteer)workerController.Workers[1]);
             scheduleController.GetAllShifts()[2].CreateRequest((Volunteer)workerController.Workers[2]);
