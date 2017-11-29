@@ -18,9 +18,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
 
         VolunteerOverview volunteerOverview;
         ScheduleController scheduleController;
+        WorkerController workerController;
 
-        public TheOverviewPanel(VolunteerOverview volunteerOverview, ScheduleController scheduleController)
+        public TheOverviewPanel(VolunteerOverview volunteerOverview, ScheduleController scheduleController, WorkerController workerController)
         {
+            this.workerController = workerController;
             this.volunteerOverview = volunteerOverview;
             this.scheduleController = scheduleController;
         }
@@ -117,9 +119,37 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                 AutoSize = true
             };
 
+            Button removeWorkerButton = new Button()
+            {
+                Location = new Point(5, volunteerInformationPanel.Height - 25),
+                Size = new Size(volunteerInformationPanel.Width - 10, 20),
+                Text = "Remove Volunteer"
+            };
+            removeWorkerButton.Click += RemoveVolunteerButton_Click;
+
+            volunteerInformationPanel.Controls.Add(removeWorkerButton);
             volunteerInformationPanel.Controls.Add(titleTopLabel);
             volunteerInformationPanel.Controls.Add(informationLabel);
             return volunteerInformationPanel;
+        }
+
+        private void RemoveVolunteerButton_Click(object sender, EventArgs e)
+        {
+            DeleteFormPopUp deleteFormPopUp = new DeleteFormPopUp("Are you sure you want to delete this volunteer and all requests from given volunteer?");
+            deleteFormPopUp.StartPosition = FormStartPosition.CenterParent;
+            deleteFormPopUp.ShowDialog();
+            if (deleteFormPopUp.DialogResult == DialogResult.OK)
+            {
+                //Removes
+                scheduleController.RemoveAllRequestsForAWorker(volunteerOverview.SelectedWorker);
+                scheduleController.RemoveWorkerFromAllHisShifts(volunteerOverview.SelectedWorker);
+                workerController.RemoveWorker(volunteerOverview.SelectedWorker);
+
+                //Updates
+                volunteerOverview.UpdateSeachAndVolunteerElement();
+                volunteerOverview.SelectedWorker = null;
+                volunteerOverview.UpdateVolunteerOverviewElement();
+            }
         }
 
         private Panel getShiftInformationPanel(Point location, Size size)

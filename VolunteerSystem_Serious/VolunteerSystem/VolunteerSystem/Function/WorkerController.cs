@@ -37,5 +37,10 @@ namespace VolunteerSystem
         {
             return worker.GetInformation();
         }
+
+        internal void RemoveWorker(Worker worker)
+        {
+            _wokers.Remove(worker);
+        }
     }
 }

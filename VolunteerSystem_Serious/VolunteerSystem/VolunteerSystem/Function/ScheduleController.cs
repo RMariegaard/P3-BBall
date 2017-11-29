@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VolunteerSystem.UserInterfaceAdmin;
 
 namespace VolunteerSystem
 {
     public class ScheduleController
     {
         private Schedule _schedule;
+        public event UpdateRequestPanelEvent UpdateRequestPanel;
 
         public ScheduleController(Schedule schedule)
         {
@@ -65,10 +67,9 @@ namespace VolunteerSystem
         {
             Shift shift = _schedule.Shifts.Find(x => x.ID == shiftID);
             _schedule.Shifts.Remove(shift);
+            UpdateRequestPanel();
         }
-
-
-
+        
         private string[] FindShiftChanges(Shift oldShift, Shift newShift)
         {
             List<string> changes = new List<string>();
@@ -93,23 +94,34 @@ namespace VolunteerSystem
             {
                 changes.Add("Task");
             }
-
-
+            
             return changes.ToArray();
         }
 
         public void AddWorkerToShift(Shift shift, Worker worker)
         {
             shift.AddWorker(worker);
-
         }
-
-
+        
         public void RemoveWorkerFromShift(Worker worker, Shift shift)
         {
             shift.RemoveWorker(worker);
         }
 
+        public void RemoveWorkerFromAllHisShifts(Worker worker)
+        {
+            GetAllShifts().ForEach(x => x.Workers.RemoveAll(y => y == worker));
+            UpdateRequestPanel();
+        }
+        
+        public void RemoveAllRequestsForAWorker(Worker worker)
+        {
+            foreach (Request request in GetAllRequests())
+                if (request.Worker == worker)
+                    DenyRequest(request);
+            UpdateRequestPanel();
+        }
+        
         public void ViewShiftInformation()
         {
             throw new NotImplementedException();

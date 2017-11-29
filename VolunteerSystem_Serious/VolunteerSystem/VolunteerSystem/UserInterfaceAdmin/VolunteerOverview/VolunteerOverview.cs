@@ -84,7 +84,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview
                 Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left,
                 BorderStyle = BorderStyle.FixedSingle
             };
-            OverviewPanelStuff.TheOverviewPanel theOverviewPanel = new OverviewPanelStuff.TheOverviewPanel(this, scheduleController);
+            OverviewPanelStuff.TheOverviewPanel theOverviewPanel = new OverviewPanelStuff.TheOverviewPanel(this, scheduleController, workerController);
             volunteerOverviewPanel.Controls.Add(theOverviewPanel.GetPanel(volunteerOverviewPanel.Size));
 
             _volunteerOverviewMainPanel.Controls.Add(volunteerOverviewPanel);

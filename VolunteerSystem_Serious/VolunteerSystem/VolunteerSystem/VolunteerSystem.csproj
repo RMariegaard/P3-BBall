@@ -134,6 +134,7 @@
     <Compile Include="UserInterfaceAdmin\TheMainWindow.Designer.cs">
       <DependentUpon>TheMainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterfaceAdmin\UpdateRequestPanelEvent.cs" />
     <Compile Include="UserInterfaceAdmin\VolunteerOverview\CreateVolunteerStuff\CreateVolunteerClass.cs" />
     <Compile Include="UserInterfaceAdmin\VolunteerOverview\OverviewPanelStuff\TheOverviewPanel.cs" />
     <Compile Include="UserInterfaceAdmin\VolunteerOverview\VolunteerOverview.cs" />

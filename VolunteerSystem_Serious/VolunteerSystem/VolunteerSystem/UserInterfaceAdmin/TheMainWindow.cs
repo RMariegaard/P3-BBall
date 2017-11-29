@@ -73,8 +73,6 @@ namespace VolunteerSystem.UserInterface
                 BackColor = ColorAndStyle.PrimaryColor()
             };
             _homepageButton.Click += _homepageButton_Clicked;
-            //_homepageButton.Paint += ColorAndStyle.OnPaintDrawRect;
-            //_homepageButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _homepageButton.Size, 10));
             _volunteerOverviewButton = new Button()
             {
                 Location = new Point(_homepageButton.Location.X + _homepageButton.Size.Width, 0),
@@ -83,8 +81,6 @@ namespace VolunteerSystem.UserInterface
                 FlatStyle = FlatStyle.Flat
             };
             _volunteerOverviewButton.Click += _volunteerOverviewButton_Clicked;
-            //_volunteerOverviewButton.Paint += ColorAndStyle.OnPaintDrawRect;
-            //_volunteerOverviewButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _volunteerOverviewButton.Size, 10));
             _settingsButton = new Button()
             {
                 Location = new Point(_volunteerOverviewButton.Location.X + _volunteerOverviewButton.Size.Width, 0),
@@ -93,8 +89,6 @@ namespace VolunteerSystem.UserInterface
                 FlatStyle = FlatStyle.Flat
             };
             _settingsButton.Click += _settingsButton_Clicked;
-            //_settingsButton.Paint += ColorAndStyle.OnPaintDrawRect;
-            //_settingsButton.Region = new Region(ColorAndStyle.GetRoundRectGP(new Point(0, 0), _settingsButton.Size, 10));
 
             _menuButtonPanel.Controls.Add(_homepageButton);
             _menuButtonPanel.Controls.Add(_volunteerOverviewButton);
@@ -108,13 +102,16 @@ namespace VolunteerSystem.UserInterface
                 Location = new Point(5, _menuButtonPanel.Location.Y + _menuButtonPanel.Height + 5),
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
             };
-
-
-            //UpdateUI();
-
+            
             //Adds to the window
             Controls.Add(_mainPanel);
             Controls.Add(_menuButtonPanel);
+
+            //event
+            scheduleController.UpdateRequestPanel += delegate ()
+            {
+                _homepage.UpdatePendingRequestPanel();
+            };
         }
         
         private void _homepageButton_Clicked(object sender, EventArgs e)
@@ -149,7 +146,6 @@ namespace VolunteerSystem.UserInterface
             _mainPanel.Controls.Add(_volunteerOverview.GetPanel(_mainPanel.Size));
             _mainPanel.Controls.Add(_settings.GetPanel(_mainPanel.Size));
             Application.Run(this);
-
         }
 
         public void DisplayPopup(string Header, string body)
@@ -166,12 +162,8 @@ namespace VolunteerSystem.UserInterface
 
         public void DisplayHomepage()
         {
-           
             _volunteerOverview.GetPanel(_mainPanel.Size).Visible = false;
             _settings.GetPanel(_mainPanel.Size).Visible = false;
-            //_homepage.GetHomepagePanel(_mainPanel).BringToFront();
-            //_homepage.GetHomepagePanel(_mainPanel).Visible = true;
-            //_volunteerOverview.GetPanel(_mainPanel.Size).Visible = false;
         }
         public void UpdateSchedule()
         {
@@ -189,8 +181,6 @@ namespace VolunteerSystem.UserInterface
 
         public void DisplayVolunteerOverview()
         {
-            //_volunteerOverview.GetPanel(_mainPanel.Size).Visible = true;
-            //_homepage.GetHomepagePanel(_mainPanel).Visible = false;
             _volunteerOverview.GetPanel(_mainPanel.Size).BringToFront();
             _volunteerOverview.GetPanel(_mainPanel.Size).Visible = true;
 
@@ -199,20 +189,8 @@ namespace VolunteerSystem.UserInterface
         public void AcceptWorkerRequest(Request request)
         {
             Shift shiftToedit = ScheduleController.FindSingleShift(x => x.Requests.Contains(request));
-            //Approve it
-
             ScheduleController.ApproveRequest(request);
-            //_homepage.UpdateShiftPanel(shiftToedit);
-            //Update ui
 
-
-
-
-            //Approve it
-            // ScheduleController.ApproveRequest(request);
-
-            //Update ui
-            //_homepage.UpdateSchedulePanel();
             _homepage.UpdatePendingRequestPanel();
             if (_homepage.ShownVolunteer != null)
                 if (_homepage.ShownVolunteer.Name == request.Worker.Name)
@@ -276,8 +254,7 @@ namespace VolunteerSystem.UserInterface
                     break;
             }
         }
-
- 
+        
         public void DisplayPressedOnShift(Shift shift)
         {
             UserInterfaceAdmin.PressedOnShiftPopup pressedOnShiftPopup = new UserInterfaceAdmin.PressedOnShiftPopup(shift, this);

@@ -182,7 +182,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
 
             shiftInformationLabel.LinkColor = Color.Black;
 
-            shiftInformationLabel.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            shiftInformationLabel.LinkBehavior = LinkBehavior.HoverUnderline;
 
             //Mangler at skrive dato og klokslet på. Ikke længere
             return shiftInformationLabel;
@@ -190,10 +190,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
 
         private void _getShiftInformation_Clicked(object sender, Shift shift)
         {
-            //Kan ikke få den til at vise shiften i skemaet...
-            //Control temp = _volunteerMainUI.FindSpecificControl("Shift " + shift.ID.ToString());
-            //if(temp != null)
-            //    _volunteerMainUI.ScrollToControlOnSchedule(temp);
             _volunteerMainUI.HomepageChangeDay(shift.StartTime.DayOfWeek.ToString() + " " + shift.StartTime.ToShortDateString());
             _volunteerMainUI.DisplayPressedOnShift(shift);
         }

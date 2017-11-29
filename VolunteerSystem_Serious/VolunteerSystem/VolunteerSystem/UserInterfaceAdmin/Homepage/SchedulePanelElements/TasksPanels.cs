@@ -60,8 +60,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 volunteerMainUI.GetScheduleController().RemoveTask(_taskName);
                 _deleteAllAcciciateShifts();
                 volunteerMainUI.UpdateAllHomepage();
-
-
             }
 
         }
@@ -77,7 +75,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             {
                 scheduleController.DeleteShift(shift.ID);
             }
-
         }
     }
 }
