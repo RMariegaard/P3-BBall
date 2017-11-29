@@ -51,7 +51,11 @@ namespace VolunteerSystem
             return thisYear == YearsWorked.Last() && lastYear == YearsWorked[YearsWorked.Count - 1];
             
         }
-        
-        
+
+        public override string ToString()
+        {
+            return Assosiation + " " + Name + " " + Email;
+        }
+
     }
 }

@@ -30,5 +30,12 @@ namespace VolunteerSystem
         {
             return Name + "\t" + Email;
         }
+
+        public override string ToString()
+        {
+            
+
+            return Name + " " + Email;
+        }
     }
 }

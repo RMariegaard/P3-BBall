@@ -11,6 +11,7 @@ using VolunteerSystem.UserInterface;
 using System.IO;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Collections.ObjectModel;
 
 namespace VolunteerSystem.UserInterfaceAdmin
 {
@@ -21,10 +22,14 @@ namespace VolunteerSystem.UserInterfaceAdmin
         Size fullClientSize;
         IVolunteerMainUI volunteerMainUI;
 
+       // ObservableCollection<Worker> data;
+
+        BindingSource bindingSource = new BindingSource();
 
         public PressedOnShiftPopup(Shift shift, IVolunteerMainUI volunteerMainUI)
         {
             InitializeComponent();
+            
             Width = 400;
             Height = 400;
             this.StartPosition = FormStartPosition.CenterParent;
@@ -99,11 +104,20 @@ namespace VolunteerSystem.UserInterfaceAdmin
                 Location = new Point(5, workerLabel.Location.Y + workerLabel.GetPreferredSize(Size.Empty).Height),
                 BorderStyle = BorderStyle.FixedSingle
             };
-          
             
 
+            
+
+            bindingSource.DataSource = shift.Workers;
             workersList.BeginUpdate();
-            workersList.DataSource = shift.Workers;
+
+            workersList.DataSource = bindingSource;
+
+
+
+
+
+           // workersList.DisplayMember = 
             //foreach (var w in shift.Workers)
             //{
             //    if( w is Volunteer)
@@ -112,6 +126,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             //    }
                 
             //}
+            
             workersList.EndUpdate();
             workersList.AutoSize = true;
 
@@ -164,7 +179,10 @@ namespace VolunteerSystem.UserInterfaceAdmin
         private void _addWorkerButton_Clicked(object sender, EventArgs e)
         {
             AddWorkerManuallyButtonPopUp workerForm = new AddWorkerManuallyButtonPopUp(volunteerMainUI, shift);
-            workerForm.Show();
+            workerForm.ShowDialog();
+
+            bindingSource.DataSource = null;
+            bindingSource.DataSource = shift.Workers;
         }
 
         private void DeleteButton_clicked(object sender, EventArgs e)
