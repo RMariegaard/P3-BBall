@@ -170,7 +170,10 @@ namespace VolunteerSystem.UserInterface
         {
             _homepage.UpdateSchedulePanel();
         }
-
+        public void UpdateAllHomepage()
+        {
+            _homepage.UpdateAllPanels();
+        }
         public void DisplaySettings()
         {
             throw new NotImplementedException();

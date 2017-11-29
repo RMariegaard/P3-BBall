@@ -59,7 +59,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             {
                 volunteerMainUI.GetScheduleController().RemoveTask(_taskName);
                 _deleteAllAcciciateShifts();
-                volunteerMainUI.UpdateUI();
+                volunteerMainUI.UpdateAllHomepage();
 
 
             }

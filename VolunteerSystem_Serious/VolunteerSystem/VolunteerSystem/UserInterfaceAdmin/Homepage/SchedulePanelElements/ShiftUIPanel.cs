@@ -92,6 +92,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             headder.DataBindings.Add(numberOfVolunteerBinding);
             headder.Location = new Point(0 , 8);
             headder.AutoSize = true;
+            headder.Click += _panel_clicked;
 
             //////////////////TimeLabel////////////////////////
             var timeBinding = new Binding("Text", shiftBindingSource, "TimeInterval");
@@ -101,7 +102,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             };
             Time.DataBindings.Add(timeBinding);
             Time.AutoSize = true;
-
+            Time.Click += _panel_clicked;
             //////////////////DescriptionLabel////////////////////////
             Label Desciption = new Label
             {
@@ -111,6 +112,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             };
             var descriptionBinding = new Binding("Text", shiftBindingSource, "Description");
             Desciption.DataBindings.Add(descriptionBinding);
+            Desciption.Click += _panel_clicked;
+
 
             shiftPanel.Controls.Add(topColor);
             shiftPanel.Controls.Add(headder);

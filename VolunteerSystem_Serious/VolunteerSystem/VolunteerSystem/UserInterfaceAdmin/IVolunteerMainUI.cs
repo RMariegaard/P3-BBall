@@ -12,6 +12,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
     public interface IVolunteerMainUI
     {
         void UpdateSchedule();
+        void UpdateAllHomepage();
         void DisplayPopup(string header, string body);
         ScheduleController GetScheduleController();
         void DisplayHomepage();
