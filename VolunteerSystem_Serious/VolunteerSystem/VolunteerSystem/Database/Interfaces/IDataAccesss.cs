@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VolunteerSystem.Database.Interfaces
 {
-    public interface IDataAccesss<TEntity> where TEntity : class, IDisposable
+    public interface IDataAccesss<TEntity> where TEntity : class
     {
         TEntity Get(int Id);
         IEnumerable<TEntity> GetAll();
@@ -15,7 +15,6 @@ namespace VolunteerSystem.Database.Interfaces
         void AddRange(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
-        int Complete();
 
     }
 }

@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace VolunteerSystem.Database
 {
-    public class DataConnection<TEntity> : IDataAccesss<TEntity> where TEntity : class, IDisposable
+    public class DataConnection<TEntity> : IDataAccesss<TEntity> where TEntity : class
     {
         protected readonly DbContext Context;
 
@@ -46,16 +46,6 @@ namespace VolunteerSystem.Database
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
             Context.Set<TEntity>().RemoveRange(entities);
-        }
-
-        public int Complete()
-        {
-            return Context.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            Context.Dispose();
         }
     }
 }
