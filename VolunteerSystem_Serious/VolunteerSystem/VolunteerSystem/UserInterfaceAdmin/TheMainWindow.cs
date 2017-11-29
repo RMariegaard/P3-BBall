@@ -24,6 +24,7 @@ namespace VolunteerSystem.UserInterface
         
         private UserInterfaceAdmin.Homepage.Homepage _homepage;
         private UserInterfaceAdmin.VolunteerOverview.VolunteerOverview _volunteerOverview;
+        private UserInterfaceAdmin.Settings.Settings _settings;
 
         enum ShownPage { Homepage, VolunteerOverview, Settings };
         ShownPage shownPage;
@@ -46,7 +47,7 @@ namespace VolunteerSystem.UserInterface
 
             _volunteerOverview = new UserInterfaceAdmin.VolunteerOverview.VolunteerOverview(this, workerController, ScheduleController);
             _homepage = new UserInterfaceAdmin.Homepage.Homepage(this);
-
+            _settings = new UserInterfaceAdmin.Settings.Settings(this);
 
             shownPage = new ShownPage();
 
@@ -146,6 +147,7 @@ namespace VolunteerSystem.UserInterface
 
             _mainPanel.Controls.Add(_homepage.GetHomepagePanel(_mainPanel));
             _mainPanel.Controls.Add(_volunteerOverview.GetPanel(_mainPanel.Size));
+            _mainPanel.Controls.Add(_settings.GetPanel(_mainPanel.Size));
             Application.Run(this);
 
         }
@@ -180,7 +182,7 @@ namespace VolunteerSystem.UserInterface
         }
         public void DisplaySettings()
         {
-            throw new NotImplementedException();
+            _settings.GetPanel(_mainPanel.Size).BringToFront();
         }
 
         public void DisplayVolunteerOverview()
