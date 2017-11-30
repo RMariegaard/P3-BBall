@@ -14,15 +14,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         IVolunteerMainUI volunteerMainUI;
         Shift shift;
         Panel shiftPanel;
-
-        public ShiftUIPanel(IVolunteerMainUI volunteerMainUI, Shift shift)
+        DateTime date;
+        public ShiftUIPanel(IVolunteerMainUI volunteerMainUI, Shift shift, DateTime date)
         {
             this.volunteerMainUI = volunteerMainUI;
             this.shift = shift;
+            this.date = date;
         }
-
         
-
         public Control ShiftUI(Panel forRefence, int hourHeight)
         {
             BindingSource shiftBindingSource = new BindingSource
@@ -40,18 +39,49 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 BorderStyle = BorderStyle.FixedSingle
             };
             shiftPanel.Click += _panel_clicked;
-            
+
             //Binds the location to starttime, so whenever this is edited, the position of the shift will be changed in the schedule
+            int startTimeHour = 0;
+            int endTimeHour = 0;
+            int startTimeMinut = 0;
+            int endTimeMinut = 0;
+
+            DateTime startShiftShotDateTime = new DateTime(shift.StartTime.Year, shift.StartTime.Month, shift.StartTime.Day);
+            DateTime endShiftShotDateTime = new DateTime(shift.EndTime.Year, shift.EndTime.Month, shift.EndTime.Day);
+
+            if (startShiftShotDateTime < date)
+            {
+                startTimeHour = 0;
+                startTimeMinut = 0;
+            }
+            else if (startShiftShotDateTime == date)
+            {
+                startTimeHour = shift.StartTime.Hour;
+                startTimeMinut = shift.StartTime.Minute;
+            }
+            if (endShiftShotDateTime == date)
+            {
+                endTimeHour = shift.EndTime.Hour;
+                endTimeMinut = shift.EndTime.Minute;
+            }
+            else if (endShiftShotDateTime > date)
+            {
+                endTimeHour = 23;
+                endTimeMinut = 23;
+            }
+
+
+
             var locationBinding = new Binding("Location", shiftBindingSource, "StartTime");
             locationBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
-                convertEventArgs.Value = new Point(0, (int)(((shift.StartTime.Hour * 60 + 60) + shift.StartTime.Minute) * ((double)hourHeight / 60))); 
+                convertEventArgs.Value = new Point(0, (int)(((startTimeHour * 60 + 60) + startTimeMinut) * ((double)hourHeight / 60))); 
             };
 
             var SizeBinding = new Binding("Size", shiftBindingSource, "EndTime");
             SizeBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
-                TimeSpan timeSpan = shift.EndTime - shift.StartTime;
+                TimeSpan timeSpan = new TimeSpan(endTimeHour, endTimeMinut, 0) - new TimeSpan(startTimeHour, startTimeMinut, 0); //shift.EndTime - shift.StartTime;
                 int LengthInminuts = (int)timeSpan.TotalMinutes;
 
                 convertEventArgs.Value = new Size(forRefence.Size.Width, (int)(LengthInminuts * ((double)hourHeight / 60)));

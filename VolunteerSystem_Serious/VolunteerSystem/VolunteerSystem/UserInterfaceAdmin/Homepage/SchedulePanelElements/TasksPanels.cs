@@ -16,7 +16,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             this.volunteerMainUI = volunteerMainUI;
         }
         private string _taskName;
-        public Panel GetATaskPanel(string headline, List<Shift> shifts, Size size, Point location, int hourHeight)
+        public Panel GetATaskPanel(string headline, List<Shift> shifts, Size size, Point location, int hourHeight, DateTime date)
         {
             _taskName = headline;
             Panel taskPanel = new Panel
@@ -43,7 +43,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
             for (int i = 0; i < shifts.Count(); i++)
             {
-                ShiftUIPanel tempShiftUIPanel = new ShiftUIPanel(volunteerMainUI, shifts[i]);
+                ShiftUIPanel tempShiftUIPanel = new ShiftUIPanel(volunteerMainUI, shifts[i], date);
                 taskPanel.Controls.Add(tempShiftUIPanel.ShiftUI(taskPanel, hourHeight));
             }
 

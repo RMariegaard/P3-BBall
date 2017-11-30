@@ -32,7 +32,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom,
                 AutoScroll = true
             };
-            this.day = day.Text;
+            if (day != null)
+            {
+                this.day = day.Text;
+            }
 
             hourHeight = 25;//schedulePanel.Size.Height / 25;
 
@@ -77,12 +80,48 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             {
                 TasksPanels tempTaskPanel = new TasksPanels(_mainWindowUI);
 
+                List<Shift> toBeOnPanel = new List<Shift>();
+                foreach(Shift shift in AllShifts)
+                {
+                    if (shift.Task == Tasks[i])
+                    {
+                        DateTime tempDateTime = new DateTime(shift.StartTime.Year, shift.StartTime.Month, shift.StartTime.Day, 0, 0, 0);
+                        do
+                        {
+                            if ((tempDateTime.DayOfWeek.ToString() + " " + tempDateTime.ToShortDateString()) == day)
+                            {
+                                toBeOnPanel.Add(shift);
+                                break;
+                            }
+                            tempDateTime = tempDateTime.AddDays(1);
+                        } while (tempDateTime < shift.EndTime);
+
+                        //if (shift.StartTime.DayOfWeek)
+                    }
+                }
+                //&& x.StartTime.DayOfWeek.ToString() + " " + x.StartTime.ToShortDateString() == day).ToList()
                 //Create
-                colorAndShiftPanel.Controls.Add(tempTaskPanel.GetATaskPanel(Tasks[i], AllShifts.Where(x => x.Task == Tasks[i] && x.StartTime.DayOfWeek.ToString() + " " + x.StartTime.ToShortDateString() == day).ToList(), new Size(widthOfTask, colorAndShiftPanel.Height), new Point((i * (widthOfTask + 5)) + 50, 0), hourHeight));
+                Panel taskPanel = tempTaskPanel.GetATaskPanel(
+                    Tasks[i],
+                    toBeOnPanel,
+                    new Size(widthOfTask, colorAndShiftPanel.Height),
+                    new Point((i * (widthOfTask + 5)) + 50, 0),
+                    hourHeight,
+                    convertDayStringFromButtonToDateTime(day)
+                    );
+                
+                colorAndShiftPanel.Controls.Add(taskPanel);
+                //colorAndShiftPanel.Controls.Add(tempTaskPanel.GetATaskPanel(Tasks[i], AllShifts.Where(x => x.Task == Tasks[i] && x.StartTime.DayOfWeek.ToString() + " " + x.StartTime.ToShortDateString() == day).ToList(), new Size(widthOfTask, colorAndShiftPanel.Height), new Point((i * (widthOfTask + 5)) + 50, 0), hourHeight));
             }
 
             _theSchedulemainPanel.Controls.Add(colorAndShiftPanel);
             return _theSchedulemainPanel;
+        }
+
+        private DateTime convertDayStringFromButtonToDateTime(string day)
+        {
+            List<string> dayElemensts = day.Split(' ').Last().Split('-').ToList();
+            return new DateTime(int.Parse(dayElemensts[2]), int.Parse(dayElemensts[1]), int.Parse(dayElemensts[0]));
         }
 
         private void _alternatingColors_Paint(object sender, PaintEventArgs e)

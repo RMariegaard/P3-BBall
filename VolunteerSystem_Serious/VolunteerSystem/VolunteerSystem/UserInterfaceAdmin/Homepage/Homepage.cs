@@ -68,10 +68,16 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             days = new List<string>();
             foreach (Shift shift in _mainWindowUI.GetScheduleController().GetAllShifts().OrderBy(x => x.StartTime))
             {
-                if (!days.Contains(shift.StartTime.DayOfWeek.ToString() + " " + shift.StartTime.ToShortDateString()))
+                DateTime tempDateTime = new DateTime(shift.StartTime.Year, shift.StartTime.Month, shift.StartTime.Day, 0, 0, 0);
+
+                do
                 {
-                    days.Add(shift.StartTime.DayOfWeek.ToString() + " " + shift.StartTime.ToShortDateString());
-                }
+                    if (!days.Contains(tempDateTime.DayOfWeek.ToString() + " " + tempDateTime.ToShortDateString()))
+                    {
+                        days.Add(tempDateTime.DayOfWeek.ToString() + " " + tempDateTime.ToShortDateString());
+                    }
+                    tempDateTime = tempDateTime.AddDays(1);
+                } while (tempDateTime < shift.EndTime);
             }
 
             //Schedule panel
@@ -179,7 +185,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
 
             //Kan godt blive et problem at man søger efter id?
-
+            /*
             Control test = _mainHomepagePanel.Controls.Find("Shift " + shift.ID.ToString(), true).FirstOrDefault();
 
             if (test != null)
@@ -189,6 +195,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
                 SchedulePanelElements.ShiftUIPanel temp = new SchedulePanelElements.ShiftUIPanel(_mainWindowUI, shift);
                 parent.Controls.Add(temp.ShiftUI(parent as Panel, 50));
             }
+            */
         }
 
 

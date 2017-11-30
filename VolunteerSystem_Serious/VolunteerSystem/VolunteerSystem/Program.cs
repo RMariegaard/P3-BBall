@@ -21,16 +21,16 @@ namespace VolunteerSystem
             WorkerController workerController = new WorkerController();
 
             workerController.Workers.Add(new Volunteer("meget langt navn der ikke giver mening ", "AnEmail@gmail.com", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Kasper", "AnEmail@gmail.com", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Casper", "AnEmail@gmail.com", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Mark", "AnEmail@gmail.com", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Mustafa", "AnEmail@gmail.com", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Emil", "AnEmail@gmail.com", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Kasper", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Casper", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Mark", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Mustafa", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Emil", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Rasmus", "JegKanIkkeLideSex@NarrePik.fuck", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Peter", "AnEmail@gmail.com", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Søren", "AnEmail@gmail.com", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Krisjan", "AnEmail@gmail.com", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Mikkel", "AnEmail@gmail.com", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Peter", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Søren", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Krisjan", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Mikkel", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
 
             scheduleController.CreateTask("Kitchen");
             scheduleController.CreateTask("Accomadation");

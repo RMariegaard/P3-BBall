@@ -15,16 +15,19 @@ namespace VolunteerSystem.UserInterface
         protected Label desciptionLabel;
         protected Label endTimeLabel;
         protected Label startTimeLabel;
-        protected Label dateLabel;
+        protected Label startDateLabel;
+        protected Label endDateLabel;
         protected Label TaskLabel;
         protected Label numberOfVolunteersLabel;
 
         protected TextBox desciptionTextBox;
         protected TextBox numberOfVolunteersTextBox;
         protected TextBox startHourMinutTextBox;
+
         protected TextBox endHourMinutTextBox;
         protected ComboBox TasksComboBox;
-        protected DateTimePicker DateTimePicker;
+        protected DateTimePicker startDateTimePicker;
+        protected DateTimePicker endDateTimePicker;
 
         protected Button createShiftButton;
         protected Button regretButton;
@@ -52,11 +55,12 @@ namespace VolunteerSystem.UserInterface
             int YForLabels = 10;
             int YForTextBoxandStuff = 160;
 
-            int numberOfVolunteerPosistion = 1;
-            int taskPosition = 2;
-            int startTimePosition = 3;
+            int numberOfVolunteerPosistion = 0;
+            int taskPosition = 1;
+            int startTimePosition = 2;
+            int startDatePickerPosition = 3;
             int endTimePosition = 4;
-            int datePickerPosition = 5;
+            int endDatePickerPosition = 5;
             int desciptionPosition = 6;
             int buttonPosition = 7;
 
@@ -87,10 +91,16 @@ namespace VolunteerSystem.UserInterface
             TaskLabel.AutoSize = true;
 
             //Date  - label
-            dateLabel = new Label();
-            dateLabel.Text = "Select the date: ";
-            dateLabel.Location = new Point(YForLabels, (heightBewtweenElements * datePickerPosition) + 10);
-            dateLabel.AutoSize = true;
+            startDateLabel = new Label();
+            startDateLabel.Text = "Select Start Date: ";
+            startDateLabel.Location = new Point(YForLabels, (heightBewtweenElements * startDatePickerPosition) + 10);
+            startDateLabel.AutoSize = true;
+
+            //Date  - label
+            endDateLabel = new Label();
+            endDateLabel.Text = "Select End Date: ";
+            endDateLabel.Location = new Point(YForLabels, (heightBewtweenElements * endDatePickerPosition) + 10);
+            endDateLabel.AutoSize = true;
 
             //Number of volunteer  - Label
             numberOfVolunteersLabel = new Label();
@@ -127,9 +137,13 @@ namespace VolunteerSystem.UserInterface
             TasksComboBox.Size = new Size(200, desciptionTextBox.Size.Height);
 
             //Date  - DateTimePicker
-            DateTimePicker = new DateTimePicker();
-            DateTimePicker.Location = new Point(YForTextBoxandStuff, (heightBewtweenElements * datePickerPosition) + 10);
-            
+            startDateTimePicker = new DateTimePicker();
+            startDateTimePicker.Location = new Point(YForTextBoxandStuff, (heightBewtweenElements * startDatePickerPosition) + 10);
+
+            //Date  - DateTimePicker
+            endDateTimePicker = new DateTimePicker();
+            endDateTimePicker.Location = new Point(YForTextBoxandStuff, (heightBewtweenElements * endDatePickerPosition) + 10);
+
             //Regret  - Button
             regretButton = new Button();
             regretButton.Location = new Point(YForLabels, (heightBewtweenElements * buttonPosition) + 10);
@@ -146,18 +160,20 @@ namespace VolunteerSystem.UserInterface
 
             //Adds to the window
             Controls.Add(desciptionLabel);
-            Controls.Add(dateLabel);
+            Controls.Add(startDateLabel);
             Controls.Add(endTimeLabel);
             Controls.Add(startTimeLabel);
             Controls.Add(TaskLabel);
             Controls.Add(numberOfVolunteersLabel);
+            Controls.Add(endDateLabel);
 
             Controls.Add(desciptionTextBox);
-            Controls.Add(DateTimePicker);
+            Controls.Add(startDateTimePicker);
             Controls.Add(numberOfVolunteersTextBox);
             Controls.Add(TasksComboBox);
             Controls.Add(endHourMinutTextBox);
             Controls.Add(startHourMinutTextBox);
+            Controls.Add(endDateTimePicker);
 
             Controls.Add(createShiftButton);
             Controls.Add(regretButton);
@@ -167,8 +183,8 @@ namespace VolunteerSystem.UserInterface
         {
             if (correctInformation())
             {
-                DateTime startDateTime = new DateTime(DateTimePicker.Value.Year, DateTimePicker.Value.Month, DateTimePicker.Value.Day, startHour, startMinut, 0);
-                DateTime endDateTime = new DateTime(DateTimePicker.Value.Year, DateTimePicker.Value.Month, DateTimePicker.Value.Day, endHour, endMinut, 0);
+                DateTime startDateTime = new DateTime(startDateTimePicker.Value.Year, startDateTimePicker.Value.Month, startDateTimePicker.Value.Day, startHour, startMinut, 0);
+                DateTime endDateTime = new DateTime(endDateTimePicker.Value.Year, endDateTimePicker.Value.Month, endDateTimePicker.Value.Day, endHour, endMinut, 0);
                 if(startDateTime < endDateTime)
                 {
                     Result = new Shift(startDateTime, endDateTime, TasksComboBox.SelectedItem.ToString(), int.Parse(numberOfVolunteersTextBox.Text), desciptionTextBox.Text);
@@ -176,14 +192,12 @@ namespace VolunteerSystem.UserInterface
                 }
                 else
                 {
-
                     PopupUI popup = new PopupUI("Invalid information", "The start of the shift has to be before the end of shift");
                     popup.Show();
                 }
             }
         }
         
-
         protected bool correctInformation()
         {
             //Check tasks comboBox
