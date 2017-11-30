@@ -129,7 +129,7 @@ namespace VolunteerSystem
         public void RemoveRequest(Request request)
         {
             Shift shift = GetAllShifts().Find(x => x.Requests.Contains(request));
-            shift.DenieRequest(request);
+            shift.RemoveRequest(request);
         }
         public void ViewShiftInformation()
         {
