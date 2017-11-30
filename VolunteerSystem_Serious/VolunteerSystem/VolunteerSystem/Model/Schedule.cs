@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace VolunteerSystem
 {
     public class Schedule
     {
-        private int _id;
+        [Key]
+        public int id { get; set; }
         private int _year;
         private List<Shift> _shifts;
         public List<Shift> Shifts
@@ -37,7 +40,6 @@ namespace VolunteerSystem
             //Assign ID??
             _shifts = new List<Shift>();
             _tasks = new List<string>();
-            _id = year;
             _year = year;
             _shifts = new List<Shift>();
         }

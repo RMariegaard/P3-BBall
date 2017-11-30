@@ -59,11 +59,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\Database.cs" />
-    <Compile Include="Database\DatabaseInterfaces\IDatabaseSkov.cs" />
+    <Compile Include="Database\DatabaseContext.cs" />
+    <Compile Include="Database\DatabaseController.cs" />
+    <Compile Include="Database\ExternalWorkerController.cs" />
+    <Compile Include="Database\FinalController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IDatabaseController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IExternalWorkerController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IFinalController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IRequestController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IScheduleController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IShiftController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IVolunteerController.cs" />
+    <Compile Include="Database\RequestController.cs" />
+    <Compile Include="Database\ScheduleController.cs" />
+    <Compile Include="Database\ShiftController.cs" />
+    <Compile Include="Database\VolunteerController.cs" />
     <Compile Include="Enums\InformShiftCommand.cs" />
     <Compile Include="Function\AccountController.cs" />
-    <Compile Include="Database\DataAccess.cs" />
     <Compile Include="Model\ExternalWorker.cs" />
     <Compile Include="Function\WorkerController.cs" />
     <Compile Include="Function\Notifier.cs" />
@@ -143,7 +155,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Compile Include="Database\DBConnection.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

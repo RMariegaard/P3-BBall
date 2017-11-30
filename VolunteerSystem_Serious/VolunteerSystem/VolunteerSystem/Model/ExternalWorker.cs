@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VolunteerSystem
 {
-    class ExternalWorker : Worker
+    public class ExternalWorker : Worker
     {
         public ExternalWorker(string name, string email) : base(name, email)
         {

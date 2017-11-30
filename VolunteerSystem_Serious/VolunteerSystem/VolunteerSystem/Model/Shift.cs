@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
@@ -18,10 +19,9 @@ namespace VolunteerSystem
             this._description = description;
             _workers = new List<Worker>();
             _requests = new List<Request>();
-            ID = _id++;
         }
-        private static int _id = 0;
-        public int ID { get; private set; }
+        [Key]
+        public int ID { get; set; }
         private DateTime _startTime;
         public DateTime StartTime
         {

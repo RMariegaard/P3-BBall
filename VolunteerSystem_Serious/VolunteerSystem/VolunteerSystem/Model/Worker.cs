@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace VolunteerSystem
 {
@@ -19,11 +21,10 @@ namespace VolunteerSystem
         {
             this._name = name;
             this._email = email;
-            ID = _id++;
         }
 
-        private static int _id = 0;
-        public int ID { get; private set; }
+        [Key]
+        public int ID { get; set; }
 
 
         public string GetInformation()

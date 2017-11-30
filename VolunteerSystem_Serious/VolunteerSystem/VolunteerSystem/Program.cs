@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VolunteerSystem.Database;
+using Dapper;
+using System.Data.Entity;
+using VolunteerSystem.Model;
 
 namespace VolunteerSystem
 {
@@ -19,6 +23,19 @@ namespace VolunteerSystem
             Schedule schedule = new Schedule(2018);
             ScheduleController scheduleController = new ScheduleController(schedule);
             WorkerController workerController = new WorkerController();
+
+            using (var test = new FinalController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS"))))
+            {
+                test.volunteer.Add(new Volunteer("Kasper", "Casperca", "aau"));
+
+    
+
+                test.schedule.Add(new Schedule(20));
+
+                test.Complete();
+
+
+            }
 
             workerController.Workers.Add(new Volunteer("meget langt navn der ikke giver mening ", "AnEmail@gmail.com", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Kasper", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
@@ -134,6 +151,7 @@ namespace VolunteerSystem
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
+
 
 
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);

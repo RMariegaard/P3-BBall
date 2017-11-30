@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace VolunteerSystem
 {
     public class Request
     {
-        private int _id;
+        [Key]
+        public int id { get; set; }
+
         private DateTime _timeSent;
         public DateTime TimeSent
         {
