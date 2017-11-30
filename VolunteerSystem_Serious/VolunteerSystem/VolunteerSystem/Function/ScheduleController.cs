@@ -122,10 +122,15 @@ namespace VolunteerSystem
         {
             foreach (Request request in GetAllRequests())
                 if (request.Worker == worker)
-                    DenyRequest(request);
+                    RemoveRequest(request);
             UpdateRequestPanel();
         }
-        
+
+        public void RemoveRequest(Request request)
+        {
+            Shift shift = GetAllShifts().Find(x => x.Requests.Contains(request));
+            shift.DenieRequest(request);
+        }
         public void ViewShiftInformation()
         {
             throw new NotImplementedException();
