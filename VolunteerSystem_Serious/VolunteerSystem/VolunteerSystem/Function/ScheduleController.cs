@@ -66,6 +66,10 @@ namespace VolunteerSystem
         public void DeleteShift(int shiftID)
         {
             Shift shift = _schedule.Shifts.Find(x => x.ID == shiftID);
+            foreach (var volunteer in shift.Workers.Where(x => x.GetType() == typeof(Volunteer)))
+            {
+                Notifier.InformVolunteer(volunteer as Volunteer, shift, InformShiftCommand.Delete);
+            }
             _schedule.Shifts.Remove(shift);
             UpdateRequestPanel();
         }
@@ -138,11 +142,15 @@ namespace VolunteerSystem
         }
         public void ApproveRequest(Request request)
         {
-            GetAllShifts().Find(x => x.Requests.Contains(request)).ApproveRequest(request);
+           Shift shift = GetAllShifts().Find(x => x.Requests.Contains(request));
+            shift.ApproveRequest(request);
+            Notifier.InformVolunteer(request.Worker as Volunteer, shift, InformShiftCommand.Accept);
         }
         public void DenyRequest(Request request)
         {
-            GetAllShifts().Find(x => x.Requests.Contains(request)).DenieRequest(request);
+            Shift shift = GetAllShifts().Find(x => x.Requests.Contains(request));
+            shift.DenieRequest(request);
+            Notifier.InformVolunteer(request.Worker as Volunteer, shift, InformShiftCommand.Deny);
         }
 
         public Shift FindSingleShift(Predicate<Shift> predicate)

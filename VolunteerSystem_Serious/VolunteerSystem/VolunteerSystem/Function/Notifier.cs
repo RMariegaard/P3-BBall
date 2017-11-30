@@ -19,9 +19,9 @@ namespace VolunteerSystem
 
         public static void InformVolunteer(Volunteer volunteer, string messageContent)
         {
-            var fromAddress = new MailAddress("cazzcasper@gmail.com", "Aarhus Basketball Festival");
+            var fromAddress = new MailAddress("hackermark1234@gmail.com", "Aarhus Basketball Festival");
             var toAddress = new MailAddress(volunteer.Email, volunteer.Name);
-            string fromPassword = "";
+            string fromPassword = "1234Hackermark";
             string subject = "Changes to your shift";
             string body = messageContent;
 
@@ -53,7 +53,7 @@ namespace VolunteerSystem
                 object newAt = findAttribute(newShift, change);
                 if ((oldAt == null || newAt == null))
                 {
-                    //skipp
+                    //skip
                 }
                 else
                 {
@@ -62,6 +62,46 @@ namespace VolunteerSystem
 
             }
             message += "Aarhus Basketball Festival";
+            InformVolunteer(volunteer, message);
+        }
+
+        public static void InformVolunteer(Volunteer volunteer, Shift shift, InformShiftCommand command)
+        {
+            switch (command)
+            {
+                case InformShiftCommand.Delete:
+                    InfromVolunteerDeletedShift(volunteer, shift);
+                    break;
+                case InformShiftCommand.Accept:
+                    InformVolunteerAcceptedShift(volunteer, shift);
+                    break;
+                case InformShiftCommand.Deny:
+                    InformVolunteerDeniedShift(volunteer, shift);
+                    break;
+                default:
+                    break;
+                    
+            }
+        }
+
+        private static void InformVolunteerDeniedShift(Volunteer volunteer, Shift shift)
+        {
+
+            string message = $"Dear {volunteer.Name},\n Your request for the {shift.Task} shift at {shift.StartTime} has been denied.\nAarhus Basketball Festival.";
+            InformVolunteer(volunteer, message);
+        }
+
+        private static void InformVolunteerAcceptedShift(Volunteer volunteer, Shift shift)
+        {
+
+            string message = $"Dear {volunteer.Name},\n Your request for the {shift.Task} shift at {shift.StartTime} has been accepted.\n The shift ends at {shift.EndTime}.\nAarhus Basketball Festival.";
+            InformVolunteer(volunteer, message);
+        }
+
+        private static void InfromVolunteerDeletedShift(Volunteer volunteer, Shift shift)
+        {
+
+            string message = $"Dear {volunteer.Name},\nThe {shift.Task} shift at {shift.StartTime} has been deleted and therefor you are not going to work at this time.\nAarhus Basketball Festival.";
             InformVolunteer(volunteer, message);
         }
 
