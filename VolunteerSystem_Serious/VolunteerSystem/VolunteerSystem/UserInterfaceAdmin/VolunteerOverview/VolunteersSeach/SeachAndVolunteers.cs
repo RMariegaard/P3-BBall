@@ -16,6 +16,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         TextBox searchTextBox;
         Size _size;
         Panel panelNames;
+        ComboBox filterOptions;
 
         public SeachAndVolunteers(WorkerController workerController, VolunteerOverview volunteerOverview)
         {
@@ -24,6 +25,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             _searchAndVolunteerMainPanel = new Panel();
             _searchAndVolunteerMainPanel.Name = "_searchAndVolunteerMainPanel";
             searchTextBox = new TextBox();
+            filterOptions = new ComboBox();
         }
 
         public Panel GetPanel(Size size)
@@ -33,12 +35,27 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             _searchAndVolunteerMainPanel.BorderStyle = BorderStyle.FixedSingle;
 
             searchTextBox.Location = new Point(5, 5);
-            searchTextBox.Size = new Size(_size.Width - 10, 0);
+            searchTextBox.Size = new Size(_size.Width - 30, 0);
             searchTextBox.TextChanged += searchTextBox_Changed;
 
+            filterOptions.Location = new Point(5, searchTextBox.Location.Y + searchTextBox.Size.Height + 5);
+            filterOptions.Size = new Size(_size.Width -30, 0);
+            filterOptions.Items.Add("None");
+            filterOptions.Items.Add("Volunteers from last year, who hasn't signed up");
+            filterOptions.Items.Add("Øhhhhmmm ved ikke flere");
+            filterOptions.Items.Add("Skriver bare dette på listen i stedet for at lave det");
+            filterOptions.SelectedIndex = 0;
+            filterOptions.SelectedIndexChanged += FilterOptions_SelectedIndexChanged;
+
             UpdateNamesPanel();
+            _searchAndVolunteerMainPanel.Controls.Add(filterOptions);
             _searchAndVolunteerMainPanel.Controls.Add(searchTextBox);
             return _searchAndVolunteerMainPanel;
+        }
+
+        private void FilterOptions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
         }
 
         private void searchTextBox_Changed(object sender, EventArgs e)
@@ -49,7 +66,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         public void UpdateNamesPanel()
         {
             _searchAndVolunteerMainPanel.Controls.Remove(panelNames);
-            panelNames = namesPanel(new Size(_size.Width -10, _size.Height - searchTextBox.Height - 10), new Point(2, searchTextBox.Location.Y + searchTextBox.Size.Height));
+            panelNames = namesPanel(new Size(_size.Width -10, _size.Height - searchTextBox.Height - filterOptions.Height), new Point(2, filterOptions.Location.Y + filterOptions.Size.Height));
             _searchAndVolunteerMainPanel.Controls.Add(panelNames);
         }
 

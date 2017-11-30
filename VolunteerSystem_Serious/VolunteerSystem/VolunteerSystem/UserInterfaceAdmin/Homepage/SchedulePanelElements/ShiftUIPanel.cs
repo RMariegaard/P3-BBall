@@ -67,7 +67,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             else if (endShiftShotDateTime > date)
             {
                 endTimeHour = 23;
-                endTimeMinut = 23;
+                endTimeMinut = 60;
             }
 
 
