@@ -22,7 +22,7 @@ namespace VolunteerSystem
 
             workerController.Workers.Add(new Volunteer("meget langt navn der ikke giver mening ", "AnEmail@gmail.com", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Kasper", "AnEmail@gmail.com", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Casper", "AnEmail@gmail.com", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Casper", "caspersn2@gmail.com", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Mark", "AnEmail@gmail.com", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Mustafa", "AnEmail@gmail.com", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Emil", "AnEmail@gmail.com", "U12 Drenge"));

@@ -58,7 +58,7 @@ namespace VolunteerSystem
             Shift oldShift = FindSingleShift(x => x.ID == oldShiftID);
             string[] changes = FindShiftChanges(oldShift, newShift);
             foreach (var volunteer in oldShift.Workers.Where(x => x.GetType() == typeof(Volunteer))){
-               // Notifier.InformVolunteer(volunteer, oldShift, newShift, changes);
+                Notifier.InformVolunteer(volunteer as Volunteer, oldShift, newShift, changes);
             }
             oldShift.EditShift(newShift);
 

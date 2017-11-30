@@ -19,10 +19,10 @@ namespace VolunteerSystem
 
         public static void InformVolunteer(Volunteer volunteer, string messageContent)
         {
-            var fromAddress = new MailAddress("cazzcasper@gmail.com", "From Name");
+            var fromAddress = new MailAddress("cazzcasper@gmail.com", "Aarhus Basketball Festival");
             var toAddress = new MailAddress(volunteer.Email, volunteer.Name);
             string fromPassword = "";
-            string subject = "Subject";
+            string subject = "Changes to your shift";
             string body = messageContent;
 
             var smtp = new SmtpClient
@@ -46,7 +46,47 @@ namespace VolunteerSystem
 
         public static void InformVolunteer(Volunteer volunteer, Shift oldShift, Shift newShift, string[] changes)
         {
-            throw new NotImplementedException();
+            string message = $"Dear {volunteer.Name},\nThe following changes has happen to the {oldShift.Task} shift at {oldShift.StartTime}:\n";
+            foreach(string change in changes)
+            {
+                object oldAt = findAttribute(oldShift, change);
+                object newAt = findAttribute(newShift, change);
+                if ((oldAt == null || newAt == null))
+                {
+                    //skipp
+                }
+                else
+                {
+                    message += $"The {change} has been changed from {oldAt} to {newAt}.\n";
+                }
+
+            }
+            message += "Aarhus Basketball Festival";
+            InformVolunteer(volunteer, message);
+        }
+
+        private static object findAttribute(Shift shift, string str)
+        {
+            object res; 
+            switch (str)
+            {
+                case "Starttime":
+                    res = shift.StartTime;
+                    break;
+                case "Endtime":
+                    res = shift.EndTime;
+                    break;
+                case "Description":
+                    res = shift.Description;
+                    break;
+                case "Task":
+                    res = shift.Task;
+                    break;
+                default:
+                    res = null;
+                    break;
+            }
+            return res;
         }
 
     }
