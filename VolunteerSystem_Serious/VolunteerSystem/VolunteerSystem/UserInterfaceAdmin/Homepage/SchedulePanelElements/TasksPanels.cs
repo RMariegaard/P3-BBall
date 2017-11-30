@@ -29,18 +29,24 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 BorderStyle = BorderStyle.FixedSingle
             };
 
-            LinkLabel Headder = new LinkLabel
+            Label Headder = new Label
             {
                 Location = new Point(2, 2),
                 Text = headline,
                 AutoSize = true,
-                LinkBehavior = LinkBehavior.HoverUnderline,
-                LinkColor = Color.Black,
             };
-            Headder.Click += headder_clicked;
-
+           
             taskPanel.Controls.Add(Headder);
 
+            PictureBox button = new PictureBox()
+            {
+                Image = PressedOnShiftPopup.ResizeImage(SystemIcons.Error.ToBitmap(), 15, 15),
+                Location = new Point(taskPanel.Width - 15, 0),
+                Cursor = Cursors.Hand,
+                Size = new Size(15, 15)
+            };
+            button.Click += headder_clicked;
+            taskPanel.Controls.Add(button);
             for (int i = 0; i < shifts.Count(); i++)
             {
                 ShiftUIPanel tempShiftUIPanel = new ShiftUIPanel(volunteerMainUI, shifts[i], date);
