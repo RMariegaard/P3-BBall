@@ -104,7 +104,7 @@ namespace VolunteerSystem
 
         public void AddWorkerToShift(Shift shift, Worker worker)
         {
-            shift.AddWorker(worker);
+            shift?.AddWorker(worker);
         }
         
         public void RemoveWorkerFromShift(Worker worker, Shift shift)
