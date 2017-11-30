@@ -1,4 +1,4 @@
-﻿namespace VolunteerSystem.UserInterfaceAdmin
+﻿namespace VolunteerSystem
 {
     public delegate void UpdateRequestPanelEvent();
 }
