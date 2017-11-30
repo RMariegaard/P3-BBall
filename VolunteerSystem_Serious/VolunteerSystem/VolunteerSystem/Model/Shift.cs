@@ -64,7 +64,7 @@ namespace VolunteerSystem
         }
 
         private List<Request> _requests;
-        public IEnumerable<Request> Requests
+        public List<Request> Requests
         {
             get
             {

@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database2\VolunteerContext.cs" />
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Database\DatabaseController.cs" />
     <Compile Include="Database\ExternalWorkerController.cs" />
