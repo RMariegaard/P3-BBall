@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 {
-    class SeachAndVolunteers
+    class SeachAndVolunteers 
     {
         Panel _searchAndVolunteerMainPanel;
         WorkerController workerController;
@@ -17,6 +18,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         Size _size;
         Panel panelNames;
         ComboBox filterOptions;
+        List<Worker> allWorkers;
+        
 
         public SeachAndVolunteers(WorkerController workerController, VolunteerOverview volunteerOverview)
         {
@@ -26,6 +29,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             _searchAndVolunteerMainPanel.Name = "_searchAndVolunteerMainPanel";
             searchTextBox = new TextBox();
             filterOptions = new ComboBox();
+            allWorkers = workerController.Workers;
         }
 
         public Panel GetPanel(Size size)
@@ -42,8 +46,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             filterOptions.Size = new Size(_size.Width -30, 0);
             filterOptions.Items.Add("None");
             filterOptions.Items.Add("Volunteers from last year, who hasn't signed up");
-            filterOptions.Items.Add("Øhhhhmmm ved ikke flere");
-            filterOptions.Items.Add("Skriver bare dette på listen i stedet for at lave det");
+            filterOptions.Items.Add("Volunteers validated for seasonal tickets");
+            filterOptions.Items.Add("Volunteers signed up this year");
             filterOptions.SelectedIndex = 0;
             filterOptions.SelectedIndexChanged += FilterOptions_SelectedIndexChanged;
 
@@ -55,8 +59,15 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 
         private void FilterOptions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            
+            if(filterOptions.SelectedIndex == 2)
+            {
+                allWorkers = workerController.SearchWorkers(x => ((Volunteer)x).IsValidForSeasonTickets() == true);
+                UpdateNamesPanel();
+            }
+            UpdateNamesPanel();
         }
+
 
         private void searchTextBox_Changed(object sender, EventArgs e)
         {
@@ -117,7 +128,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 
         private List<Worker> FilterWorkers()
         {
-            return workerController.Workers.Where(
+            return allWorkers.Where(
                 x => x.Name.ToLower().Contains(searchTextBox.Text.ToLower())
                 || x.Email.ToLower().Contains(searchTextBox.Text.ToLower())
                 || ((x.GetType() == typeof(Volunteer)) ? (((Volunteer)x).PhoneNumber.ToString().Contains(searchTextBox.Text)) : false)

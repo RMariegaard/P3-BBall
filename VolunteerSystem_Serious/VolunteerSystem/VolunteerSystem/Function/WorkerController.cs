@@ -8,29 +8,29 @@ namespace VolunteerSystem
 {
     public class WorkerController
     {
-        private List<Worker> _wokers;
+        private List<Worker> _workers;
         public List<Worker> Workers
         {
             get
             {
-                return _wokers;
+                return _workers;
             }
         }
 
         public WorkerController()
         {
-            _wokers = new List<Worker>();
+            _workers = new List<Worker>();
         }
 
         public void CreateWorker(Worker worker)
         {
-            _wokers.Add(worker);
+            _workers.Add(worker);
         }
 
-        public List<Worker> SearchWorkers()
+        public List<Worker> SearchWorkers(Predicate<Worker> predicate)
         {
-
-            throw new NotImplementedException();
+            List<Worker> list = _workers.FindAll(predicate);
+            return list;
         }
 
         public string ViewWorkerInformation(Worker worker)
@@ -40,7 +40,9 @@ namespace VolunteerSystem
 
         internal void RemoveWorker(Worker worker)
         {
-            _wokers.Remove(worker);
+            _workers.Remove(worker);
         }
+
+        
     }
 }

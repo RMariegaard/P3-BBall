@@ -27,6 +27,8 @@ namespace VolunteerSystem
           
 
             workerController.Workers.Add(new Volunteer("meget langt navn der ikke giver mening ", "AnEmail@gmail.com", "U12 Drenge"));
+            ((Volunteer)workerController.Workers.First()).TempAddYearWorked(2016);
+            ((Volunteer)workerController.Workers.First()).TempAddYearWorked(2017);
             workerController.Workers.Add(new Volunteer("Kasper", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Casper", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Mark", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));

@@ -55,20 +55,29 @@ namespace VolunteerSystem
             this._yearsWorked = new List<int>();
         }
  
+        
 
         public bool IsValidForSeasonTickets()
         {
             int thisYear = DateTime.Now.Year;
             int lastYear = thisYear - 1;
-
-            return thisYear == YearsWorked.Last() && lastYear == YearsWorked[YearsWorked.Count - 1];
-            
+            if (YearsWorked.Count >= 2)
+                return thisYear == YearsWorked.Last() && lastYear == YearsWorked[YearsWorked.Count - 2];
+            else
+                return false;
         }
 
         public override string ToString()
         {
             return Assosiation + " " + Name + " " + Email;
         }
+
+
+        public void TempAddYearWorked(int year)
+        {
+            _yearsWorked.Add(year);
+        }
+
 
     }
 }

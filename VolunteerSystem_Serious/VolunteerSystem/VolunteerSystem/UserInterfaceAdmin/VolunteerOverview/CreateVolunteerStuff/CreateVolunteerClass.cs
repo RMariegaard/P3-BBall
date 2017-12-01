@@ -129,7 +129,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
 
         private void ExternalCheckBox_Click(object sender, EventArgs e)
         {
-            PropertyChanged?.Invoke(externalCheckBox.Checked, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
+            PropertyChanged?.Invoke(externalCheckBox.Checked, new PropertyChangedEventArgs("CheckBoxChecked"));
         }
 
         private void CreateButton_Click(object sender, EventArgs e)
