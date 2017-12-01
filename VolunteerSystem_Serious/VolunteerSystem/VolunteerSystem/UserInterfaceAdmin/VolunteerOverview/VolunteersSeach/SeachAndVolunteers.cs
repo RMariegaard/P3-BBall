@@ -70,7 +70,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             _searchAndVolunteerMainPanel.Controls.Add(panelNames);
         }
 
-        private Panel namesPanel(Size size, Point location)
+        private Panel namesPanel(Size size, Point location) 
         {
             Panel namesPanel = new Panel();
             namesPanel.Name = "namesPanel";
@@ -78,12 +78,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             namesPanel.Location = location;
             namesPanel.AutoScroll = true;
 
-            List<Worker> workersList = workerController.Workers.Where(
-                x => x.Name.ToLower().Contains(searchTextBox.Text.ToLower()) 
-                || x.Email.ToLower().Contains(searchTextBox.Text.ToLower()) 
-                || ((x.GetType() == typeof(Volunteer)) ? (((Volunteer)x).PhoneNumber.ToString().Contains(searchTextBox.Text)) : false)
-                ).OrderBy(x => x.Name).ToList();
-
+            List<Worker> workersList = FilterWorkers();
+             
             for (int i = 0; i < workersList.Count; i++)
             {
                 Panel panel = new Panel
@@ -117,6 +113,15 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             }
             
             return namesPanel;
+        }
+
+        private List<Worker> FilterWorkers()
+        {
+            return workerController.Workers.Where(
+                x => x.Name.ToLower().Contains(searchTextBox.Text.ToLower())
+                || x.Email.ToLower().Contains(searchTextBox.Text.ToLower())
+                || ((x.GetType() == typeof(Volunteer)) ? (((Volunteer)x).PhoneNumber.ToString().Contains(searchTextBox.Text)) : false)
+                ).OrderBy(x => x.Name).ToList(); 
         }
 
         private void Panel_Click(object sender, EventArgs e)
