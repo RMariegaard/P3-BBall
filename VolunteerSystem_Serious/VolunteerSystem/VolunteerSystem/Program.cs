@@ -36,7 +36,7 @@ namespace VolunteerSystem
             workerController.Workers.Add(new Volunteer("Peter", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Søren", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Krisjan", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Mikkel", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Mikkel", "AnEmail@domainFindesIkke.dk", "U12 Drenge") { PhoneNumber = 11223344 });
 
             scheduleController.CreateTask("Kitchen");
             scheduleController.CreateTask("Accomadation");
@@ -140,7 +140,7 @@ namespace VolunteerSystem
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
-
+            
             using (var test = new Database2.VolunteerContext())
             {
                 var volunteer = new Volunteer("casper", "casper", "casper");
@@ -162,7 +162,7 @@ namespace VolunteerSystem
 
                 test.SaveChanges();
             }
-
+            
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
             
             Ui.Start();

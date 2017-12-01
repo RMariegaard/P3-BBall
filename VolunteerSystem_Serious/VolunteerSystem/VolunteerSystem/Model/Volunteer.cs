@@ -17,6 +17,19 @@ namespace VolunteerSystem
             }
         }
 
+        private int _phoneNumber;
+        public int PhoneNumber
+        {
+            get
+            {
+                return _phoneNumber;
+            }
+            set
+            {
+                _phoneNumber = value;
+            }
+        }
+
         private DateTime _dateCreated;
         public DateTime DateCreated
         {

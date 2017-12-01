@@ -90,6 +90,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                     informationString =
                         $"Name: {volunteer.Name}\n\n" +
                         $"Emil: {volunteer.Email}\n\n" +
+                        $"Phone Number: {volunteer.PhoneNumber.ToString()}\n\n" +
                         $"Team: {volunteer.Assosiation}\n\n" +
                         $"Created: {volunteer.DateCreated.ToShortDateString()}\n\n" +
                         $"Years Participated: \n";

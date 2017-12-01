@@ -78,7 +78,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             namesPanel.Location = location;
             namesPanel.AutoScroll = true;
 
-            List<Worker> workersList = workerController.Workers.Where(x => x.Name.ToLower().Contains(searchTextBox.Text.ToLower())).OrderBy(x => x.Name).ToList();
+            List<Worker> workersList = workerController.Workers.Where(
+                x => x.Name.ToLower().Contains(searchTextBox.Text.ToLower()) 
+                || x.Email.ToLower().Contains(searchTextBox.Text.ToLower()) 
+                || (x.GetType() == typeof(Volunteer)) ? (((Volunteer)x).PhoneNumber.ToString().Contains(searchTextBox.Text)) : false
+                ).OrderBy(x => x.Name).ToList();
 
             for (int i = 0; i < workersList.Count; i++)
             {
