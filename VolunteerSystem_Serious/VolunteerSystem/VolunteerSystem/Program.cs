@@ -141,27 +141,7 @@ namespace VolunteerSystem
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             
-            using (var test = new Database2.VolunteerContext())
-            {
-                var volunteer = new Volunteer("casper", "casper", "casper");
-                var shift = new Shift(DateTime.Now, DateTime.Now, "casper", 8, "casper");
-
-                var shift2 = new Shift(DateTime.Now, DateTime.Now, "casper", 8, "casper");
-
-                var shift3 = new Shift(DateTime.Now, DateTime.Now, "casper", 8, "casper");
-                shift.CreateRequest(volunteer);
-                var request = shift.Requests.First();
-                shift.AddWorker(volunteer);
-                shift2.AddWorker(volunteer);
-                shift3.AddWorker(volunteer);
-                test.Volunteers.Add(volunteer);
-                test.Shifts.Add(shift);
-                test.Shifts.Add(shift2);
-                test.Shifts.Add(shift3);
-                test.Requests.Add(request);
-
-                test.SaveChanges();
-            }
+         
             
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
             
