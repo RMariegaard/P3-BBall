@@ -151,7 +151,9 @@ namespace VolunteerSystem
                 var shift3 = new Shift(DateTime.Now, DateTime.Now, "casper", 8, "casper");
                 shift.CreateRequest(volunteer);
                 var request = shift.Requests.First();
-                shift.AddWorker(volunteer); shift2.AddWorker(volunteer); shift3.AddWorker(volunteer);
+                shift.AddWorker(volunteer);
+                shift2.AddWorker(volunteer);
+                shift3.AddWorker(volunteer);
                 test.Volunteers.Add(volunteer);
                 test.Shifts.Add(shift);
                 test.Shifts.Add(shift2);
