@@ -63,23 +63,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             deletePopup.ShowDialog();
             if (deletePopup.DialogResult == DialogResult.OK)
             {
-                volunteerMainUI.GetScheduleController().RemoveTask(_taskName);
-                _deleteAllAcciciateShifts();
+                volunteerMainUI.GetScheduleController().RemoveTaskAndAssociateShifts(_taskName);
                 volunteerMainUI.UpdateAllHomepage();
-            }
-
-        }
-
-        private void _deleteAllAcciciateShifts()
-        {
-            ScheduleController scheduleController = volunteerMainUI.GetScheduleController();
-            List<Shift> listOFShifts = scheduleController.GetAllShifts();
-
-            listOFShifts = listOFShifts.Where(x => x.Task == _taskName).ToList();
-
-            foreach (var shift in listOFShifts)
-            {
-                scheduleController.DeleteShift(shift.ID);
             }
         }
     }

@@ -63,9 +63,8 @@ namespace VolunteerSystem
             oldShift.EditShift(newShift);
 
         }
-        public void DeleteShift(int shiftID)
+        public void DeleteShift(Shift shift)
         {
-            Shift shift = _schedule.Shifts.Find(x => x.ID == shiftID);
             foreach (var volunteer in shift.Workers.Where(x => x.GetType() == typeof(Volunteer)))
             {
                 Notifier.InformVolunteer(volunteer as Volunteer, shift, InformShiftCommand.Delete);
@@ -100,6 +99,12 @@ namespace VolunteerSystem
             }
             
             return changes.ToArray();
+        }
+
+        internal void RemoveTaskAndAssociateShifts(string taskName)
+        {
+            GetAllShifts().Where(x => x.Task == taskName).ToList().ForEach(y => DeleteShift(y));
+            RemoveTask(taskName);
         }
 
         public void AddWorkerToShift(Shift shift, Worker worker)
@@ -157,7 +162,7 @@ namespace VolunteerSystem
             shift.DenieRequest(request);
             Notifier.InformVolunteer(request.Worker as Volunteer, shift, InformShiftCommand.Deny);
         }
-
+        
         public Shift FindSingleShift(Predicate<Shift> predicate)
         {
             return _schedule.Shifts.Find(predicate);

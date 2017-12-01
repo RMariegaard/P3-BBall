@@ -192,12 +192,9 @@ namespace VolunteerSystem.UserInterfaceAdmin
             if(deletePopup.DialogResult == DialogResult.OK)
             {
                 this.Close();
-                volunteerMainUI.GetScheduleController().DeleteShift(shift.ID);
+                volunteerMainUI.GetScheduleController().DeleteShift(shift);
                 volunteerMainUI.UpdateSchedule();
-   
             }
-
-
         }
 
         private void EditShift_Clicked(object sender, EventArgs e)
