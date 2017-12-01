@@ -88,8 +88,12 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             {
                 allWorkers = workerController.SearchWorkers(x => x is ExternalWorker);
             }
+           
+
             UpdateNamesPanel();
         }
+
+
 
 
         private void searchTextBox_Changed(object sender, EventArgs e)
