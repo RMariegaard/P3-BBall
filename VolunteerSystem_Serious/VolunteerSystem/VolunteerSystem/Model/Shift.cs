@@ -109,9 +109,13 @@ namespace VolunteerSystem
             _workers.Remove(worker);
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
-        public void AddWorker(Worker worker)
+        public void AddWorker(Worker worker, int year)
         {
             _workers.Add(worker);
+            if (worker is Volunteer)
+            {
+                ((Volunteer)worker).AddYearWorked(year);
+            }
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
         public void CreateRequest(Volunteer volunteer)
@@ -128,10 +132,17 @@ namespace VolunteerSystem
         {
             throw new NotImplementedException();
         }
-        public void ApproveRequest(Request request)
+        public void ApproveRequest(Request request, int year)
         {
-            _workers.Add(request.Worker);
+            Worker worker = request.Worker;
+            _workers.Add(worker);
+
+            if(worker is Volunteer)
+            {
+                ((Volunteer)worker).AddYearWorked(year);
+            }
             RemoveRequest(request);
+            
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
         public void DenieRequest(Request request)

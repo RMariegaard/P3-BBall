@@ -67,7 +67,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview
             volunteersAndSeachPanel.Location = new Point(0, 0);
             volunteersAndSeachPanel.Size = new Size((_volunteerOverviewMainPanel.Size.Width / 5), _volunteerOverviewMainPanel.Size.Height);
             volunteersAndSeachPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            VolunteersSeach.SeachAndVolunteers seachAndVolunteers = new VolunteersSeach.SeachAndVolunteers(workerController, this);
+            VolunteersSeach.SeachAndVolunteers seachAndVolunteers = new VolunteersSeach.SeachAndVolunteers(scheduleController,workerController, this);
             volunteersAndSeachPanel.Controls.Add(seachAndVolunteers.GetPanel(volunteersAndSeachPanel.Size));
 
             _volunteerOverviewMainPanel.Controls.Add(volunteersAndSeachPanel);

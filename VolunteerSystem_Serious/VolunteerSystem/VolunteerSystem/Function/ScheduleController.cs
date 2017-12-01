@@ -21,6 +21,10 @@ namespace VolunteerSystem
         {
             throw new NotImplementedException();
         }
+        public int ScheduleYear()
+        {
+            return _schedule.Year;
+        }
 
         public List<Request> GetAllRequests()
         {
@@ -109,7 +113,7 @@ namespace VolunteerSystem
 
         public void AddWorkerToShift(Shift shift, Worker worker)
         {
-            shift?.AddWorker(worker);
+            shift?.AddWorker(worker, ScheduleYear());
         }
         
         public void RemoveWorkerFromShift(Worker worker, Shift shift)
@@ -153,7 +157,7 @@ namespace VolunteerSystem
         public void ApproveRequest(Request request)
         {
            Shift shift = GetAllShifts().Find(x => x.Requests.Contains(request));
-            shift.ApproveRequest(request);
+            shift.ApproveRequest(request, ScheduleYear());
             Notifier.InformVolunteer(request.Worker as Volunteer, shift, InformShiftCommand.Accept);
         }
         public void DenyRequest(Request request)

@@ -13,6 +13,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
     {
         Panel _searchAndVolunteerMainPanel;
         WorkerController workerController;
+        ScheduleController ScheduleController;
         VolunteerOverview _volunteerOverview;
         TextBox searchTextBox;
         Size _size;
@@ -21,9 +22,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         List<Worker> allWorkers;
         
 
-        public SeachAndVolunteers(WorkerController workerController, VolunteerOverview volunteerOverview)
+        public SeachAndVolunteers(ScheduleController scheduleController,WorkerController workerController, VolunteerOverview volunteerOverview)
         {
             this.workerController = workerController;
+            this.ScheduleController = scheduleController;
             _volunteerOverview = volunteerOverview;
             _searchAndVolunteerMainPanel = new Panel();
             _searchAndVolunteerMainPanel.Name = "_searchAndVolunteerMainPanel";
@@ -44,10 +46,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 
             filterOptions.Location = new Point(5, searchTextBox.Location.Y + searchTextBox.Size.Height + 5);
             filterOptions.Size = new Size(_size.Width -30, 0);
-            filterOptions.Items.Add("None");
+            filterOptions.Items.Add("All");
             filterOptions.Items.Add("Volunteers from last year, who hasn't signed up");
             filterOptions.Items.Add("Volunteers validated for seasonal tickets");
             filterOptions.Items.Add("Volunteers signed up this year");
+            filterOptions.Items.Add("All external workers");
             filterOptions.SelectedIndex = 0;
             filterOptions.SelectedIndexChanged += FilterOptions_SelectedIndexChanged;
 
@@ -59,11 +62,31 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 
         private void FilterOptions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            if(filterOptions.SelectedIndex == 2)
+            if(filterOptions.SelectedIndex == 0)
             {
-                allWorkers = workerController.SearchWorkers(x => ((Volunteer)x).IsValidForSeasonTickets() == true);
-                UpdateNamesPanel();
+                allWorkers = workerController.Workers;
+            }
+            else if (filterOptions.SelectedIndex == 1)
+            {
+                //if x.YearsWorked is thisYear - 1, then that means the volunteer worked last year, but have not yet signed up this year.
+                int thisYear = ScheduleController.ScheduleYear();
+                allWorkers = workerController.SearchWorkers(x => ((Volunteer)x).YearsWorked.LastOrDefault() == thisYear - 1);
+            }
+            else if (filterOptions.SelectedIndex == 2)
+            {
+                int thisYear = ScheduleController.ScheduleYear();
+                allWorkers = workerController.SearchWorkers(x => ((Volunteer)x).IsValidForSeasonTickets(thisYear) == true);
+
+            }
+            else if (filterOptions.SelectedIndex == 3)
+            {
+                
+                int thisYear = ScheduleController.ScheduleYear();
+                allWorkers = workerController.SearchWorkers(x => ((Volunteer)x).YearsWorked.LastOrDefault() == thisYear);
+            }
+            else if(filterOptions.SelectedIndex == 4)
+            {
+                allWorkers = workerController.SearchWorkers(x => x is ExternalWorker);
             }
             UpdateNamesPanel();
         }

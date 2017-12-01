@@ -47,6 +47,14 @@ namespace VolunteerSystem
                 return _yearsWorked;
             }
         }
+        public void AddYearWorked(int year)
+        {
+            if (!_yearsWorked.Contains(year))
+            {
+                _yearsWorked.Add(year);
+            }
+        }
+
 
         public Volunteer(string name, string email, string assosiation) : base(name, email)
         {
@@ -59,10 +67,22 @@ namespace VolunteerSystem
 
         public bool IsValidForSeasonTickets()
         {
+            //problem if the program is used before newyears.... or is it??
+            //When would you search for this? right after the tournament it is correct..
+            //When should the validation reset? when a new schedule is created??
             int thisYear = DateTime.Now.Year;
             int lastYear = thisYear - 1;
             if (YearsWorked.Count >= 2)
                 return thisYear == YearsWorked.Last() && lastYear == YearsWorked[YearsWorked.Count - 2];
+            else
+                return false;
+        }
+        // i would do it this way maybe
+        public bool IsValidForSeasonTickets(int scheduleYear)
+        {
+            int lastYear = scheduleYear - 1;
+            if (YearsWorked.Count >= 2)
+                return scheduleYear == YearsWorked.Last() && lastYear == YearsWorked[YearsWorked.Count - 2];
             else
                 return false;
         }

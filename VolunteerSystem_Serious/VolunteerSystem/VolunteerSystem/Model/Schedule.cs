@@ -13,6 +13,7 @@ namespace VolunteerSystem
         [Key]
         public int id { get; set; }
         private int _year;
+        public int Year { get { return _year; } }
         private List<Shift> _shifts;
         public List<Shift> Shifts
         {
