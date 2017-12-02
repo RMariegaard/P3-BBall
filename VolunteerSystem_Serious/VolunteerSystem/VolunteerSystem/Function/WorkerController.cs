@@ -43,6 +43,23 @@ namespace VolunteerSystem
             _workers.Remove(worker);
         }
 
+        public List<string> GetAllTeams()
+        {
+            var allTeams = new List<string>();
+            foreach(Worker worker in this.Workers)
+            {
+                if (worker is Volunteer volunteer)
+                {
+                    string team = volunteer.Assosiation;
+                    if (!allTeams.Contains(team))
+                    {
+                        allTeams.Add(team);
+                    }
+                }
+            }
+            return allTeams;
+        }
+
         
     }
 }

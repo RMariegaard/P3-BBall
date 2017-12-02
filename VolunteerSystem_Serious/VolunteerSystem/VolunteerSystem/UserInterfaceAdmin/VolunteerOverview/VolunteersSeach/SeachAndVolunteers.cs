@@ -20,6 +20,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         Panel panelNames;
         ComboBox filterOptions;
         List<Worker> allWorkers;
+        ComboBox filterTeam;
         
 
         public SeachAndVolunteers(ScheduleController scheduleController,WorkerController workerController, VolunteerOverview volunteerOverview)
@@ -31,6 +32,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             _searchAndVolunteerMainPanel.Name = "_searchAndVolunteerMainPanel";
             searchTextBox = new TextBox();
             filterOptions = new ComboBox();
+            filterTeam = new ComboBox();
             allWorkers = workerController.Workers;
         }
 
@@ -54,10 +56,40 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             filterOptions.SelectedIndex = 0;
             filterOptions.SelectedIndexChanged += FilterOptions_SelectedIndexChanged;
 
+            GetTeamFilter();
+
             UpdateNamesPanel();
             _searchAndVolunteerMainPanel.Controls.Add(filterOptions);
             _searchAndVolunteerMainPanel.Controls.Add(searchTextBox);
+            _searchAndVolunteerMainPanel.Controls.Add(filterTeam);
             return _searchAndVolunteerMainPanel;
+        }
+
+        private void GetTeamFilter()
+        {
+            filterTeam.Location = new Point(5, filterOptions.Location.Y + filterOptions.Size.Height + 5);
+            filterTeam.Size = new Size(_size.Width - 30, 0);
+            filterTeam.Items.Add("All");
+            var allTeams = workerController.GetAllTeams();
+            foreach(var team in allTeams)
+            {
+                filterTeam.Items.Add(team);
+            }
+            filterTeam.SelectedIndex = 0;
+            filterTeam.SelectedIndexChanged += FilterTeam_SelectedIndexChanged;
+        }
+
+        private void FilterTeam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (filterTeam.SelectedIndex == 0)
+            {
+                allWorkers = workerController.Workers;
+            }
+            else
+            {
+                allWorkers = workerController.SearchWorkers(x => ((Volunteer)x).Assosiation == filterTeam.SelectedItem.ToString());
+            }
+            UpdateNamesPanel();
         }
 
         private void FilterOptions_SelectedIndexChanged(object sender, EventArgs e)
@@ -104,7 +136,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         public void UpdateNamesPanel()
         {
             _searchAndVolunteerMainPanel.Controls.Remove(panelNames);
-            panelNames = namesPanel(new Size(_size.Width -10, _size.Height - searchTextBox.Height - filterOptions.Height), new Point(2, filterOptions.Location.Y + filterOptions.Size.Height));
+            panelNames = namesPanel(new Size(_size.Width -10, _size.Height - searchTextBox.Height - filterTeam.Height), new Point(2, filterTeam.Location.Y + filterTeam.Size.Height));
             _searchAndVolunteerMainPanel.Controls.Add(panelNames);
         }
 

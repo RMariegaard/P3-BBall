@@ -29,17 +29,17 @@ namespace VolunteerSystem
             workerController.Workers.Add(new Volunteer("Denne dude er validated for season tickets ", "AnEmail@gmail.com", "U12 Drenge"));
             ((Volunteer)workerController.Workers.First()).TempAddYearWorked(2017);
             ((Volunteer)workerController.Workers.First()).TempAddYearWorked(2018);
-            workerController.Workers.Add(new Volunteer("Kasper", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Kasper", "AnEmail@domainFindesIkke.dk", "U8 Drenge"));
             ((Volunteer)workerController.Workers[1]).TempAddYearWorked(2017);
-            workerController.Workers.Add(new Volunteer("Casper", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Casper", "AnEmail@domainFindesIkke.dk", "U16 Drenge"));
             workerController.Workers.Add(new Volunteer("Mark", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Mustafa", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Emil", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Rasmus", "JegKanIkkeLideSex@NarrePik.fuck", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Peter", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Søren", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Søren", "AnEmail@domainFindesIkke.dk", "U14 Drenge"));
             workerController.Workers.Add(new Volunteer("Krisjan", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Mikkel", "AnEmail@domainFindesIkke.dk", "U12 Drenge") { PhoneNumber = 11223344 });
+            workerController.Workers.Add(new Volunteer("Mikkel", "AnEmail@domainFindesIkke.dk", "U12 Piger") { PhoneNumber = 11223344 });
 
             scheduleController.CreateTask("Kitchen");
             scheduleController.CreateTask("Accomadation");
