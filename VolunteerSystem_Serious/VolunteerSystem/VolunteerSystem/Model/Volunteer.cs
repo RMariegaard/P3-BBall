@@ -8,6 +8,7 @@ namespace VolunteerSystem
 {
     public class Volunteer:Worker
     {
+        private static VolunteerSystem.Database2.VolunteerDatabase _db = new VolunteerSystem.Database2.VolunteerDatabase();
         private string _assosiation;
         public string Assosiation
         {
@@ -52,6 +53,7 @@ namespace VolunteerSystem
             if (!_yearsWorked.Contains(year))
             {
                 _yearsWorked.Add(year);
+                _db.Update(this);
             }
         }
 
@@ -61,6 +63,8 @@ namespace VolunteerSystem
             this._dateCreated = DateTime.Now;
             this._assosiation = assosiation;
             this._yearsWorked = new List<int>();
+            _db.Add(this);
+            
         }
         public Volunteer(int id, string name, string email, string assosiation, DateTime dateCreated, List<int> yearsworked) : base(name, email)
         {

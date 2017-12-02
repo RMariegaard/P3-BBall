@@ -49,9 +49,22 @@ namespace VolunteerSystem.Database2
 
         }
 
-        public void UpdateYearsWorked(int Year)
+        public void Update(Volunteer volunteer)
         {
+            var command = DBConnection.SqlConnection.CreateCommand();
+            DBConnection.SqlConnection.Open();
+            command.CommandText = $"UPDATE VolunteerTable SET FirstName = '{volunteer.Name}', LastName = '{volunteer.Name}', Email = '{volunteer.Email}', YearsWorked = '{string.Join(",", volunteer.YearsWorked)}', Assoistation = '{volunteer.Assosiation}', DateCreated = '{volunteer.DateCreated}' WHERE Id = '{volunteer.ID}';";
+            command.ExecuteNonQuery();
+            DBConnection.SqlConnection.Close();
+        }
 
+        public void Remove(Volunteer volunteer)
+        {
+            var command = DBConnection.SqlConnection.CreateCommand();
+            DBConnection.SqlConnection.Open();
+            command.CommandText = $"DELETE VolunteerTable WHERE Id ='{volunteer.ID}';";
+            command.ExecuteNonQuery();
+            DBConnection.SqlConnection.Close();
         }
     }
 }
