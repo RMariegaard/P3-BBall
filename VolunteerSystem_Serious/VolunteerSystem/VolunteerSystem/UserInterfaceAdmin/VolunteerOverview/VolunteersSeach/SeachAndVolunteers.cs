@@ -81,49 +81,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 
         private void FilterTeam_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (filterTeam.SelectedIndex == 0)
-            {
-                allWorkers = workerController.Workers;
-            }
-            else
-            {
-                allWorkers = workerController.SearchWorkers(x => ((Volunteer)x).Assosiation == filterTeam.SelectedItem.ToString());
-            }
             UpdateNamesPanel();
         }
 
         private void FilterOptions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(filterOptions.SelectedIndex == 0)
-            {
-                allWorkers = workerController.Workers;
-            }
-            else if (filterOptions.SelectedIndex == 1)
-            {
-                //if x.YearsWorked is thisYear - 1, then that means the volunteer worked last year, but have not yet signed up this year.
-                int thisYear = ScheduleController.ScheduleYear();
-                allWorkers = workerController.SearchWorkers(x => ((Volunteer)x).YearsWorked.LastOrDefault() == thisYear - 1);
-            }
-            else if (filterOptions.SelectedIndex == 2)
-            {
-                int thisYear = ScheduleController.ScheduleYear();
-                allWorkers = workerController.SearchWorkers(x => ((Volunteer)x).IsValidForSeasonTickets(thisYear) == true);
-
-            }
-            else if (filterOptions.SelectedIndex == 3)
-            {
-                
-                int thisYear = ScheduleController.ScheduleYear();
-                allWorkers = workerController.SearchWorkers(x => ((Volunteer)x).YearsWorked.LastOrDefault() == thisYear);
-            }
-            else if(filterOptions.SelectedIndex == 4)
-            {
-                allWorkers = workerController.SearchWorkers(x => x is ExternalWorker);
-            }
-           
-
             UpdateNamesPanel();
         }
+
 
 
 
@@ -187,11 +152,41 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 
         private List<Worker> FilterWorkers()
         {
-            return allWorkers.Where(
+            var res = allWorkers.Where(
                 x => x.Name.ToLower().Contains(searchTextBox.Text.ToLower())
                 || x.Email.ToLower().Contains(searchTextBox.Text.ToLower())
                 || ((x.GetType() == typeof(Volunteer)) ? (((Volunteer)x).PhoneNumber.ToString().Contains(searchTextBox.Text)) : false)
-                ).OrderBy(x => x.Name).ToList(); 
+                ).OrderBy(x => x.Name).ToList();
+            if (filterTeam.SelectedIndex != 0)
+            {
+                res = res.Where(x => ((Volunteer)x).Assosiation == filterTeam.SelectedItem.ToString()).ToList();
+            }
+            if(filterOptions.SelectedIndex != 0)
+            {
+                if (filterOptions.SelectedIndex == 1)
+                {
+                    //if x.YearsWorked is thisYear - 1, then that means the volunteer worked last year, but have not yet signed up this year.
+                    int thisYear = ScheduleController.ScheduleYear();
+                    res = res.Where(x => ((Volunteer)x).YearsWorked.LastOrDefault() == thisYear - 1).ToList();
+                }
+                else if (filterOptions.SelectedIndex == 2)
+                {
+                    int thisYear = ScheduleController.ScheduleYear();
+                    res = res.Where(x => ((Volunteer)x).IsValidForSeasonTickets(thisYear) == true).ToList();
+
+                }
+                else if (filterOptions.SelectedIndex == 3)
+                {
+
+                    int thisYear = ScheduleController.ScheduleYear();
+                    res = res.Where(x => ((Volunteer)x).YearsWorked.LastOrDefault() == thisYear).ToList();
+                }
+                else if (filterOptions.SelectedIndex == 4)
+                {
+                    res = res.Where(x => x is ExternalWorker).ToList();
+                }
+            }
+            return res;
         }
 
         private void Panel_Click(object sender, EventArgs e)
