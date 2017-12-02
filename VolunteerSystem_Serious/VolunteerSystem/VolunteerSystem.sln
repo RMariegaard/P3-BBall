@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolunteerSystem", "VolunteerSystem\VolunteerSystem.csproj", "{1F1EE146-BC45-4ACD-B297-8E274BDC9738}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolunteerSystemTests", "VolunteerSystemTests\VolunteerSystemTests.csproj", "{D8711518-410C-4083-BD21-510CFC76EAFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1F1EE146-BC45-4ACD-B297-8E274BDC9738}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F1EE146-BC45-4ACD-B297-8E274BDC9738}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F1EE146-BC45-4ACD-B297-8E274BDC9738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8711518-410C-4083-BD21-510CFC76EAFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8711518-410C-4083-BD21-510CFC76EAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8711518-410C-4083-BD21-510CFC76EAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8711518-410C-4083-BD21-510CFC76EAFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
