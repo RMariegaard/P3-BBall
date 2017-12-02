@@ -62,8 +62,15 @@ namespace VolunteerSystem
             this._assosiation = assosiation;
             this._yearsWorked = new List<int>();
         }
- 
-        
+        public Volunteer(int id, string name, string email, string assosiation, DateTime dateCreated, List<int> yearsworked) : base(name, email)
+        {
+            this.ID = id;
+            this._dateCreated = dateCreated;
+            this._assosiation = assosiation;
+            this._yearsWorked = yearsworked;
+        }
+
+
 
         public bool IsValidForSeasonTickets()
         {

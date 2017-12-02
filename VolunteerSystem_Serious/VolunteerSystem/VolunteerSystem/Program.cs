@@ -143,9 +143,11 @@ namespace VolunteerSystem
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
-            
-         
-            
+
+
+            var db = new Database2.DatabaseSet<Volunteer>();
+            db.Add(workerController.Workers[0] as Volunteer);
+            var v = db.Get(2);
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
             
             Ui.Start();
