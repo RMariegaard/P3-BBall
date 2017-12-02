@@ -42,11 +42,25 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             _searchAndVolunteerMainPanel.Size = _size;
             _searchAndVolunteerMainPanel.BorderStyle = BorderStyle.FixedSingle;
 
-            searchTextBox.Location = new Point(5, 5);
+            Label searchLabel = new Label()
+            {
+                Text = "Search for volunteers",
+                Location = new Point(5, 5),
+                AutoSize = true,
+            };
+
+            searchTextBox.Location = new Point(5, searchLabel.Location.Y + searchLabel.Size.Height - 5);
             searchTextBox.Size = new Size(_size.Width - 30, 0);
             searchTextBox.TextChanged += searchTextBox_Changed;
 
-            filterOptions.Location = new Point(5, searchTextBox.Location.Y + searchTextBox.Size.Height + 5);
+            Label filterOptionLabel = new Label()
+            {
+                Text = "Select filter options:",
+                Location = new Point(5, searchTextBox.Location.Y + searchTextBox.Size.Height + 10),
+                AutoSize = true,
+            };
+
+            filterOptions.Location = new Point(5, filterOptionLabel.Location.Y + filterOptionLabel.Size.Height - 5);
             filterOptions.Size = new Size(_size.Width -30, 0);
             filterOptions.Items.Add("All");
             filterOptions.Items.Add("Volunteers from last year, who hasn't signed up");
@@ -56,18 +70,29 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             filterOptions.SelectedIndex = 0;
             filterOptions.SelectedIndexChanged += FilterOptions_SelectedIndexChanged;
 
-            GetTeamFilter();
+            Label teamOptionLabel = new Label()
+            {
+                Text = "Select team:",
+                Location = new Point(5, filterOptions.Location.Y + filterOptions.Size.Height + 10),
+                AutoSize = true,
+            };
+
+
+            GetTeamFilter(new Point(5, teamOptionLabel.Location.Y + teamOptionLabel.Size.Height - 5));
 
             UpdateNamesPanel();
+            _searchAndVolunteerMainPanel.Controls.Add(searchLabel);
+            _searchAndVolunteerMainPanel.Controls.Add(filterOptionLabel);
             _searchAndVolunteerMainPanel.Controls.Add(filterOptions);
+            _searchAndVolunteerMainPanel.Controls.Add(teamOptionLabel);
             _searchAndVolunteerMainPanel.Controls.Add(searchTextBox);
             _searchAndVolunteerMainPanel.Controls.Add(filterTeam);
             return _searchAndVolunteerMainPanel;
         }
 
-        private void GetTeamFilter()
+        private void GetTeamFilter(Point point)
         {
-            filterTeam.Location = new Point(5, filterOptions.Location.Y + filterOptions.Size.Height + 5);
+            filterTeam.Location = point;
             filterTeam.Size = new Size(_size.Width - 30, 0);
             filterTeam.Items.Add("All");
             var allTeams = workerController.GetAllTeams();
