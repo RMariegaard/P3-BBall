@@ -19,11 +19,19 @@ namespace VolunteerSystem
 
         public static void InformVolunteer(Volunteer volunteer, string messageContent)
         {
-            var fromAddress = new MailAddress("hackermark1234@gmail.com", "Aarhus Basketball Festival");
+            
             var toAddress = new MailAddress(volunteer.Email, volunteer.Name);
-            string fromPassword = "1234Hackermark";
             string subject = "Changes to your shift";
-            string body = messageContent;
+
+            SendEmail(toAddress.Address, subject, messageContent);
+        }
+
+        public static void SendEmail(string toAddress, string subject, string body)
+        {
+            var fromAddress = new MailAddress("hackermark1234@gmail.com", "Aarhus Basketball Festival");
+            string fromPassword = "1234Hackermark";
+            
+            
 
             var smtp = new SmtpClient
             {
@@ -34,7 +42,7 @@ namespace VolunteerSystem
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
             };
-            using (var message = new MailMessage(fromAddress, toAddress)
+            using (var message = new MailMessage(fromAddress.Address, toAddress)
             {
                 Subject = subject,
                 Body = body

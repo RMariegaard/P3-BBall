@@ -21,6 +21,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         ComboBox filterOptions;
         List<Worker> allWorkers;
         ComboBox filterTeam;
+        Button _sendEmailButton;
+        SendEmailPopup _emailPopup;
         
 
         public SeachAndVolunteers(ScheduleController scheduleController,WorkerController workerController, VolunteerOverview volunteerOverview)
@@ -33,6 +35,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             searchTextBox = new TextBox();
             filterOptions = new ComboBox();
             filterTeam = new ComboBox();
+            _sendEmailButton = new Button();
             allWorkers = workerController.Workers;
         }
 
@@ -80,14 +83,28 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 
             GetTeamFilter(new Point(5, teamOptionLabel.Location.Y + teamOptionLabel.Size.Height - 5));
 
-            UpdateNamesPanel();
+            _sendEmailButton.Text = "Send Email";
+            _sendEmailButton.Location = new Point(5, size.Height - _sendEmailButton.Height - 10);
+            _sendEmailButton.AutoSize = true;
+            _sendEmailButton.Click += _sendEmailButtonClicked;
+
+
+            
             _searchAndVolunteerMainPanel.Controls.Add(searchLabel);
             _searchAndVolunteerMainPanel.Controls.Add(filterOptionLabel);
             _searchAndVolunteerMainPanel.Controls.Add(filterOptions);
             _searchAndVolunteerMainPanel.Controls.Add(teamOptionLabel);
             _searchAndVolunteerMainPanel.Controls.Add(searchTextBox);
             _searchAndVolunteerMainPanel.Controls.Add(filterTeam);
+            _searchAndVolunteerMainPanel.Controls.Add(_sendEmailButton);
+            UpdateNamesPanel();
             return _searchAndVolunteerMainPanel;
+        }
+
+        private void _sendEmailButtonClicked(object sender, EventArgs e)
+        {
+            _emailPopup = new SendEmailPopup(FilterWorkers());
+            _emailPopup.Show();
         }
 
         private void GetTeamFilter(Point point)
