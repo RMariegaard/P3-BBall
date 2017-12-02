@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace VolunteerSystem.Database2
 {
-    public class DatabaseSet<T> where T: Volunteer
+    public class VolunteerDatabase
     {
         public void Add(Volunteer volunteer)
         {
@@ -46,6 +46,11 @@ namespace VolunteerSystem.Database2
 
             DBConnection.SqlConnection.Close();
             return volunteer;
+
+        }
+
+        public void UpdateYearsWorked(int Year)
+        {
 
         }
     }
