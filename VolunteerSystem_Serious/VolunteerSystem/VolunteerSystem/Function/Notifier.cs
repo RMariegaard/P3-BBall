@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
+using System.IO;
 
 namespace VolunteerSystem
 {
@@ -94,15 +95,28 @@ namespace VolunteerSystem
 
         private static void InformVolunteerDeniedShift(Volunteer volunteer, Shift shift)
         {
+            var reader = new System.IO.StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerRequestDeniedMessage.txt");
 
-            string message = $"Dear {volunteer.Name},\n Your request for the {shift.Task} shift at {shift.StartTime} has been denied.\nAarhus Basketball Festival.";
+            string message = reader.ReadToEnd()
+                .Replace("[Volunteer]", volunteer.Name)
+                .Replace("[Task]", shift.Task)
+                .Replace("[Time]", shift.StartTime.ToString("dddd D. dd/MM/yyyy kl. hh:mm"));
+
+
             InformVolunteer(volunteer, message);
         }
 
         private static void InformVolunteerAcceptedShift(Volunteer volunteer, Shift shift)
         {
+            var reader = new System.IO.StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerRequestDeniedMessage.txt");
 
-            string message = $"Dear {volunteer.Name},\n Your request for the {shift.Task} shift at {shift.StartTime} has been accepted.\n The shift ends at {shift.EndTime}.\nAarhus Basketball Festival.";
+            string message = reader.ReadToEnd()
+                .Replace("[Volunteer]", volunteer.Name)
+                .Replace("[Task]", shift.Task)
+                .Replace("[StartTime]", shift.StartTime.ToString("dddd D. dd/MM/yyyy kl. hh:mm"))
+                .Replace("[Endtime]", shift.EndTime.ToString("dddd D. dd/MM/yyyy kl. hh:mm"));
+
+
             InformVolunteer(volunteer, message);
         }
 
