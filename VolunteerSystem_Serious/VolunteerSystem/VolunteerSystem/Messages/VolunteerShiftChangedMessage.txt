@@ -1,6 +1,6 @@
 ﻿Dear [Volunteer],
 
-Your [Shift] has been changed from [oldAt] to [newAt].
+Your shift on [oldAt] in [Task] has been changed to [NewAt].
 
 Best Regards,
-Aarhus Basketball Festival
+Aarhus Basketball Festival.
