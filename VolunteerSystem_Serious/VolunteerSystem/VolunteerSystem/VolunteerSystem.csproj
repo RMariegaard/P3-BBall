@@ -89,6 +89,12 @@
     <Compile Include="Function\WorkerController.cs" />
     <Compile Include="Function\Notifier.cs" />
     <Compile Include="Database\SqlDataConnecter.cs" />
+    <Compile Include="Model\TestExternalWorker.cs" />
+    <Compile Include="Model\TestRequest.cs" />
+    <Compile Include="Model\TestSchedule.cs" />
+    <Compile Include="Model\TestShift.cs" />
+    <Compile Include="Model\TestVolunteer.cs" />
+    <Compile Include="Model\TestWorker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Request.cs" />

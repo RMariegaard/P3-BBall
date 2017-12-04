@@ -32,9 +32,9 @@ namespace VolunteerSystem.Database
 
         public IExternalWorkerController externalWorker { get; private set; }
 
-        public void Complete()
+        public int Complete()
         {
-            _context.SaveChanges();
+           return _context.SaveChanges();
         }
 
         public void Dispose()
