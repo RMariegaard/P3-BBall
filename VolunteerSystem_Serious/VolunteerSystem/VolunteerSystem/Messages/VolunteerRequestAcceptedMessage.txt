@@ -3,5 +3,5 @@
 Your request for the [Task] shift at [StartTime] has been accepted.
 The shift ends at [Endtime].
 
-Best regards,
+Best Regards,
 Aarhus Basketball Festival
