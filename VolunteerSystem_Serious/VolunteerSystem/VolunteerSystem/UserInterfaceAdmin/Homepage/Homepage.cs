@@ -16,6 +16,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
         public Panel pendingRequestPanel;
         public Panel VolunteerPanel;
 
+        Panel TheSchedule;
+        Panel ButtonsBottumPanel;
+        Panel DaysLeft;
+
         public List<string> days;
         public Button selectedDay;
         
@@ -26,23 +30,52 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
         public Homepage(IVolunteerMainUI mainWindowUI)
         {
             _mainWindowUI = mainWindowUI;
-            _mainHomepagePanel = new Panel();
+            
 
+
+
+            InizializeControls();
+            CreatePanels();
+        }
+
+        SchedulePanelElements.TheSchedule schedule;
+        SchedulePanelElements.DaysLeftNavigation daysLeftNavigation;
+
+        private void InizializeControls()
+        {
+            _mainHomepagePanel = new Panel();
+            schedulePanel = new Panel();
             pendingRequestPanel = new Panel();
             VolunteerPanel = new Panel();
-            schedulePanel = new Panel();
 
+            TheSchedule = new Panel();
+            ButtonsBottumPanel = new Panel();
+            DaysLeft = new Panel();
+            daysLeftNavigation = new SchedulePanelElements.DaysLeftNavigation(_mainWindowUI, this);
             _mainHomepagePanel.Name = "_mainHomepagePanel";
             pendingRequestPanel.Name = "pendingRequestPanel";
             VolunteerPanel.Name = "VolunteerPanel";
             schedulePanel.Name = "schedulePanel";
         }
 
+        private void CreatePanels()
+        {
+            _mainHomepagePanel.Controls.Add(schedulePanel);
+            _mainHomepagePanel.Controls.Add(pendingRequestPanel);
+            _mainHomepagePanel.Controls.Add(VolunteerPanel);
+
+
+            schedulePanel.Controls.Add(DaysLeft);
+            schedulePanel.Controls.Add(TheSchedule);
+            schedulePanel.Controls.Add(ButtonsBottumPanel);
+
+        }
+
         public Panel GetHomepagePanel(Panel forRefrence)
         {
             _mainHomepagePanel.Size = forRefrence.Size;
             _mainHomepagePanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-            _mainHomepagePanel.Controls.Clear();
+            //_mainHomepagePanel.Controls.Clear();
 
             //Updates the panels
             UpdateAllPanels();
@@ -80,23 +113,23 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
         public void UpdateSchedulePanel()
         {
-            _mainHomepagePanel.SuspendLayout();
-            _mainHomepagePanel.Controls.Remove(schedulePanel);
-            
 
             //Schedule panel
-            schedulePanel.Controls.Clear();
+            schedulePanel.Invalidate();
             schedulePanel.Location = new Point(0, 0);
             schedulePanel.Size = new Size((_mainHomepagePanel.Size.Width / 100) * 70 - 2, _mainHomepagePanel.Height);
             schedulePanel.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right;
             schedulePanel.AutoScroll = true;
+            schedulePanel.BorderStyle = BorderStyle.FixedSingle;
+
+
             _threeSchedulePanels();
-            _mainHomepagePanel.Controls.Add(schedulePanel);
-            _mainHomepagePanel.ResumeLayout();
+            schedulePanel.Update();
+
         }
         public void UpdatePendingRequestPanel()
         {
-            _mainHomepagePanel.Controls.Remove(pendingRequestPanel);
+            pendingRequestPanel.Invalidate();
             //Pending request panel
             pendingRequestPanel.Controls.Clear();
             pendingRequestPanel.Location = new Point(schedulePanel.Location.X + schedulePanel.Size.Width + 2, 0);
@@ -104,11 +137,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             pendingRequestPanel.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
             RequestPanelElements.MainRequestPanelElement requestPanel = new RequestPanelElements.MainRequestPanelElement(_mainWindowUI);
             pendingRequestPanel.Controls.Add(requestPanel.GetRequestPanel(pendingRequestPanel.Size));
-            _mainHomepagePanel.Controls.Add(pendingRequestPanel);
+            pendingRequestPanel.Update();
         }
         public void UpdateVolunteerPanel()
         {
-            _mainHomepagePanel.Controls.Remove(VolunteerPanel);
+            VolunteerPanel.Invalidate();
             //Volunteer panel
             VolunteerPanel.Controls.Clear();
             VolunteerPanel.Location = new Point(schedulePanel.Location.X + schedulePanel.Size.Width + 2, pendingRequestPanel.Location.Y + pendingRequestPanel.Size.Height + 2);
@@ -116,49 +149,46 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             VolunteerPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             VolunteerSmallOverview.VolunteerHomapageOverview volunteerOverviewSmall = new VolunteerSmallOverview.VolunteerHomapageOverview(_mainWindowUI, this);
             VolunteerPanel.Controls.Add(volunteerOverviewSmall.GetPanel(VolunteerPanel.Size));
-            _mainHomepagePanel.Controls.Add(VolunteerPanel);
+            VolunteerPanel.Update();
         }
 
+
+        
         private void _threeSchedulePanels()
         {
             
-            Panel TheSchedule = new Panel();
-            Panel ButtonsBottumPanel = new Panel();
-            
-          
+
             TheSchedule.Name = "TheSchedule";
             ButtonsBottumPanel.Name = "ButtonsBottumPanel";
-
-  
-            schedulePanel.Controls.Remove(TheSchedule);
-            schedulePanel.Controls.Remove(ButtonsBottumPanel);
 
             int leftButtonsWidth = 120;
             int leftButtonsLocationX = 0;
 
-            schedulePanel.Controls.Add(DaysLeft);
+            
             UpdateButtonsLeftSide(leftButtonsLocationX, leftButtonsWidth);
 
+            TheSchedule.Invalidate();
+            TheSchedule.Controls.Clear();
             TheSchedule.Location = new Point( 120, 0);
             TheSchedule.Size = new Size(schedulePanel.Size.Width - 120, schedulePanel.Size.Height - 50);
             TheSchedule.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
-            SchedulePanelElements.TheSchedule schedule = new SchedulePanelElements.TheSchedule(_mainWindowUI, selectedDay);
+            schedule = new SchedulePanelElements.TheSchedule(_mainWindowUI, selectedDay);
             TheSchedule.Controls.Add(schedule.GetPanel(TheSchedule));
             TheSchedule.AutoScroll = true;
-            
-            
+            TheSchedule.Update();
+
+            ButtonsBottumPanel.Invalidate();
             ButtonsBottumPanel.Location = new Point(  120, TheSchedule.Location.Y + TheSchedule.Size.Height);
             ButtonsBottumPanel.Size = new Size(schedulePanel.Size.Width - 120, schedulePanel.Size.Height - TheSchedule.Size.Height);
             ButtonsBottumPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left;
             SchedulePanelElements.ButtonsBottom buttons = new SchedulePanelElements.ButtonsBottom(_mainWindowUI, this);
             ButtonsBottumPanel.Controls.Add(buttons.GetPanel());
+            ButtonsBottumPanel.Update();
 
-            
-            schedulePanel.Controls.Add(TheSchedule);
-            schedulePanel.Controls.Add(ButtonsBottumPanel);
+
         }
 
-        Panel DaysLeft = new Panel();
+       
         public void UpdateButtonsLeftSide(int x, int width)
         {
             _createDates();
@@ -168,7 +198,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             DaysLeft.Location = new Point(x, 0);
             DaysLeft.Size = new Size(width, schedulePanel.Size.Height);
             DaysLeft.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom;
-            SchedulePanelElements.DaysLeftNavigation daysLeftNavigation = new SchedulePanelElements.DaysLeftNavigation(_mainWindowUI, this);
             DaysLeft.Controls.Add(daysLeftNavigation.GetPanel(DaysLeft.Size));
             
             DaysLeft.Update();
