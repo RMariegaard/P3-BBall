@@ -44,5 +44,15 @@ namespace VolunteerSystem
             _year = year;
             _shifts = new List<Shift>();
         }
+
+        //Test Constructer only used for unit test does not connect to database
+        public Schedule(bool test, int year)
+        {
+            //Assign ID??
+            _shifts = new List<Shift>();
+            _tasks = new List<string>();
+            _year = year;
+            _shifts = new List<Shift>();
+        }
     }
 }

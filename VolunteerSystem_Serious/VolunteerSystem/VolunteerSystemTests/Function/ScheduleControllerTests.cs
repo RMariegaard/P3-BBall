@@ -25,7 +25,7 @@ namespace VolunteerSystem.Tests
         [TestCase(0)]
         public void ScheduleYearTest(int year)
         {
-            Schedule schedule = new Schedule(year);
+            Schedule schedule = new Schedule(true, year);
             ScheduleController controller = new ScheduleController(schedule);
 
             Assert.AreEqual(controller.ScheduleYear(), schedule.Year);
