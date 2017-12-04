@@ -13,7 +13,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Settings
         IVolunteerMainUI _settingsMainUI;
         private Panel _settingsMainPanel;
         private Label _titleLabel;
-
+        private ListBox _settingsList;
+        private Panel _settingViewPanel;
         public Settings(IVolunteerMainUI mainUI)
         {
             this._settingsMainUI = mainUI;
@@ -30,6 +31,30 @@ namespace VolunteerSystem.UserInterfaceAdmin.Settings
                 AutoSize = true
                 
             };
+
+            _settingsList = new ListBox()
+            {
+                Location = new Point(5, _titleLabel.Location.Y + _titleLabel.Height + 5),
+                Font = new Font(_settingsMainPanel.Font.Name, 14F),
+                AutoSize = true
+            };
+            _settingsList.Items.Add("Hej");
+
+            _settingsList.Items.Add("Hej");
+            _settingsList.Items.Add("Hej");
+
+            _settingViewPanel = new EmailSetting()
+            {
+                Location = new Point(100, 50),
+
+                BorderStyle = BorderStyle.FixedSingle,
+                Height = 400,
+                Width = 7400
+            };
+
+            _settingsMainPanel.Controls.Add(_settingViewPanel);
+
+            this._settingsMainPanel.Controls.Add(_settingsList);
 
             this._settingsMainPanel.Controls.Add(_titleLabel);
     }

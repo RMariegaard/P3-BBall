@@ -155,6 +155,10 @@
     <Compile Include="UserInterfaceAdmin\PressedOnShiftPopup.Designer.cs">
       <DependentUpon>PressedOnShiftPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterfaceAdmin\Settings\ChooseSettings.cs" />
+    <Compile Include="UserInterfaceAdmin\Settings\EmailSetting.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UserInterfaceAdmin\Settings\Settings.cs" />
     <Compile Include="UserInterfaceAdmin\TheMainWindow.cs">
       <SubType>Form</SubType>
