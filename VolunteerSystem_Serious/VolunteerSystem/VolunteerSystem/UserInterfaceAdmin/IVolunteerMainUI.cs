@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements;
 
 namespace VolunteerSystem.UserInterfaceAdmin
 {
@@ -15,6 +14,8 @@ namespace VolunteerSystem.UserInterfaceAdmin
         void UpdateAllHomepage();
         void HomepageChangeDay(string day);
         void DisplayPopup(string header, string body);
+
+        void UpdateButtonsLeftSide();
         ScheduleController GetScheduleController();
         WorkerController GetWorkController();
         void DisplayHomepage();

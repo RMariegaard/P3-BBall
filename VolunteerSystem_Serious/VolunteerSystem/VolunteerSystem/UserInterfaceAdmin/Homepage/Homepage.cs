@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 {
-    class Homepage : AccessibleObject
+    public class Homepage : AccessibleObject
     {
         public Panel _mainHomepagePanel;
 
@@ -59,12 +59,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             //_mainHomepagePanel.PerformLayout();
         }
 
-        public void UpdateSchedulePanel()
+        private void _createDates()
         {
-            _mainHomepagePanel.SuspendLayout();
-            _mainHomepagePanel.Controls.Remove(schedulePanel);
-            
-            //Finding the dates
             days = new List<string>();
             foreach (Shift shift in _mainWindowUI.GetScheduleController().GetAllShifts().OrderBy(x => x.StartTime))
             {
@@ -79,6 +75,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
                     tempDateTime = tempDateTime.AddDays(1);
                 } while (tempDateTime < shift.EndTime);
             }
+
+        }
+
+        public void UpdateSchedulePanel()
+        {
+            _mainHomepagePanel.SuspendLayout();
+            _mainHomepagePanel.Controls.Remove(schedulePanel);
+            
 
             //Schedule panel
             schedulePanel.Controls.Clear();
@@ -117,41 +121,57 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
         private void _threeSchedulePanels()
         {
-            Panel DaysLeft = new Panel();
+            
             Panel TheSchedule = new Panel();
             Panel ButtonsBottumPanel = new Panel();
-
-            DaysLeft.Name = "DaysLeft";
+            
+          
             TheSchedule.Name = "TheSchedule";
             ButtonsBottumPanel.Name = "ButtonsBottumPanel";
 
-            schedulePanel.Controls.Remove(DaysLeft);
+  
             schedulePanel.Controls.Remove(TheSchedule);
             schedulePanel.Controls.Remove(ButtonsBottumPanel);
-            
-            DaysLeft.Location = new Point(0, 0);
-            DaysLeft.Size = new Size(120, schedulePanel.Size.Height);
-            DaysLeft.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom;
-            SchedulePanelElements.DaysLeftNavigation daysLeftNavigation = new SchedulePanelElements.DaysLeftNavigation(_mainWindowUI, this);
-            DaysLeft.Controls.Add(daysLeftNavigation.GetPanel(DaysLeft.Size));
-            
-            
-            TheSchedule.Location = new Point(DaysLeft.Location.X + DaysLeft.Size.Width, 0);
-            TheSchedule.Size = new Size(schedulePanel.Size.Width - DaysLeft.Size.Width, schedulePanel.Size.Height - 50);
+
+            int leftButtonsWidth = 120;
+            int leftButtonsLocationX = 0;
+
+            schedulePanel.Controls.Add(DaysLeft);
+            UpdateButtonsLeftSide(leftButtonsLocationX, leftButtonsWidth);
+
+            TheSchedule.Location = new Point( 120, 0);
+            TheSchedule.Size = new Size(schedulePanel.Size.Width - 120, schedulePanel.Size.Height - 50);
             TheSchedule.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             SchedulePanelElements.TheSchedule schedule = new SchedulePanelElements.TheSchedule(_mainWindowUI, selectedDay);
             TheSchedule.Controls.Add(schedule.GetPanel(TheSchedule));
             TheSchedule.AutoScroll = true;
             
-            ButtonsBottumPanel.Location = new Point(DaysLeft.Location.X + DaysLeft.Size.Width, TheSchedule.Location.Y + TheSchedule.Size.Height);
-            ButtonsBottumPanel.Size = new Size(schedulePanel.Size.Width - DaysLeft.Size.Width, schedulePanel.Size.Height - TheSchedule.Size.Height);
+            
+            ButtonsBottumPanel.Location = new Point(  120, TheSchedule.Location.Y + TheSchedule.Size.Height);
+            ButtonsBottumPanel.Size = new Size(schedulePanel.Size.Width - 120, schedulePanel.Size.Height - TheSchedule.Size.Height);
             ButtonsBottumPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left;
             SchedulePanelElements.ButtonsBottom buttons = new SchedulePanelElements.ButtonsBottom(_mainWindowUI, this);
             ButtonsBottumPanel.Controls.Add(buttons.GetPanel());
 
-            schedulePanel.Controls.Add(DaysLeft);
+            
             schedulePanel.Controls.Add(TheSchedule);
             schedulePanel.Controls.Add(ButtonsBottumPanel);
+        }
+
+        Panel DaysLeft = new Panel();
+        public void UpdateButtonsLeftSide(int x, int width)
+        {
+            _createDates();
+            DaysLeft.Invalidate();
+            DaysLeft.Controls.Clear();
+            DaysLeft.Name = "DaysLeft";
+            DaysLeft.Location = new Point(x, 0);
+            DaysLeft.Size = new Size(width, schedulePanel.Size.Height);
+            DaysLeft.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom;
+            SchedulePanelElements.DaysLeftNavigation daysLeftNavigation = new SchedulePanelElements.DaysLeftNavigation(_mainWindowUI, this);
+            DaysLeft.Controls.Add(daysLeftNavigation.GetPanel(DaysLeft.Size));
+            
+            DaysLeft.Update();
         }
 
         public void ChangeButtonSelected(string day)
@@ -164,9 +184,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             }
 
         }
-
-
-
+        
         public void UpdateShiftPanel(Shift shift)
         {
 

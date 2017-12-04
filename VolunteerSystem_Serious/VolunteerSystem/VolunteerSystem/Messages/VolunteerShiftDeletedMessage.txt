@@ -1,8 +1,8 @@
 ﻿Dear [Volunteer],
 
-Your [Shift] has been deleted. 
+Your [Shift] in [Task] has been deleted. 
 
 If you want to know why, you can contact us [Email] or [Tlf.]
 
 Best Regards,
-Aarhus Basketball Festival
+Aarhus Basketball Festival.

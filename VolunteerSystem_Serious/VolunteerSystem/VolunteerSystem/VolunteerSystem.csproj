@@ -84,11 +84,14 @@
     <Compile Include="Database\ShiftController.cs" />
     <Compile Include="Database\VolunteerController.cs" />
     <Compile Include="Enums\InformShiftCommand.cs" />
+    <Compile Include="Enums\NotificationImportance.cs" />
     <Compile Include="Function\AccountController.cs" />
+    <Compile Include="Model\AbstractNotification.cs" />
     <Compile Include="Model\ExternalWorker.cs" />
     <Compile Include="Function\WorkerController.cs" />
     <Compile Include="Function\Notifier.cs" />
     <Compile Include="Database\SqlDataConnecter.cs" />
+    <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\TestExternalWorker.cs" />
     <Compile Include="Model\TestRequest.cs" />
     <Compile Include="Model\TestSchedule.cs" />

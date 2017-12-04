@@ -21,7 +21,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             this.shift = shift;
             this.date = date;
         }
-        
+
+
         public Control ShiftUI(Panel forRefence, int hourHeight)
         {
             BindingSource shiftBindingSource = new BindingSource
@@ -49,6 +50,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                     convertEventArgs.Value = new Point(0, 25); //25 svare til hourhight inde i theSchedule...
             };
 
+            DateTime test = shift.EndTime;
             var SizeBinding = new Binding("Size", shiftBindingSource, "EndTime");
             SizeBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
@@ -74,8 +76,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
                     convertEventArgs.Value = new Size(forRefence.Size.Width, (int)(LengthInminuts * ((double)hourHeight / 60)));
                 }
-            };
 
+                if(test != shift.EndTime)
+                    volunteerMainUI.UpdateButtonsLeftSide();
+            };
 
             shiftPanel.DataBindings.Add(locationBinding);
             shiftPanel.DataBindings.Add(SizeBinding);

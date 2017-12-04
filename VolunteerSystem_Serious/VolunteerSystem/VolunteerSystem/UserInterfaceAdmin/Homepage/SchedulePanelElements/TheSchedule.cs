@@ -95,11 +95,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                             }
                             tempDateTime = tempDateTime.AddDays(1);
                         } while (tempDateTime < shift.EndTime);
-
-                        //if (shift.StartTime.DayOfWeek)
                     }
                 }
-                //&& x.StartTime.DayOfWeek.ToString() + " " + x.StartTime.ToShortDateString() == day).ToList()
+                
                 //Create
                 Panel taskPanel = tempTaskPanel.GetATaskPanel(
                     Tasks[i],
@@ -111,7 +109,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                     );
                 
                 colorAndShiftPanel.Controls.Add(taskPanel);
-                //colorAndShiftPanel.Controls.Add(tempTaskPanel.GetATaskPanel(Tasks[i], AllShifts.Where(x => x.Task == Tasks[i] && x.StartTime.DayOfWeek.ToString() + " " + x.StartTime.ToShortDateString() == day).ToList(), new Size(widthOfTask, colorAndShiftPanel.Height), new Point((i * (widthOfTask + 5)) + 50, 0), hourHeight));
             }
 
             _theSchedulemainPanel.Controls.Add(colorAndShiftPanel);

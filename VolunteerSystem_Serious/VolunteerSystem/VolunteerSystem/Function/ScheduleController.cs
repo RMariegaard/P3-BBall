@@ -32,7 +32,16 @@ namespace VolunteerSystem
             _schedule.Shifts.ForEach(x => requests.AddRange(x.Requests));
             return requests;
         }
-        
+
+        public List<AbstractNotification> GetAllRequestsAndNotifications()
+        {
+            List<AbstractNotification> notifications = new List<AbstractNotification>();
+            _schedule.Shifts.ForEach(x => notifications.AddRange(x.Requests));
+            Notifier.AllNotifications.ForEach(x => notifications.Add(x));
+
+            return notifications;
+        }
+
         public List<Shift> GetAllShifts()
         {
             return _schedule.Shifts;

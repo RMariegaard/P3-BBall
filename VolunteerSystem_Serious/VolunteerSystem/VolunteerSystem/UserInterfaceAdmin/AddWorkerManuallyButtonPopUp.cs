@@ -19,6 +19,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
         public AddWorkerManuallyButtonPopUp(IVolunteerMainUI volunteerMainUI, Shift shift)
         {
+            StartPosition = FormStartPosition.CenterParent;
             workController = volunteerMainUI.GetWorkController();
             this.volunteerMainUI = volunteerMainUI;
             this.shift = shift;

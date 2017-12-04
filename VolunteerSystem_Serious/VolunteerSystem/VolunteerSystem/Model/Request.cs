@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace VolunteerSystem
 {
-    public class Request
+    public class Request : AbstractNotification
     {
         [Key]
         public int id { get; set; }
@@ -32,6 +32,7 @@ namespace VolunteerSystem
         }
 
         public Request(Worker worker)
+            : base(DateTime.Now)
         {
             _timeSent = DateTime.Now;
             _worker = worker;
@@ -39,6 +40,7 @@ namespace VolunteerSystem
 
         //Test Constructer only used for unit test does not connect to database
         public Request(bool test, Worker worker)
+            : base(DateTime.Now)
         {
             _timeSent = DateTime.Now;
             _worker = worker;

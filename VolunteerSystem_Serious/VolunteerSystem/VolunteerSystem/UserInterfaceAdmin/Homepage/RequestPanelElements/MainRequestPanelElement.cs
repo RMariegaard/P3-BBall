@@ -14,6 +14,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
         private Panel _mainRequestPanel;
         private IVolunteerMainUI _volunteerMainUI;
         private Label titleTopLabel;
+        private CheckBox NotificationCheckBox;
 
         public MainRequestPanelElement(IVolunteerMainUI volunteerMainUI)
         {
@@ -25,6 +26,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
                 Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom
             };
             titleTopLabel = new Label();
+            NotificationCheckBox = new CheckBox();
         }
 
         private Panel _getTopBarPanel(Size size)
@@ -91,6 +93,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             titleTopLabel.Font = new Font("Arial", 24, FontStyle.Bold);
             titleTopLabel.AutoSize = true;
 
+            _mainRequestPanel.Controls.Add(titleTopLabel);
+
+            Label notificationLabel = new Label
+            {
+                Text = "Show Notifications: ",
+                Location = new Point(titleTopLabel.Location.X + titleTopLabel.Size.Width + 10, 0),
+                AutoSize = true
+            };
+            NotificationCheckBox.Location = new Point(notificationLabel.Location.X + notificationLabel.Size.Width + 10, 0);
+            NotificationCheckBox.AutoSize = true;
+            NotificationCheckBox.CheckState = CheckState.Checked;
+            _mainRequestPanel.Controls.Add(notificationLabel);
+            _mainRequestPanel.Controls.Add(NotificationCheckBox);
+
+
             Panel theRequestsPanel = new Panel();
             theRequestsPanel.Location = new Point(_mainRequestPanel.Location.X, panelHeight + 15);
             theRequestsPanel.Size = new Size(_mainRequestPanel.Width, _mainRequestPanel.Height - theRequestsPanel.Location.Y);
@@ -99,9 +116,15 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             theRequestsPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
             int i = 0;
-            foreach (Request request in _volunteerMainUI.GetScheduleController().GetAllRequests())
+            List<AbstractNotification> showedNotifications = new List<AbstractNotification>();
+            if (NotificationCheckBox.Checked == false)
+                _volunteerMainUI.GetScheduleController().GetAllRequests().ForEach(x => showedNotifications.Add(x));
+            else 
+                showedNotifications = _volunteerMainUI.GetScheduleController().GetAllRequestsAndNotifications();
+
+            foreach (AbstractNotification abNotification in showedNotifications.OrderBy(x => x.DateCreated))
             {
-                Panel requestPanel = new Panel
+                Panel notificationPanel = new Panel
                 {
                     Name = "requestPanel",
                     Location = new Point(0, (i * panelHeight)),
@@ -109,27 +132,65 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
                     BorderStyle = BorderStyle.FixedSingle
                 };
                 if (i % 2 != 0)
-                    requestPanel.BackColor = ColorAndStyle.SmallAlternatingColorsONE();
+                    notificationPanel.BackColor = ColorAndStyle.SmallAlternatingColorsONE();
                 else
-                    requestPanel.BackColor = ColorAndStyle.SmallAlternatingColorsTWO();
+                    notificationPanel.BackColor = ColorAndStyle.SmallAlternatingColorsTWO();
 
-                requestPanel.Controls.Add(_getVolunteerName(new Point((_mainRequestPanel.Size.Width / 5) * 0 + 2, 2), request, request.Worker));
-                requestPanel.Controls.Add(_getDateItWasSent(new Point((_mainRequestPanel.Size.Width / 5) * 1 + 2, 2), request));
-                requestPanel.Controls.Add(_getShiftInformation(new Point((_mainRequestPanel.Size.Width / 5) * 2 + 2, 2), request));
-                requestPanel.Controls.Add(_getAccept(new Point((_mainRequestPanel.Size.Width / 5) * 3 + 2, 2), request));
-                requestPanel.Controls.Add(_getDeny(new Point((_mainRequestPanel.Size.Width / 5) * 4 + 2, 2), request));
+                if (abNotification.GetType() == typeof(Request))
+                {
+                    Request request = (Request)abNotification;
 
-                theRequestsPanel.Controls.Add(requestPanel);
+                    notificationPanel.Controls.Add(new Panel() { Size = new Size(5, notificationPanel.Height), Location = new Point(0, 0), BackColor = ColorAndStyle.RequestColor()});
+                    notificationPanel.Controls.Add(_getVolunteerName(new Point((notificationPanel.Size.Width / 5) * 0 + 6, 2), request, request.Worker));
+                    notificationPanel.Controls.Add(_getDateItWasSent(new Point((notificationPanel.Size.Width / 5) * 1 + 2, 2), request));
+                    notificationPanel.Controls.Add(_getShiftInformation(new Point((notificationPanel.Size.Width / 5) * 2 + 2, 2), request));
+                    notificationPanel.Controls.Add(_getAccept(new Point((notificationPanel.Size.Width / 5) * 3 + 2, 2), request));
+                    notificationPanel.Controls.Add(_getDeny(new Point((notificationPanel.Size.Width / 5) * 4 + 2, 2), request));
+                }
+                else if (abNotification.GetType() == typeof(Notification))
+                {
+                    Notification notification = (Notification)abNotification;
+
+                    notificationPanel.Controls.Add(new Panel() { Size = new Size(5, notificationPanel.Height), Location = new Point(0, 0), BackColor = ColorAndStyle.NotificationColor() });
+                    notificationPanel.Controls.Add(notificationHeadder(new Point((notificationPanel.Size.Width / 5) * 0 + 6, 2), (notificationPanel.Size.Width / 5) + 2, notification.Headder));
+                    notificationPanel.Controls.Add(notificationBody(new Point((notificationPanel.Size.Width / 5) * 1 + 5, 2), notificationPanel.Width - ((notificationPanel.Size.Width / 5) + 5), notification.Body));
+                }
+
+                theRequestsPanel.Controls.Add(notificationPanel);
                 i++;
             }
 
             _mainRequestPanel.Controls.Add(theRequestsPanel);
             _mainRequestPanel.Controls.Add(_getTopBarPanel(new Size(_mainRequestPanel.Size.Width - 20, panelHeight)));
-            _mainRequestPanel.Controls.Add(titleTopLabel);
 
             return _mainRequestPanel;
         }
 
+        private Label notificationHeadder(Point location, int maxWidth, string headder)
+        {
+            Label headderLabel = new Label()
+            {
+                Text = headder,
+                Location = location,
+                MaximumSize = new Size(maxWidth, 0),
+                AutoSize = true
+            };
+            
+            return headderLabel;
+        }
+        private Label notificationBody(Point location, int maxWidth, string body)
+        {
+            Label bodyLabel = new Label()
+            {
+                Text = body,
+                Location = location,
+                MaximumSize = new Size(maxWidth, 0),
+                AutoSize = true
+            };
+
+            return bodyLabel;
+        }
+        
         private LinkLabel _getVolunteerName(Point location, Request request, Worker worker)
         {
             LinkLabel volunteerNameLabel = new LinkLabel

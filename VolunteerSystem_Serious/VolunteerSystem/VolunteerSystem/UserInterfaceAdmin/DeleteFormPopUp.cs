@@ -19,6 +19,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             InitializeComponent();
             button1.DialogResult = DialogResult.OK;
             button2.DialogResult = DialogResult.Abort;
+            StartPosition = FormStartPosition.CenterParent;
         }
 
 

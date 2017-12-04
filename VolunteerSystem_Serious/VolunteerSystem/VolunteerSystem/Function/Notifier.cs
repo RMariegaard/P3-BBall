@@ -11,7 +11,7 @@ namespace VolunteerSystem
 {
     public class Notifier
     {
-
+        public static List<Notification> AllNotifications = new List<Notification>();
 
         public static void InformAdmin()
         {
