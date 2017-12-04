@@ -175,6 +175,8 @@ namespace VolunteerSystem
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
 
+            Notifier.AllNotifications.Add(new Notification("Volunteer droped out", "Unfortunetly Casper has dropped his shift in the kitchen friday 22-01-2017", NotificationImportance.HighImportance));
+            Notifier.AllNotifications.Add(new Notification("Volunteer nhddasmd,klas out", "Unfortunetly Markfasdnklfnadslkf has dropped his shift in the kitchen friday 22-31-2017", NotificationImportance.MediumImportance));
 
             var db = new Database2.VolunteerDatabase();
             db.Add(workerController.Workers[0] as Volunteer);

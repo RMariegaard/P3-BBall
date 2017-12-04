@@ -164,9 +164,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             }
 
         }
-
-
-
+        
         public void UpdateShiftPanel(Shift shift)
         {
 

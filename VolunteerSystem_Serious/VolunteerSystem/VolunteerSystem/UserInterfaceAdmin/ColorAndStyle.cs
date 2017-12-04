@@ -74,5 +74,14 @@ namespace VolunteerSystem.UserInterfaceAdmin
             else
                 return SecondaryColor();
         }
+
+        public static Color RequestColor()
+        {
+            return Color.Orange;
+        }
+        public static Color NotificationColor()
+        {
+            return Color.Blue;
+        }
     }
 }
