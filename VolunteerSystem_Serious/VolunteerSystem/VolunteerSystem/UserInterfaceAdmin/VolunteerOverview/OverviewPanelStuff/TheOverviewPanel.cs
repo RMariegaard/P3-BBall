@@ -273,7 +273,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                 {
                     foreach (Request request in shift.Requests)
                     {
-                        if (worker.ID == request.Worker.ID)
+                        if (worker == request.Worker)
                             requestedShifts.Add(shift);
                     }
                 }
