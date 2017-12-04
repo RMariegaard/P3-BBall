@@ -20,7 +20,6 @@ namespace VolunteerSystem
             Console.Read();
             */
 
-
             FinalController db2 = new FinalController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS"))); 
             
                 db2.externalWorker.Add(new TestExternalWorker("asd", "addsd"));
@@ -31,6 +30,7 @@ namespace VolunteerSystem
 
             db2.volunteer.Add(new TestVolunteer("asd", "asd", "asdd"));
             db2.volunteer.Add(new TestVolunteer("asd", "asd", "asdd"));
+          
 
            TestShift asd = new TestShift("hey", "asd");
 
