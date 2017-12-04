@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VolunteerSystem.UserInterfaceAdmin;
+using VolunteerSystem.UserInterfaceAdmin.Homepage;
 
 namespace VolunteerSystem.UserInterface
 {
@@ -22,7 +23,7 @@ namespace VolunteerSystem.UserInterface
 
         Size fullClientWindowSize;
         
-        private UserInterfaceAdmin.Homepage.Homepage _homepage;
+        private Homepage _homepage;
         private UserInterfaceAdmin.VolunteerOverview.VolunteerOverview _volunteerOverview;
         private UserInterfaceAdmin.Settings.Settings _settings;
 
@@ -298,6 +299,11 @@ namespace VolunteerSystem.UserInterface
         public WorkerController GetWorkController()
         {
             return WorkerController;
+        }
+
+        public void UpdateButtonsLeftSide()
+        {
+            _homepage.UpdateButtonsLeftSide(0 , 120);
         }
     }
 }
