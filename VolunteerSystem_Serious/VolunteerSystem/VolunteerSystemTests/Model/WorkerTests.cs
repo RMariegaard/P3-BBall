@@ -12,16 +12,41 @@ namespace VolunteerSystem.Tests
     public class WorkerTests
     {
 
-        //idk tror ikke denne klasse skal testes overhoved
         [TestCase("Peter", "mark@test.dk", "Peter\tmark@test.dk")]
         [TestCase("Jens", "jens@test.dk", "Jens\tjens@test.dk")]
-        public void GetInformationTest(string name, string email, string actual)
+        public void VolunteerConstructTest(string name, string email, string actual)
         {
             Worker worker = new Volunteer(name, email, "");
 
             Assert.AreEqual(worker.GetInformation(), actual);
         }
 
+
+        
+        [TestCase("jens@")]
+        [TestCase("jensEmail.Dk")]
+        [TestCase("jens")]
+        [TestCase("jens@jens")]
+        [TestCase(".Mark@.dk")]
+        [TestCase("@jens.Dk")]
+        [TestCase("")]
+        [TestCase("@")]
+        [TestCase("mark@test.dk.")]
+        public void WrongEmailFormatExceptionTest( string email)
+        {
+            Worker worker;
+            Assert.Throws<Exception>(() =>worker = new ExternalWorker("Hallo", email));
+        }
+
+        [TestCase("Mark@hej.dk")]
+        [TestCase("Cooper@Love.Com.Uk")]
+        [TestCase("Easy.Peasy@Lemon.Dk")]
+        [TestCase("Mark_Underscore@Test.Test")]
+        public void CorrectEmailTest(string email)
+        {
+            Worker worker = new ExternalWorker("Mark", email);
+            Assert.AreEqual(worker.Email, email);
+        }
 
     }
 }
