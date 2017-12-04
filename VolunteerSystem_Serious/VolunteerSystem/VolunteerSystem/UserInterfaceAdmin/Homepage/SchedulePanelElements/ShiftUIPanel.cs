@@ -43,7 +43,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             var locationBinding = new Binding("Location", shiftBindingSource, "StartTime");
             locationBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
-                if (date.Day == shift.StartTime.Day)
+                if (date.Date == shift.StartTime.Date)
                     convertEventArgs.Value = new Point(0, (int)(((shift.StartTime.Hour * 60 + 60) + shift.StartTime.Minute) * ((double)hourHeight / 60)));
                 else
                     convertEventArgs.Value = new Point(0, 25); //25 svare til hourhight inde i theSchedule...
@@ -53,14 +53,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             SizeBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
 
-                if (date.Day == shift.EndTime.Day)
+                if (date.Date == shift.EndTime.Date)
                 {
                     TimeSpan timeSpan = new TimeSpan(shift.EndTime.Hour, shift.EndTime.Minute, 0) - new TimeSpan(shift.StartTime.Hour, shift.StartTime.Minute, 0);
                     int LengthInminuts = (int)timeSpan.TotalMinutes;
 
                     convertEventArgs.Value = new Size(forRefence.Size.Width, (int)(LengthInminuts * ((double)hourHeight / 60)));
                 }
-                else if (date.Day == shift.StartTime.Day)
+                else if (date.Date == shift.StartTime.Date)
                 {
                     TimeSpan timespan = new TimeSpan(23, 60, 0) - new TimeSpan(shift.StartTime.Hour, shift.StartTime.Minute, 0); //
                     int LengthInminuts = (int)timespan.TotalMinutes;
