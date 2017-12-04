@@ -81,7 +81,7 @@ namespace VolunteerSystem.Tests
         }
 
         [TestCase("Peter", "mark@test.dk", "U12 drenge", "U12 drenge Peter mark@test.dk")]
-        [TestCase("Jens", "jens@test.dk", "U1 piger", "U1 piger jens jens@test.dk")]
+        [TestCase("Jens", "jens@test.dk", "U1 piger", "U1 piger Jens jens@test.dk")]
         public void ToStringTest(string name, string email, string assosiation, string actual)
         {
             Volunteer volunteer = new Volunteer(true, name, email, assosiation);
