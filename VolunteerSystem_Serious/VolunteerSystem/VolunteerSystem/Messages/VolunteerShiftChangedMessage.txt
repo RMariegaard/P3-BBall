@@ -1,4 +1,4 @@
-﻿Dear [Volunteer],
+Dear [Volunteer],
 
 Your shift on [oldAt] in [Task] has been changed to [NewAt].
 

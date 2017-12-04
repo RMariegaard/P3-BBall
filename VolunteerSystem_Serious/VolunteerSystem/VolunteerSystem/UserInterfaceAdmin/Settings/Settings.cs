@@ -45,11 +45,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Settings
 
             _settingViewPanel = new EmailSetting()
             {
-                Location = new Point(100, 50),
+                Location = new Point(_settingsList.Location.X + _settingsList.Width + 10, _settingsList.Location.Y),
 
                 BorderStyle = BorderStyle.FixedSingle,
-                Height = 400,
-                Width = 7400
+                AutoSize = true
             };
 
             _settingsMainPanel.Controls.Add(_settingViewPanel);

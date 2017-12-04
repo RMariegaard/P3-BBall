@@ -1,4 +1,4 @@
-﻿Dear [Volunteer],
+Dear [Volunteer],
 
 Your [Shift] in [Task] has been deleted. 
 
