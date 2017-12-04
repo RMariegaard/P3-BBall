@@ -24,6 +24,7 @@ namespace VolunteerSystem.UserInterface
             numberOfVolunteersTextBox.Text = shift.VolunteersNeeded.ToString();
             TasksComboBox.SelectedItem = shift.Task;
             startDateTimePicker.Value = shift.StartTime;
+            endDateTimePicker.Value = shift.EndTime;
             createShiftButton.Text = "Save";
 
 
@@ -33,7 +34,7 @@ namespace VolunteerSystem.UserInterface
             if (correctInformation())
             {
                 DateTime startDateTime = new DateTime(startDateTimePicker.Value.Year, startDateTimePicker.Value.Month, startDateTimePicker.Value.Day, startHour, startMinut, 0);
-                DateTime endDateTime = new DateTime(startDateTimePicker.Value.Year, startDateTimePicker.Value.Month, startDateTimePicker.Value.Day, endHour, endMinut, 0);
+                DateTime endDateTime = new DateTime(endDateTimePicker.Value.Year, endDateTimePicker.Value.Month, endDateTimePicker.Value.Day, endHour, endMinut, 0);
                 if (startDateTime < endDateTime)
                 {
                     Result = new Shift(startDateTime, endDateTime, TasksComboBox.SelectedItem.ToString(), int.Parse(numberOfVolunteersTextBox.Text), desciptionTextBox.Text);
