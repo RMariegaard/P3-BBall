@@ -120,8 +120,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
         private DateTime convertDayStringFromButtonToDateTime(string day)
         {
-            List<string> dayElemensts = day.Split(' ').Last().Split('/').ToList();
-            return new DateTime(int.Parse(dayElemensts[2]), int.Parse(dayElemensts[0]), int.Parse(dayElemensts[1]));
+            return DateTime.Parse(day);
         }
 
         private void _alternatingColors_Paint(object sender, PaintEventArgs e)
