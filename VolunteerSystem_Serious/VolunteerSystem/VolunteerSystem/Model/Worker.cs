@@ -24,10 +24,7 @@ namespace VolunteerSystem
             }
         }
         
-
-
         public string Name { get { return _name; } }
-
         
         public Worker(string name, string email)
         {
@@ -46,8 +43,6 @@ namespace VolunteerSystem
 
         public override string ToString()
         {
-            
-
             return Name + " " + Email;
         }
 
