@@ -37,7 +37,10 @@ namespace VolunteerSystem.Database2
                     var years3 = new List<int>();
                     foreach (var str in years2)
                     {
-                        years3.Add(int.Parse(str));
+                        if (str != "")
+                        {
+                            years3.Add(int.Parse(str));
+                        }
                     }
 
                     volunteer = new Volunteer((int)reader["Id"], (string)reader["FirstName"], (string)reader["Email"], (string)reader["Assoistation"], DateTime.Parse((string)reader["DateCreated"]), years3);
@@ -65,6 +68,41 @@ namespace VolunteerSystem.Database2
             command.CommandText = $"DELETE VolunteerTable WHERE Id ='{volunteer.ID}';";
             command.ExecuteNonQuery();
             DBConnection.SqlConnection.Close();
+        }
+
+        public int GetLatestID()
+        {
+            int res = -1;
+
+            var command = DBConnection.SqlConnection.CreateCommand();
+            DBConnection.SqlConnection.Open();
+            command.CommandText = $"SELECT TOP 1 Id FROM VolunteerTable ORDER BY Id DESC;";
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+
+                if (reader.Read())
+                {
+                    res = (int)reader["Id"];
+                }
+            }
+            DBConnection.SqlConnection.Close();
+
+            return res;
+        }
+
+        public List<Volunteer> GetAll()
+        {
+            var res = new List<Volunteer>();
+            int last = GetLatestID();
+
+            for(int i = 0; i <= last; i++)
+            {
+                    res.Add(Get(i));
+                
+            }
+
+            return res;
+
         }
     }
 }
