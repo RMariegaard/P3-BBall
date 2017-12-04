@@ -40,45 +40,13 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             };
             shiftPanel.Click += _panel_clicked;
 
-            //Binds the location to starttime, so whenever this is edited, the position of the shift will be changed in the schedule
-            int startTimeHour = 0;
-            int endTimeHour = 0;
-            int startTimeMinut = 0;
-            int endTimeMinut = 0;
-
-            DateTime startShiftShotDateTime = new DateTime(shift.StartTime.Year, shift.StartTime.Month, shift.StartTime.Day);
-            DateTime endShiftShotDateTime = new DateTime(shift.EndTime.Year, shift.EndTime.Month, shift.EndTime.Day);
-
-            if (startShiftShotDateTime < date)
-            {
-                startTimeHour = 0;
-                startTimeMinut = 0;
-            }
-            else if (startShiftShotDateTime == date)
-            {
-                startTimeHour = shift.StartTime.Hour;
-                startTimeMinut = shift.StartTime.Minute;
-            }
-            if (endShiftShotDateTime == date)
-            {
-                endTimeHour = shift.EndTime.Hour;
-                endTimeMinut = shift.EndTime.Minute;
-            }
-            else if (endShiftShotDateTime > date)
-            {
-                endTimeHour = 23;
-                endTimeMinut = 60;
-            }
-
-
-
             var locationBinding = new Binding("Location", shiftBindingSource, "StartTime");
             locationBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
                 if (date.Day == shift.StartTime.Day)
                     convertEventArgs.Value = new Point(0, (int)(((shift.StartTime.Hour * 60 + 60) + shift.StartTime.Minute) * ((double)hourHeight / 60)));
                 else
-                    convertEventArgs.Value = new Point(0, 25);
+                    convertEventArgs.Value = new Point(0, 25); //25 svare til hourhight inde i theSchedule...
             };
 
             var SizeBinding = new Binding("Size", shiftBindingSource, "EndTime");
@@ -87,7 +55,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
                 if (date.Day == shift.EndTime.Day)
                 {
-                    TimeSpan timeSpan = shift.EndTime - shift.StartTime;
+                    TimeSpan timeSpan = new TimeSpan(shift.EndTime.Hour, shift.EndTime.Minute, 0) - new TimeSpan(shift.StartTime.Hour, shift.StartTime.Minute, 0);
                     int LengthInminuts = (int)timeSpan.TotalMinutes;
 
                     convertEventArgs.Value = new Size(forRefence.Size.Width, (int)(LengthInminuts * ((double)hourHeight / 60)));
