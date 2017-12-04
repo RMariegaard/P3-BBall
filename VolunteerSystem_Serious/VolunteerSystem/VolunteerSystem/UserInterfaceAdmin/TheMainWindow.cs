@@ -189,7 +189,7 @@ namespace VolunteerSystem.UserInterface
         
         public void AcceptWorkerRequest(Request request)
         {
-            Shift shiftToedit = ScheduleController.FindSingleShift(x => x.Requests.Contains(request));
+
             ScheduleController.ApproveRequest(request);
 
             _homepage.UpdatePendingRequestPanel();

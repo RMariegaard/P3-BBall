@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 using System.IO;
+using System.Threading;
 
 namespace VolunteerSystem
 {
@@ -20,12 +21,16 @@ namespace VolunteerSystem
 
         public static void InformVolunteer(Volunteer volunteer, string messageContent)
         {
-            
             var toAddress = new MailAddress(volunteer.Email, volunteer.Name);
             string subject = "Changes to your shift";
-
-            SendEmail(toAddress.Address, subject, messageContent);
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                SendEmail(toAddress.Address, subject, messageContent);
+            }).Start();
+            
         }
+
 
         public static void SendEmail(string toAddress, string subject, string body)
         {

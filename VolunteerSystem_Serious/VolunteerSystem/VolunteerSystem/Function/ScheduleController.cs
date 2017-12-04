@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VolunteerSystem.UserInterfaceAdmin;
+using System.Threading;
 
 namespace VolunteerSystem
 {
@@ -166,6 +167,8 @@ namespace VolunteerSystem
         {
            Shift shift = GetAllShifts().Find(x => x.Requests.Contains(request));
             shift.ApproveRequest(request, ScheduleYear());
+
+            
             Notifier.InformVolunteer(request.Worker as Volunteer, shift, InformShiftCommand.Accept);
         }
         public void DenyRequest(Request request)
