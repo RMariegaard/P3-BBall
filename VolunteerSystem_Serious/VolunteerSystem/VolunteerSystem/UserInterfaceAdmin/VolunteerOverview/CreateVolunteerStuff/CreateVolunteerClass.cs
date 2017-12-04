@@ -134,33 +134,44 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            if (externalCheckBox.Checked)
+            try
             {
-                string name = labelAndTextBoxList.First(x => x.Label.Text == "Name").TextBox.Text;
-                string email = labelAndTextBoxList.First(x => x.Label.Text == "Email").TextBox.Text;
-                ExternalWorker externalWorker = new ExternalWorker(name, email)
+                if (externalCheckBox.Checked)
                 {
+                    string name = labelAndTextBoxList.First(x => x.Label.Text == "Name").TextBox.Text;
+                    string email = labelAndTextBoxList.First(x => x.Label.Text == "Email").TextBox.Text;
+                    ExternalWorker externalWorker = new ExternalWorker(name, email)
+                    {
 
-                };
+                    };
 
-                workerController.CreateWorker(externalWorker);
-                volunteerOverview.UpdateCreateVolunteerElement();
-                volunteerOverview.UpdateSeachAndVolunteerElement();
+                    workerController.CreateWorker(externalWorker);
+                    volunteerOverview.UpdateCreateVolunteerElement();
+                    volunteerOverview.UpdateSeachAndVolunteerElement();
+                }
+                else
+                {
+                    string name = labelAndTextBoxList.First(x => x.Label.Text == "Name").TextBox.Text;
+                    string email = labelAndTextBoxList.First(x => x.Label.Text == "Email").TextBox.Text;
+                    string team = labelAndTextBoxList.First(x => x.Label.Text == "Team").TextBox.Text;
+
+                    Volunteer volunteer = new Volunteer(name, email, team)
+                    {
+
+                    };
+
+                    workerController.CreateWorker(volunteer);
+                    volunteerOverview.UpdateCreateVolunteerElement();
+                    volunteerOverview.UpdateSeachAndVolunteerElement();
+                }
             }
-            else
-            {
-                string name = labelAndTextBoxList.First(x => x.Label.Text == "Name").TextBox.Text;
-                string email = labelAndTextBoxList.First(x => x.Label.Text == "Email").TextBox.Text;
-                string team = labelAndTextBoxList.First(x => x.Label.Text == "Team").TextBox.Text;
+            catch(Exception)
+            { 
+                DeleteFormPopUp deletePopup = new DeleteFormPopUp("The Email format is not legal, enter a correct email adress.");
+                deletePopup.StartPosition = FormStartPosition.CenterParent;
+                deletePopup.ShowDialog();
 
-                Volunteer volunteer = new Volunteer(name, email, team)
-                {  
 
-                };
-
-                workerController.CreateWorker(volunteer);
-                volunteerOverview.UpdateCreateVolunteerElement();
-                volunteerOverview.UpdateSeachAndVolunteerElement();
             }
         }
     }
