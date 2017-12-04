@@ -124,7 +124,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
             {
                 Location = new Point(5, volunteerInformationPanel.Height - 25),
                 Size = new Size(volunteerInformationPanel.Width - 10, 20),
-                Text = "Remove Volunteer"
+                Text = "Delete Volunteer"
             };
             removeWorkerButton.Click += RemoveVolunteerButton_Click;
 
