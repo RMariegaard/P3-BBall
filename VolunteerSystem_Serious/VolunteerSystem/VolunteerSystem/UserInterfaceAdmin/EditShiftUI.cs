@@ -18,6 +18,7 @@ namespace VolunteerSystem.UserInterface
             InitializeComponent();
             this.shift = shift;
 
+            StartPosition = FormStartPosition.CenterParent;
             desciptionTextBox.Text = shift.Description;
             startHourMinutTextBox.Text = shift.StartTime.Hour + ":" + shift.StartTime.Minute;
             endHourMinutTextBox.Text = shift.EndTime.Hour + ":" + shift.EndTime.Minute;
