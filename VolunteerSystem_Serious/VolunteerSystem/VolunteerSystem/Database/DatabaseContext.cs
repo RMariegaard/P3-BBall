@@ -24,7 +24,16 @@ namespace VolunteerSystem.Database
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();
-            modelBuilder.Entity<TestShift>().HasMany(p => p.listOfVolunteers).WithMany();
+            modelBuilder.Entity<TestShift>().HasMany(p => p.listOfVolunteers).WithMany(p => p.testShift).
+            Map(m =>{
+                m.ToTable("VolunteerShifts");
+                m.MapRightKey("workerId");
+                m.MapLeftKey("shiftId");
+
+            });
+
+
+            
         }
     }
 }

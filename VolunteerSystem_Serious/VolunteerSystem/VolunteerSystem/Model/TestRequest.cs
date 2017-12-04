@@ -16,5 +16,6 @@ namespace VolunteerSystem.Model
         public int? volunterId { get; set; }
         public TestVolunteer TestVolunteer { get; set; }
 
+
     }
 }

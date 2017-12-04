@@ -14,8 +14,12 @@ namespace VolunteerSystem.Model
             this.email = _email;
             this.name = _name;
         }
+        public TestWorker()
+        {
+
+        }
         [Key]
-        public int workerId { get; private set; }
+        public int workerId { get; set; }
         public string email { get; private set; }
         public string name { get; private set; }
     }

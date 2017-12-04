@@ -12,10 +12,17 @@ namespace VolunteerSystem.Model
        public TestVolunteer(string name, string email, string accosi):base(name, email)
         {
             this.accosiation = accosi;
+            this.testShift = new List<TestShift>();
         }
-       public string accosiation { get; private set; }
+
+        public TestVolunteer()
+        {
+            //this.testShift = new List<TestShift>();
+        }
+
+        public string accosiation { get; private set; }
        public DateTime? dateCreated { get; private set; }
-       public int? volunterId { get; set; }
+       public List<TestShift> testShift { get; set; }
     
 
     }

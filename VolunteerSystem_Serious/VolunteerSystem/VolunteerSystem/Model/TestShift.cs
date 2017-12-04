@@ -14,16 +14,18 @@ namespace VolunteerSystem.Model
         {
             this.task = task;
             this.descripstion = descrip;
+            listOfVolunteers = new List<TestVolunteer>();
+        }
+        public TestShift()
+        {
+            listOfVolunteers = new List<TestVolunteer>();
         }
 
-        [ForeignKey("TestVolunteer")]
-        public int? volunterId { get; set; }
-        public TestVolunteer TestVolunteer { get; set; }
 
-        public List<TestVolunteer> listOfVolunteers { get; set; }
+        public IList<TestVolunteer> listOfVolunteers { get; set; }
 
         [Key]
-        public int id { get; private set; }
+        public int shiftId { get; private set; }
         public string task { get; private set; }
         public string descripstion { get; private set; }
         public DateTime? startTime { get; private set; }

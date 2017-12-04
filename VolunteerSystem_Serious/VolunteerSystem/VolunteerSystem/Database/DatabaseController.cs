@@ -4,16 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VolunteerSystem.Database.InterfacesDatabase;
+using System.Data.Entity;
 
 namespace VolunteerSystem.Database
 {
     public class DatabaseController<TEntity> : IDatabaseController<TEntity> where TEntity : class
     {
-        protected readonly DatabaseContext _context;
+        public DatabaseContext _context { get; set; }
 
         public DatabaseController(DatabaseContext context)
         {
             this._context = context;
+        }
+
+        public void Load(TEntity entity)
+        {
+            
         }
 
 
