@@ -75,6 +75,15 @@ namespace VolunteerSystem
             this._yearsWorked = yearsworked;
         }
 
+        //Test Consctructor that does not connect to the database
+        public Volunteer(bool test, string name, string email, string assosiation) : base(name, email)
+        {
+            this._dateCreated = DateTime.Now;
+            this._assosiation = assosiation;
+            this._yearsWorked = new List<int>();
+            
+        }
+
 
 
         public bool IsValidForSeasonTickets()

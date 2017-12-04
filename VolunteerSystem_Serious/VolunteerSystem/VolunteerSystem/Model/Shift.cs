@@ -20,6 +20,20 @@ namespace VolunteerSystem
             _workers = new List<Worker>();
             _requests = new List<Request>();
         }
+
+        //Test Constructer only used for unit test does not connect to database
+        public Shift(bool test, DateTime startTime, DateTime endTime, string task, int volunteersNeeded, string description)
+        {
+            this._startTime = startTime;
+            this._endTime = endTime;
+            this._task = task;
+            this._volunteersNeeded = volunteersNeeded;
+            this._description = description;
+            _workers = new List<Worker>();
+            _requests = new List<Request>();
+        }
+
+
         [Key]
         public int ID { get; set; }
         private DateTime _startTime;

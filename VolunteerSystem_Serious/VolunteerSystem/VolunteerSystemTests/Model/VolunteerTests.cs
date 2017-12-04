@@ -15,7 +15,7 @@ namespace VolunteerSystem.Tests
         [TestCase("Jens", "jens@test.dk", "U1 piger")]
         public void VolunteerTest(string name, string email, string assosiation)
         {
-            Volunteer volunteer = new Volunteer(name, email, assosiation);
+            Volunteer volunteer = new Volunteer(true, name, email, assosiation);
 
             Assert.AreEqual(volunteer.Name, name);
             Assert.AreEqual(volunteer.Email, email);
@@ -29,7 +29,7 @@ namespace VolunteerSystem.Tests
         [TestCase(0)]
         public void AddYearWorkedTest(int year)
         {
-            Volunteer volunteer = new Volunteer("Peter", "mark@test.dk", "U12 drenge");
+            Volunteer volunteer = new Volunteer(true, "Peter", "mark@test.dk", "U12 drenge");
             volunteer.AddYearWorked(year);
 
             Assert.AreEqual(volunteer.YearsWorked.LastOrDefault(), year);
@@ -41,7 +41,7 @@ namespace VolunteerSystem.Tests
         [TestCase(0)]
         public void AddSameYearWorkedMulitpleTimesTest(int year)
         {
-            Volunteer volunteer = new Volunteer("Peter", "mark@test.dk", "U12 drenge");
+            Volunteer volunteer = new Volunteer(true, "Peter", "mark@test.dk", "U12 drenge");
             volunteer.AddYearWorked(2000);
             volunteer.AddYearWorked(year);
             volunteer.AddYearWorked(year);
@@ -61,7 +61,7 @@ namespace VolunteerSystem.Tests
         [TestCase(0, 1, 1)]
         public void TrueIsValidForSeasonTicketsTest(int year1, int year2, int scheduleYear)
         {
-            Volunteer volunteer = new Volunteer("Peter", "mark@test.dk", "U12 drenge");
+            Volunteer volunteer = new Volunteer(true, "Peter", "mark@test.dk", "U12 drenge");
             volunteer.AddYearWorked(year1);
             volunteer.AddYearWorked(year2);
 
@@ -73,7 +73,7 @@ namespace VolunteerSystem.Tests
         [TestCase(1, 1, 1)]
         public void FalseIsValidForSeasonTicketsTest(int year1, int year2, int scheduleYear)
         {
-            Volunteer volunteer = new Volunteer("Peter", "mark@test.dk", "U12 drenge");
+            Volunteer volunteer = new Volunteer(true,"Peter", "mark@test.dk", "U12 drenge");
             volunteer.AddYearWorked(year1);
             volunteer.AddYearWorked(year2);
 
@@ -84,7 +84,7 @@ namespace VolunteerSystem.Tests
         [TestCase("Jens", "jens@test.dk", "U1 piger", "U1 piger jens jens@test.dk")]
         public void ToStringTest(string name, string email, string assosiation, string actual)
         {
-            Volunteer volunteer = new Volunteer(name, email, assosiation);
+            Volunteer volunteer = new Volunteer(true, name, email, assosiation);
 
             Assert.AreEqual(volunteer.ToString(), actual);
         }

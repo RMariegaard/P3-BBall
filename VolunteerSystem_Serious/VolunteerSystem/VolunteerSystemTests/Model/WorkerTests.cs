@@ -16,7 +16,7 @@ namespace VolunteerSystem.Tests
         [TestCase("Jens", "jens@test.dk", "Jens\tjens@test.dk")]
         public void VolunteerConstructTest(string name, string email, string actual)
         {
-            Worker worker = new Volunteer(name, email, "");
+            Worker worker = new Volunteer(true, name, email, "");
 
             Assert.AreEqual(worker.GetInformation(), actual);
         }
@@ -35,7 +35,7 @@ namespace VolunteerSystem.Tests
         public void WrongEmailFormatExceptionTest( string email)
         {
             Worker worker;
-            Assert.Throws<Exception>(() =>worker = new ExternalWorker("Hallo", email));
+            Assert.Throws<Exception>(() =>worker = new ExternalWorker(true, "Hallo", email));
         }
 
         [TestCase("Mark@hej.dk")]
@@ -44,7 +44,7 @@ namespace VolunteerSystem.Tests
         [TestCase("Mark_Underscore@Test.Test")]
         public void CorrectEmailTest(string email)
         {
-            Worker worker = new ExternalWorker("Mark", email);
+            Worker worker = new ExternalWorker(true, "Mark", email);
             Assert.AreEqual(worker.Email, email);
         }
 

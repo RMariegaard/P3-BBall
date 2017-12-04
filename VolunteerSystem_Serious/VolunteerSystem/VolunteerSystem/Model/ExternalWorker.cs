@@ -12,5 +12,11 @@ namespace VolunteerSystem
         {
 
         }
+
+        //Test Constructer only used for unit test does not connect to database
+        public ExternalWorker(bool test, string name, string email) : base(name, email)
+        {
+
+        }
     }
 }

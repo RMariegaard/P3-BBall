@@ -36,5 +36,12 @@ namespace VolunteerSystem
             _timeSent = DateTime.Now;
             _worker = worker;
         }
+
+        //Test Constructer only used for unit test does not connect to database
+        public Request(bool test, Worker worker)
+        {
+            _timeSent = DateTime.Now;
+            _worker = worker;
+        }
     }
 }
