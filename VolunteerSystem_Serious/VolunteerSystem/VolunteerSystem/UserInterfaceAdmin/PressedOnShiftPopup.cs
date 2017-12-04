@@ -209,7 +209,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             int time = shift.StartTime.Day;
             if (editShiftUI.DialogResult == DialogResult.OK)
             {
-                volunteerMainUI.GetScheduleController().EditShift(shift.ID, editShiftUI.Result);
+                volunteerMainUI.GetScheduleController().EditShift(shift, editShiftUI.Result);
                 this.Close();
             }
             if (task != shift.Task || time != shift.StartTime.Day)

@@ -57,9 +57,8 @@ namespace VolunteerSystem
             _schedule.Tasks.Remove(task);
         }
 
-        public void EditShift(int oldShiftID, Shift newShift)
+        public void EditShift(Shift oldShift, Shift newShift)
         {
-            Shift oldShift = FindSingleShift(x => x.ID == oldShiftID);
             string[] changes = FindShiftChanges(oldShift, newShift);
             foreach (var volunteer in oldShift.Workers.Where(x => x.GetType() == typeof(Volunteer))){
                 Notifier.InformVolunteer(volunteer as Volunteer, oldShift, newShift, changes);
