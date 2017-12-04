@@ -50,7 +50,7 @@ namespace VolunteerSystem.Tests
 
             for(int i = 0; i<volunteersNeeded; i++)
             {
-                shift.AddWorker(new ExternalWorker("", ""), 2018);
+                shift.AddWorker(new ExternalWorker("", "test@test.dk"), 2018);
             }
 
             Assert.IsTrue(shift.IsFilled());
@@ -67,7 +67,7 @@ namespace VolunteerSystem.Tests
 
             for (int i = 0; i < numberOfVolunteers; i++)
             {
-                shift.AddWorker(new ExternalWorker("", ""), 2018);
+                shift.AddWorker(new ExternalWorker("", "test@test.dk"), 2018);
             }
 
             Assert.AreEqual(shift.NumberOfVolunteers(), numberOfVolunteers);
@@ -79,10 +79,10 @@ namespace VolunteerSystem.Tests
         public void NumberOfRequestsTest(int numberOfRequests)
         {
             Shift shift = new Shift(DateTime.Now, DateTime.Now, "", 25, "");
-
+            Volunteer volunteer = new Volunteer("", "test@test.dk", "");
             for (int i = 0; i < numberOfRequests; i++)
             {
-                shift.CreateRequest(new Volunteer("", "", ""));
+                shift.CreateRequest(volunteer);
             }
             Assert.AreEqual(shift.NumberOfRequests(), numberOfRequests);
 
@@ -114,8 +114,8 @@ namespace VolunteerSystem.Tests
 
             for (int i = 0; i < 5; i++)
             {
-                shift.AddWorker(new ExternalWorker("", ""), 2018);
-                shift.AddWorker(new Volunteer("", "", ""), 2018);
+                shift.AddWorker(new ExternalWorker("", "test@test.dk"), 2018);
+                shift.AddWorker(new Volunteer("", "test@test.dk", ""), 2018);
             }
 
             shift.RemoveWorker(worker);
@@ -131,8 +131,8 @@ namespace VolunteerSystem.Tests
 
             for (int i = 0; i < 5; i++)
             {
-                shift.AddWorker(new ExternalWorker("", ""), 2018);
-                shift.AddWorker(new Volunteer("", "", ""), 2018);
+                shift.AddWorker(new ExternalWorker("", "test@test.dk"), 2018);
+                shift.AddWorker(new Volunteer("", "test@test.dk", ""), 2018);
             }
 
             shift.RemoveWorker(worker);
@@ -183,7 +183,7 @@ namespace VolunteerSystem.Tests
             shift.Requests.Add(request);
             for (int i = 0; i < 5; i++)
             {
-                shift.CreateRequest(new Volunteer("", "", ""));
+                shift.CreateRequest(new Volunteer("", "test@test.dk", ""));
             }
             shift.RemoveRequest(request);
             Assert.IsFalse(shift.Requests.Contains(request));
@@ -204,7 +204,7 @@ namespace VolunteerSystem.Tests
 
             for (int i = 0; i < 5; i++)
             {
-                shift.CreateRequest(new Volunteer("", "", ""));
+                shift.CreateRequest(new Volunteer("", "test@test.dk", ""));
             }
 
             shift.ApproveRequest(request, 2018);
@@ -220,7 +220,7 @@ namespace VolunteerSystem.Tests
 
             for (int i = 0; i < 5; i++)
             {
-                shift.CreateRequest(new Volunteer("", "", ""));
+                shift.CreateRequest(new Volunteer("", "test@test.dk", ""));
             }
 
             shift.DenieRequest(request);
