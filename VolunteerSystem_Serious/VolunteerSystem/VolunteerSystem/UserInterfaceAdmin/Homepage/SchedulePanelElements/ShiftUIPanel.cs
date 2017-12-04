@@ -75,16 +75,37 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             var locationBinding = new Binding("Location", shiftBindingSource, "StartTime");
             locationBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
-                convertEventArgs.Value = new Point(0, (int)(((startTimeHour * 60 + 60) + startTimeMinut) * ((double)hourHeight / 60))); 
+                if (date.Day == shift.StartTime.Day)
+                    convertEventArgs.Value = new Point(0, (int)(((shift.StartTime.Hour * 60 + 60) + shift.StartTime.Minute) * ((double)hourHeight / 60)));
+                else
+                    convertEventArgs.Value = new Point(0, 25);
             };
 
             var SizeBinding = new Binding("Size", shiftBindingSource, "EndTime");
             SizeBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
-                TimeSpan timeSpan = new TimeSpan(endTimeHour, endTimeMinut, 0) - new TimeSpan(startTimeHour, startTimeMinut, 0); //shift.EndTime - shift.StartTime;
-                int LengthInminuts = (int)timeSpan.TotalMinutes;
 
-                convertEventArgs.Value = new Size(forRefence.Size.Width, (int)(LengthInminuts * ((double)hourHeight / 60)));
+                if (date.Day == shift.EndTime.Day)
+                {
+                    TimeSpan timeSpan = shift.EndTime - shift.StartTime;
+                    int LengthInminuts = (int)timeSpan.TotalMinutes;
+
+                    convertEventArgs.Value = new Size(forRefence.Size.Width, (int)(LengthInminuts * ((double)hourHeight / 60)));
+                }
+                else if (date.Day == shift.StartTime.Day)
+                {
+                    TimeSpan timespan = new TimeSpan(23, 60, 0) - new TimeSpan(shift.StartTime.Hour, shift.StartTime.Minute, 0); //
+                    int LengthInminuts = (int)timespan.TotalMinutes;
+
+                    convertEventArgs.Value = new Size(forRefence.Size.Width, (int)(LengthInminuts * ((double)hourHeight / 60)));
+                }
+                else
+                {
+                    TimeSpan timespan = new TimeSpan(23, 60, 0) - new TimeSpan(0, 0, 0); //
+                    int LengthInminuts = (int)timespan.TotalMinutes;
+
+                    convertEventArgs.Value = new Size(forRefence.Size.Width, (int)(LengthInminuts * ((double)hourHeight / 60)));
+                }
             };
 
 
