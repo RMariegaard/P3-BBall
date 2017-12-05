@@ -104,11 +104,11 @@ namespace VolunteerPrototype.UI
             topColor.DataBindings.Add(topColorBinding);
             //////////////////NumberOfVolunteerLabel////////////////////////
             var numberOfVolunteerBinding = new Binding("Text", shiftBindingSource, "GetNumberOfVolunteers");
-            //Ikke længere nødvendig
-            //binding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
-            //{
-            //    convertEventArgs.Value =  convertEventArgs.Value + "/"+shift.VolunteersNeeded;
-            //};
+
+            numberOfVolunteerBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
+            {
+               convertEventArgs.Value =  "Volunteers:     "+convertEventArgs.Value;
+            };
 
             Label headder = new Label();
             headder.DataBindings.Add(numberOfVolunteerBinding);
@@ -119,18 +119,26 @@ namespace VolunteerPrototype.UI
             var timeBinding = new Binding("Text", shiftBindingSource, "TimeInterval");
             Label Time = new Label
             {
-                Location = new Point(0, headder.Location.Y + headder.Size.Height + 1)
+                Location = new Point(0, headder.Location.Y + headder.Font.Height + 2)
+            };
+            timeBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
+            {
+                convertEventArgs.Value = "Time:     " + convertEventArgs.Value;
             };
             Time.DataBindings.Add(timeBinding);
             Time.AutoSize = true;
             //////////////////DescriptionLabel////////////////////////
             Label Desciption = new Label
             {
-                Location = new Point(0, Time.Location.Y + Time.Size.Height + 1),
+                Location = new Point(0, Time.Location.Y + Time.Font.Height  + 2),
                 MaximumSize = new Size(100, 0),
                 AutoSize = true
             };
             var descriptionBinding = new Binding("Text", shiftBindingSource, "Description");
+            descriptionBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
+            {
+                convertEventArgs.Value = "Description:\n" + convertEventArgs.Value;
+            };
             Desciption.DataBindings.Add(descriptionBinding);
 
 
@@ -141,7 +149,6 @@ namespace VolunteerPrototype.UI
 
             return shiftPanel;
         }
-
 
     }
 }

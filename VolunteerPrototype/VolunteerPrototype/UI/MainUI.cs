@@ -19,6 +19,7 @@ namespace VolunteerPrototype.UI
 
         private Panel _schedulePanel;
         private Panel _dayNavigationPanel;
+        private MenuUI _menu;
 
         public MainUI(ScheduleController sc, WorkerController wc)
         {
@@ -28,30 +29,42 @@ namespace VolunteerPrototype.UI
             this.WindowState = FormWindowState.Maximized;
             this.Bounds = Screen.PrimaryScreen.Bounds;
             _dayNavigation = new DayNavigation(this);
-            _dayNavigationPanel = _dayNavigation.GetPanel(new Size(100, this.Height));
-            Controls.Add(_dayNavigationPanel);
-            _scheduleUI = new ScheduleUI(_dayNavigation._selected.Text, this);
-
-            _schedulePanel = new Panel()
-            {
-                Location = new Point(_dayNavigationPanel.Width, 0),
-                Size = new Size((this.Size.Width / 100) * 70 - 2, this.Height),
-                Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right,
-                AutoScroll = true,
-                BorderStyle = BorderStyle.FixedSingle
-        };
-            _schedulePanel.Controls.Add(_scheduleUI.GetPanel(_schedulePanel));
-            Controls.Add(_schedulePanel);
+            _menu = new MenuUI(this, false);
+            Controls.Add(_menu);
+            UpdateSchedulePanel();
         }
+
 
         public ScheduleController ScheduleController()
         {
             return _scheduleController;
         }
 
+        public void UpdateMenu()
+        {
+            //hmm
+        }
+
         public void UpdateSchedulePanel()
         {
-            
+            Controls.Remove(_schedulePanel);
+            Controls.Remove(_dayNavigationPanel);
+            _dayNavigationPanel = _dayNavigation.GetPanel(new Size(100, this.Height));
+            Controls.Add(_dayNavigationPanel);
+
+
+            _scheduleUI = new ScheduleUI(_dayNavigation._selected.Text, this);
+
+            _schedulePanel = new Panel()
+            {
+                Location = new Point(_dayNavigationPanel.Width, 100),
+                Size = new Size((this.Size.Width / 100) * 70 - 2, 25*24 + 45),
+                Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right,
+                AutoScroll = true,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+            _schedulePanel.Controls.Add(_scheduleUI.GetPanel(_schedulePanel));
+            Controls.Add(_schedulePanel);
         }
 
         public WorkerController WorkerController()

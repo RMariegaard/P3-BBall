@@ -23,6 +23,7 @@ namespace VolunteerPrototype.UI
         {
             _daysLeftNavigationMainPanel = new Panel();
             _daysLeftNavigationMainPanel.Name = "_daysLeftNavigationMainPanel";
+            _daysLeftNavigationMainPanel.Location = new Point(0, 100);
             int heightOfButtons = 40;
             _daysLeftNavigationMainPanel.Size = forRefferece;
             List<string> days = new List<string>();

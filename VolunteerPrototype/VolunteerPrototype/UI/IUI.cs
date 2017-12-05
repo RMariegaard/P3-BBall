@@ -12,5 +12,6 @@ namespace VolunteerPrototype.UI
         ScheduleController ScheduleController();
         WorkerController WorkerController();
         void UpdateSchedulePanel();
+        void UpdateMenu();
     }
 }
