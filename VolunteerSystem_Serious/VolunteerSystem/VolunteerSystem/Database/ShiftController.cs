@@ -14,5 +14,16 @@ namespace VolunteerSystem.Database
         {
 
         }
+
+        public void Complete()
+        {
+            _context.SaveChanges();
+        }
+
+        public void UpdateShift(TestShift shift)
+        {
+            _context.Entry(shift).State = System.Data.Entity.EntityState.Modified;
+            
+        }
     }
 }

@@ -15,9 +15,15 @@ namespace VolunteerSystem.Database
 
         }
 
+
         public List<TestVolunteer> getthembitches()
         {
             return _context.volunteer.Include("testShift").ToList();
         }
+        public void Complete()
+        {
+            _context.SaveChanges();
+        }
+        
     }
 }

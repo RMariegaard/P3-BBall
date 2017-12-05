@@ -9,5 +9,6 @@ namespace VolunteerSystem.Database.InterfacesDatabase
 {
     public interface IRequestController : IDatabaseController<TestRequest>
     {
+        void Complete();
     }
 }

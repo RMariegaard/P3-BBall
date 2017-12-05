@@ -10,6 +10,7 @@ namespace VolunteerSystem.Database.InterfacesDatabase
     public interface IVolunteerController : IDatabaseController<TestVolunteer>
     {
         List<TestVolunteer> getthembitches();
+        void Complete();
     }
     
 }

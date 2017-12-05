@@ -42,7 +42,7 @@ namespace VolunteerSystem.Database
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _context.Set<TEntity>().ToList();
+            return _context.Set<TEntity>();
         }
 
         public void Remove(TEntity entity)

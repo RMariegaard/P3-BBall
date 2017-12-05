@@ -9,5 +9,7 @@ namespace VolunteerSystem.Database.InterfacesDatabase
 {
     public interface IShiftController : IDatabaseController<TestShift>
     {
+        void Complete();
+        void UpdateShift(TestShift shift);
     }
 }

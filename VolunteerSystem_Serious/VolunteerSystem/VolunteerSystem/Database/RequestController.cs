@@ -14,5 +14,10 @@ namespace VolunteerSystem.Database
         {
 
         }
+
+        public void Complete()
+        {
+            _context.SaveChanges();
+        }
     }
 }
