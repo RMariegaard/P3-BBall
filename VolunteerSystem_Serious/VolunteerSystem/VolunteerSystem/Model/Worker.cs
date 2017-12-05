@@ -50,6 +50,10 @@ namespace VolunteerSystem
         {
             try
             {
+                if(value == "")
+                {
+                    return true;
+                }
                 if (!value.Any(c => c == '@'))
                     return false;
 

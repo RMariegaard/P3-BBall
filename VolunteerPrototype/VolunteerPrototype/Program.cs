@@ -18,10 +18,23 @@ namespace VolunteerPrototype
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var test = new VolunteerSystem.UserInterfaceAdmin.Homepage.Homepage()
+            var btn = new Button()
+            {
+                Text = DateTime.Now.ToString()
+            };
+            var UI = new UI.MainUI();
+            var test = new VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements.TheSchedule(UI, btn);
+            var homepage = new VolunteerSystem.UserInterfaceAdmin.Homepage.Homepage(UI);
+
+            var form = new Form()
+            {
+            };
+            form.Controls.Add(homepage.schedulePanel);
+            homepage.UpdateSchedulePanel();
+            form.Size = new System.Drawing.Size(2000, 750);
 
 
-            Application.Run(test);
+            Application.Run(form);
         }
     }
 }
