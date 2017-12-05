@@ -18,7 +18,7 @@ namespace VolunteerSystem.Database
 
         public List<TestVolunteer> getthembitches()
         {
-            return _context.volunteer.Include("testShift").ToList();
+            return _context.volunteer.Include("ListofShifts").Include("ListOfRequest").ToList();
         }
         public void Complete()
         {

@@ -70,6 +70,7 @@ namespace VolunteerSystem
             //fuck.CreateRequest(db2.volunteer.Get(38));
 
             List<TestShift> hey = db2.shift.getthembitches();
+            List<TestVolunteer> hey2 = db2.volunteer.getthembitches();
 
             int he2y = 5;
 

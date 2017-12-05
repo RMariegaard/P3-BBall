@@ -37,8 +37,6 @@ namespace VolunteerSystem.Database
                 }
                 );
 
-
-           // modelBuilder.Entity<TestRequest>().HasOptional(p => p.TestShift).WithMany(p => p.ListOfRequest);
                 
             
         }
