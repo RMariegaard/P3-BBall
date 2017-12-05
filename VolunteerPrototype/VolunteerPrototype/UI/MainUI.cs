@@ -10,11 +10,36 @@ using VolunteerSystem.UserInterfaceAdmin;
 
 namespace VolunteerPrototype.UI
 {
-    class MainUI : IVolunteerMainUI
+    class MainUI : Form, IVolunteerMainUI
     {
-        private ScheduleController _scheduleController = new ScheduleController(new Schedule(2017));
-        private Panel _panel;
-        
+        private ScheduleController _scheduleController;
+        private WorkerController _workerController;
+        public Panel MainUIPanel;
+
+
+        private Size _fullClientWindowSize;
+
+        public MainUI(ScheduleController sc, WorkerController wc)
+        {
+            _scheduleController = sc;
+            _workerController = wc;
+
+            this.WindowState = FormWindowState.Maximized;
+            this.Bounds = Screen.PrimaryScreen.Bounds;
+            
+
+            _fullClientWindowSize = new Size(RectangleToScreen(this.ClientRectangle).Size.Width, RectangleToScreen(this.ClientRectangle).Height);
+            MainUIPanel = new Panel()
+            {
+                Size = _fullClientWindowSize
+            };
+
+
+            Controls.Add(new VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements.Schedule(this, ))
+
+            Controls.Add(MainUIPanel);
+        }
+
         public void AcceptWorkerRequest(Request request)
         {
             throw new NotImplementedException();

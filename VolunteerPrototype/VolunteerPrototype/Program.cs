@@ -25,15 +25,8 @@ namespace VolunteerPrototype
             ScheduleController scheduleController = new ScheduleController(schedule);
             WorkerController workerController = new WorkerController();
 
-            var form = new Form()
-            {
-            };
-            form.Controls.Add(homepage.schedulePanel);
-            homepage.UpdateSchedulePanel();
-            form.Size = new System.Drawing.Size(2000, 750);
-
-
-            Application.Run(form);
+            
+            Application.Run(new UI.MainUI(scheduleController, workerController));
         }
     }
 }
