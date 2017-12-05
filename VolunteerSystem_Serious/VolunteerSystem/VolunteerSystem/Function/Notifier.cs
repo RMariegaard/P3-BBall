@@ -23,12 +23,8 @@ namespace VolunteerSystem
         {
             var toAddress = new MailAddress(volunteer.Email, volunteer.Name);
             string subject = "Changes to your shift";
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-                SendEmail(toAddress.Address, subject, messageContent);
-            }).Start();
-            
+
+            SendEmail(toAddress.Address, subject, messageContent);
         }
 
 
@@ -54,7 +50,7 @@ namespace VolunteerSystem
                 Body = body
             })
             {
-                smtp.Send(message);
+                smtp.SendAsync(message, new object());
             }
         }
 
