@@ -166,14 +166,14 @@ namespace VolunteerSystem
             scheduleController.GetAllShifts()[4].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[5].CreateRequest((Volunteer)workerController.Workers[1]);
             scheduleController.GetAllShifts()[6].CreateRequest((Volunteer)workerController.Workers[2]);
-            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
-            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
-            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
-            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
-            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
-            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
-            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
-            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[1]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[2]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[3]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[4]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[5]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[6]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[8]);
+            scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[9]);
 
             Notifier.AllNotifications.Add(new Notification("High Importance: Volunteer droped out", "Unfortunetly Casper has dropped his shift in the kitchen friday 22-01-2017", NotificationImportance.HighImportance));
             Notifier.AllNotifications.Add(new Notification("Medium Importance: En lang headder for at se hvad der sker når den bliver lang", 
