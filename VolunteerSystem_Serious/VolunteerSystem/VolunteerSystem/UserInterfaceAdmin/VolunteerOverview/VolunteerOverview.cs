@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview
 {
-    class VolunteerOverview
+    public class VolunteerOverview
     {
         IVolunteerMainUI volunteerMainUI;
         WorkerController workerController;

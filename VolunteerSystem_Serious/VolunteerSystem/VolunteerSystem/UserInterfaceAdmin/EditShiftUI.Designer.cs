@@ -1,6 +1,6 @@
 ﻿namespace VolunteerSystem.UserInterface
 {
-    partial class EditShiftUI
+    public partial class EditShiftUI
     {
         /// <summary>
         /// Required designer variable.

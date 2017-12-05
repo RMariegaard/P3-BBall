@@ -1,6 +1,6 @@
 ﻿namespace VolunteerSystem.UserInterface
 {
-    partial class PopupUI
+    public partial class PopupUI
     {
         /// <summary>
         /// Required designer variable.

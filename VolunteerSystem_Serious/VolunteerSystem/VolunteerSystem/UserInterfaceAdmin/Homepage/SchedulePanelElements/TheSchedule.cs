@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 {
-    class TheSchedule
+    public class TheSchedule
     {
         Panel _theSchedulemainPanel;
         IVolunteerMainUI _mainWindowUI;

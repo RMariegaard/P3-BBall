@@ -1,6 +1,6 @@
 ﻿namespace VolunteerSystem.UserInterface
 {
-    partial class CreateNewTaskUI
+    public partial class CreateNewTaskUI
     {
         /// <summary>
         /// Required designer variable.

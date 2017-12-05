@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 {
-    class DaysLeftNavigation
+    public class DaysLeftNavigation
     {
         Panel _daysLeftNavigationMainPanel;
         IVolunteerMainUI mainWindowUI;

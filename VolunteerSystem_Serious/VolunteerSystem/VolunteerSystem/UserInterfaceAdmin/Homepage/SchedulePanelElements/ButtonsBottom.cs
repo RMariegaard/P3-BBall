@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 {
-    class ButtonsBottom
+    public class ButtonsBottom
     {
         IVolunteerMainUI _mainWindowUI;
         Panel _buttonsatBottomMainPanel;

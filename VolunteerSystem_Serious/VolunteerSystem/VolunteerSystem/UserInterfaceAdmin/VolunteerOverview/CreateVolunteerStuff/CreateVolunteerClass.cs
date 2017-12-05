@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 
 namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerStuff
 {
-    class CreateVolunteerClass : INotifyPropertyChanged
+    public class CreateVolunteerClass : INotifyPropertyChanged
     {
         Panel createVolunteerMainPanel;
         WorkerController workerController;
@@ -176,7 +176,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
         }
     }
 
-    class LabelAndTextBox
+    public class LabelAndTextBox
     {
         private string labelText;
         public Label Label;

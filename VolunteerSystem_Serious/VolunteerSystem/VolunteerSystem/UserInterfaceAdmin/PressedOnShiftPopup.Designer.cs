@@ -1,6 +1,6 @@
 ﻿namespace VolunteerSystem.UserInterfaceAdmin
 {
-    partial class PressedOnShiftPopup
+    public partial class PressedOnShiftPopup
     {
         /// <summary>
         /// Required designer variable.

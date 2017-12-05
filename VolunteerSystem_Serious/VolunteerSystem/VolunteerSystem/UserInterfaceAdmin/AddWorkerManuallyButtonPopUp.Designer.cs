@@ -1,6 +1,6 @@
 ﻿namespace VolunteerSystem.UserInterfaceAdmin
 {
-    partial class AddWorkerManuallyButtonPopUp
+   public partial class AddWorkerManuallyButtonPopUp
     {
         /// <summary>
         /// Required designer variable.

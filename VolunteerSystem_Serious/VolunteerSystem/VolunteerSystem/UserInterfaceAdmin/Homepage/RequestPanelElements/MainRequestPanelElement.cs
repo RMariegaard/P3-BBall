@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
 {
     
-    class MainRequestPanelElement
+    public class MainRequestPanelElement
     {
         private Panel _mainRequestPanel;
         private IVolunteerMainUI _volunteerMainUI;

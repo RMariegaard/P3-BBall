@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuff
 {
-    class TheOverviewPanel
+    public class TheOverviewPanel
     {
         Panel overviewPanel;
 

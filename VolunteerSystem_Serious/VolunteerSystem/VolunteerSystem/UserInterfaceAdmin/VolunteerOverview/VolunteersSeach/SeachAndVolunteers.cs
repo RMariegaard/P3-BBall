@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
 {
-    class SeachAndVolunteers 
+    public class SeachAndVolunteers 
     {
         Panel _searchAndVolunteerMainPanel;
         WorkerController workerController;

@@ -1,6 +1,6 @@
 ﻿namespace VolunteerSystem.UserInterfaceAdmin
 {
-    partial class DeleteFormPopUp
+    public partial class DeleteFormPopUp
     {
         /// <summary>
         /// Required designer variable.

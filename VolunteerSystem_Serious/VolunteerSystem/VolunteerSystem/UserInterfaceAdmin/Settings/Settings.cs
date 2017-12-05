@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace VolunteerSystem.UserInterfaceAdmin.Settings
 {
-    class Settings
+    public class Settings
     {
         IVolunteerMainUI _settingsMainUI;
         private Panel _settingsMainPanel;

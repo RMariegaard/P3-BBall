@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 {
-    class VolunteerHomapageOverview
+    public class VolunteerHomapageOverview
     {
         Panel _volunteerHomapageOverviewMainPanel;
         Volunteer volunteer;
