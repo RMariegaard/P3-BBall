@@ -53,7 +53,7 @@ namespace VolunteerSystem
             if (!_yearsWorked.Contains(year))
             {
                 _yearsWorked.Add(year);
-                _db.Update(this);
+                //_db.Update(this);
             }
         }
         
@@ -62,8 +62,8 @@ namespace VolunteerSystem
             this._dateCreated = DateTime.Now;
             this._assosiation = assosiation;
             this._yearsWorked = new List<int>();
-            _db.Add(this);
-            this.ID = _db.GetLatestID();
+            //_db.Add(this);
+            //this.ID = _db.GetLatestID();
         }
         public Volunteer(int id, string name, string email, string assosiation, DateTime dateCreated, List<int> yearsworked) : base(name, email)
         {

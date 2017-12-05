@@ -23,7 +23,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         ComboBox filterTeam;
         Button _sendEmailButton;
         SendEmailPopup _emailPopup;
-        
+        int volunteersHeight;
 
         public SeachAndVolunteers(ScheduleController scheduleController,WorkerController workerController, VolunteerOverview volunteerOverview)
         {
@@ -79,8 +79,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
                 Location = new Point(5, filterOptions.Location.Y + filterOptions.Size.Height + 10),
                 AutoSize = true,
             };
-
-
+            
             GetTeamFilter(new Point(5, teamOptionLabel.Location.Y + teamOptionLabel.Size.Height - 5));
 
             _sendEmailButton.Text = "Send Email";
@@ -88,8 +87,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             _sendEmailButton.AutoSize = true;
             _sendEmailButton.Click += _sendEmailButtonClicked;
 
+            volunteersHeight = teamOptionLabel.Location.Y + teamOptionLabel.Height + 30;
 
-            
+
             _searchAndVolunteerMainPanel.Controls.Add(searchLabel);
             _searchAndVolunteerMainPanel.Controls.Add(filterOptionLabel);
             _searchAndVolunteerMainPanel.Controls.Add(filterOptions);
@@ -130,10 +130,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         {
             UpdateNamesPanel();
         }
-
-
-
-
+        
 
         private void searchTextBox_Changed(object sender, EventArgs e)
         {
@@ -143,7 +140,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
         public void UpdateNamesPanel()
         {
             _searchAndVolunteerMainPanel.Controls.Remove(panelNames);
-            panelNames = namesPanel(new Size(_size.Width -10, _size.Height - searchTextBox.Height - filterTeam.Height), new Point(2, filterTeam.Location.Y + filterTeam.Size.Height));
+            panelNames = namesPanel(new Size(_size.Width -10, _size.Height - filterTeam.Location.Y - filterTeam.Size.Height - 45), new Point(5, filterTeam.Location.Y + filterTeam.Size.Height + 5));
             _searchAndVolunteerMainPanel.Controls.Add(panelNames);
         }
 
@@ -161,7 +158,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             {
                 Panel panel = new Panel
                 {
-                    Location = new Point(namesPanel.Location.X, namesPanel.Location.Y + (i * 32)),
+                    Location = new Point(0, (i * 32)),
                     Size = new Size(namesPanel.Width - 20, 30),
                     BorderStyle = BorderStyle.FixedSingle,
                     Tag = workersList[i]
