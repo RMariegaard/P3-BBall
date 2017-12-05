@@ -113,11 +113,11 @@ namespace VolunteerSystem.UserInterface
             Controls.Add(_menuButtonPanel);
 
             //event
-            scheduleController.UpdateRequestPanel += delegate ()
-            {
-                _homepage.UpdateTheRequestAndNotificationElements();
-            };
-            this.ResizeEnd += RezieHomepage;
+            //scheduleController.UpdateRequestPanel += delegate ()
+            //{
+            //    _homepage.UpdateTheRequestAndNotificationElements();
+            //};
+            //this.ResizeEnd += RezieHomepage;
         }
 
         private void RezieHomepage(object sender, EventArgs e)
