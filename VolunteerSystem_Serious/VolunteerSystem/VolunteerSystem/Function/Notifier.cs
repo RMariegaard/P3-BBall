@@ -30,31 +30,38 @@ namespace VolunteerSystem
 
         public static void SendEmail(string toAddress, string subject, string body)
         {
-            var fromAddress = new MailAddress("hackermark1234@gmail.com", "Aarhus Basketball Festival");
-            string fromPassword = "1234Hackermark";
-            
-            
+            if (toAddress == "")
+            {
+                //Dont send
+            }
+            else
+            {
+                var fromAddress = new MailAddress("hackermark1234@gmail.com", "Aarhus Basketball Festival");
+                string fromPassword = "1234Hackermark";
 
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-            };
-            new Thread(() =>
-            {
-                using (var message = new MailMessage(fromAddress.Address, toAddress)
+
+
+                var smtp = new SmtpClient
                 {
-                    Subject = subject,
-                    Body = body
-                })
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                };
+                new Thread(() =>
                 {
-                    smtp.Send(message);
-                }
-            }).Start();
+                    using (var message = new MailMessage(fromAddress.Address, toAddress)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(message);
+                    }
+                }).Start();
+            }
         }
 
         public static void InformVolunteer(Volunteer volunteer, Shift oldShift, Shift newShift, string[] changes)

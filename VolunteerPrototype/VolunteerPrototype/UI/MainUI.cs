@@ -12,6 +12,9 @@ namespace VolunteerPrototype.UI
 {
     class MainUI : IVolunteerMainUI
     {
+        private ScheduleController _scheduleController = new ScheduleController(new Schedule(2017));
+        private Panel _panel;
+        
         public void AcceptWorkerRequest(Request request)
         {
             throw new NotImplementedException();
@@ -49,7 +52,7 @@ namespace VolunteerPrototype.UI
 
         public void DisplayPressedOnShift(Shift shift)
         {
-            throw new NotImplementedException();
+          //  throw new NotImplementedException();
         }
 
         public void DisplaySettings()
@@ -79,7 +82,7 @@ namespace VolunteerPrototype.UI
 
         public ScheduleController GetScheduleController()
         {
-            throw new NotImplementedException();
+            return _scheduleController;
         }
 
         public WorkerController GetWorkController()
@@ -104,12 +107,12 @@ namespace VolunteerPrototype.UI
 
         public void UpdateAllHomepage()
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         public void UpdateButtonsLeftSide()
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         public void UpdateSchedule()
