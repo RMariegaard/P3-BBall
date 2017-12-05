@@ -48,8 +48,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             pendingRequestPanel = new Panel();
             VolunteerPanel = new Panel();
 
-            TheSchedule = new Panel();
+
             ButtonsBottumPanel = new Panel();
+            TheSchedule = new Panel();
             DaysLeft = new Panel();
             daysLeftNavigation = new SchedulePanelElements.DaysLeftNavigation(_mainWindowUI, this);
             _mainHomepagePanel.Name = "_mainHomepagePanel";
@@ -66,8 +67,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
 
             schedulePanel.Controls.Add(DaysLeft);
-            schedulePanel.Controls.Add(TheSchedule);
             schedulePanel.Controls.Add(ButtonsBottumPanel);
+            schedulePanel.Controls.Add(TheSchedule);
 
         }
 
@@ -79,7 +80,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
             //Updates the panels
             UpdateAllPanels();
-            UpdateSchedulePanel();
+           // UpdateSchedulePanel();
             return _mainHomepagePanel;
         }
 
@@ -178,15 +179,16 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             TheSchedule.Location = new Point( 120, 0);
             TheSchedule.Size = new Size(schedulePanel.Size.Width - 120, schedulePanel.Size.Height - 50);
             TheSchedule.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
-            schedule = new SchedulePanelElements.TheSchedule(_mainWindowUI, selectedDay);
+            schedule = new SchedulePanelElements.TheSchedule(_mainWindowUI, selectedDay, schedulePanel.Height - 50 );
             TheSchedule.Controls.Add(schedule.GetPanel(TheSchedule));
             TheSchedule.AutoScroll = true;
             TheSchedule.Update();
 
             ButtonsBottumPanel.Invalidate();
             ButtonsBottumPanel.Location = new Point(  120, TheSchedule.Location.Y + TheSchedule.Size.Height);
-            ButtonsBottumPanel.Size = new Size(schedulePanel.Size.Width - 120, schedulePanel.Size.Height - TheSchedule.Size.Height);
+            ButtonsBottumPanel.Size = new Size(schedulePanel.Size.Width - 120, schedulePanel.Size.Height - TheSchedule.Size.Height + 50);
             ButtonsBottumPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left;
+            ButtonsBottumPanel.AutoSize = true;
             SchedulePanelElements.ButtonsBottom buttons = new SchedulePanelElements.ButtonsBottom(_mainWindowUI, this);
             ButtonsBottumPanel.Controls.Add(buttons.GetPanel());
             ButtonsBottumPanel.Update();

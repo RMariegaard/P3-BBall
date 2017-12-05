@@ -35,14 +35,18 @@ namespace VolunteerSystem.UserInterface
         public TheMainWindow(ScheduleController scheduleController, WorkerController workerController)
         {
             InitializeComponent();
-            Width = 1600;
-            Height = 800;
+            //Width = 1600;
+            //Height = 800;
             //this.MinimumSize = new Size(1200 ,800);
+
+            this.WindowState = FormWindowState.Maximized;
+            this.Bounds = Screen.PrimaryScreen.Bounds;
 
             WorkerController = workerController;
             ScheduleController = scheduleController;
 
-            fullClientWindowSize = RectangleToScreen(this.ClientRectangle).Size;
+            fullClientWindowSize = new Size(RectangleToScreen(this.ClientRectangle).Size.Width, RectangleToScreen(this.ClientRectangle).Height);
+
 
             int buttonPanelHeight = 50;
 

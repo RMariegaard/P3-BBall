@@ -16,7 +16,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         int hourHeight;
         Panel colorAndShiftPanel;
 
-        public TheSchedule(IVolunteerMainUI mainWindowUI, Button day)
+        public TheSchedule(IVolunteerMainUI mainWindowUI, Button day, int hight)
         {
             _mainWindowUI = mainWindowUI;
             _theSchedulemainPanel = new Panel
@@ -37,10 +37,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 this.day = day.Text;
             }
 
-            hourHeight = 25;//schedulePanel.Size.Height / 25;
+            hourHeight = hight / 25;
 
             //Add Numbers to Panel. this needs only to be done once
-            for (int i = 1; i <= 25; i++)
+            for (int i = 1; i <= 24; i++)
             {
                 Label tempLabel = new Label
                 {
