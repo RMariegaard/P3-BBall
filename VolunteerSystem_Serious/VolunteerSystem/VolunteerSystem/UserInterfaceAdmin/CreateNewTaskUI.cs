@@ -28,7 +28,7 @@ namespace VolunteerSystem.UserInterface
             Width = 400;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
-
+            StartPosition = FormStartPosition.CenterParent;
             FormBorderStyle = FormBorderStyle.FixedDialog;
 
             nameOfTaskLabel = new Label();
@@ -71,7 +71,6 @@ namespace VolunteerSystem.UserInterface
                 NotGoodEnugh.Show();
             }
         }
-
         private bool correctInformation()
         {
             return true;

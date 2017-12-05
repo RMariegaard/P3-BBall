@@ -49,6 +49,7 @@ namespace VolunteerSystem.UserInterface
             this.MinimizeBox = false;
             this.MaximizeBox = false;
 
+            StartPosition = FormStartPosition.CenterParent;
             FormBorderStyle = FormBorderStyle.FixedDialog;
 
             int heightBewtweenElements = 30;
@@ -63,6 +64,7 @@ namespace VolunteerSystem.UserInterface
             int endDatePickerPosition = 5;
             int desciptionPosition = 6;
             int buttonPosition = 7;
+            
 
             //Desciption - label
             desciptionLabel = new Label
@@ -177,6 +179,7 @@ namespace VolunteerSystem.UserInterface
 
             Controls.Add(createShiftButton);
             Controls.Add(regretButton);
+            
         }
 
         protected virtual void createShift_Clicked(object sender, EventArgs e)
