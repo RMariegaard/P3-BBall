@@ -57,7 +57,7 @@ namespace VolunteerSystem
 
 
 
-            workerController.Workers.Add(new Volunteer("Denne dude er validated for season tickets ", "mark1904@hotmail.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Denne dude er validated for season tickets ", "nej@ja.maybe", "U12 Drenge"));
             ((Volunteer)workerController.Workers.First()).TempAddYearWorked(2017);
             ((Volunteer)workerController.Workers.First()).TempAddYearWorked(2018);
             workerController.Workers.Add(new Volunteer("Kasper", "AnEmail@domainFindesIkke.dk", "U8 Drenge"));
@@ -67,7 +67,7 @@ namespace VolunteerSystem
             workerController.Workers.Add(new Volunteer("Mustafa", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Emil", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Rasmus", "JegKanIkkeLideSex@NarrePik.fuck", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Peter", "mustafaanoorzai@gmail.com", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Peter", "anEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Søren", "AnEmail@domainFindesIkke.dk", "U14 Drenge"));
             workerController.Workers.Add(new Volunteer("Krisjan", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Mikkel", "AnEmail@domainFindesIkke.dk", "U12 Piger") { PhoneNumber = 11223344 });
