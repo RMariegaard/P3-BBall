@@ -79,7 +79,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
             //Updates the panels
             UpdateAllPanels();
-
+            UpdateSchedulePanel();
             return _mainHomepagePanel;
         }
 

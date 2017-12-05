@@ -155,6 +155,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
                     string email = labelAndTextBoxList.First(x => x.Label.Text == "Email").TextBox.Text;
                     string team = labelAndTextBoxList.First(x => x.Label.Text == "Team").TextBox.Text;
 
+
                     Volunteer volunteer = new Volunteer(name, email, team)
                     {
 
@@ -167,9 +168,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
             }
             catch(Exception)
             { 
-                DeleteFormPopUp deletePopup = new DeleteFormPopUp("The Email format is not legal, enter a correct email adress.");
-                deletePopup.StartPosition = FormStartPosition.CenterParent;
-                deletePopup.ShowDialog();
+                WrongEmailWarning message = new WrongEmailWarning("The Email format is not legal, enter a correct email adress.");
+                message.StartPosition = FormStartPosition.CenterParent;
+                message.ShowDialog();
 
 
             }
