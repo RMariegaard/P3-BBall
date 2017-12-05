@@ -49,7 +49,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
 
             Label dateSentLabel = new Label
             {
-                Text = "Request Sent",
+                Text = "Date Sent",
                 AutoSize = true,
                 Location = new Point((_mainRequestPanel.Size.Width / 5) * 1 + 2, 2)
             };
@@ -61,26 +61,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
                 Location = new Point((_mainRequestPanel.Size.Width / 5) * 2 + 2, 2)
             };
 
-            Label acceptButtonLabel = new Label
-            {
-                Text = "Accept",
-                AutoSize = true,
-                Location = new Point((_mainRequestPanel.Size.Width / 5) * 3 + 2, 2)
-            };
-
-            Label denyButtonLabel = new Label
-            {
-                Text = "Deny",
-                AutoSize = true,
-                Location = new Point((_mainRequestPanel.Size.Width / 5) * 4 + 2, 2)
-            };
 
 
             TopBarPanel.Controls.Add(nameLabel);
             TopBarPanel.Controls.Add(dateSentLabel);
             TopBarPanel.Controls.Add(shiftInfoLabel);
-            TopBarPanel.Controls.Add(acceptButtonLabel);
-            TopBarPanel.Controls.Add(denyButtonLabel);
             return TopBarPanel;
         }
 
