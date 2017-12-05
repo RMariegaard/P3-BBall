@@ -57,7 +57,7 @@ namespace VolunteerSystem
 
 
 
-            workerController.Workers.Add(new Volunteer("Denne dude er validated for season tickets ", "AnEmail@gmail.com", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Denne dude er validated for season tickets ", "nej@ja.maybe", "U12 Drenge"));
             ((Volunteer)workerController.Workers.First()).TempAddYearWorked(2017);
             ((Volunteer)workerController.Workers.First()).TempAddYearWorked(2018);
             workerController.Workers.Add(new Volunteer("Kasper", "AnEmail@domainFindesIkke.dk", "U8 Drenge"));
@@ -67,14 +67,14 @@ namespace VolunteerSystem
             workerController.Workers.Add(new Volunteer("Mustafa", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Emil", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Rasmus", "JegKanIkkeLideSex@NarrePik.fuck", "U12 Drenge"));
-            workerController.Workers.Add(new Volunteer("Peter", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            workerController.Workers.Add(new Volunteer("Peter", "anEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Søren", "AnEmail@domainFindesIkke.dk", "U14 Drenge"));
             workerController.Workers.Add(new Volunteer("Krisjan", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
             workerController.Workers.Add(new Volunteer("Mikkel", "AnEmail@domainFindesIkke.dk", "U12 Piger") { PhoneNumber = 11223344 });
 
             scheduleController.CreateTask("Kitchen");
             scheduleController.CreateTask("Accomadation");
-            scheduleController.CreateTask("Koisk");
+            scheduleController.CreateTask("Kiosk");
             scheduleController.CreateTask("Dinning Hall");
             scheduleController.CreateTask("DishWash");
             scheduleController.CreateTask("Car");
@@ -145,12 +145,12 @@ namespace VolunteerSystem
 
             for (int i = 1; i <= 7; i++)
             {
-                scheduleController.AddWorkerToShift(scheduleController.FindSingleShift(x => x.ID == 12), workerController.Workers[i]);
+                scheduleController.AddWorkerToShift(scheduleController.FindSingleShift(x => x.Task == "Kiosk"), workerController.Workers[i]);
             }
 
             for (int i = 1; i <= 7; i++)
             {
-                scheduleController.AddWorkerToShift(scheduleController.FindSingleShift(x => x.ID == 15), workerController.Workers[i]);
+                scheduleController.AddWorkerToShift(scheduleController.FindSingleShift(x => x == scheduleController.GetAllShifts().FindAll(y => y.Task == "Kiosk")[2]), workerController.Workers[i]);
             }
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[1].CreateRequest((Volunteer)workerController.Workers[1]);
@@ -175,6 +175,7 @@ namespace VolunteerSystem
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
 
+<<<<<<< HEAD
             Notifier.AllNotifications.Add(new Notification("High Importance: Volunteer droped out", "Unfortunetly Casper has dropped his shift in the kitchen friday 22-01-2017", NotificationImportance.HighImportance));
             Notifier.AllNotifications.Add(new Notification("Medium Importance: En lang headder for at se hvad der sker når den bliver lang", 
                 "Og den skal selvfølgelig have en mindst ligeså lang body for at se hvad der sker her ovre. Men hvor langt er for langt? Måske lige en sætning mere", 
@@ -188,6 +189,18 @@ namespace VolunteerSystem
             v.ID = 5;
             db.Update(v);
             db.Remove(v);
+=======
+            Notifier.AllNotifications.Add(new Notification("Volunteer droped out", "Unfortunetly Casper has dropped his shift in the kitchen friday 22-01-2017", NotificationImportance.HighImportance));
+            Notifier.AllNotifications.Add(new Notification("Volunteer nhddasmd,klas out", "Unfortunetly Markfasdnklfnadslkf has dropped his shift in the kitchen friday 22-31-2017", NotificationImportance.MediumImportance));
+
+            //var db = new Database2.VolunteerDatabase();
+            //db.Add(workerController.Workers[0] as Volunteer);
+            //var v = workerController.Workers[0] as Volunteer;
+            //v.TempAddYearWorked(2019);
+            //v.ID = 5;
+            //db.Update(v);
+            //db.Remove(v);
+>>>>>>> 60f2a730178ed2f562fcce533cfd79e60773b6e3
 
             
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
