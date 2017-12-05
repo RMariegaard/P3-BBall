@@ -54,7 +54,8 @@ namespace VolunteerSystem.Model
         //not properties
         public int NumberOfVolunteers() => ListOfWorkers.Count;
         public bool IsFilled() => NumberOfVolunteers() >= VolunteersNeeded;
-        //public int NumberOfRequests() => ListOfRequest.Count;
+        public int NumberOfRequests() => ListOfRequest.Count;
+
         [NotMapped]
         public string GetNumberOfVolunteers { get { return ListOfWorkers.Count.ToString() + "/" + VolunteersNeeded; } }
 
@@ -78,10 +79,10 @@ namespace VolunteerSystem.Model
             ListOfWorkers.Add(worker);
             ShiftDatabase.UpdateShift(this);
             ShiftDatabase.Complete();
-            //if (worker is TestVolunteer)
-            //{
-            //    ((TestVolunteer)worker).AddYearWorked(year);
-            //}
+            if (worker is TestVolunteer)
+            {
+                ((TestVolunteer)worker).AddYearWorked(year);
+            }
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
         public void CreateRequest(TestVolunteer volunteer)
@@ -93,12 +94,17 @@ namespace VolunteerSystem.Model
 
         public void RemoveRequest(TestRequest request)
         {
-            ListOfRequest.Remove(request);
+            //ListOfRequest.Remove(request);
+            //ShiftDatabase._context.request.Attach(request);
+            //ShiftDatabase._context.request.Remove(request);
+            //ShiftDatabase.Complete();
         }
 
         public void RemoveWorker(TestWorker worker)
         {
             ListOfWorkers.Remove(worker);
+            ShiftDatabase.UpdateShift(this);
+            ShiftDatabase.Complete();
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -111,21 +117,27 @@ namespace VolunteerSystem.Model
             }
         }
 
-        //public void ApproveRequest(TestRequest request, int year)
-        //{
-        //    TestWorker worker = request.TestVolunteer;
-        //    ListOfWorkers.Add(worker);
+        public void ApproveRequest(TestRequest request, int year)
+        {
+            TestWorker worker = request.TestVolunteer;
+            this.ListOfWorkers.Add(worker);
+            this.ListOfRequest.Remove(request);
 
-        //    if (worker is TestVolunteer)
-        //    {
-        //        ((TestVolunteer)worker).AddYearWorked(year);
-        //    }
-        //    RemoveRequest(request);
+            ShiftDatabase.UpdateShift(this);
+            ShiftDatabase.Complete();
+            //RemoveRequest(request);
 
-        //    PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
-        //}
+
+            //if (worker is TestVolunteer)
+            //{
+            //    ((TestVolunteer)worker).AddYearWorked(year);
+            //}
+
+            PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
+        }
         public void DenieRequest(TestRequest request)
         {
+            
             RemoveRequest(request);
         }
 

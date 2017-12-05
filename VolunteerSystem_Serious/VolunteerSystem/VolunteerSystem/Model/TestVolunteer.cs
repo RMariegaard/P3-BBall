@@ -11,8 +11,10 @@ namespace VolunteerSystem.Model
 {
     public class TestVolunteer : TestWorker
     {
-
+        //Database Connection
         public VolunteerController volunteerDatabase = new VolunteerController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
+
+        //Constructors 
         public TestVolunteer(string name, string email, string accosi):base(name, email)
         {
             this.Association = accosi;
@@ -20,7 +22,6 @@ namespace VolunteerSystem.Model
             volunteerDatabase.Complete();
             
         }
-
         public TestVolunteer()
         {
         }
@@ -33,6 +34,8 @@ namespace VolunteerSystem.Model
         [NotMapped]
         public List<int> YearsWorked { get; set; }
 
+        
+                               
         public override string ToString()
         {
             return Association + " " + Name + " " + Email;
@@ -42,25 +45,29 @@ namespace VolunteerSystem.Model
 
 
 
+
         public void AddYearWorked(int year)
         {
-            if (!YearsWorked.Contains(year))
+            //if (!YearsWorked.Contains(year))
             {
-                YearsWorked.Add(year);
+               // YearsWorked.Add(year);
                 //update database på en måde
             }
         }
 
 
-        //public Volunteer(string name, string email, string assosiation) : base(name, email)
-        //{
-        //    this._dateCreated = DateTime.Now;
-        //    this._assosiation = assosiation;
-        //    this._yearsWorked = new List<int>();
-        //    _db.Add(this);
-        //    this.ID = _db.GetLatestID();
+        public TestVolunteer(string name, string email, string assosiation, int phonenumber) : base(name, email)
+        {
+            this.DateCreated = DateTime.Now;
+            this.Association = assosiation;
+            this.YearsWorked = new List<int>();
+            this.Phonenumber = phonenumber;
 
-        //}
+            volunteerDatabase.Add(this);
+            volunteerDatabase.Complete();
+
+
+        }
         //public Volunteer(int id, string name, string email, string assosiation, DateTime dateCreated, List<int> yearsworked) : base(name, email)
         //{
         //    this.ID = id;
@@ -80,27 +87,27 @@ namespace VolunteerSystem.Model
 
 
 
-        //public bool IsValidForSeasonTickets()
-        //{
-        //    problem if the program is used before newyears....or is it ??
-        //    When would you search for this ? right after the tournament it is correct..
-        //    When should the validation reset ? when a new schedule is created ??
-        //    int thisYear = DateTime.Now.Year;
-        //    int lastYear = thisYear - 1;
-        //    if (YearsWorked.Count >= 2)
-        //        return thisYear == YearsWorked.Last() && lastYear == YearsWorked[YearsWorked.Count - 2];
-        //    else
-        //        return false;
-        //}
+        public bool IsValidForSeasonTickets()
+        {
+            //problem if the program is used before newyears....or is it ??
+            //When would you search for this ? right after the tournament it is correct..
+            //When should the validation reset ? when a new schedule is created ??
+            int thisYear = DateTime.Now.Year;
+            int lastYear = thisYear - 1;
+            if (YearsWorked.Count >= 2)
+                return thisYear == YearsWorked.Last() && lastYear == YearsWorked[YearsWorked.Count - 2];
+            else
+                return false;
+        }
         //i would do it this way maybe
-        //public bool IsValidForSeasonTickets(int scheduleYear)
-        //{
-        //    int lastYear = scheduleYear - 1;
-        //    if (YearsWorked.Count >= 2)
-        //        return scheduleYear == YearsWorked.Last() && lastYear == YearsWorked[YearsWorked.Count - 2];
-        //    else
-        //        return false;
-        //}
+        public bool IsValidForSeasonTickets(int scheduleYear)
+        {
+            int lastYear = scheduleYear - 1;
+            if (YearsWorked.Count >= 2)
+                return scheduleYear == YearsWorked.Last() && lastYear == YearsWorked[YearsWorked.Count - 2];
+            else
+                return false;
+        }
 
 
 

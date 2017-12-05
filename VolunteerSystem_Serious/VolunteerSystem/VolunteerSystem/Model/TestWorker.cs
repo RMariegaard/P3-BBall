@@ -18,7 +18,7 @@ namespace VolunteerSystem.Model
         }
         public TestWorker()
         {
-
+            ListofShifts = new List<TestShift>();
         }
         [Key]
         public int WorkerId { get; set; }

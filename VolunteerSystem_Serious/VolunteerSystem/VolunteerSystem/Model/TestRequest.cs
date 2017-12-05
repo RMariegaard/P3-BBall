@@ -17,12 +17,13 @@ namespace VolunteerSystem.Model
         [Key]
         public int RequestId { get; set; }
         public DateTime? TimeSent { get; set; }
+
         [ForeignKey("TestShift")]
-        public int ShiftId { get; set; }
+        public int? ShiftId { get; set; }
         public TestShift TestShift { get; set; }
 
         [ForeignKey("TestVolunteer")]
-        public int WorkerId { get; set; }
+        public int? WorkerId { get; set; }
         public TestVolunteer TestVolunteer { get; set; }
 
 

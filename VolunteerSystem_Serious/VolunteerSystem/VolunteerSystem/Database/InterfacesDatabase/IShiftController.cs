@@ -12,5 +12,7 @@ namespace VolunteerSystem.Database.InterfacesDatabase
         void Complete();
         void UpdateShift(TestShift shift);
         List<TestShift> getthembitches();
+        void RemoveRequest(TestRequest request);
+        TestShift GetShift(int id);
     }
 }

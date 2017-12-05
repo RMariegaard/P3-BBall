@@ -19,5 +19,10 @@ namespace VolunteerSystem.Database
         {
             _context.SaveChanges();
         }
+
+        public TestRequest GetRequest(int id)
+        {
+            return _context.request.Include("TestVolunteer").Single(x => x.RequestId == id);
+        }
     }
 }
