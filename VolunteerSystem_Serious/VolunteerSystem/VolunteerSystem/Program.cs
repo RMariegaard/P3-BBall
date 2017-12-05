@@ -180,7 +180,7 @@ namespace VolunteerSystem
                 "Og den skal selvfølgelig have en mindst ligeså lang body for at se hvad der sker her ovre. Men hvor langt er for langt? Måske lige en sætning mere", 
                 NotificationImportance.MediumImportance));
             Notifier.AllNotifications.Add(new Notification("Low importance: Headder", "Boddy, denne er ikke så vigtig", NotificationImportance.LowImportance));
-            /*
+            
             var db = new Database2.VolunteerDatabase();
             db.Add(workerController.Workers[0] as Volunteer);
             var v = workerController.Workers[0] as Volunteer;
@@ -188,7 +188,7 @@ namespace VolunteerSystem
             v.ID = 5;
             db.Update(v);
             db.Remove(v);
-            */
+            
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
 
             Ui.Start();
