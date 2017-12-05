@@ -44,14 +44,17 @@ namespace VolunteerSystem
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
             };
-            using (var message = new MailMessage(fromAddress.Address, toAddress)
+            new Thread(() =>
             {
-                Subject = subject,
-                Body = body
-            })
-            {
-                smtp.SendAsync(message, new object());
-            }
+                using (var message = new MailMessage(fromAddress.Address, toAddress)
+                {
+                    Subject = subject,
+                    Body = body
+                })
+                {
+                    smtp.Send(message);
+                }
+            }).Start();
         }
 
         public static void InformVolunteer(Volunteer volunteer, Shift oldShift, Shift newShift, string[] changes)
@@ -109,7 +112,7 @@ namespace VolunteerSystem
 
         private static void InformVolunteerAcceptedShift(Volunteer volunteer, Shift shift)
         {
-            var reader = new System.IO.StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerRequestDeniedMessage.txt");
+            var reader = new System.IO.StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerRequestAcceptedMessage.txt");
 
             string message = reader.ReadToEnd()
                 .Replace("[Volunteer]", volunteer.Name)
