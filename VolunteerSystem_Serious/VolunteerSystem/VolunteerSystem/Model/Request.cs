@@ -32,7 +32,7 @@ namespace VolunteerSystem
         }
 
         public Request(Worker worker)
-            : base(DateTime.Now)
+            : base(DateTime.Now, NotificationImportance.MediumImportance)
         {
             _timeSent = DateTime.Now;
             _worker = worker;
@@ -40,7 +40,7 @@ namespace VolunteerSystem
 
         //Test Constructer only used for unit test does not connect to database
         public Request(bool test, Worker worker)
-            : base(DateTime.Now)
+            : base(DateTime.Now, NotificationImportance.MediumImportance)
         {
             _timeSent = DateTime.Now;
             _worker = worker;

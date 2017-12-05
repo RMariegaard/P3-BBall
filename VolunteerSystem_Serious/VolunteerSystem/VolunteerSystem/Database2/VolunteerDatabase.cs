@@ -18,8 +18,7 @@ namespace VolunteerSystem.Database2
             command.ExecuteNonQuery();
             DBConnection.SqlConnection.Close();
         }
-
-
+        
         public Volunteer Get(int id)
         {
             Volunteer volunteer = null;

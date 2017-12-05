@@ -17,8 +17,18 @@ namespace VolunteerSystem
             }
         }
 
-        public AbstractNotification(DateTime DateCreated)
+        private NotificationImportance _importance;
+        public NotificationImportance Importance
         {
+            get
+            {
+                return _importance;
+            }
+        }
+
+        public AbstractNotification(DateTime DateCreated, NotificationImportance importance)
+        {
+            _importance = importance;
             _dateCreated = DateCreated;
         }
     }

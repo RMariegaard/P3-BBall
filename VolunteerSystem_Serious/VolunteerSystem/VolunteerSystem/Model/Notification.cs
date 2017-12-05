@@ -25,22 +25,12 @@ namespace VolunteerSystem
                 return _headder;
             }
         }
-
-        private NotificationImportance _importance;
-        public NotificationImportance Importance
-        {
-            get
-            {
-                return _importance;
-            }
-        }
-
+        
         public Notification(string headder, string body, NotificationImportance importance)
-            : base(DateTime.Now)
+            : base(DateTime.Now, importance)
         {
             _headder = headder;
             _body = body;
-            _importance = importance;
         }
 
     }

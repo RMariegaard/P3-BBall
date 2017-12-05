@@ -43,6 +43,12 @@ namespace VolunteerSystem
             return notifications;
         }
 
+        public void RemoveNotification(Notification notification)
+        {
+            Notifier.AllNotifications.Remove(notification);
+            UpdateRequestPanel();
+        }
+
         public List<Shift> GetAllShifts()
         {
             return _schedule.Shifts;

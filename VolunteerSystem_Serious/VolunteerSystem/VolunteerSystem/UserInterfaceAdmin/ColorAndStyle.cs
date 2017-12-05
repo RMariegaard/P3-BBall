@@ -79,9 +79,18 @@ namespace VolunteerSystem.UserInterfaceAdmin
         {
             return Color.Orange;
         }
-        public static Color NotificationColor()
+
+        public static Color NotificationColorHighImportance()
+        {
+            return Color.Red;
+        }
+        public static Color NotificationColorMediumImportance()
         {
             return Color.Blue;
+        }
+        public static Color NotificationColorLowImportance()
+        {
+            return Color.Green;
         }
     }
 }

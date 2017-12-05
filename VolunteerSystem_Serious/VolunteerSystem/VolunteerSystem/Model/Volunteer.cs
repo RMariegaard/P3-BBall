@@ -56,8 +56,7 @@ namespace VolunteerSystem
                 _db.Update(this);
             }
         }
-
-
+        
         public Volunteer(string name, string email, string assosiation) : base(name, email)
         {
             this._dateCreated = DateTime.Now;
@@ -65,7 +64,6 @@ namespace VolunteerSystem
             this._yearsWorked = new List<int>();
             _db.Add(this);
             this.ID = _db.GetLatestID();
-            
         }
         public Volunteer(int id, string name, string email, string assosiation, DateTime dateCreated, List<int> yearsworked) : base(name, email)
         {

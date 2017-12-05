@@ -175,9 +175,12 @@ namespace VolunteerSystem
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
 
-            Notifier.AllNotifications.Add(new Notification("Volunteer droped out", "Unfortunetly Casper has dropped his shift in the kitchen friday 22-01-2017", NotificationImportance.HighImportance));
-            Notifier.AllNotifications.Add(new Notification("Volunteer nhddasmd,klas out", "Unfortunetly Markfasdnklfnadslkf has dropped his shift in the kitchen friday 22-31-2017", NotificationImportance.MediumImportance));
-
+            Notifier.AllNotifications.Add(new Notification("High Importance: Volunteer droped out", "Unfortunetly Casper has dropped his shift in the kitchen friday 22-01-2017", NotificationImportance.HighImportance));
+            Notifier.AllNotifications.Add(new Notification("Medium Importance: En lang headder for at se hvad der sker når den bliver lang", 
+                "Og den skal selvfølgelig have en mindst ligeså lang body for at se hvad der sker her ovre. Men hvor langt er for langt? Måske lige en sætning mere", 
+                NotificationImportance.MediumImportance));
+            Notifier.AllNotifications.Add(new Notification("Low importance: Headder", "Boddy, denne er ikke så vigtig", NotificationImportance.LowImportance));
+            
             var db = new Database2.VolunteerDatabase();
             db.Add(workerController.Workers[0] as Volunteer);
             var v = workerController.Workers[0] as Volunteer;
@@ -186,7 +189,7 @@ namespace VolunteerSystem
             db.Update(v);
             db.Remove(v);
 
-
+            
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
 
             Ui.Start();
