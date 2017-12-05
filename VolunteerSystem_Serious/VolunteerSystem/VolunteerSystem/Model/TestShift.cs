@@ -27,8 +27,8 @@ namespace VolunteerSystem.Model
         public TestShift()
         {
             ListOfWorkers = new List<TestWorker>();
-            this.StartTime = DateTime.Parse(this.StringStartTime);
-            this.EndTime = DateTime.Parse(this.StringEndTime);
+            //this.StartTime = DateTime.Parse(this.StringStartTime);
+            //this.EndTime = DateTime.Parse(this.StringEndTime);
             ListOfRequest = new List<TestRequest>();
             
 

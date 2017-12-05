@@ -27,12 +27,20 @@ namespace VolunteerSystem.Model
 
 
 
+        public TestRequest(TestVolunteer volunteer, NotificationImportance hey)
+            : base(DateTime.Now, hey)
+        {
+            TimeSent = DateTime.Now;
+            TestVolunteer = volunteer;
+        }
+
         public TestRequest(TestVolunteer volunteer)
             : base(DateTime.Now)
         {
             TimeSent = DateTime.Now;
             TestVolunteer = volunteer;
         }
+
 
         public TestRequest()
         {

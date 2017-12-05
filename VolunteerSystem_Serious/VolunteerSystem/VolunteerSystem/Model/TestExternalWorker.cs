@@ -12,5 +12,9 @@ namespace VolunteerSystem.Model
         {
 
         }
+        public TestExternalWorker()
+        {
+
+        }
     }
 }

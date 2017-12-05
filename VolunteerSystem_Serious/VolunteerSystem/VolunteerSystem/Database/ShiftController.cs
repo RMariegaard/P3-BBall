@@ -25,5 +25,10 @@ namespace VolunteerSystem.Database
             _context.Entry(shift).State = System.Data.Entity.EntityState.Modified;
             
         }
+        public List<TestShift> getthembitches()
+        {
+            return _context.shift.Include("ListOfRequest").Include("ListOfWorkers").ToList();
+                //_context.volunteer.Include("testShift").ToList();
+        }
     }
 }
