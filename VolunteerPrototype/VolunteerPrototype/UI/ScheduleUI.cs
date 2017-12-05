@@ -63,7 +63,7 @@ namespace VolunteerPrototype.UI
             _theSchedulemainPanel.Dock = DockStyle.Fill;
             //_theSchedulemainPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             
-            colorAndShiftPanel.Location = new Point(0, 0);
+            colorAndShiftPanel.Location = schedulePanel.Location;
             colorAndShiftPanel.Size = new Size(schedulePanel.Size.Width-20, 25 * hourHeight);
             colorAndShiftPanel.Paint += _alternatingColors_Paint;
             colorAndShiftPanel.Dock = DockStyle.Fill;    
@@ -90,7 +90,7 @@ namespace VolunteerPrototype.UI
                         DateTime tempDateTime = new DateTime(shift.StartTime.Year, shift.StartTime.Month, shift.StartTime.Day, 0, 0, 0);
                         do
                         {
-                            if ((tempDateTime.DayOfWeek.ToString() + " " + tempDateTime.ToShortDateString()) == _day)
+                            if ((tempDateTime.ToShortDateString()) == _day)
                             {
                                 toBeOnPanel.Add(shift);
                                 break;

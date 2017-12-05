@@ -25,10 +25,16 @@ namespace VolunteerPrototype.UI
             _daysLeftNavigationMainPanel.Name = "_daysLeftNavigationMainPanel";
             int heightOfButtons = 40;
             _daysLeftNavigationMainPanel.Size = forRefferece;
-
-            List<string> days = _mainUI.ScheduleController().GetAllShifts().Select(x => x.StartTime.ToString()).ToList();
-            List<string> endDays = _mainUI.ScheduleController().GetAllShifts().Select(x => x.StartTime.ToString()).ToList();
-
+            List<string> days = new List<string>();
+            List<string> startdays = _mainUI.ScheduleController().GetAllShifts().Select(x => x.StartTime.ToShortDateString()).ToList();
+            List<string> endDays = _mainUI.ScheduleController().GetAllShifts().Select(x => x.StartTime.ToShortDateString()).ToList();
+            foreach(string day in startdays)
+            {
+                if (!days.Contains(day))
+                {
+                    days.Add(day);
+                }
+            }
             foreach(string day in endDays)
             {
                 if (!days.Contains(day))

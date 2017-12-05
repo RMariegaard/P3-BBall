@@ -24,7 +24,7 @@ namespace VolunteerPrototype.UI
                 Name = headline,
                 Location = location,
                 Size = size,
-                BackColor = Color.AliceBlue,
+                BackColor = Color.FromArgb(100, Color.AliceBlue),
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left,
                 BorderStyle = BorderStyle.FixedSingle
             };

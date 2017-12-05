@@ -17,6 +17,8 @@ namespace VolunteerPrototype.UI
         private ScheduleUI _scheduleUI;
         private DayNavigation _dayNavigation;
 
+        private Panel _schedulePanel;
+        private Panel _dayNavigationPanel;
 
         public MainUI(ScheduleController sc, WorkerController wc)
         {
@@ -26,20 +28,20 @@ namespace VolunteerPrototype.UI
             this.WindowState = FormWindowState.Maximized;
             this.Bounds = Screen.PrimaryScreen.Bounds;
             _dayNavigation = new DayNavigation(this);
-
-            Controls.Add(_dayNavigation.GetPanel(new Size(100,this.Height)));
+            _dayNavigationPanel = _dayNavigation.GetPanel(new Size(100, this.Height));
+            Controls.Add(_dayNavigationPanel);
             _scheduleUI = new ScheduleUI(_dayNavigation._selected.Text, this);
 
-            Panel sPanel = new Panel()
+            _schedulePanel = new Panel()
             {
-                Location = new Point(200, 50),
-                Size = new Size(10,10),// new Size((this.Size.Width / 100) * 70 - 2, this.Height),
+                Location = new Point(_dayNavigationPanel.Width, 0),
+                Size = new Size((this.Size.Width / 100) * 70 - 2, this.Height),
                 Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right,
                 AutoScroll = true,
                 BorderStyle = BorderStyle.FixedSingle
         };
-            Controls.Add(sPanel);
-            Controls.Add(_scheduleUI.GetPanel(sPanel));
+            _schedulePanel.Controls.Add(_scheduleUI.GetPanel(_schedulePanel));
+            Controls.Add(_schedulePanel);
         }
 
         public ScheduleController ScheduleController()
@@ -49,7 +51,7 @@ namespace VolunteerPrototype.UI
 
         public void UpdateSchedulePanel()
         {
-            throw new NotImplementedException();
+            
         }
 
         public WorkerController WorkerController()
