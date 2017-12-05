@@ -51,7 +51,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
         public static Color ShiftColorWhenFull()
         {
-            return Color.LawnGreen;
+            return Color.LimeGreen;
         }
 
         public static Color SmallButtonColor()
