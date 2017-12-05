@@ -117,8 +117,14 @@ namespace VolunteerSystem.UserInterface
             {
                 _homepage.UpdateTheRequestAndNotificationElements();
             };
+            this.ResizeEnd += RezieHomepage;
         }
-        
+
+        private void RezieHomepage(object sender, EventArgs e)
+        {
+            UpdateSchedule();
+        }
+
         private void _homepageButton_Clicked(object sender, EventArgs e)
         {
             if (shownPage != ShownPage.Homepage)
