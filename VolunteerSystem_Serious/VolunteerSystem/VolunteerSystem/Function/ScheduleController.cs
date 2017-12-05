@@ -11,7 +11,7 @@ namespace VolunteerSystem
     public class ScheduleController
     {
         private Schedule _schedule;
-        public event UpdateRequestPanelEvent UpdateRequestPanel;
+        //public event UpdateRequestPanelEvent UpdateRequestPanel;
 
         public ScheduleController(Schedule schedule)
         {
@@ -46,7 +46,7 @@ namespace VolunteerSystem
         public void RemoveNotification(Notification notification)
         {
             Notifier.AllNotifications.Remove(notification);
-            UpdateRequestPanel();
+            //UpdateRequestPanel();
         }
 
         public List<Shift> GetAllShifts()
@@ -89,7 +89,7 @@ namespace VolunteerSystem
                 Notifier.InformVolunteer(volunteer as Volunteer, shift, InformShiftCommand.Delete);
             }
             _schedule.Shifts.Remove(shift);
-            UpdateRequestPanel();
+            //UpdateRequestPanel();
         }
         
         private string[] FindShiftChanges(Shift oldShift, Shift newShift)
@@ -139,7 +139,7 @@ namespace VolunteerSystem
         public void RemoveWorkerFromAllHisShifts(Worker worker)
         {
             GetAllShifts().ForEach(x => x.Workers.RemoveAll(y => y == worker));
-            UpdateRequestPanel();
+            //UpdateRequestPanel();
         }
         
         public void RemoveAllRequestsForAWorker(Worker worker)
@@ -147,7 +147,7 @@ namespace VolunteerSystem
             foreach (Request request in GetAllRequests())
                 if (request.Worker == worker)
                     RemoveRequest(request);
-            UpdateRequestPanel();
+            //UpdateRequestPanel();
         }
 
         public void RemoveRequest(Request request)

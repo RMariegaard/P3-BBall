@@ -104,7 +104,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
                 Location = new Point(5, workerLabel.Location.Y + workerLabel.GetPreferredSize(Size.Empty).Height),
                 BorderStyle = BorderStyle.FixedSingle
             };
-            
+            workersList.ScrollAlwaysVisible = true;
 
             
 
@@ -141,17 +141,19 @@ namespace VolunteerSystem.UserInterfaceAdmin
             ListBox requestsList = new ListBox
             {
                 Text = "Requests",
+                AutoSize = true,
+                ScrollAlwaysVisible = true,
                 Size = new Size(300, 100),
                 Location = new Point(5, requestLabel.Location.Y + requestLabel.PreferredSize.Height),
                 BorderStyle = BorderStyle.FixedSingle
             };
+            
             requestsList.BeginUpdate();
             foreach (var r in shift.Requests)
             {
                requestsList.Items.Add($"{r.TimeSent.ToString("dd/MM/yyyy HH:mm")} - {r.Worker.Name} - {r.Worker.Email}");
             }
             requestsList.EndUpdate();
-            requestsList.AutoSize = true;
 
             Button addWorkerButton = new Button()
             {

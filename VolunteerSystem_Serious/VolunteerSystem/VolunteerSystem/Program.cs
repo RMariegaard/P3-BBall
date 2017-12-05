@@ -181,14 +181,7 @@ namespace VolunteerSystem
                 NotificationImportance.MediumImportance));
             Notifier.AllNotifications.Add(new Notification("Low importance: Headder", "Boddy, denne er ikke så vigtig", NotificationImportance.LowImportance));
             
-            var db = new Database2.VolunteerDatabase();
-            db.Add(workerController.Workers[0] as Volunteer);
-            var v = workerController.Workers[0] as Volunteer;
-            v.TempAddYearWorked(2019);
-            v.ID = 5;
-            db.Update(v);
-            db.Remove(v);
-            
+
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
 
             Ui.Start();

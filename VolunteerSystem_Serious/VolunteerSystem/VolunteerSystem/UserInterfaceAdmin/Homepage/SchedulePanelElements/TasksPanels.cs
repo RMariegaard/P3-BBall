@@ -58,7 +58,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
         private void headder_clicked(object sender, EventArgs e)
         {
-            DeleteFormPopUp deletePopup = new DeleteFormPopUp($"Are you sure you want to delete the task {_taskName}?\n (This will remove the task for all days)");
+            DeleteFormPopUp deletePopup = new DeleteFormPopUp($"Are you sure you want to delete the task {_taskName}?\n (This will remove the task for all days and shifts and request for this task)");
             deletePopup.StartPosition = FormStartPosition.CenterParent;
             deletePopup.ShowDialog();
             if (deletePopup.DialogResult == DialogResult.OK)
