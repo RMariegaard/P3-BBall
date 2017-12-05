@@ -5,20 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using VolunteerSystem;
+using VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements;
 
-namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
+namespace VolunteerPrototype.UI
 {
-    public class Schedule
+    public class ScheduleUI
     {
         Panel _theSchedulemainPanel;
-        IVolunteerMainUI _mainWindowUI;
-        string day;
+        string _day;
         int hourHeight;
         Panel colorAndShiftPanel;
+        IUI _mainUI;
 
-        public Schedule(IVolunteerMainUI mainWindowUI, Button day, int hight)
+        public ScheduleUI(string day, IUI mainUI)
         {
-            _mainWindowUI = mainWindowUI;
+            _mainUI = mainUI;    
             _theSchedulemainPanel = new Panel
             {
                 Name = "_theSchedulemainPanel",
@@ -34,10 +36,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             };
             if (day != null)
             {
-                this.day = day.Text;
+                this._day = day;
             }
 
-            hourHeight = hight / 25;
+            hourHeight = 25;
 
             //Add Numbers to Panel. this needs only to be done once
             for (int i = 1; i <= 24; i++)
@@ -56,7 +58,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
         public Panel GetPanel(Panel schedulePanel)
         {
             _theSchedulemainPanel.Size = schedulePanel.Size;
-            _theSchedulemainPanel.Location = new Point(0, 0);
+            _theSchedulemainPanel.Location = schedulePanel.Location;
             _theSchedulemainPanel.AutoScroll = true;
             _theSchedulemainPanel.Dock = DockStyle.Fill;
             //_theSchedulemainPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
@@ -67,8 +69,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             colorAndShiftPanel.Dock = DockStyle.Fill;    
 
             //Adds Tasks and shifts
-            List<Shift> AllShifts = _mainWindowUI.GetScheduleController().GetAllShifts();
-            List<string> Tasks = _mainWindowUI.GetScheduleController().GetAllTasks();
+            List<Shift> AllShifts = _mainUI.ScheduleController().GetAllShifts();
+            List<string> Tasks = _mainUI.ScheduleController().GetAllTasks();
 
             int widthOfTask;
             if (Tasks.Count() != 0)
@@ -78,7 +80,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
             for (int i = 0; i < Tasks.Count; i++)
             {
-                TasksPanel tempTaskPanel = new TasksPanel(_mainWindowUI);
+                TaskPanel tempTaskPanel = new TaskPanel();
 
                 List<Shift> toBeOnPanel = new List<Shift>();
                 foreach(Shift shift in AllShifts)
@@ -88,7 +90,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                         DateTime tempDateTime = new DateTime(shift.StartTime.Year, shift.StartTime.Month, shift.StartTime.Day, 0, 0, 0);
                         do
                         {
-                            if ((tempDateTime.DayOfWeek.ToString() + " " + tempDateTime.ToShortDateString()) == day)
+                            if ((tempDateTime.DayOfWeek.ToString() + " " + tempDateTime.ToShortDateString()) == _day)
                             {
                                 toBeOnPanel.Add(shift);
                                 break;
@@ -105,7 +107,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                     new Size(widthOfTask, colorAndShiftPanel.Height),
                     new Point((i * (widthOfTask + 5)) + 50, 0),
                     hourHeight,
-                    convertDayStringFromButtonToDateTime(day)
+                    convertDayStringFromButtonToDateTime(_day)
                     );
                 
                 colorAndShiftPanel.Controls.Add(taskPanel);
@@ -127,8 +129,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 Rectangle rc = _theSchedulemainPanel.ClientRectangle;
                 rc.Size = new Size(_theSchedulemainPanel.Size.Width-10, hourHeight);
                 rc.Location = new Point(0, (i*hourHeight));
-                Brush brush1 = new SolidBrush(ColorAndStyle.AlternatingColorsONE());
-                Brush brush2 = new SolidBrush(ColorAndStyle.AlternatingColorsTWO());
+                Brush brush1 = new SolidBrush(Color.AliceBlue);
+                Brush brush2 = new SolidBrush(Color.Gray);
 
                 if (i%2 == 0)
                     e.Graphics.FillRectangle(brush1, rc);

@@ -10,14 +10,13 @@ using VolunteerSystem.UserInterfaceAdmin;
 
 namespace VolunteerPrototype.UI
 {
-    class MainUI : Form, IVolunteerMainUI
+    class MainUI : Form, IUI
     {
         private ScheduleController _scheduleController;
         private WorkerController _workerController;
-        public Panel MainUIPanel;
+        private ScheduleUI _scheduleUI;
+        private DayNavigation _dayNavigation;
 
-
-        private Size _fullClientWindowSize;
 
         public MainUI(ScheduleController sc, WorkerController wc)
         {
@@ -26,128 +25,36 @@ namespace VolunteerPrototype.UI
 
             this.WindowState = FormWindowState.Maximized;
             this.Bounds = Screen.PrimaryScreen.Bounds;
-            
+            _dayNavigation = new DayNavigation(this);
 
-            _fullClientWindowSize = new Size(RectangleToScreen(this.ClientRectangle).Size.Width, RectangleToScreen(this.ClientRectangle).Height);
-            MainUIPanel = new Panel()
+            Controls.Add(_dayNavigation.GetPanel(new Size(100,this.Height)));
+            _scheduleUI = new ScheduleUI(_dayNavigation._selected.Text, this);
+
+            Panel sPanel = new Panel()
             {
-                Size = _fullClientWindowSize
-            };
-
-
-            Controls.Add(new VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements.Schedule(this, ))
-
-            Controls.Add(MainUIPanel);
+                Location = new Point(200, 50),
+                Size = new Size(10,10),// new Size((this.Size.Width / 100) * 70 - 2, this.Height),
+                Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right,
+                AutoScroll = true,
+                BorderStyle = BorderStyle.FixedSingle
+        };
+            Controls.Add(sPanel);
+            Controls.Add(_scheduleUI.GetPanel(sPanel));
         }
 
-        public void AcceptWorkerRequest(Request request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DenyWorkerRequest(Request request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DisplayCreateNewShift()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DisplayCreateNewTask()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DisplayGeneralError(string body)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DisplayHomepage()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DisplayPopup(string header, string body)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DisplayPressedOnShift(Shift shift)
-        {
-          //  throw new NotImplementedException();
-        }
-
-        public void DisplaySettings()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DisplayVolunteerInVolunteerOverview(Volunteer volunteer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DisplayVolunteerOnHomepage(Volunteer volunteer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DisplayVolunteerOverview()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Size GetFullClientWindowSize()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ScheduleController GetScheduleController()
+        public ScheduleController ScheduleController()
         {
             return _scheduleController;
         }
 
-        public WorkerController GetWorkController()
+        public void UpdateSchedulePanel()
         {
             throw new NotImplementedException();
         }
 
-        public void HomepageChangeDay(string day)
+        public WorkerController WorkerController()
         {
-            throw new NotImplementedException();
-        }
-
-        public void ScrollToControlOnSchedule(Control control)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Start()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateAllHomepage()
-        {
-           // throw new NotImplementedException();
-        }
-
-        public void UpdateButtonsLeftSide()
-        {
-           // throw new NotImplementedException();
-        }
-
-        public void UpdateSchedule()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateUI()
-        {
-            throw new NotImplementedException();
+            return _workerController;
         }
     }
 }

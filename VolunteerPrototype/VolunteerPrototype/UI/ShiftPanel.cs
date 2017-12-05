@@ -5,19 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using VolunteerSystem;
 
-
-namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
+namespace VolunteerPrototype.UI
 {
     public class ShiftPanel
     {
-        IVolunteerMainUI volunteerMainUI;
         Shift shift;
         Panel shiftPanel;
         DateTime date;
-        public ShiftPanel(IVolunteerMainUI volunteerMainUI, Shift shift, DateTime date)
+        public ShiftPanel(Shift shift, DateTime date)
         {
-            this.volunteerMainUI = volunteerMainUI;
             this.shift = shift;
             this.date = date;
         }
@@ -39,7 +37,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 BackColor = Color.AliceBlue,
                 BorderStyle = BorderStyle.FixedSingle
             };
-            shiftPanel.Click += _panel_clicked;
 
             var locationBinding = new Binding("Location", shiftBindingSource, "StartTime");
             locationBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
@@ -77,8 +74,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                     convertEventArgs.Value = new Size(forRefence.Size.Width, (int)(LengthInminuts * ((double)hourHeight / 60)));
                 }
 
-                if(test != shift.EndTime)
-                    volunteerMainUI.UpdateButtonsLeftSide();
+                if (test != shift.EndTime)
+                {
+                    //vgv 
+                }
             };
 
             shiftPanel.DataBindings.Add(locationBinding);
@@ -90,11 +89,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             topColorBinding.Format += delegate (object sender, ConvertEventArgs e)
             {
                 if (shift.Requests.Count() + shift.Workers.Count() < shift.VolunteersNeeded)
-                    e.Value = ColorAndStyle.ShiftColorCompletelyFree();
+                    e.Value = Color.Green;
                 else if ((shift.Workers.Count() < shift.VolunteersNeeded) && (shift.Workers.Count() + shift.Requests.Count() > shift.VolunteersNeeded))
-                    e.Value = ColorAndStyle.ShiftColorEnoughRequests();
+                    e.Value = Color.Yellow;
                 else if (shift.Workers.Count() >= shift.VolunteersNeeded)
-                    e.Value = ColorAndStyle.ShiftColorWhenFull();
+                    e.Value = Color.Red;
             };
 
             Panel topColor = new Panel
@@ -115,7 +114,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             headder.DataBindings.Add(numberOfVolunteerBinding);
             headder.Location = new Point(0 , 8);
             headder.AutoSize = true;
-            headder.Click += _panel_clicked;
 
             //////////////////TimeLabel////////////////////////
             var timeBinding = new Binding("Text", shiftBindingSource, "TimeInterval");
@@ -125,7 +123,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             };
             Time.DataBindings.Add(timeBinding);
             Time.AutoSize = true;
-            Time.Click += _panel_clicked;
             //////////////////DescriptionLabel////////////////////////
             Label Desciption = new Label
             {
@@ -135,7 +132,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             };
             var descriptionBinding = new Binding("Text", shiftBindingSource, "Description");
             Desciption.DataBindings.Add(descriptionBinding);
-            Desciption.Click += _panel_clicked;
 
 
             shiftPanel.Controls.Add(topColor);
@@ -146,9 +142,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             return shiftPanel;
         }
 
-        private void _panel_clicked(object sender, EventArgs e)
-        {
-            volunteerMainUI.DisplayPressedOnShift(shift);
-        }
+
     }
 }
