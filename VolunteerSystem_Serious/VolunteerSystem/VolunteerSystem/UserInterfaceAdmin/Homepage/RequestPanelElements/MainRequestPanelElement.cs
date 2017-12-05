@@ -16,6 +16,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
         private Label titleTopLabel;
         private CheckBox NotificationCheckBox;
         int panelHeight = 40;
+        Panel requestAndNotificationPanel;
 
         public MainRequestPanelElement(IVolunteerMainUI volunteerMainUI)
         {
@@ -35,7 +36,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             Panel TopBarPanel = new Panel
             {
                 Name = "TopBarPanel",
-                Location = new Point(0, 40),
+                Location = new Point(0, panelHeight),
                 Size = size
             };
 
@@ -105,26 +106,26 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             NotificationCheckBox.CheckState = CheckState.Checked;
             NotificationCheckBox.Click += delegate (object sender, EventArgs e)
             {
-                _mainRequestPanel.Invalidate();
+                UpdateRequestAndNotificationPanels();
             };
 
             _mainRequestPanel.Controls.Add(notificationLabel);
             _mainRequestPanel.Controls.Add(NotificationCheckBox);
 
-            //bjhkhgkjhkj
-
-            _mainRequestPanel.Controls.Add(theRequestPanel());
-            
+            UpdateRequestAndNotificationPanels();
             _mainRequestPanel.Controls.Add(_getTopBarPanel(new Size(_mainRequestPanel.Size.Width - 20, panelHeight)));
 
             return _mainRequestPanel;
         }
-        /*
-        private void updateRequestPanel()
+        
+        public void UpdateRequestAndNotificationPanels()
         {
-
+            _mainRequestPanel.Controls.Remove(requestAndNotificationPanel);
+            requestAndNotificationPanel = theRequestPanel();
+            _mainRequestPanel.Controls.Add(requestAndNotificationPanel);
+            requestAndNotificationPanel.BringToFront();
         }
-        */
+        
         private Panel theRequestPanel()
         {
             Panel theRequestsPanel = new Panel
@@ -136,13 +137,13 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
             };
 
-            int i = 0;
             List<AbstractNotification> showedNotifications = new List<AbstractNotification>();
             if (NotificationCheckBox.Checked == false)
                 _volunteerMainUI.GetScheduleController().GetAllRequests().ForEach(x => showedNotifications.Add(x));
             else
                 showedNotifications = _volunteerMainUI.GetScheduleController().GetAllRequestsAndNotifications();
 
+            int i = 0;
             foreach (AbstractNotification abNotification in showedNotifications.OrderBy(x => x.Importance).ThenBy(x => x.DateCreated))
             {
                 Panel notificationPanel = new Panel

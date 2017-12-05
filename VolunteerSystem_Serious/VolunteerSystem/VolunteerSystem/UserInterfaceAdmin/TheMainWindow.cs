@@ -37,7 +37,7 @@ namespace VolunteerSystem.UserInterface
             InitializeComponent();
             Width = 1600;
             Height = 800;
-            this.MinimumSize = new Size(1200 ,800);
+            //this.MinimumSize = new Size(1200 ,800);
 
             WorkerController = workerController;
             ScheduleController = scheduleController;
@@ -111,7 +111,7 @@ namespace VolunteerSystem.UserInterface
             //event
             scheduleController.UpdateRequestPanel += delegate ()
             {
-                _homepage.UpdatePendingRequestPanel();
+                _homepage.UpdateTheRequestAndNotificationElements();
             };
         }
         
