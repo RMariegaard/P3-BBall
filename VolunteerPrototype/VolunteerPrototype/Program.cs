@@ -18,13 +18,12 @@ namespace VolunteerPrototype
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var btn = new Button()
-            {
-                Text = DateTime.Now.ToString()
-            };
-            var UI = new UI.MainUI();
-            var test = new VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements.TheSchedule(UI, btn);
-            var homepage = new VolunteerSystem.UserInterfaceAdmin.Homepage.Homepage(UI);
+
+
+
+            Schedule schedule = new Schedule(2018);
+            ScheduleController scheduleController = new ScheduleController(schedule);
+            WorkerController workerController = new WorkerController();
 
             var form = new Form()
             {

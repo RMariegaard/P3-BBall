@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace VolunteerSystem
 {
@@ -134,6 +135,10 @@ namespace VolunteerSystem
         }
         public void CreateRequest(Volunteer volunteer)
         {
+            if(_requests.Any(x => x.Worker == volunteer))
+            {
+                throw new Exception("Volunteer has allready requested this shift");
+            }
             _requests.Add(new Request(volunteer));
         }
 
