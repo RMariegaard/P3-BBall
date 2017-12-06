@@ -21,8 +21,8 @@ namespace VolunteerSystem.Model
             this.Descripstion = descrip;
             ListOfWorkers = new List<TestWorker>();
             ListOfRequest = new List<TestRequest>();
-            ShiftDatabase.Add(this);
-            ShiftDatabase.Complete();
+           // ShiftDatabase.Add(this);
+            //ShiftDatabase.Complete();
         }
 
         public TestShift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded, string description)
@@ -82,9 +82,6 @@ namespace VolunteerSystem.Model
             this.StartTime = newShift.StartTime;
             this.EndTime = newShift.EndTime;
             this.Descripstion = newShift.Descripstion;
-            //ShiftDatabase.UpdateShift(this);
-            ShiftDatabase.Remove(newShift);
-            ShiftDatabase.Complete();
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
 
         }
@@ -93,27 +90,23 @@ namespace VolunteerSystem.Model
         public void AddWorker(TestWorker worker, int year)
         {
             ListOfWorkers.Add(worker);
-            //ShiftDatabase.UpdateShift(this);
-            ShiftDatabase.Complete();
-            if (worker is TestVolunteer)
-            {
-                ((TestVolunteer)worker).AddYearWorked(year);
-            }
+            //if (worker is TestVolunteer)
+            //{
+            //    ((TestVolunteer)worker).AddYearWorked(year);
+            //}
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
         public void CreateRequest(TestVolunteer volunteer)
         {
             ListOfRequest.Add(new TestRequest(volunteer));
-            //ShiftDatabase.UpdateShift(this);
-            ShiftDatabase.Complete();
         }
 
         public void RemoveRequest(TestRequest request)
         {
-            //ListOfRequest.Remove(request);
-            ShiftDatabase._context.request.Attach(request);
-            ShiftDatabase._context.request.Remove(request);
-            ShiftDatabase.Complete();
+            ListOfRequest.Remove(request);
+            //ShiftDatabase._context.request.Attach(request);
+            //ShiftDatabase._context.request.Remove(request);
+            //ShiftDatabase.Complete();
         }
 
         public void RemoveWorker(TestWorker worker)
@@ -135,10 +128,10 @@ namespace VolunteerSystem.Model
         {
             TestWorker worker = request.TestVolunteer;
             this.ListOfWorkers.Add(worker);
-            //this.ListOfRequest.Remove(request);
+            this.ListOfRequest.Remove(request);
 
-            ShiftDatabase.UpdateShift(this, worker);
-            ShiftDatabase.RemoveRequest(request);
+            //ShiftDatabase.UpdateShift(this, worker);
+            //ShiftDatabase.RemoveRequest(request);
             
 
             //if (worker is TestVolunteer)

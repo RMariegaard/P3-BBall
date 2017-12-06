@@ -18,5 +18,9 @@ namespace VolunteerSystem.Database
         {
             _context.SaveChanges();
         }
+        public List<TestExternalWorker> GetExternalWorkers()
+        {
+            return _context.externalWorker.Include("ListofShifts").ToList();
+        }
     }
 }

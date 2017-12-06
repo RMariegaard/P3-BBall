@@ -9,5 +9,8 @@ namespace VolunteerSystem.Database.InterfacesDatabase
 {
     public interface IScheduleController : IDatabaseController<TestSchedule>
     {
+        void UpdateSchedule(TestSchedule schedule);
+        TestSchedule GetSchedule(int id);
     }
+
 }

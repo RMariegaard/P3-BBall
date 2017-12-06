@@ -18,8 +18,8 @@ namespace VolunteerSystem.Model
         public TestVolunteer(string name, string email, string accosi):base(name, email)
         {
             this.Association = accosi;
-            volunteerDatabase.Add(this);
-            volunteerDatabase.Complete();
+           volunteerDatabase.Add(this);
+           volunteerDatabase.Complete();
             
         }
         public TestVolunteer()

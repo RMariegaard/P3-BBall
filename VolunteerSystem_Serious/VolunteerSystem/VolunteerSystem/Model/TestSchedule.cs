@@ -40,6 +40,10 @@ namespace VolunteerSystem.Model
             _tasks = new List<string>();
             Year = year;
         }
+        public TestSchedule()
+        {
+            ListOfShifts = new List<TestShift>();
+        }
 
         ////Test Constructer only used for unit test does not connect to database
         //public Schedule(bool test, int year)

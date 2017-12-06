@@ -10,5 +10,6 @@ namespace VolunteerSystem.Database.InterfacesDatabase
     public interface IExternalWorkerController : IDatabaseController<TestExternalWorker>
     {
         void Complete();
+        List<TestExternalWorker> GetExternalWorkers();
     }
 }
