@@ -80,6 +80,7 @@ namespace VolunteerSystem
             ScheduleController scheduleController = new ScheduleController(schedule);
             WorkerController workerController = new WorkerController();
 
+        
 
 
             workerController.Workers.Add(new Volunteer("Denne dude er validated for season tickets ", "nej@ja.maybe", "U12 Drenge"));
