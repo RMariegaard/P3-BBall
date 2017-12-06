@@ -225,6 +225,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             removeNotificationButton.Click += delegate (object sender, EventArgs e)
             {
                 _volunteerMainUI.GetScheduleController().RemoveNotification(notification);
+                UpdateRequestAndNotificationPanels();
             };
 
             return removeNotificationButton;
