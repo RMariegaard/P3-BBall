@@ -36,7 +36,7 @@ namespace VolunteerSystem.Database
 
                 }
                 );
-            modelBuilder.Entity<TestShift>().HasMany(p => p.ListOfRequest).WithOptional(p => p.TestShift);
+            //modelBuilder.Entity<TestShift>().HasMany(p => p.ListOfRequest).WithOptional(p => p.TestShift);
                 
             
         }

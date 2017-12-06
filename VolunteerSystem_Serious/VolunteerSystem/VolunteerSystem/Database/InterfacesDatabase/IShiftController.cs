@@ -10,7 +10,7 @@ namespace VolunteerSystem.Database.InterfacesDatabase
     public interface IShiftController : IDatabaseController<TestShift>
     {
         void Complete();
-        void UpdateShift(TestShift shift);
+        void UpdateShift(TestShift shift, TestWorker worker);
         List<TestShift> getthembitches();
         void RemoveRequest(TestRequest request);
         TestShift GetShift(int id);

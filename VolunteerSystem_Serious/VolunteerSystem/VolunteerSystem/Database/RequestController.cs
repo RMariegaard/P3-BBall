@@ -24,5 +24,15 @@ namespace VolunteerSystem.Database
         {
             return _context.request.Include("TestVolunteer").Single(x => x.RequestId == id);
         }
+        public List<TestRequest> GetAllRequest()
+        {
+            return _context.request.Include("TestVolunteer").Include("TestShift").ToList();
+        }
+        public void RemoveRequest(TestRequest request)
+        {
+            _context.request.Attach(request);
+            _context.request.Remove(request);
+            _context.SaveChanges();
+        }
     }
 }

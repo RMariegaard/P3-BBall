@@ -86,6 +86,7 @@
     <Compile Include="Enums\InformShiftCommand.cs" />
     <Compile Include="Enums\NotificationImportance.cs" />
     <Compile Include="Function\AccountController.cs" />
+    <Compile Include="Function\TestScheduleController.cs" />
     <Compile Include="Model\AbstractNotification.cs" />
     <Compile Include="Model\ExternalWorker.cs" />
     <Compile Include="Function\WorkerController.cs" />

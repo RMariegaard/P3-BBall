@@ -11,5 +11,7 @@ namespace VolunteerSystem.Database.InterfacesDatabase
     {
         void Complete();
         TestRequest GetRequest(int id);
+        void RemoveRequest(TestRequest request);
+        List<TestRequest> GetAllRequest();
     }
 }

@@ -24,6 +24,17 @@ namespace VolunteerSystem.Model
             ShiftDatabase.Add(this);
             ShiftDatabase.Complete();
         }
+
+        public TestShift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded, string description)
+        {
+            this.StartTime = startTime;
+            this.EndTime = endTime;
+            this.Task = task;
+            this.VolunteersNeeded = volunteersNeeded;
+            this.Descripstion = description;
+            this.ListOfWorkers = new List<TestWorker>();
+            this.ListOfRequest = new List<TestRequest>();
+        }
         public TestShift()
         {
             ListOfWorkers = new List<TestWorker>();
@@ -37,6 +48,11 @@ namespace VolunteerSystem.Model
 
         [Key]
         public int ShiftId { get; private set; }
+
+        [ForeignKey("TestSchedule")]
+        public int? ScheduleId { get; set; }
+        public TestSchedule TestSchedule { get; set; }
+
         public string Task { get; private set; }
         public string Descripstion { get; private set; }
         [NotMapped]
@@ -66,7 +82,7 @@ namespace VolunteerSystem.Model
             this.StartTime = newShift.StartTime;
             this.EndTime = newShift.EndTime;
             this.Descripstion = newShift.Descripstion;
-            ShiftDatabase.UpdateShift(this);
+            //ShiftDatabase.UpdateShift(this);
             ShiftDatabase.Remove(newShift);
             ShiftDatabase.Complete();
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
@@ -77,7 +93,7 @@ namespace VolunteerSystem.Model
         public void AddWorker(TestWorker worker, int year)
         {
             ListOfWorkers.Add(worker);
-            ShiftDatabase.UpdateShift(this);
+            //ShiftDatabase.UpdateShift(this);
             ShiftDatabase.Complete();
             if (worker is TestVolunteer)
             {
@@ -88,23 +104,21 @@ namespace VolunteerSystem.Model
         public void CreateRequest(TestVolunteer volunteer)
         {
             ListOfRequest.Add(new TestRequest(volunteer));
-            ShiftDatabase.UpdateShift(this);
+            //ShiftDatabase.UpdateShift(this);
             ShiftDatabase.Complete();
         }
 
         public void RemoveRequest(TestRequest request)
         {
             //ListOfRequest.Remove(request);
-            //ShiftDatabase._context.request.Attach(request);
-            //ShiftDatabase._context.request.Remove(request);
-            //ShiftDatabase.Complete();
+            ShiftDatabase._context.request.Attach(request);
+            ShiftDatabase._context.request.Remove(request);
+            ShiftDatabase.Complete();
         }
 
         public void RemoveWorker(TestWorker worker)
         {
             ListOfWorkers.Remove(worker);
-            ShiftDatabase.UpdateShift(this);
-            ShiftDatabase.Complete();
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -121,12 +135,11 @@ namespace VolunteerSystem.Model
         {
             TestWorker worker = request.TestVolunteer;
             this.ListOfWorkers.Add(worker);
-            this.ListOfRequest.Remove(request);
+            //this.ListOfRequest.Remove(request);
 
-            ShiftDatabase.UpdateShift(this);
-            ShiftDatabase.Complete();
-            //RemoveRequest(request);
-
+            ShiftDatabase.UpdateShift(this, worker);
+            ShiftDatabase.RemoveRequest(request);
+            
 
             //if (worker is TestVolunteer)
             //{
@@ -137,7 +150,6 @@ namespace VolunteerSystem.Model
         }
         public void DenieRequest(TestRequest request)
         {
-            
             RemoveRequest(request);
         }
 
@@ -146,16 +158,7 @@ namespace VolunteerSystem.Model
     }
 
 
-    //public Shift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded, string description)
-    //{
-    //    this._startTime = startTime;
-    //    this._endTime = endTime;
-    //    this._task = task;
-    //    this._volunteersNeeded = volunteersNeeded;
-    //    this._description = description;
-    //    _workers = new List<Worker>();
-    //    _requests = new List<Request>();
-    //}
+
 
     //Test Constructer only used for unit test does not connect to database
     //public Shift(bool test, DateTime startTime, DateTime endTime, string task, int volunteersNeeded, string description)
