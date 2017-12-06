@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuff
 {
@@ -15,16 +16,19 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
         Panel volunteerInformationPanel;
         Panel shiftInformaitonPanel;
         Panel requestInforationPanel;
+        IVolunteerMainUI volunteerMainUI;
 
         VolunteerOverview volunteerOverview;
         ScheduleController scheduleController;
         WorkerController workerController;
 
-        public TheOverviewPanel(VolunteerOverview volunteerOverview, ScheduleController scheduleController, WorkerController workerController)
+        public TheOverviewPanel(VolunteerOverview volunteerOverview, IVolunteerMainUI volunteerMain)
         {
-            this.workerController = workerController;
+            this.volunteerMainUI = volunteerMain;
+            this.workerController = volunteerMainUI.GetWorkController();
             this.volunteerOverview = volunteerOverview;
-            this.scheduleController = scheduleController;
+            this.scheduleController = volunteerMainUI.GetScheduleController();
+
         }
 
         public Panel GetPanel(Size size)
@@ -338,12 +342,15 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                         Size = new Size(panel.Size.Width - 10, buttonHeight),
                         Location = new Point(5, panel.Size.Height - (1 * buttonHeight + 2)),
                         Tag = requestedShifts[i]
+                        
                     };
                     denyButton.Click += delegate (object sender, EventArgs e)
                     {
                         scheduleController.DenyRequest(((Shift)((Control)sender).Tag).Requests.First(x => x.Worker == volunteerOverview.SelectedWorker));
                         updateShiftInformationPanel();
                         updateRequestInformaitonPanel();
+                        
+
                     };
                     panel.Controls.Add(denyButton);
 

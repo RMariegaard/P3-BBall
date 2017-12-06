@@ -173,6 +173,7 @@ namespace VolunteerSystem.UserInterface
 
         public void DisplayHomepage()
         {
+            _homepage.UpdatePendingRequestPanel();
             _volunteerOverview.GetPanel(_mainPanel.Size).Visible = false;
             _settings.GetPanel(_mainPanel.Size).Visible = false;
         }
