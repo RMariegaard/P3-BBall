@@ -79,9 +79,10 @@ namespace VolunteerSystem.Tests
         public void NumberOfRequestsTest(int numberOfRequests)
         {
             Shift shift = new Shift(true, DateTime.Now, DateTime.Now, "", 25, "");
-            Volunteer volunteer = new Volunteer(true, "", "test@test.dk", "");
+
             for (int i = 0; i < numberOfRequests; i++)
             {
+                Volunteer volunteer = new Volunteer(true, "", "test@test.dk", "");
                 shift.CreateRequest(volunteer);
             }
             Assert.AreEqual(shift.NumberOfRequests(), numberOfRequests);

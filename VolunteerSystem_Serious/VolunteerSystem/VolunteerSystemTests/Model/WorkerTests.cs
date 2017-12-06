@@ -29,7 +29,6 @@ namespace VolunteerSystem.Tests
         [TestCase("jens@jens")]
         [TestCase(".Mark@.dk")]
         [TestCase("@jens.Dk")]
-        [TestCase("")]
         [TestCase("@")]
         [TestCase("mark@test.dk.")]
         public void WrongEmailFormatExceptionTest( string email)
