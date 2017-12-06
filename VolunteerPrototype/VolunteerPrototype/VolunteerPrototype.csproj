@@ -75,6 +75,7 @@
     <Compile Include="UI\ShiftPanel.cs" />
     <Compile Include="UI\TasksPanel.cs" />
     <Compile Include="UI\ScheduleUI.cs" />
+    <Compile Include="User.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

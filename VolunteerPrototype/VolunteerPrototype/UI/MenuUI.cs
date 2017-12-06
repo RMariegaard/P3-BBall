@@ -9,8 +9,7 @@ namespace VolunteerPrototype.UI
 {
     public class MenuUI : Panel
     {
-        private bool _isLoggedIn;
-        public bool IsLoggedIn { get { return _isLoggedIn; } }
+        public bool IsLoggedIn { get { return _mainUI.IsLoggedIn(); } }
 
         //test
         Button test1;
@@ -20,11 +19,10 @@ namespace VolunteerPrototype.UI
 
         private Form _logInPopUp;
 
-        public MenuUI(IUI mainUI, bool isLoggedIn, int width)
+        public MenuUI(IUI mainUI, int width)
         {
             Width = width;
             _mainUI = mainUI;
-            _isLoggedIn = isLoggedIn;
 
             if (IsLoggedIn)
             {
@@ -58,7 +56,7 @@ namespace VolunteerPrototype.UI
             if (_logInPopUp.DialogResult == DialogResult.Yes)
             {
                 Controls.Remove(test1);
-                _isLoggedIn = true;
+                _mainUI.LogIn();
                 LoggedIn();
             }
             else

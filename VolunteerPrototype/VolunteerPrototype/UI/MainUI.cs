@@ -21,6 +21,8 @@ namespace VolunteerPrototype.UI
         private Panel _dayNavigationPanel;
         private MenuUI _menu;
 
+        private User _user;
+
         public MainUI(ScheduleController sc, WorkerController wc)
         {
             _scheduleController = sc;
@@ -31,7 +33,7 @@ namespace VolunteerPrototype.UI
             _dayNavigation = new DayNavigation(this);
 
             UpdateSchedulePanel();
-            _menu = new MenuUI(this, false, _schedulePanel.Width + _dayNavigationPanel.Width+54)
+            _menu = new MenuUI(this, _schedulePanel.Width + _dayNavigationPanel.Width+54)
             {
                 Location = new Point(0, 25),
             };
@@ -79,6 +81,16 @@ namespace VolunteerPrototype.UI
         public WorkerController WorkerController()
         {
             return _workerController;
+        }
+
+        public bool IsLoggedIn()
+        {
+            return _user == null;
+        }
+
+        public void LogIn()
+        {
+            _user = new User();
         }
     }
 }

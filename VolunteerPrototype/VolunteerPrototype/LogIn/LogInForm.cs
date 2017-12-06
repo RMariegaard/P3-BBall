@@ -75,7 +75,7 @@ namespace VolunteerPrototype.LogIn
                 if (CredentialsSource.Check(_emailInputBox.Text, _passwordInputBox.Text))
                 {
 
-                    DialogResult = DialogResult.Yes;
+                DialogResult = DialogResult.Yes;
                     Close(); }
                 else
                 {
