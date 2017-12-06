@@ -56,7 +56,8 @@ namespace VolunteerPrototype.UI
 
             test2 = new Button()
             {
-                Text = "Log Out"
+                Text = "Log Out",
+
             };
             Controls.Add(test2);
             test2.Click += LogOut;
