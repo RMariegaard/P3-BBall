@@ -18,8 +18,11 @@ namespace VolunteerPrototype.UI
 
         private IUI _mainUI;
 
-        public MenuUI(IUI mainUI, bool isLoggedIn)
+        private Form _logInPopUp;
+
+        public MenuUI(IUI mainUI, bool isLoggedIn, int width)
         {
+            Width = width;
             _mainUI = mainUI;
             _isLoggedIn = isLoggedIn;
 
@@ -37,27 +40,42 @@ namespace VolunteerPrototype.UI
         {
              test1 = new Button()
             {
-                Text = "Log In"
-            };
+                Text = "Log In",
+                 Location = new System.Drawing.Point(this.Width - 110)
+             };
             test1.Click += Login;
             Controls.Add(test1);
         }
 
         private void Login(object sender, EventArgs e)
         {
-            Controls.Remove(test1);
-            _isLoggedIn = true;
-            LoggedIn();
+            _logInPopUp = new LogIn.LogInForm()
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
+            
+            _logInPopUp.ShowDialog();
+            if (_logInPopUp.DialogResult == DialogResult.Yes)
+            {
+                Controls.Remove(test1);
+                _isLoggedIn = true;
+                LoggedIn();
+            }
+            else
+            {
+                //do nothing
+            }
+            
             _mainUI.UpdateMenu();
         }
 
         private void LoggedIn()
         {
-
+           
             test2 = new Button()
             {
                 Text = "Log Out",
-
+                Location = new System.Drawing.Point(this.Width - 110)
             };
             Controls.Add(test2);
             test2.Click += LogOut;

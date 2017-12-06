@@ -13,5 +13,7 @@ namespace VolunteerPrototype.UI
         WorkerController WorkerController();
         void UpdateSchedulePanel();
         void UpdateMenu();
+
+        int GetFullWidth();
     }
 }

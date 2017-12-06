@@ -29,11 +29,20 @@ namespace VolunteerPrototype.UI
             this.WindowState = FormWindowState.Maximized;
             this.Bounds = Screen.PrimaryScreen.Bounds;
             _dayNavigation = new DayNavigation(this);
-            _menu = new MenuUI(this, false);
-            Controls.Add(_menu);
+
             UpdateSchedulePanel();
+            _menu = new MenuUI(this, false, _schedulePanel.Width + _dayNavigationPanel.Width+54)
+            {
+                Location = new Point(0, 25),
+            };
+            Controls.Add(_menu);
+
         }
 
+        public int GetFullWidth()
+        {
+            return Width;
+        }
 
         public ScheduleController ScheduleController()
         {
