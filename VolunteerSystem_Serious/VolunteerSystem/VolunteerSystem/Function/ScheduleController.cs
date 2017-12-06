@@ -139,7 +139,7 @@ namespace VolunteerSystem
         public void RemoveWorkerFromAllHisShifts(Worker worker)
         {
             GetAllShifts().ForEach(x => x.Workers.RemoveAll(y => y == worker));
-            //UpdateRequestPanel();
+
         }
         
         public void RemoveAllRequestsForAWorker(Worker worker)
@@ -147,7 +147,6 @@ namespace VolunteerSystem
             foreach (Request request in GetAllRequests())
                 if (request.Worker == worker)
                     RemoveRequest(request);
-            //UpdateRequestPanel();
         }
 
         public void RemoveRequest(Request request)
@@ -169,6 +168,7 @@ namespace VolunteerSystem
         {
             throw new NotImplementedException();
         }
+
         public void ApproveRequest(Request request)
         {
            Shift shift = GetAllShifts().Find(x => x.Requests.Contains(request));

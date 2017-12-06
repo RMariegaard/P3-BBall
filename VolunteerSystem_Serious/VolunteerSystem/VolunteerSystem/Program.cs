@@ -176,7 +176,7 @@ namespace VolunteerSystem
 
             for (int i = 1; i <= 7; i++)
             {
-                scheduleController.AddWorkerToShift(scheduleController.FindSingleShift(x => x == scheduleController.GetAllShifts().FindAll(y => y.Task == "Kiosk")[2]), workerController.Workers[i]);
+                scheduleController.AddWorkerToShift(scheduleController.GetAllShifts().FindAll(y => y.Task == "Kiosk")[2], workerController.Workers[i]);
             }
             scheduleController.GetAllShifts()[0].CreateRequest((Volunteer)workerController.Workers[0]);
             scheduleController.GetAllShifts()[1].CreateRequest((Volunteer)workerController.Workers[1]);
