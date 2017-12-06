@@ -66,10 +66,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             filterOptions.Location = new Point(5, filterOptionLabel.Location.Y + filterOptionLabel.Size.Height - 5);
             filterOptions.Size = new Size(_size.Width -30, 0);
             filterOptions.Items.Add("All");
-            filterOptions.Items.Add("Volunteers from last year, who hasn't signed up");
+            filterOptions.Items.Add("On shifts this year");
+            filterOptions.Items.Add("Volunteers from last year");
+            filterOptions.Items.Add("Volunteers from last year, who has no shift");
             filterOptions.Items.Add("Volunteers validated for seasonal tickets");
-            filterOptions.Items.Add("Volunteers signed up this year");
-            filterOptions.Items.Add("All external workers");
+            filterOptions.Items.Add("External workers only");
             filterOptions.SelectedIndex = 0;
             filterOptions.SelectedIndexChanged += FilterOptions_SelectedIndexChanged;
 
@@ -204,30 +205,40 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             {
                 if (filterOptions.SelectedIndex == 1)
                 {
-                    //if x.YearsWorked is thisYear - 1, then that means the volunteer worked last year, but have not yet signed up this year.
+                    //On shift this year
                     int thisYear = ScheduleController.ScheduleYear();
-                    res = res.Where(x => ((Volunteer)x).YearsWorked.LastOrDefault() == thisYear - 1).ToList();
+                    res = res.Where(x => ((Volunteer)x).YearsWorked.LastOrDefault() == thisYear).ToList();
+                    
                 }
                 else if (filterOptions.SelectedIndex == 2)
                 {
+                    //Volunteers from last year
                     int thisYear = ScheduleController.ScheduleYear();
-                    res = res.Where(x => ((Volunteer)x).IsValidForSeasonTickets(thisYear) == true).ToList();
+                    res = res.Where(x => ((Volunteer)x).YearsWorked.Contains(thisYear - 1)).ToList();
 
                 }
                 else if (filterOptions.SelectedIndex == 3)
                 {
-
+                    //Volunteers from last year, who has no shift
                     int thisYear = ScheduleController.ScheduleYear();
-                    res = res.Where(x => ((Volunteer)x).YearsWorked.LastOrDefault() == thisYear).ToList();
+                    res = res.Where(x => ((Volunteer)x).YearsWorked.LastOrDefault() == thisYear - 1).ToList();
+                    //if x.YearsWorked is thisYear - 1, then that means the volunteer worked last year, but have not yet signed up this year.
+
                 }
                 else if (filterOptions.SelectedIndex == 4)
                 {
+                    //volunteers validated for seasonal tichets
+                    int thisYear = ScheduleController.ScheduleYear();
+                    res = res.Where(x => ((Volunteer)x).IsValidForSeasonTickets(thisYear) == true).ToList();
+                }
+                else if (filterOptions.SelectedIndex == 5)
+                {
+                    //External workers only
                     res = res.Where(x => x is ExternalWorker).ToList();
                 }
             }
             return res;
         }
-
         private void Panel_Click(object sender, EventArgs e)
         {
             Worker worker = (Worker)((Control)sender).Tag;
