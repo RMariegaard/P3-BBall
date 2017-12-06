@@ -200,7 +200,8 @@ namespace VolunteerSystem.UserInterfaceAdmin
             {
                 this.Close();
                 volunteerMainUI.GetScheduleController().DeleteShift(shift);
-                volunteerMainUI.UpdateSchedule();
+                volunteerMainUI.UpdateAllHomepage();
+                
             }
         }
 
