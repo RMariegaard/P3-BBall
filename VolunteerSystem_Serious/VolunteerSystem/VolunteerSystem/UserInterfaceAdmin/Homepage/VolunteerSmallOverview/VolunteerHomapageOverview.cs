@@ -39,12 +39,12 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 
             volunteer = _homepage.ShownVolunteer;
 
-            if (volunteer != null)
-            {
+            //if (volunteer != null)
+            //{
                 _volunteerHomapageOverviewMainPanel.Controls.Add(_getVolunteerInformationPanel(new Point(5, 40), new Size((_volunteerHomapageOverviewMainPanel.Width/3) - 5, _volunteerHomapageOverviewMainPanel.Height - 50), volunteer));
                 _volunteerHomapageOverviewMainPanel.Controls.Add(_getVolunteerShiftPanel(new Point((_volunteerHomapageOverviewMainPanel.Width / 3) +5, 40), new Size((2*_volunteerHomapageOverviewMainPanel.Width / 3) - 10, (_volunteerHomapageOverviewMainPanel.Height/2) - 22), volunteer));
                 _volunteerHomapageOverviewMainPanel.Controls.Add(_getVolunteerRequestPanel(new Point((_volunteerHomapageOverviewMainPanel.Width / 3) + 5, 40 + (_volunteerHomapageOverviewMainPanel.Height / 2) - 22), new Size((2 * _volunteerHomapageOverviewMainPanel.Width / 3) - 10, (_volunteerHomapageOverviewMainPanel.Height / 2) - 22), volunteer));
-            }
+            //}
             _volunteerHomapageOverviewMainPanel.Controls.Add(titleTopLabel);
 
             return _volunteerHomapageOverviewMainPanel;
@@ -62,16 +62,30 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             };
 
             Label information = new Label();
-            String informationString = 
-                $"Name: {volunteer.Name}\n\n" +
-                $"Emil: {volunteer.Email}\n\n" +
-                $"Team: {volunteer.Assosiation}\n\n" +
-                $"Created: {volunteer.DateCreated.ToShortDateString()}\n\n" +
-                $"Years Participated: \n";
-            foreach(int year in volunteer.YearsWorked)
+            String informationString;
+            if (volunteer != null)
             {
-                informationString += $"  - {year} \n";
+
+
+                informationString =
+                    $"Name: {volunteer.Name}\n\n" +
+                    $"Emil: {volunteer.Email}\n\n" +
+                    $"Team: {volunteer.Assosiation}\n\n" +
+                    $"Created: {volunteer.DateCreated.ToShortDateString()}\n\n" +
+                    $"Years Participated: \n";
+                foreach (int year in volunteer.YearsWorked)
+                {
+                    informationString += $"  - {year} \n";
+                }
             }
+            else
+                informationString =
+                    $"Name: \n\n" +
+                    $"Emil: \n\n" +
+                    $"Team: \n\n" +
+                    $"Created: \n\n" +
+                    $"Years Participated: \n";
+
             information.Text = informationString;
             information.Location = new Point(2, 10);
             information.MaximumSize = new Size(size.Width - 10,0);
@@ -82,6 +96,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             fullProfileButton.Text = "Full Profile";
             fullProfileButton.AutoSize = true;
             fullProfileButton.Location = new Point((size.Width - fullProfileButton.Size.Width) / 2, information.Bottom + 170/*_mainPanel.Size.Height - 100*/);
+            if(volunteer == null)
+            {
+                fullProfileButton.Enabled = false;
+            }
+
 
             volunteerInformationPanel.Controls.Add(fullProfileButton);
             volunteerInformationPanel.Controls.Add(information);
@@ -110,14 +129,17 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
                 Location = new Point(0, 0),
                 AutoSize = true
             };
-
-            List<Shift> workerShifts = volunteerMainUI.GetScheduleController().GetAllShifts().Where(x => x.Workers.Exists(y => y.ID == worker.ID)).ToList();
-            int widthOfShiftElement = 100;
-            for (int i = 0; i < workerShifts.Count; i++)
+            if (worker != null)
             {
-                volunteerShiftPanel.Controls.Add(_getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height-2), new Size(widthOfShiftElement, volunteerShiftPanel.Size.Height - 50), workerShifts[i]));
-            }
 
+
+                List<Shift> workerShifts = volunteerMainUI.GetScheduleController().GetAllShifts().Where(x => x.Workers.Exists(y => y.ID == worker.ID)).ToList();
+                int widthOfShiftElement = 100;
+                for (int i = 0; i < workerShifts.Count; i++)
+                {
+                    volunteerShiftPanel.Controls.Add(_getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height - 2), new Size(widthOfShiftElement, volunteerShiftPanel.Size.Height - 50), workerShifts[i]));
+                }
+            }
             volunteerShiftPanel.Controls.Add(shiftLabel);
             return volunteerShiftPanel;
         }
@@ -139,14 +161,17 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
                 Location = new Point(0, 0),
                 AutoSize = true
             };
-
-            List<Shift> workerShifts = volunteerMainUI.GetScheduleController().GetAllShifts().Where(x => x.Requests.Any(y => y.Worker.ID == worker.ID) ).ToList();
-            int widthOfShiftElement = 100;
-            for (int i = 0; i < workerShifts.Count; i++)
+            if (worker != null)
             {
-                volunteerRequestPanel.Controls.Add(_getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height - 2), new Size(widthOfShiftElement, volunteerRequestPanel.Size.Height - 50), workerShifts[i]));
-            }
 
+
+                List<Shift> workerShifts = volunteerMainUI.GetScheduleController().GetAllShifts().Where(x => x.Requests.Any(y => y.Worker.ID == worker.ID)).ToList();
+                int widthOfShiftElement = 100;
+                for (int i = 0; i < workerShifts.Count; i++)
+                {
+                    volunteerRequestPanel.Controls.Add(_getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height - 2), new Size(widthOfShiftElement, volunteerRequestPanel.Size.Height - 50), workerShifts[i]));
+                }
+            }
             volunteerRequestPanel.Controls.Add(shiftLabel);
             return volunteerRequestPanel;
         }
