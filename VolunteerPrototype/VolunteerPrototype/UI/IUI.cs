@@ -17,5 +17,6 @@ namespace VolunteerPrototype.UI
         int GetFullWidth();
         bool IsLoggedIn();
         void LogIn();
+        void LogOut();
     }
 }

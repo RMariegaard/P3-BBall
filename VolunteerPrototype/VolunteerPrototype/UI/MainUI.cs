@@ -33,9 +33,10 @@ namespace VolunteerPrototype.UI
             _dayNavigation = new DayNavigation(this);
 
             UpdateSchedulePanel();
-            _menu = new MenuUI(this, _schedulePanel.Width + _dayNavigationPanel.Width+54)
+            _menu = new MenuUI(this, _schedulePanel.Width + _dayNavigationPanel.Width + 54)
             {
-                Location = new Point(0, 25),
+                Location = new Point(0, 0),
+                Height = 100
             };
             Controls.Add(_menu);
 
@@ -85,12 +86,17 @@ namespace VolunteerPrototype.UI
 
         public bool IsLoggedIn()
         {
-            return _user == null;
+            return _user != null;
         }
 
         public void LogIn()
         {
             _user = new User();
+        }
+
+        public void LogOut()
+        {
+            _user = null;
         }
     }
 }
