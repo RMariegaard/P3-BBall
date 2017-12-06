@@ -38,7 +38,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Settings
                 Font = new Font(_settingsMainPanel.Font.Name, 14F),
                 AutoSize = true
             };
-            _settingsList.Items.Add("Hej");
+            _settingsList.Items.Add("Email ");
 
             _settingsList.Items.Add("Hej");
             _settingsList.Items.Add("Hej");
