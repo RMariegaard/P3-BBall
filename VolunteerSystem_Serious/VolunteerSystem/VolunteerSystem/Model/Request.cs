@@ -45,5 +45,9 @@ namespace VolunteerSystem
             _timeSent = DateTime.Now;
             _worker = worker;
         }
+        public override string ToString()
+        {
+            return $"{TimeSent.ToString("dd/MM/yyyy HH:mm")} - {Worker.Name} - {Worker.Email}";
+        }
     }
 }

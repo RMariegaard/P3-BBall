@@ -304,7 +304,11 @@ namespace VolunteerSystem.UserInterface
         {
             return ScheduleController;
         }
-
+        public void UpdateSmallVolunteerOverview(Volunteer worker)
+        {
+            _homepage.ShownVolunteer = worker;
+            _homepage.UpdateVolunteerPanel();
+        }
 
         public WorkerController GetWorkController()
         {

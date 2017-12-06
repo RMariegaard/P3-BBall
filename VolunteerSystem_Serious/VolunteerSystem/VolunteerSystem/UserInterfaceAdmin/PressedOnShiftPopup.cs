@@ -21,8 +21,8 @@ namespace VolunteerSystem.UserInterfaceAdmin
         Panel _pressedOnShiftPopupMainPanel;
         Size fullClientSize;
         IVolunteerMainUI volunteerMainUI;
-
-       // ObservableCollection<Worker> data;
+        ListBox workersList;
+        ListBox requestsList;
 
         BindingSource bindingSource = new BindingSource();
 
@@ -97,13 +97,14 @@ namespace VolunteerSystem.UserInterfaceAdmin
                 AutoSize = true
             };
 
-            ListBox workersList = new ListBox
+            workersList = new ListBox
             {
                 Text = "Workers",
                 Size = new Size(300, 100),
                 Location = new Point(5, workerLabel.Location.Y + workerLabel.GetPreferredSize(Size.Empty).Height),
                 BorderStyle = BorderStyle.FixedSingle
             };
+            workersList.AutoSize = true;
             workersList.ScrollAlwaysVisible = true;
 
             
@@ -114,21 +115,11 @@ namespace VolunteerSystem.UserInterfaceAdmin
             workersList.DataSource = bindingSource;
 
 
-
-
-
-           // workersList.DisplayMember = 
-            //foreach (var w in shift.Workers)
-            //{
-            //    if( w is Volunteer)
-            //    {
-            //        workersList.Items.Add($"{((Volunteer)w).Assosiation} - {w.Name} - {w.Email}");
-            //    }
-                
-            //}
+            workersList.SelectedIndexChanged += WorkersList_SelectedIndexChanged;
             
+
+
             workersList.EndUpdate();
-            workersList.AutoSize = true;
 
             Label requestLabel = new Label
             {
@@ -138,7 +129,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
                 AutoSize = true
             };
 
-            ListBox requestsList = new ListBox
+            requestsList = new ListBox
             {
                 Text = "Requests",
                 AutoSize = true,
@@ -151,8 +142,10 @@ namespace VolunteerSystem.UserInterfaceAdmin
             requestsList.BeginUpdate();
             foreach (var r in shift.Requests)
             {
-               requestsList.Items.Add($"{r.TimeSent.ToString("dd/MM/yyyy HH:mm")} - {r.Worker.Name} - {r.Worker.Email}");
+               requestsList.Items.Add(r);
             }
+            requestsList.SelectedIndexChanged += RequestsList_SelectedIndexChanged;
+
             requestsList.EndUpdate();
 
             Button addWorkerButton = new Button()
@@ -176,6 +169,18 @@ namespace VolunteerSystem.UserInterfaceAdmin
             this.Controls.Add(editShiftButton);
             this.Controls.Add(deleteButton);
             Controls.Add(_pressedOnShiftPopupMainPanel);
+        }
+
+        private void RequestsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Request request = (Request)requestsList.SelectedItem;
+            volunteerMainUI.UpdateSmallVolunteerOverview(request.Worker as Volunteer);
+        }
+
+        private void WorkersList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(workersList.SelectedItem is Volunteer)
+                volunteerMainUI.UpdateSmallVolunteerOverview((Volunteer)workersList.SelectedItem);
         }
 
         private void _addWorkerButton_Clicked(object sender, EventArgs e)

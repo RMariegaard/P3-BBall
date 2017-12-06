@@ -10,6 +10,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
 {
     public interface IVolunteerMainUI
     {
+        void UpdateSmallVolunteerOverview(Volunteer worker);
         void UpdateSchedule();
         void UpdateAllHomepage();
         void HomepageChangeDay(string day);
