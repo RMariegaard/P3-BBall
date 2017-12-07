@@ -67,6 +67,12 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Function\FakeDatabaseControls\FakeDatabase.cs" />
+    <Compile Include="Function\FakeDatabaseControls\FakeExternalWorker.cs" />
+    <Compile Include="Function\FakeDatabaseControls\FakeRequestController.cs" />
+    <Compile Include="Function\FakeDatabaseControls\FakeScheduleController.cs" />
+    <Compile Include="Function\FakeDatabaseControls\FakeShiftController.cs" />
+    <Compile Include="Function\FakeDatabaseControls\FakeVolunteerController.cs" />
     <Compile Include="Function\ScheduleControllerTests.cs" />
     <Compile Include="Function\WorkerControllerTests.cs" />
     <Compile Include="Model\ShiftTests.cs" />

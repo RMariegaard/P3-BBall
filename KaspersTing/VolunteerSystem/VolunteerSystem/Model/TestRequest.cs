@@ -13,7 +13,7 @@ namespace VolunteerSystem
 {
     public class Request : AbstractNotification
     {
-        public RequestController RequestDatabase = new RequestController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
+        //public RequestController RequestDatabase = new RequestController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
 
         [Key]
         public int RequestId { get; set; }

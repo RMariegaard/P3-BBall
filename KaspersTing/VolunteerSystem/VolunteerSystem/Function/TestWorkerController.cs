@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using VolunteerSystem.Database;
 using VolunteerSystem.Model;
+using VolunteerSystem.Database.InterfacesDatabase;
 
 namespace VolunteerSystem
 {
     public class WorkerController
     {
-        private FinalController _database;
+        private IFinalController _database;
         public List<Worker> ListOfWorkers;
 
-        public WorkerController(FinalController database)
+        public WorkerController(IFinalController database)
         {
             _database = database;
             ListOfWorkers = UpdateListOfVolunteers();

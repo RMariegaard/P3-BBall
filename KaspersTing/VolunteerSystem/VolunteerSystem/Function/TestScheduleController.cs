@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VolunteerSystem.Database;
 using VolunteerSystem.Model;
+using VolunteerSystem.Database.InterfacesDatabase;
 
 namespace VolunteerSystem
 {
@@ -12,9 +13,9 @@ namespace VolunteerSystem
     {
         private Schedule _schedule;
         //public event UpdateRequestPanelEvent UpdateRequestPanel;
-        private FinalController _database;
+        private IFinalController  _database;
 
-        public ScheduleController(Schedule schedule, FinalController database)
+        public ScheduleController(Schedule schedule, IFinalController database)
         {
             _schedule = schedule;
             _database = database;

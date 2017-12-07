@@ -8,8 +8,10 @@ namespace VolunteerSystem.Database.InterfacesDatabase
 {
     public interface IFinalController : IDisposable
     {
-        IScheduleController schedule {get;}
+        IScheduleController schedule { get; }
+
         IRequestController request { get; }
+
         IShiftController shift { get; }
         IVolunteerController volunteer { get; }
         IExternalWorkerController externalWorker { get; }

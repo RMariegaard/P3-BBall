@@ -22,23 +22,22 @@ namespace VolunteerSystem
         }
         [Key]
         public int WorkerId { get; set; }
-        public string Email { get; private set; }
         public string Name { get; private set; }
 
         public List<Shift> ListOfShifts {get;set;}
 
-
-        //public string Email
-        //{
-        //    get { return _email; }
-        //    set
-        //    {
-        //        if (_checkEmailValidation(value))
-        //            _email = value;
-        //        else
-        //            throw new Exception();
-        //    }
-        //}
+        private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                if (_checkEmailValidation(value))
+                    _email = value;
+                else
+                    throw new Exception();
+            }
+        }
 
 
 
@@ -52,38 +51,42 @@ namespace VolunteerSystem
             return Name + " " + Email;
         }
 
-        //private bool _checkEmailValidation(string value)
-        //{
-        //    try
-        //    {
-        //        if (!value.Any(c => c == '@'))
-        //            return false;
+        private bool _checkEmailValidation(string value)
+        {
+            try
+            {
+                if(value == "")
+                {
+                    return true;
+                }
+                if (!value.Any(c => c == '@'))
+                    return false;
 
-        //        string localPart = value.Substring(0, value.IndexOf('@'));
-        //        string domain = value.Substring(value.IndexOf('@') + 1);
+                string localPart = value.Substring(0, value.IndexOf('@'));
+                string domain = value.Substring(value.IndexOf('@') + 1);
 
 
-        //        if (!localPart.All(c => char.IsLetterOrDigit(c) || c == '.' || c == '_' || c == '-') || localPart.Count() < 1)
-        //            return false;
+                if (!localPart.All(c => char.IsLetterOrDigit(c) || c == '.' || c == '_' || c == '-') || localPart.Count() < 1)
+                    return false;
 
 
 
-        //        string domainFirstAndLast = domain.Substring(0, 1) + domain.Substring(domain.Count() - 1);
-        //        string domainMid = domain.Substring(1, domain.Count() - 2);
+                string domainFirstAndLast = domain.Substring(0, 1) + domain.Substring(domain.Count() - 1);
+                string domainMid = domain.Substring(1, domain.Count() - 2);
 
-        //        if (domainMid.All(c => char.IsLetterOrDigit(c) || c == '.' || c == '-')
-        //            && domainFirstAndLast.All(c => char.IsLetterOrDigit(c))
-        //            && domain.Any(c => c == '.'))
-        //        {
-        //            return true;
-        //        }
-        //        else
-        //            return false;
-        //    }
-        //    catch (ArgumentOutOfRangeException)
-        //    {
-        //        return false;
-        //    }
-        //}
+                if (domainMid.All(c => char.IsLetterOrDigit(c) || c == '.' || c == '-')
+                    && domainFirstAndLast.All(c => char.IsLetterOrDigit(c))
+                    && domain.Any(c => c == '.'))
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -13,13 +13,14 @@ namespace VolunteerSystem
     public class Volunteer : Worker
     {
         //Database Connection
-        public VolunteerController volunteerDatabase = new VolunteerController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
+        //public VolunteerController volunteerDatabase = new VolunteerController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
 
         //Constructors 
         public Volunteer(string name, string email, string accosi):base(name, email)
         {
             this.DateCreated = DateTime.Now;
             this.Association = accosi;
+            //Dette gør vi i controller i stedet for, så påvirker det heller ikke unit tests
            //volunteerDatabase.Add(this);
            //volunteerDatabase.Complete();
             YearsWorked = new List<int>();
@@ -52,9 +53,9 @@ namespace VolunteerSystem
 
         public void AddYearWorked(int year)
         {
-            //if (!YearsWorked.Contains(year))
+            if (!YearsWorked.Contains(year))
             {
-               // YearsWorked.Add(year);
+                YearsWorked.Add(year);
                 //update database på en måde
             }
         }
@@ -66,10 +67,6 @@ namespace VolunteerSystem
             this.Association = Association;
             this.YearsWorked = new List<int>();
             this.Phonenumber = Phonenumber;
-
-            volunteerDatabase.Add(this);
-            volunteerDatabase.Complete();
-
 
         }
         //public Volunteer(int id, string name, string email, string Association, DateTime dateCreated, List<int> yearsworked) : base(name, email)

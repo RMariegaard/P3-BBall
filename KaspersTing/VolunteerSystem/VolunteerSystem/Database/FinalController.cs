@@ -22,8 +22,8 @@ namespace VolunteerSystem.Database
 
 
         }
-        public IScheduleController schedule { get; private set; }
 
+        public IScheduleController schedule { get; private set; }
         public IRequestController request { get; private set; }
 
         public IShiftController shift { get; private set; }
