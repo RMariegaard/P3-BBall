@@ -16,16 +16,14 @@ namespace VolunteerSystem.Function
         public TestWorkerController(FinalController database)
         {
             _database = database;
-            _listOfWorkers = new List<TestWorker>();
-            _listOfWorkers.AddRange(_database.externalWorker.GetExternalWorkers());
-            _listOfWorkers.AddRange(_database.volunteer.getthembitches());
+            _listOfWorkers = UpdateListOfVolunteers();
 
         }
 
         public void CreateWorker(TestWorker worker)
         {
             _listOfWorkers.Add(worker);
-            //_database.Complete();
+            _database.Complete();
         }
 
         public List<TestWorker> SearchWorkers(Predicate<TestWorker> predicate)
@@ -46,7 +44,17 @@ namespace VolunteerSystem.Function
                 _database.volunteer.Remove(worker as TestVolunteer);
             }
             else { _database.externalWorker.Remove(worker as TestExternalWorker); }
-           
+
+            _database.Complete();
+            _listOfWorkers = UpdateListOfVolunteers();
+        }
+
+        private List<TestWorker> UpdateListOfVolunteers()
+        {
+            List<TestWorker> listOfWorkers = new List<TestWorker>();
+            listOfWorkers.AddRange(_database.volunteer.getthembitches());
+            listOfWorkers.AddRange(_database.externalWorker.GetExternalWorkers());
+            return listOfWorkers;
         }
 
         //public List<string> GetAllTeams()
