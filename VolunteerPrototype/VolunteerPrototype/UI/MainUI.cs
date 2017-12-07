@@ -23,6 +23,8 @@ namespace VolunteerPrototype.UI
 
         private User _user;
 
+        public string GetCurrentUser => _user.Name;
+
         public MainUI(ScheduleController sc, WorkerController wc)
         {
             _scheduleController = sc;

@@ -9,6 +9,8 @@ namespace VolunteerPrototype
     public class User
     {
         private int _volunteerId;
+        private string _name;
+        public string Name { get { return _name; } }
         public int VolunteerId { get { return _volunteerId; } }
 
     }

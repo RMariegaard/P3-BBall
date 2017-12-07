@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace VolunteerPrototype.UI
         private Button _myShiftButton;
         private Button _accountSettingsButton;
 
+        private Label _userInforLabel;
+
         private IUI _mainUI;
 
         private Form _logInPopUp;
@@ -28,10 +31,16 @@ namespace VolunteerPrototype.UI
             _scheduleButton = new Button()
             {
                 Text = "Schedule",
-                Location = new System.Drawing.Point(100, 70)
+                Location = new System.Drawing.Point(100, 70),
+                Size = new System.Drawing.Size(width/3 - 45,30),
             };
             _scheduleButton.Click += ShowSchedule;
             Controls.Add(_scheduleButton);
+            _userInforLabel = new Label()
+            {
+                Location = new System.Drawing.Point(100, 30)
+            };
+            Controls.Add(_userInforLabel);
 
             if (IsLoggedIn)
             {
@@ -57,7 +66,7 @@ namespace VolunteerPrototype.UI
              };
             _loginButton.Click += Login;
             Controls.Add(_loginButton);
-
+            _userInforLabel.Text = "You are not logged in";
        
 
         }
@@ -97,15 +106,19 @@ namespace VolunteerPrototype.UI
             _myShiftButton = new Button()
             {
                 Text = "My Shifts",
-                Location = new System.Drawing.Point(_scheduleButton.Width + _scheduleButton.Location.X, _scheduleButton.Location.Y)
+                Location = new System.Drawing.Point(_scheduleButton.Width + _scheduleButton.Location.X, _scheduleButton.Location.Y),
+                Size = _scheduleButton.Size
             };
             Controls.Add(_myShiftButton);
             _accountSettingsButton = new Button()
             {
                 Text = "Account Settings",
-                Location = new System.Drawing.Point(_myShiftButton.Width + _myShiftButton.Location.X, _myShiftButton.Location.Y)
+                Location = new System.Drawing.Point(_myShiftButton.Width + _myShiftButton.Location.X, _myShiftButton.Location.Y),
+                Size = _scheduleButton.Size
             };
             Controls.Add(_accountSettingsButton);
+
+            _userInforLabel.Text = $"Logged in as {_mainUI.GetCurrentUser}";
         }
 
         private void LogOut(object sender, EventArgs e)

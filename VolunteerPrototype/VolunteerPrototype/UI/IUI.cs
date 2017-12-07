@@ -9,6 +9,8 @@ namespace VolunteerPrototype.UI
 {
     public interface IUI
     {
+        string GetCurrentUser { get; }
+
         ScheduleController ScheduleController();
         WorkerController WorkerController();
         void UpdateSchedulePanel();
