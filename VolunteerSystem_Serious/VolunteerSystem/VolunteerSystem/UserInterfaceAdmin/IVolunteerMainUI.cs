@@ -15,7 +15,6 @@ namespace VolunteerSystem.UserInterfaceAdmin
         void UpdateAllHomepage();
         void HomepageChangeDay(string day);
         void DisplayPopup(string header, string body);
-
         void UpdateButtonsLeftSide();
         ScheduleController GetScheduleController();
         WorkerController GetWorkController();
@@ -34,5 +33,6 @@ namespace VolunteerSystem.UserInterfaceAdmin
         void Start();
         void UpdateUI();
         void ScrollToControlOnSchedule(Control control);
+        void RemoveTaskAndAssociateShifts(string taskName);
     }
 }

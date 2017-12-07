@@ -102,6 +102,7 @@
     <Compile Include="Model\TestShift.cs" />
     <Compile Include="Model\TestVolunteer.cs" />
     <Compile Include="Model\TestWorker.cs" />
+    <Compile Include="Model\WorkerShiftPair.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Request.cs" />
@@ -149,6 +150,12 @@
     <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\TasksPanels.cs" />
     <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\TheSchedule.cs" />
     <Compile Include="UserInterfaceAdmin\Homepage\VolunteerSmallOverview\VolunteerHomapageOverview.cs" />
+    <Compile Include="UserInterfaceAdmin\InformVolunteerEmailBeforeSendUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\InformVolunteerEmailBeforeSendUI.Designer.cs">
+      <DependentUpon>InformVolunteerEmailBeforeSendUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserInterfaceAdmin\IVolunteerMainUI.cs" />
     <Compile Include="UserInterfaceAdmin\PopupUI.cs">
       <SubType>Form</SubType>

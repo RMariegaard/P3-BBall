@@ -14,6 +14,34 @@ namespace VolunteerSystem
     {
         public static List<Notification> AllNotifications = new List<Notification>();
 
+        public static string GetStandardVolunteerDeniedShiftMessage
+        {
+            get
+            {
+                var reader = new StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerRequestDeniedMessage.txt");
+                string message = reader.ReadToEnd();
+                return message;
+            }
+        }
+        public static string GetStandardVolunteerAcceptedShiftMessage
+        {
+            get
+            {
+                var reader = new StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerRequestAcceptedMessage.txt");
+                string message = reader.ReadToEnd();
+                return message;
+            }
+        }
+        public static string GetStandardVolunteerDeletedShiftMessage
+        {
+            get
+            {
+                var reader = new StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerShiftDeletedMessage.txt");
+                string message = reader.ReadToEnd();
+                return message;
+            }
+        }
+
         public static void InformAdmin()
         {
             throw new NotImplementedException();
@@ -100,10 +128,9 @@ namespace VolunteerSystem
                     break;
                 default:
                     break;
-                    
             }
         }
-
+        
         private static void InformVolunteerDeniedShift(Volunteer volunteer, Shift shift)
         {
             var reader = new System.IO.StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerRequestDeniedMessage.txt");
@@ -116,7 +143,7 @@ namespace VolunteerSystem
 
             InformVolunteer(volunteer, message);
         }
-
+        
         private static void InformVolunteerAcceptedShift(Volunteer volunteer, Shift shift)
         {
             var reader = new System.IO.StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerRequestAcceptedMessage.txt");
@@ -130,11 +157,18 @@ namespace VolunteerSystem
 
             InformVolunteer(volunteer, message);
         }
-
+        
         private static void InfromVolunteerDeletedShift(Volunteer volunteer, Shift shift)
         {
+            var reader = new System.IO.StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerShiftDeletedMessage.txt");
+            
+            string message = reader.ReadToEnd()
+                .Replace("[Volunteer]", volunteer.Name)
+                .Replace("[Task]", shift.Task)
+                .Replace("[StartTime]", shift.StartTime.ToString("dddd D. dd/MM/yyyy kl. hh:mm"))
+                .Replace("[Endtime]", shift.EndTime.ToString("dddd D. dd/MM/yyyy kl. hh:mm"));
 
-            string message = $"Dear {volunteer.Name},\nThe {shift.Task} shift at {shift.StartTime} has been deleted and therefor you are not going to work at this time.\nAarhus Basketball Festival.";
+
             InformVolunteer(volunteer, message);
         }
 

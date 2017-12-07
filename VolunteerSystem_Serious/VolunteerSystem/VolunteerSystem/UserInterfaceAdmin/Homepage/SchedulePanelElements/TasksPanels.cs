@@ -65,8 +65,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             deletePopup.ShowDialog();
             if (deletePopup.DialogResult == DialogResult.OK)
             {
-                volunteerMainUI.GetScheduleController().RemoveTaskAndAssociateShifts(_taskName);
-                volunteerMainUI.UpdateAllHomepage();
+                volunteerMainUI.RemoveTaskAndAssociateShifts(_taskName);
             }
         }
     }
