@@ -20,8 +20,8 @@ namespace VolunteerSystem
         {
             this.DateCreated = DateTime.Now;
             this.Association = accosi;
-           volunteerDatabase.Add(this);
-           volunteerDatabase.Complete();
+           //volunteerDatabase.Add(this);
+           //volunteerDatabase.Complete();
             YearsWorked = new List<int>();
             
         }

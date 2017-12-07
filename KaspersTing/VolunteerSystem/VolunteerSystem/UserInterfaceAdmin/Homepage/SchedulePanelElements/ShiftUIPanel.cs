@@ -127,21 +127,20 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             Time.AutoSize = true;
             Time.Click += _panel_clicked;
             //////////////////DescriptionLabel////////////////////////
-            Label Desciption = new Label
-            {
-                Location = new Point(0, Time.Location.Y + Time.Size.Height + 1),
-                MaximumSize = new Size(100, 0),
-                AutoSize = true
-            };
-            var descriptionBinding = new Binding("Text", shiftBindingSource, "Description");
-            Desciption.DataBindings.Add(descriptionBinding);
-            Desciption.Click += _panel_clicked;
+            //Label Desciption = new Label
+            //{
+            //    Location = new Point(0, Time.Location.Y + Time.Size.Height + 1),
+            //    MaximumSize = new Size(100, 0),
+            //    AutoSize = true
+            //};
+            //var descriptionBinding = new Binding("Text", shiftBindingSource, "Description");
+            //Desciption.DataBindings.Add(descriptionBinding);
+            //Desciption.Click += _panel_clicked;
 
 
             shiftPanel.Controls.Add(topColor);
             shiftPanel.Controls.Add(headder);
             shiftPanel.Controls.Add(Time);
-            shiftPanel.Controls.Add(Desciption);
 
             return shiftPanel;
         }

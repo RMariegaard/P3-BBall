@@ -83,30 +83,30 @@ namespace VolunteerSystem
             ScheduleController scheduleController = new ScheduleController(db2.schedule.GetSchedule(1), db2);
             WorkerController workerController = new WorkerController(db2);
 
-
-
-
-            //workerController.ListOfWorkers.Add(new Volunteer("Denne dude er validated for season tickets ", "nej@ja.maybe", "U12 Drenge"));
-            //((Volunteer)workerController.ListOfWorkers.First()).TempAddYearWorked(2017);
-            //((Volunteer)workerController.ListOfWorkers.First()).TempAddYearWorked(2018);
-            //workerController.ListOfWorkers.Add(new Volunteer("Kasper", "AnEmail@domainFindesIkke.dk", "U8 Drenge"));
-            //((Volunteer)workerController.ListOfWorkers[1]).TempAddYearWorked(2017);
-            //workerController.ListOfWorkers.Add(new Volunteer("Casper", "AnEmail@domainFindesIkke.dk", "U16 Drenge"));
-            //workerController.ListOfWorkers.Add(new Volunteer("Mark", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
-            //workerController.ListOfWorkers.Add(new Volunteer("Mustafa", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
-            //workerController.ListOfWorkers.Add(new Volunteer("Emil", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
-            //workerController.ListOfWorkers.Add(new Volunteer("Rasmus", "JegKanIkkeLideSex@NarrePik.fuck", "U12 Drenge"));
-            //workerController.ListOfWorkers.Add(new Volunteer("Peter", "anEmail@domainFindesIkke.dk", "U12 Drenge"));
-            //workerController.ListOfWorkers.Add(new Volunteer("Søren", "AnEmail@domainFindesIkke.dk", "U14 Drenge"));
-            //workerController.ListOfWorkers.Add(new Volunteer("Krisjan", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
-            //workerController.ListOfWorkers.Add(new Volunteer("Mikkel", "AnEmail@domainFindesIkke.dk", "U12 Piger"));
-
             scheduleController.CreateTask("Kitchen");
             scheduleController.CreateTask("Accomadation");
             scheduleController.CreateTask("Kiosk");
             scheduleController.CreateTask("Dinning Hall");
             scheduleController.CreateTask("DishWash");
             scheduleController.CreateTask("Car");
+
+
+
+            //workerController.CreateWorker(new Volunteer("Denne dude er validated for season tickets ", "nej@ja.maybe", "U12 Drenge"));
+            //((Volunteer)workerController.ListOfWorkers.First()).TempAddYearWorked(2017);
+            //((Volunteer)workerController.ListOfWorkers.First()).TempAddYearWorked(2018);
+            //workerController.CreateWorker(new Volunteer("Kasper", "AnEmail@domainFindesIkke.dk", "U8 Drenge"));
+            //((Volunteer)workerController.ListOfWorkers[1]).TempAddYearWorked(2017);
+            //workerController.CreateWorker(new Volunteer("Casper", "AnEmail@domainFindesIkke.dk", "U16 Drenge"));
+            //workerController.CreateWorker(new Volunteer("Mark", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            //workerController.CreateWorker(new Volunteer("Mustafa", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            //workerController.CreateWorker(new Volunteer("Emil", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            //workerController.CreateWorker(new Volunteer("Rasmus", "JegKanIkkeLideSex@NarrePik.fuck", "U12 Drenge"));
+            //workerController.CreateWorker(new Volunteer("Peter", "anEmail@domainFindesIkke.dk", "U12 Drenge"));
+            //workerController.CreateWorker(new Volunteer("Søren", "AnEmail@domainFindesIkke.dk", "U14 Drenge"));
+            //workerController.CreateWorker(new Volunteer("Krisjan", "AnEmail@domainFindesIkke.dk", "U12 Drenge"));
+            //workerController.CreateWorker(new Volunteer("Mikkel", "AnEmail@domainFindesIkke.dk", "U12 Piger"));
+
 
             ////Day one dining hall
             //// scheduleController.CreateShift(new Shift(new DateTime(2016, 4, 13, 6, 15, 0), new DateTime(2017, 4, 13, 10, 00, 0), scheduleController.GetAllTasks()[3], 7, "Nope"));
@@ -204,7 +204,8 @@ namespace VolunteerSystem
             //scheduleController.GetAllListOfShifts()[0].CreateRequest((Volunteer)workerController.ListOfWorkers[8]);
             //scheduleController.GetAllListOfShifts()[0].CreateRequest((Volunteer)workerController.ListOfWorkers[9]);
 
-            db2.Complete();
+            //db2.Complete();
+
             Notifier.AllNotifications.Add(new Notification("High Importance: Volunteer droped out", "Unfortunetly Casper has dropped his shift in the kitchen friday 22-01-2017", NotificationImportance.HighImportance));
             Notifier.AllNotifications.Add(new Notification("Medium Importance: En lang headder for at se hvad der sker når den bliver lang",
                 "Og den skal selvfølgelig have en mindst ligeså lang body for at se hvad der sker her ovre. Men hvor langt er for langt? Måske lige en sætning mere",
@@ -215,6 +216,7 @@ namespace VolunteerSystem
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
 
             Ui.Start();
+
         }
     }
 }

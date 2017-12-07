@@ -23,6 +23,7 @@ namespace VolunteerSystem
         public void CreateWorker(Worker worker)
         {
             ListOfWorkers.Add(worker);
+            _database.volunteer.Add(worker as Volunteer);
             _database.Complete();
         }
 
@@ -53,7 +54,7 @@ namespace VolunteerSystem
         {
             List<Worker> ListOfWorkers = new List<Worker>();
             ListOfWorkers.AddRange(_database.volunteer.getthembitches());
-            ListOfWorkers.AddRange(_database.externalWorker.GetExternalListOfWorkers());
+            //ListOfWorkers.AddRange(_database.externalWorker.GetExternalListOfWorkers());
             return ListOfWorkers;
         }
 

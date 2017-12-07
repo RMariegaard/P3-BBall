@@ -78,6 +78,7 @@ namespace VolunteerSystem
         public void CreateShift(Shift shift)
         {
             _schedule.ListOfShifts.Add(shift);
+            _database.shift.Add(shift);
             _database.schedule.UpdateSchedule(_schedule);
         }
 
