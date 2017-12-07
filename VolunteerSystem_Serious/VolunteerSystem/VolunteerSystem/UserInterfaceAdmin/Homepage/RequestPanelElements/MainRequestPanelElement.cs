@@ -15,6 +15,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
         private IVolunteerMainUI _volunteerMainUI;
         private Label titleTopLabel;
         private CheckBox NotificationCheckBox;
+        private bool isChecked;
         int panelHeight = 40;
         Panel requestAndNotificationPanel;
 
@@ -28,7 +29,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
                 Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom
             };
             titleTopLabel = new Label();
-            NotificationCheckBox = new CheckBox();
+            isChecked = true;
         }
 
         private Panel _getTopBarPanel(Size size)
@@ -86,13 +87,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
                 Location = new Point(titleTopLabel.Location.X + titleTopLabel.Size.Width + 10, 15),
                 AutoSize = true
             };
+            NotificationCheckBox = new CheckBox();
+            NotificationCheckBox.Checked = isChecked ? true : false;
             NotificationCheckBox.Location = new Point(notificationLabel.Location.X + notificationLabel.Size.Width + 10, 15);
             NotificationCheckBox.AutoSize = true;
-            NotificationCheckBox.CheckState = CheckState.Checked;
-            NotificationCheckBox.Click += delegate (object sender, EventArgs e)
-            {
-                UpdateRequestAndNotificationPanels();
-            };
+            NotificationCheckBox.Click += checkBox_clicked;
 
             _mainRequestPanel.Controls.Add(notificationLabel);
             _mainRequestPanel.Controls.Add(NotificationCheckBox);
@@ -102,7 +101,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
 
             return _mainRequestPanel;
         }
-        
+
+        private void checkBox_clicked(object sender, EventArgs e)
+        {
+            isChecked = !isChecked;
+            UpdateRequestAndNotificationPanels();
+
+        }
+
         public void UpdateRequestAndNotificationPanels()
         {
             _mainRequestPanel.Controls.Remove(requestAndNotificationPanel);
