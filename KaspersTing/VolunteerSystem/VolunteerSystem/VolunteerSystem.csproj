@@ -67,9 +67,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database2\DatabaseLayer.cs" />
-    <Compile Include="Database2\VolunteerDatabase.cs" />
-    <Compile Include="Database2\DBConnection.cs" />
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Database\DatabaseController.cs" />
     <Compile Include="Database\ExternalWorkerController.cs" />
@@ -91,7 +88,6 @@
     <Compile Include="Function\TestScheduleController.cs" />
     <Compile Include="Function\TestWorkerController.cs" />
     <Compile Include="Model\AbstractNotification.cs" />
-    <Compile Include="Model\ExternalWorker.cs" />
     <Compile Include="Function\WorkerController.cs" />
     <Compile Include="Function\Notifier.cs" />
     <Compile Include="Database\SqlDataConnecter.cs" />
@@ -102,15 +98,8 @@
     <Compile Include="Model\TestShift.cs" />
     <Compile Include="Model\TestVolunteer.cs" />
     <Compile Include="Model\TestWorker.cs" />
-    <Compile Include="Model\WorkerShiftPair.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Request.cs" />
-    <Compile Include="Model\Schedule.cs" />
-    <Compile Include="Model\Shift.cs" />
-    <Compile Include="Model\Volunteer.cs" />
-    <Compile Include="Model\Worker.cs" />
-    <Compile Include="Function\ScheduleController.cs" />
     <Compile Include="UserInterfaceAdmin\AddWorkerManuallyButtonPopUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,12 +139,6 @@
     <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\TasksPanels.cs" />
     <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\TheSchedule.cs" />
     <Compile Include="UserInterfaceAdmin\Homepage\VolunteerSmallOverview\VolunteerHomapageOverview.cs" />
-    <Compile Include="UserInterfaceAdmin\InformVolunteerEmailBeforeSendUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UserInterfaceAdmin\InformVolunteerEmailBeforeSendUI.Designer.cs">
-      <DependentUpon>InformVolunteerEmailBeforeSendUI.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserInterfaceAdmin\IVolunteerMainUI.cs" />
     <Compile Include="UserInterfaceAdmin\PopupUI.cs">
       <SubType>Form</SubType>

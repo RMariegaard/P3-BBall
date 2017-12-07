@@ -17,7 +17,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             this.volunteerMainUI = volunteerMainUI;
         }
         private string _taskName;
-        public Panel GetATaskPanel(string headline, List<Shift> shifts, Size size, Point location, int hourHeight, DateTime date)
+        public Panel GetATaskPanel(string headline, List<Shift> ListOfShifts, Size size, Point location, int hourHeight, DateTime date)
         {
             _taskName = headline;
             Panel taskPanel = new Panel
@@ -49,9 +49,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             };
             button.Click += headder_clicked;
             taskPanel.Controls.Add(button);
-            for (int i = 0; i < shifts.Count(); i++)
+            for (int i = 0; i < ListOfShifts.Count(); i++)
             {
-                ShiftUIPanel tempShiftUIPanel = new ShiftUIPanel(volunteerMainUI, shifts[i], date);
+                ShiftUIPanel tempShiftUIPanel = new ShiftUIPanel(volunteerMainUI, ListOfShifts[i], date);
                 taskPanel.Controls.Add(tempShiftUIPanel.ShiftUI(taskPanel, hourHeight));
             }
 
@@ -60,12 +60,13 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
         private void headder_clicked(object sender, EventArgs e)
         {
-            DeleteFormPopUp deletePopup = new DeleteFormPopUp($"Are you sure you want to delete the task {_taskName}?\n (This will remove the task for all days and shifts and request for this task)");
+            DeleteFormPopUp deletePopup = new DeleteFormPopUp($"Are you sure you want to delete the task {_taskName}?\n (This will remove the task for all days and ListOfShifts and request for this task)");
             deletePopup.StartPosition = FormStartPosition.CenterParent;
             deletePopup.ShowDialog();
             if (deletePopup.DialogResult == DialogResult.OK)
             {
-                volunteerMainUI.RemoveTaskAndAssociateShifts(_taskName);
+                volunteerMainUI.GetScheduleController().RemoveTaskAndAssociateListOfShifts(_taskName);
+                volunteerMainUI.UpdateAllHomepage();
             }
         }
     }

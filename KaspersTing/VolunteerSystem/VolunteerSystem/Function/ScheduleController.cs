@@ -22,6 +22,11 @@ namespace VolunteerSystem
         {
             throw new NotImplementedException();
         }
+        public List<DateTime> GetDays()
+        {
+            return _schedule.Days;
+        }
+
         public int ScheduleYear()
         {
             return _schedule.Year;
@@ -73,34 +78,11 @@ namespace VolunteerSystem
             _schedule.Tasks.Remove(task);
         }
 
-        public Shift GetshiftFromRequest(Request request)
-        {
-            return GetAllShifts().First(x => x.Requests.Contains(request));
-        }
-
-        public List<WorkerShiftPair> GetAllWorkersFromATask(string task)
-        {
-            List<WorkerShiftPair> result = new List<WorkerShiftPair>();
-
-            foreach (Shift shift in GetAllShifts())
-            {
-                if (shift.Task == task)
-                {
-                    foreach (Worker worker in shift.Workers)
-                    {
-                        result.Add(new WorkerShiftPair(worker, shift));
-                    }
-                }
-            }
-            
-            return result;
-        }
-
         public void EditShift(Shift oldShift, Shift newShift)
         {
             string[] changes = FindShiftChanges(oldShift, newShift);
             foreach (var volunteer in oldShift.Workers.Where(x => x.GetType() == typeof(Volunteer))){
-                //Notifier.InformVolunteer(volunteer as Volunteer, oldShift, newShift, changes);
+                Notifier.InformVolunteer(volunteer as Volunteer, oldShift, newShift, changes);
             }
             oldShift.EditShift(newShift);
 
@@ -109,7 +91,7 @@ namespace VolunteerSystem
         {
             foreach (var volunteer in shift.Workers.Where(x => x.GetType() == typeof(Volunteer)))
             {
-                //Notifier.InformVolunteer(volunteer as Volunteer, shift, InformShiftCommand.Delete);
+                Notifier.InformVolunteer(volunteer as Volunteer, shift, InformShiftCommand.Delete);
             }
             _schedule.Shifts.Remove(shift);
             //UpdateRequestPanel();
@@ -194,10 +176,11 @@ namespace VolunteerSystem
 
         public void ApproveRequest(Request request)
         {
-            Shift shift = GetAllShifts().Find(x => x.Requests.Contains(request));
+           Shift shift = GetAllShifts().Find(x => x.Requests.Contains(request));
             shift.ApproveRequest(request, ScheduleYear());
+
             
-            //Notifier.InformVolunteer(request.Worker as Volunteer, shift, InformShiftCommand.Accept);
+            Notifier.InformVolunteer(request.Worker as Volunteer, shift, InformShiftCommand.Accept);
         }
         public void DenyRequest(Request request)
         {
