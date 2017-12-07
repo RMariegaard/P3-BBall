@@ -89,7 +89,7 @@ namespace VolunteerPrototype.UI
             topColorBinding.Format += delegate (object sender, ConvertEventArgs e)
             {
                 if (shift.Requests.Count() + shift.Workers.Count() < shift.VolunteersNeeded)
-                    e.Value = Color.Green;
+                    e.Value = Color.LimeGreen;
                 else if ((shift.Workers.Count() < shift.VolunteersNeeded) && (shift.Workers.Count() + shift.Requests.Count() > shift.VolunteersNeeded))
                     e.Value = Color.Yellow;
                 else if (shift.Workers.Count() >= shift.VolunteersNeeded)
@@ -107,7 +107,7 @@ namespace VolunteerPrototype.UI
 
             numberOfVolunteerBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
-               convertEventArgs.Value =  "Volunteers:     "+convertEventArgs.Value;
+               convertEventArgs.Value =  "Volunteers:  "+convertEventArgs.Value;
             };
 
             Label headder = new Label();
@@ -115,40 +115,48 @@ namespace VolunteerPrototype.UI
             headder.Location = new Point(0 , 8);
             headder.AutoSize = true;
 
+            Label requestsLabel = new Label()
+            {
+                Location = new Point(0, headder.Location.Y + headder.Font.Height + 2),
+                Size = new Size(shiftPanel.Width, 5),
+                AutoSize = true,
+            };
+
+
             //////////////////TimeLabel////////////////////////
             var timeBinding = new Binding("Text", shiftBindingSource, "TimeInterval");
             Label Time = new Label
             {
-                Location = new Point(0, headder.Location.Y + headder.Font.Height + 2)
+                Location = new Point(0, requestsLabel.Location.Y + requestsLabel.Font.Height + 2)
             };
+
+            var numberOfRequestsBinding = new Binding("Text", shiftBindingSource, "Requests");
+            numberOfRequestsBinding.Format += delegate (object sender, ConvertEventArgs e)
+            {
+                e.Value = "Requests:  " + shift.Requests.Count();
+            };
+            requestsLabel.DataBindings.Add(numberOfRequestsBinding);
+
             timeBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
-                convertEventArgs.Value = "Time:     " + convertEventArgs.Value;
+                convertEventArgs.Value = "Time: " + convertEventArgs.Value;
             };
+
             Time.DataBindings.Add(timeBinding);
             Time.AutoSize = true;
             //////////////////DescriptionLabel////////////////////////
-            Label Desciption = new Label
-            {
-                Location = new Point(0, Time.Location.Y + Time.Font.Height  + 2),
-                MaximumSize = new Size(100, 0),
-                AutoSize = true
-            };
-            var descriptionBinding = new Binding("Text", shiftBindingSource, "Description");
-            descriptionBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
-            {
-                convertEventArgs.Value = "Description:\n" + convertEventArgs.Value;
-            };
-            Desciption.DataBindings.Add(descriptionBinding);
-
 
             shiftPanel.Controls.Add(topColor);
             shiftPanel.Controls.Add(headder);
+            shiftPanel.Controls.Add(requestsLabel);
             shiftPanel.Controls.Add(Time);
-            shiftPanel.Controls.Add(Desciption);
 
             return shiftPanel;
         }
 
+        private void NumberOfRequestsBinding_Format(object sender, ConvertEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
