@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,9 @@ namespace VolunteerSystem.UserInterface
         {
             InitializeComponent();
             this.shift = shift;
+
+            this.Icon = new Icon(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\TwoMen.ico");
+            this.Text = "Volunteer Manegement System: Edit shift";
 
             StartPosition = FormStartPosition.CenterParent;
             desciptionTextBox.Text = shift.Description;

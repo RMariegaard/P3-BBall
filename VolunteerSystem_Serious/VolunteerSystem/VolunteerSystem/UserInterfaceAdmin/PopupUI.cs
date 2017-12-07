@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,11 @@ namespace VolunteerSystem.UserInterface
         public PopupUI(string headerText, string messageText)
         {
             InitializeComponent();
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+
+            this.Icon = new Icon(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\TwoMen.ico");
+            this.Text = "Volunteer Manegement System";
+
+            this.FormBorderStyle = FormBorderStyle.None;
             Width = 400;
             Height = 100;
             this.BackColor = Color.DarkGray;

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 {
@@ -40,10 +41,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 
             PictureBox button = new PictureBox()
             {
-                Image = PressedOnShiftPopup.ResizeImage(SystemIcons.Error.ToBitmap(), 15, 15),
+                Image = PressedOnShiftPopup.ResizeImage(Image.FromFile(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\CrossIcon.png"), 15, 15),
                 Location = new Point(taskPanel.Width - 15, 0),
                 Cursor = Cursors.Hand,
-                Size = new Size(15, 15)
+                Size = new Size(15, 15),
+                BackColor = Color.FromArgb(0, Color.Gray),
             };
             button.Click += headder_clicked;
             taskPanel.Controls.Add(button);

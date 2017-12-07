@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,13 @@ namespace VolunteerSystem.UserInterfaceAdmin
         {
             StartPosition = FormStartPosition.CenterParent;
             workController = volunteerMainUI.GetWorkController();
+            
             this.volunteerMainUI = volunteerMainUI;
             this.shift = shift;
             InitializeComponent();
+
+            this.Icon = new Icon(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\TwoMen.ico");
+            this.Text = "Volunteer Manegement System : Add Worker";
 
             workersList = workController.Workers;
             addWorkersToList();

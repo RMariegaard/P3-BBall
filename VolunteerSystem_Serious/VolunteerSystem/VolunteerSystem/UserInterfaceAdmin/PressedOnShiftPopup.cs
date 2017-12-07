@@ -29,7 +29,10 @@ namespace VolunteerSystem.UserInterfaceAdmin
         public PressedOnShiftPopup(Shift shift, IVolunteerMainUI volunteerMainUI)
         {
             InitializeComponent();
-            
+
+            this.Icon = new Icon(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\TwoMen.ico");
+            this.Text = "Volunteer Manegement System";
+
             Width = 400;
             Height = 400;
             this.StartPosition = FormStartPosition.CenterParent;
