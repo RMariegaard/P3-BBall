@@ -27,12 +27,12 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
         private IVolunteerMainUI _mainWindowUI;
 
-        RequestPanelElements.MainRequestPanelElement requestPanel;
+        public RequestPanelElements.MainRequestPanelElement requestPanelElement;
 
         public Homepage(IVolunteerMainUI mainWindowUI)
         {
             _mainWindowUI = mainWindowUI;
-            requestPanel = new RequestPanelElements.MainRequestPanelElement(_mainWindowUI);
+            requestPanelElement = new RequestPanelElements.MainRequestPanelElement(_mainWindowUI);
 
             InizializeControls();
             CreatePanels();
@@ -131,7 +131,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
 
         public void UpdateTheRequestAndNotificationElements()
         {
-            requestPanel.UpdateRequestAndNotificationPanels();
+            requestPanelElement.UpdateRequestAndNotificationPanels();
         }
 
         public void UpdatePendingRequestPanel()
@@ -143,7 +143,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             pendingRequestPanel.Size = new Size(_mainHomepagePanel.Size.Width - schedulePanel.Size.Width, (_mainHomepagePanel.Size.Height / 100) * 70);
             pendingRequestPanel.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
             
-            pendingRequestPanel.Controls.Add(requestPanel.GetRequestPanel(pendingRequestPanel.Size));
+            pendingRequestPanel.Controls.Add(requestPanelElement.GetRequestPanel(pendingRequestPanel.Size));
             pendingRequestPanel.Update();
         }
         public void UpdateVolunteerPanel()
@@ -158,19 +158,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage
             VolunteerPanel.Controls.Add(volunteerOverviewSmall.GetPanel(VolunteerPanel.Size));
             VolunteerPanel.Update();
         }
-
-
         
         private void _threeSchedulePanels()
         {
-            
-
             TheSchedule.Name = "TheSchedule";
             ButtonsBottumPanel.Name = "ButtonsBottumPanel";
 
             int leftButtonsWidth = 120;
             int leftButtonsLocationX = 0;
-
             
             UpdateButtonsLeftSide(leftButtonsLocationX, leftButtonsWidth);
 
