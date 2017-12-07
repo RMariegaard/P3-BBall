@@ -144,7 +144,7 @@ namespace VolunteerSystem.Function
         public void RemoveWorkerFromShift(TestWorker worker, TestShift shift)
         {
             shift.RemoveWorker(worker);
-           // _database.schedule.UpdateSchedule(_schedule);
+           _database.schedule.UpdateSchedule(_schedule);
         }
 
         public void RemoveWorkerFromAllHisShifts(TestWorker worker)
@@ -165,9 +165,6 @@ namespace VolunteerSystem.Function
         public void RemoveRequest(TestRequest request)
         {
             _database.request.RemoveRequest(request);
-            //TestShift shift = GetAllShifts().Find(x => x.ListOfRequest.Contains(request));
-            //shift.RemoveRequest(request);
-            //_database.schedule.UpdateSchedule(_schedule);
         }
         public void ViewShiftInformation()
         {
@@ -187,11 +184,9 @@ namespace VolunteerSystem.Function
         public void ApproveRequest(TestRequest request)
         {
             _schedule.ListOfShifts.Find(x => x.ListOfRequest.Contains(request)).ApproveRequest(request, 2);
+            _database.schedule.UpdateSchedule(_schedule);
             _database.request.Remove(request);
             
-            //shift.ApproveRequest(request, ScheduleYear());
-            //_database.schedule.UpdateSchedule(_schedule);
-
 
             // Notifier.InformVolunteer(request.TestVolunteer as TestVolunteer, shift, InformShiftCommand.Accept);
         }

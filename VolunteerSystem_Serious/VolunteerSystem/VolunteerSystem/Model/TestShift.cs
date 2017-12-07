@@ -13,7 +13,6 @@ namespace VolunteerSystem.Model
 {
     public class TestShift : INotifyPropertyChanged
     {
-        public static ShiftController ShiftDatabase = new ShiftController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
         public TestShift(string task, string descrip, int volunteersneeded)
         {
             this.VolunteersNeeded = volunteersneeded;
