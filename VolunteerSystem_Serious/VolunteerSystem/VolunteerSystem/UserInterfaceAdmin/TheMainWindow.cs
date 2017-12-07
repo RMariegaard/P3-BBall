@@ -203,7 +203,7 @@ namespace VolunteerSystem.UserInterface
 
             ScheduleController.ApproveRequest(request);
 
-            _homepage.UpdatePendingRequestPanel();
+            _homepage.UpdateTheRequestAndNotificationElements();
             if (_homepage.ShownVolunteer != null)
                 if (_homepage.ShownVolunteer.Name == request.Worker.Name)
                     _homepage.UpdateVolunteerPanel();
