@@ -17,7 +17,6 @@ namespace VolunteerSystem
         {
             _database = database;
             ListOfWorkers = UpdateListOfVolunteers();
-
         }
 
         

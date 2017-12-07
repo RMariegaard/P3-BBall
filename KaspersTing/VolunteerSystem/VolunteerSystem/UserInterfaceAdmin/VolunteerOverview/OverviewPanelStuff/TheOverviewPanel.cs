@@ -146,11 +146,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
             if (deleteFormPopUp.DialogResult == DialogResult.OK)
             {
                 //Removes
-                //scheduleController.RemoveAllListOfRequestsForAWorker(volunteerOverview.SelectedWorker);
-                var hey1 = workerController.ListOfWorkers;
-                scheduleController.RemoveWorkerFromAllHisListOfShifts(volunteerOverview.SelectedWorker);
-                //workerController.RemoveWorker(volunteerOverview.SelectedWorker);
-               var hey = workerController.ListOfWorkers;
+                scheduleController.RemoveAllListOfRequestsForAWorker(volunteerOverview.SelectedWorker);
+                //scheduleController.RemoveWorkerFromAllHisListOfShifts(volunteerOverview.SelectedWorker);
+                workerController.RemoveWorker(volunteerOverview.SelectedWorker);
                 //Updates
                 volunteerOverview.UpdateSeachAndVolunteerElement();
                 volunteerOverview.SelectedWorker = null;
