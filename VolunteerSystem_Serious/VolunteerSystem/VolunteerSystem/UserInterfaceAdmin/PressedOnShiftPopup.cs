@@ -174,7 +174,8 @@ namespace VolunteerSystem.UserInterfaceAdmin
         private void RequestsList_SelectedIndexChanged(object sender, EventArgs e)
         {
             Request request = (Request)requestsList.SelectedItem;
-            volunteerMainUI.UpdateSmallVolunteerOverview(request.Worker as Volunteer);
+            if(request != null)
+                volunteerMainUI.UpdateSmallVolunteerOverview(request.Worker as Volunteer);
         }
 
         private void WorkersList_SelectedIndexChanged(object sender, EventArgs e)
