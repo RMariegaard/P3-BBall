@@ -58,9 +58,7 @@ namespace VolunteerSystem
         public string StringStartTime { get; set; }
         [NotMapped]
         public string StringEndTime { get; set; }
-        [NotMapped]
         public DateTime StartTime { get; private set; }
-        [NotMapped]
         public DateTime EndTime { get; private set; }
         public int VolunteersNeeded { get; set; }
         public List<Worker> ListOfWorkers { get; set; }

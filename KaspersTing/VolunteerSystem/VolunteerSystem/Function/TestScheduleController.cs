@@ -28,7 +28,8 @@ namespace VolunteerSystem
         public List<AbstractNotification> GetAllRequestsAndNotifications()
         {
             List<AbstractNotification> notifications = new List<AbstractNotification>();
-            _schedule.ListOfShifts.ForEach(x => notifications.AddRange(x.ListOfRequests));
+           // _schedule.ListOfShifts.ForEach(x => notifications.AddRange(x.ListOfRequests));
+           notifications.AddRange(_database.request.GetAllRequest());
             Notifier.AllNotifications.ForEach(x => notifications.Add(x));
 
             return notifications;
@@ -108,6 +109,7 @@ namespace VolunteerSystem
             {
                 //Notifier.InformVolunteer(volunteer as Volunteer, shift, InformShiftCommand.Delete);
             }
+            _database.request.RemoveRange(shift.ListOfRequests);
             _database.shift.Remove(shift);
             //UpdateRequestPanel();
         }
@@ -162,13 +164,19 @@ namespace VolunteerSystem
 
         public void RemoveWorkerFromAllHisListOfShifts(Worker worker)
         {
-            GetAllListOfShifts().ForEach(x => x.ListOfWorkers.RemoveAll(y => y == worker));
+            if(worker is Volunteer)
+            {
+                _database.volunteer.Remove(worker as Volunteer);
+            }
+            //GetAllListOfShifts().ForEach(x => x.ListOfWorkers.RemoveAll(y => y == worker));
             _database.schedule.UpdateSchedule(_schedule);
             //UpdateRequestPanel();
         }
 
         public void RemoveAllListOfRequestsForAWorker(Worker worker)
         {
+
+
             foreach (Request request in GetAllListOfRequests())
                 if (request.Volunteer == worker)
                     RemoveRequest(request);
@@ -198,7 +206,7 @@ namespace VolunteerSystem
         {
             _schedule.ListOfShifts.Find(x => x.ListOfRequests.Contains(request)).ApproveRequest(request, 2);
             _database.schedule.UpdateSchedule(_schedule);
-            _database.request.Remove(request);
+            _database.request.RemoveRequest(request);
             
 
             // Notifier.InformVolunteer(request.Volunteer as Volunteer, shift, InformShiftCommand.Accept);
@@ -206,7 +214,7 @@ namespace VolunteerSystem
 
         public void DenyRequest(Request request)
         {
-            _database.request.Remove(request);
+            _database.request.RemoveRequest(request);
             //Notifier.InformVolunteer(request.Worker as Volunteer, shift, InformShiftCommand.Deny);
         }
 

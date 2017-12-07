@@ -27,6 +27,7 @@ namespace VolunteerSystem
         }
         public Volunteer()
         {
+            YearsWorked = new List<int>();
         }
 
         public List<Request> ListOfRequests { get; set; }

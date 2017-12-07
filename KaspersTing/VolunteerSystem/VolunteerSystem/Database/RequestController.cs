@@ -26,7 +26,7 @@ namespace VolunteerSystem.Database
         }
         public List<Request> GetAllRequest()
         {
-            return _context.request.Include("Volunteer").Include("TestShift").ToList();
+            return _context.request.Include("Volunteer").Include("Shift").ToList();
         }
         public void RemoveRequest(Request request)
         {

@@ -49,11 +49,13 @@ namespace VolunteerSystem.Database
         {
             _context.Set<TEntity>().Attach(entity);
             _context.Set<TEntity>().Remove(entity);
+            _context.SaveChanges();
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
             _context.Set<TEntity>().RemoveRange(entities);
+            _context.SaveChanges();
         }
     }
 }

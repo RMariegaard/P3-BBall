@@ -6,29 +6,30 @@ using System.Threading.Tasks;
 using VolunteerSystem.Database;
 using VolunteerSystem.Model;
 
-namespace VolunteerSystem.Function
+namespace VolunteerSystem
 {
     public class WorkerController
     {
         private FinalController _database;
-        private List<Worker> _ListOfWorkers;
+        public List<Worker> ListOfWorkers;
 
         public WorkerController(FinalController database)
         {
             _database = database;
-            _ListOfWorkers = UpdateListOfVolunteers();
+            ListOfWorkers = UpdateListOfVolunteers();
 
         }
 
+        
         public void CreateWorker(Worker worker)
         {
-            _ListOfWorkers.Add(worker);
+            ListOfWorkers.Add(worker);
             _database.Complete();
         }
 
         public List<Worker> SearchListOfWorkers(Predicate<Worker> predicate)
         {
-            List<Worker> list = _ListOfWorkers.FindAll(predicate);
+            List<Worker> list = ListOfWorkers.FindAll(predicate);
             return list;
         }
 
@@ -46,7 +47,7 @@ namespace VolunteerSystem.Function
             else { _database.externalWorker.Remove(worker as ExternalWorker); }
 
             _database.Complete();
-            _ListOfWorkers = UpdateListOfVolunteers();
+            ListOfWorkers = UpdateListOfVolunteers();
         }
 
         private List<Worker> UpdateListOfVolunteers()
@@ -57,24 +58,24 @@ namespace VolunteerSystem.Function
             return ListOfWorkers;
         }
 
-        //public List<string> GetAllTeams()
-        //{
-        //    var allTeams = new List<string>();
-        //    foreach (Worker worker in this.ListOfWorkers)
-        //    {
-        //        if (worker is Volunteer volunteer)
-        //        {
-        //            string team = volunteer.Association;
-        //            if (!allTeams.Contains(team))
-        //            {
-        //                allTeams.Add(team);
-        //            }
-        //        }
-        //    }
+        public List<string> GetAllTeams()
+        {
+            var allTeams = new List<string>();
+            foreach (Worker worker in this.ListOfWorkers)
+            {
+                if (worker is Volunteer volunteer)
+                {
+                    string team = volunteer.Association;
+                    if (!allTeams.Contains(team))
+                    {
+                        allTeams.Add(team);
+                    }
+                }
+            }
 
 
-        //    return allTeams;
-        //}
+            return allTeams;
+        }
 
     }
 }
