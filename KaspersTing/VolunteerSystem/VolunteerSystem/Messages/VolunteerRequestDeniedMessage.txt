@@ -1,0 +1,6 @@
+﻿Dear [Volunteer],
+
+Your request for the [Task] shift at [Time] has been denied.
+
+Best Regards,
+Aarhus Basketball Festival.

@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1F1EE146-BC45-4ACD-B297-8E274BDC9738}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>VolunteerSystem</RootNamespace>
+    <AssemblyName>VolunteerSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Database\DatabaseContext.cs" />
+    <Compile Include="Database\DatabaseController.cs" />
+    <Compile Include="Database\ExternalWorkerController.cs" />
+    <Compile Include="Database\FinalController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IDatabaseController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IExternalWorkerController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IFinalController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IRequestController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IScheduleController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IShiftController.cs" />
+    <Compile Include="Database\InterfacesDatabase\IVolunteerController.cs" />
+    <Compile Include="Database\RequestController.cs" />
+    <Compile Include="Database\ScheduleController.cs" />
+    <Compile Include="Database\ShiftController.cs" />
+    <Compile Include="Database\VolunteerController.cs" />
+    <Compile Include="Enums\InformShiftCommand.cs" />
+    <Compile Include="Enums\NotificationImportance.cs" />
+    <Compile Include="Function\AccountController.cs" />
+    <Compile Include="Function\TestScheduleController.cs" />
+    <Compile Include="Function\TestWorkerController.cs" />
+    <Compile Include="Model\AbstractNotification.cs" />
+    <Compile Include="Function\WorkerController.cs" />
+    <Compile Include="Function\Notifier.cs" />
+    <Compile Include="Database\SqlDataConnecter.cs" />
+    <Compile Include="Model\Notification.cs" />
+    <Compile Include="Model\TestExternalWorker.cs" />
+    <Compile Include="Model\TestRequest.cs" />
+    <Compile Include="Model\TestSchedule.cs" />
+    <Compile Include="Model\TestShift.cs" />
+    <Compile Include="Model\TestVolunteer.cs" />
+    <Compile Include="Model\TestWorker.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInterfaceAdmin\AddWorkerManuallyButtonPopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\AddWorkerManuallyButtonPopUp.Designer.cs">
+      <DependentUpon>AddWorkerManuallyButtonPopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\ColorAndStyle.cs" />
+    <Compile Include="UserInterfaceAdmin\CreateNewShiftUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\CreateNewShiftUI.Designer.cs">
+      <DependentUpon>CreateNewShiftUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\CreateNewTaskUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\CreateNewTaskUI.Designer.cs">
+      <DependentUpon>CreateNewTaskUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\DeleteFormPopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\DeleteFormPopUp.Designer.cs">
+      <DependentUpon>DeleteFormPopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\EditShiftUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\EditShiftUI.Designer.cs">
+      <DependentUpon>EditShiftUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\Homepage\Homepage.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\RequestPanelElements\MainRequestPanelElement.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\ButtonsBottom.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\DaysLeftNavigation.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\ShiftUIPanel.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\TasksPanels.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\SchedulePanelElements\TheSchedule.cs" />
+    <Compile Include="UserInterfaceAdmin\Homepage\VolunteerSmallOverview\VolunteerHomapageOverview.cs" />
+    <Compile Include="UserInterfaceAdmin\IVolunteerMainUI.cs" />
+    <Compile Include="UserInterfaceAdmin\PopupUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\PopupUI.Designer.cs">
+      <DependentUpon>PopupUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\PressedOnShiftPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\PressedOnShiftPopup.Designer.cs">
+      <DependentUpon>PressedOnShiftPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\Settings\ChooseSettings.cs" />
+    <Compile Include="UserInterfaceAdmin\Settings\EmailSetting.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\Settings\Settings.cs" />
+    <Compile Include="UserInterfaceAdmin\TheMainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\TheMainWindow.Designer.cs">
+      <DependentUpon>TheMainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\UpdateRequestPanelEvent.cs" />
+    <Compile Include="UserInterfaceAdmin\VolunteerOverview\CreateVolunteerStuff\CreateVolunteerClass.cs" />
+    <Compile Include="UserInterfaceAdmin\VolunteerOverview\OverviewPanelStuff\TheOverviewPanel.cs" />
+    <Compile Include="UserInterfaceAdmin\VolunteerOverview\VolunteerOverview.cs" />
+    <Compile Include="UserInterfaceAdmin\VolunteerOverview\VolunteersSeach\SeachAndVolunteers.cs" />
+    <Compile Include="UserInterfaceAdmin\VolunteerOverview\VolunteersSeach\SendEmailPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\WrongEmailWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterfaceAdmin\WrongEmailWarning.Designer.cs">
+      <DependentUpon>WrongEmailWarning.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UserInterfaceAdmin\AddWorkerManuallyButtonPopUp.resx">
+      <DependentUpon>AddWorkerManuallyButtonPopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterfaceAdmin\DeleteFormPopUp.resx">
+      <DependentUpon>DeleteFormPopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterfaceAdmin\PressedOnShiftPopup.resx">
+      <DependentUpon>PressedOnShiftPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterfaceAdmin\WrongEmailWarning.resx">
+      <DependentUpon>WrongEmailWarning.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Messages\VolunteerRequestAcceptedMessage.txt" />
+    <Content Include="Messages\VolunteerRequestDeniedMessage.txt" />
+    <Content Include="Messages\VolunteerShiftChangedMessage.txt" />
+    <Content Include="Messages\VolunteerShiftDeletedMessage.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props'))" />
+  </Target>
+</Project>
