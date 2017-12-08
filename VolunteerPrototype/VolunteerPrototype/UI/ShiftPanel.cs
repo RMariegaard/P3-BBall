@@ -14,8 +14,10 @@ namespace VolunteerPrototype.UI
         Shift shift;
         Panel shiftPanel;
         DateTime date;
-        public ShiftPanel(Shift shift, DateTime date)
+        private IUI _mainUI;
+        public ShiftPanel(Shift shift, DateTime date, IUI mainUI)
         {
+            _mainUI = mainUI;
             this.shift = shift;
             this.date = date;
         }
@@ -150,8 +152,14 @@ namespace VolunteerPrototype.UI
             shiftPanel.Controls.Add(headder);
             shiftPanel.Controls.Add(requestsLabel);
             shiftPanel.Controls.Add(Time);
-
+            shiftPanel.Click += OpenShift;
             return shiftPanel;
+        }
+
+        private void OpenShift(object sender, EventArgs e)
+        {
+            var popUp = new PressedOnShift(shift, _mainUI);
+            popUp.ShowDialog();
         }
 
         private void NumberOfRequestsBinding_Format(object sender, ConvertEventArgs e)

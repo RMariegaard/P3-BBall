@@ -110,8 +110,7 @@ namespace VolunteerPrototype.LogIn
         {
             try
             {
-                var db = new VolunteerSystem.Database.FinalController(new VolunteerSystem.Database.DatabaseContext(VolunteerSystem.Model.SqlDataConnecter.CnnVal("DatabaseCS")));
-                var volunteer = _mainUI.WorkerController().ListOfWorkers.Select(x => x as Volunteer).First(y => (y.Email == login && y.HashPassworkd == pwd));
+               var volunteer = _mainUI.WorkerController().ListOfWorkers.Select(x => x as Volunteer).First(y => (y.Email == login && y.HashPassworkd == pwd));
                 
                 if(volunteer != null)
                 {

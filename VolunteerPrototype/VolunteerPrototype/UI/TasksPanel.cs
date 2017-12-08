@@ -11,9 +11,11 @@ namespace VolunteerPrototype.UI
 {
     public class TaskPanel
     {
+        private IUI _mainUI;
 
-        public TaskPanel()
+        public TaskPanel(IUI mainUI)
         {
+            _mainUI = mainUI;
         }
         private string _taskName;
         public Panel GetATaskPanel(string headline, List<Shift> shifts, Size size, Point location, int hourHeight, DateTime date)
@@ -40,7 +42,7 @@ namespace VolunteerPrototype.UI
 
             for (int i = 0; i < shifts.Count(); i++)
             {
-                ShiftPanel tempShiftUIPanel = new ShiftPanel(shifts[i], date);
+                ShiftPanel tempShiftUIPanel = new ShiftPanel(shifts[i], date, _mainUI);
                 taskPanel.Controls.Add(tempShiftUIPanel.ShiftUI(taskPanel, hourHeight));
             }
 

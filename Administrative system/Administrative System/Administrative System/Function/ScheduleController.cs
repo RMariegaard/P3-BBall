@@ -217,10 +217,12 @@ namespace VolunteerSystem
             throw new NotImplementedException();
         }
 
-        //public void SendRequest()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void SendRequest(Shift shift, Volunteer volunteer)
+        {
+            shift.CreateRequest(volunteer);
+            _database.request.Add(shift.ListOfRequests.Last());
+            _database.schedule.UpdateSchedule(_schedule);
+        }
 
         public void ApproveRequest(Request request)
         {

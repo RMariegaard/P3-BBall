@@ -80,7 +80,7 @@ namespace VolunteerPrototype.UI
 
             for (int i = 0; i < Tasks.Count; i++)
             {
-                TaskPanel tempTaskPanel = new TaskPanel();
+                TaskPanel tempTaskPanel = new TaskPanel(_mainUI);
 
                 List<Shift> toBeOnPanel = new List<Shift>();
                 foreach(Shift shift in AllShifts)
@@ -107,7 +107,7 @@ namespace VolunteerPrototype.UI
                     new Size(widthOfTask, colorAndShiftPanel.Height),
                     new Point((i * (widthOfTask + 5)) + 50, 0),
                     hourHeight,
-                    convertDayStringFromButtonToDateTime(_day)
+                    ConvertDayStringFromButtonToDateTime(_day)
                     );
                 
                 colorAndShiftPanel.Controls.Add(taskPanel);
@@ -117,7 +117,7 @@ namespace VolunteerPrototype.UI
             return _theSchedulemainPanel;
         }
 
-        private DateTime convertDayStringFromButtonToDateTime(string day)
+        private DateTime ConvertDayStringFromButtonToDateTime(string day)
         {
             return DateTime.Parse(day);
         }

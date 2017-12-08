@@ -19,7 +19,7 @@ namespace VolunteerPrototype
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            var db = new VolunteerSystem.Database.FinalController(new VolunteerSystem.Database.DatabaseContext(VolunteerSystem.Model.SqlDataConnecter.CnnVal("DatabaseCS")));
+            var db = new VolunteerSystem.Database.FinalDataController(new VolunteerSystem.Database.DatabaseContext(VolunteerSystem.Model.SqlDataConnecter.CnnVal("DatabaseCS")));
 
             ScheduleController scheduleController = new ScheduleController(db.schedule.Get(1), db);
            var list = db.shift.GetAll().ToList();
