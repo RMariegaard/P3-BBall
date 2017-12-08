@@ -20,8 +20,7 @@ namespace VolunteerSystem
             this.Description = descrip;
             ListOfWorkers = new List<Worker>();
             ListOfRequests = new List<Request>();
-           // ShiftDatabase.Add(this);
-            //ShiftDatabase.Complete();
+ 
         }
 
         public Shift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded, string description)
@@ -87,10 +86,10 @@ namespace VolunteerSystem
         public void AddWorker(Worker worker, int year)
         {
             ListOfWorkers.Add(worker);
-            //if (worker is Volunteer)
-            //{
-            //    ((Volunteer)worker).AddYearWorked(year);
-            //}
+            if (worker is Volunteer)
+            {
+                ((Volunteer)worker).AddYearWorked(year);
+            }
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
         public void CreateRequest(Volunteer volunteer)
@@ -101,9 +100,7 @@ namespace VolunteerSystem
         public void RemoveRequest(Request request)
         {
             ListOfRequests.Remove(request);
-            //ShiftDatabase._context.request.Attach(request);
-            //ShiftDatabase._context.request.Remove(request);
-            //ShiftDatabase.Complete();
+
         }
 
         public void RemoveWorker(Worker worker)
@@ -127,14 +124,10 @@ namespace VolunteerSystem
             this.ListOfWorkers.Add(worker);
             this.ListOfRequests.Remove(request);
 
-            //ShiftDatabase.UpdateShift(this, worker);
-            //ShiftDatabase.RemoveRequest(request);
-            
-
-            //if (worker is Volunteer)
-            //{
-            //    ((Volunteer)worker).AddYearWorked(year);
-            //}
+            if (worker is Volunteer)
+            {
+                ((Volunteer)worker).AddYearWorked(year);
+            }
 
             PropertyChanged?.Invoke(GetNumberOfVolunteers, new PropertyChangedEventArgs("GetNumberOfVolunteers"));
         }
@@ -146,26 +139,6 @@ namespace VolunteerSystem
 
 
     }
-
-
-
-
-    //Test Constructer only used for unit test does not connect to database
-    //public Shift(bool test, DateTime startTime, DateTime endTime, string task, int volunteersNeeded, string description)
-    //{
-    //    this._startTime = startTime;
-    //    this._endTime = endTime;
-    //    this._task = task;
-    //    this._volunteersNeeded = volunteersNeeded;
-    //    this._description = description;
-    //    _ListOfWorkers = new List<Worker>();
-    //    _ListOfRequests = new List<Request>();
-    //}
-
-
-
-
-
 
     //public string GetInformation()
     //{

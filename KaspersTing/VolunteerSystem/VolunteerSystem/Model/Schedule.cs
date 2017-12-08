@@ -18,11 +18,23 @@ namespace VolunteerSystem
         public int Year {get;set;}
 
 
+
+        private List<string> _tasks;
         public List<string> Tasks { get; set; }
         public string TasksString
         {
             get { return string.Join(",", Tasks); }
-            set { Tasks = value.Split(',').ToList(); }
+            set
+            {
+                if (value.Split(',').ToList().First() == "")
+                {
+                    List<string> temp = value.Split(',').ToList();
+                    temp.Remove(temp.First());
+                    Tasks = temp;
+                }
+                else
+                    Tasks = value.Split(',').ToList();
+            }
         }
 
         public void CreateNewShift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded)
