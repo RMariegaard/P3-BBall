@@ -107,9 +107,14 @@ namespace VolunteerSystem
         }
         public void DeleteShift(Shift shift)
         {
+            //Both Volunteers on the shift and volunteers who have requested the shift have to be informed!!!!!
             foreach (var volunteer in shift.ListOfWorkers.Where(x => x.GetType() == typeof(Volunteer)))
             {
                 //Notifier.InformVolunteer(volunteer as Volunteer, shift, InformShiftCommand.Delete);
+            }
+            foreach(var volunteer in shift.ListOfRequests.Select(x => x.Volunteer))
+            {
+                //Notifier.InformVolunteer(volunteer, shift, InformShiftCommand.Deny)
             }
             _database.request.RemoveRange(shift.ListOfRequests);
             _database.shift.Remove(shift);
