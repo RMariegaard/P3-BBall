@@ -17,9 +17,6 @@ namespace VolunteerSystem
 
         public int Year {get;set;}
 
-
-
-        private List<string> _tasks;
         public List<string> Tasks { get; set; }
         public string TasksString
         {
