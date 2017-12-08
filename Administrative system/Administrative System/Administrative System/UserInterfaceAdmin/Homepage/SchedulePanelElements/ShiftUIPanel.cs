@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
-
+using VolunteerSystem.UserInterface;
 
 namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
 {
@@ -31,8 +31,14 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             };
             shiftBindingSource.Add(shift);
 
-            //////////////////ShiftPanel////////////////////////
+            BindingSource mainPanelBinding = new BindingSource
+            {
+                DataSource = typeof(TheMainWindow)
+            };
+            mainPanelBinding.Add(volunteerMainUI);
 
+
+            //////////////////ShiftPanel////////////////////////
             shiftPanel = new Panel
             {
                 Name = "Shift " + shift.ShiftId.ToString(),
@@ -40,6 +46,22 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                 BorderStyle = BorderStyle.FixedSingle
             };
             shiftPanel.Click += _panel_clicked;
+
+            var backColorBinding = new Binding("BackColor", mainPanelBinding, "");
+            backColorBinding.Format += delegate (object sender, ConvertEventArgs convertEventArgs)
+            {
+                if(volunteerMainUI.selectedShift == shift)
+                {
+                    convertEventArgs.Value = Color.Gray; 
+                }
+                else
+                {
+                    convertEventArgs.Value = Color.AliceBlue;
+                }
+            };
+
+            shiftPanel.DataBindings.Add(backColorBinding);
+
 
             var locationBinding = new Binding("Location", shiftBindingSource, "StartTime");
             locationBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)

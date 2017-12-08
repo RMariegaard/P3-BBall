@@ -13,7 +13,6 @@ namespace VolunteerSystem
 {
     public class Request : AbstractNotification
     {
-        //public RequestController RequestDatabase = new RequestController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
 
         [Key]
         public int RequestId { get; set; }
@@ -39,15 +38,11 @@ namespace VolunteerSystem
         {
 
         }
-        
-        ////Test Constructer only used for unit test does not connect to database
-        //public Request(bool test, Worker worker)
-        //    : base(DateTime.Now)
-        //{
-        //    _timeSent = DateTime.Now;
-        //    _worker = worker;
-        //}
 
+        public override string ToString()
+        {
+            return $"{TimeSent.ToString("dd/MM/yyyy HH:mm")} - {Volunteer.Name} - {Volunteer.Email}";
+        }
 
     }
 }

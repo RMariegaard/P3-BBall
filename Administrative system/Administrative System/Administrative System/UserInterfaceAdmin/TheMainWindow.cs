@@ -13,7 +13,7 @@ using VolunteerSystem.UserInterfaceAdmin.Homepage;
 
 namespace VolunteerSystem.UserInterface
 {
-    public partial class TheMainWindow : Form, IVolunteerMainUI
+    public partial class TheMainWindow : Form, IVolunteerMainUI, INotifyPropertyChanged
     {
         private Panel _mainPanel;
         private Panel _menuButtonPanel;
@@ -33,6 +33,9 @@ namespace VolunteerSystem.UserInterface
 
         public ScheduleController ScheduleController;
         WorkerController WorkerController;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public TheMainWindow(ScheduleController scheduleController, WorkerController workerController)
         {
             InitializeComponent();
@@ -288,11 +291,17 @@ namespace VolunteerSystem.UserInterface
                     break;
             }
         }
-        
+        public Shift selectedShift { get; set; }
         public void DisplayPressedOnShift(Shift shift)
         {
+            selectedShift = shift;
+            PropertyChanged?.Invoke(selectedShift, new PropertyChangedEventArgs("selectedShift"));
             UserInterfaceAdmin.PressedOnShiftPopup pressedOnShiftPopup = new UserInterfaceAdmin.PressedOnShiftPopup(shift, this);
             pressedOnShiftPopup.ShowDialog();
+            selectedShift = null;
+            PropertyChanged?.Invoke(selectedShift, new PropertyChangedEventArgs("selectedShift"));
+
+
         }
 
         public void DisplayVolunteerOnHomepage(Volunteer volunteer)
