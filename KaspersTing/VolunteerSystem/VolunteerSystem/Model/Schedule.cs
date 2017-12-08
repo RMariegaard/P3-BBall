@@ -18,14 +18,11 @@ namespace VolunteerSystem
         public int Year {get;set;}
 
 
-        private List<String> _tasks;
-        [NotMapped]
-        public List<String> Tasks
+        public List<string> Tasks { get; set; }
+        public string TasksString
         {
-            get
-            {
-                return _tasks;
-            }
+            get { return string.Join(",", Tasks); }
+            set { Tasks = value.Split(',').ToList(); }
         }
 
         public void CreateNewShift(DateTime startTime, DateTime endTime, string task, int volunteersNeeded)
@@ -37,12 +34,12 @@ namespace VolunteerSystem
         {
             //Assign ID??
             ListOfShifts = new List<Shift>();
-            _tasks = new List<string>();
+            Tasks = new List<string>();
             Year = year;
         }
         public Schedule()
         {
-            _tasks = new List<string>();
+            Tasks = new List<string>();
             ListOfShifts = new List<Shift>();
         }
 

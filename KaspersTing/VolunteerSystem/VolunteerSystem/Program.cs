@@ -17,17 +17,18 @@ namespace VolunteerSystem
 
             FinalController db2 = new FinalController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
 
+            //db2.schedule.Add(new Schedule(2018));
 
-            //Schedule schedule = new Schedule(2018);
+
             ScheduleController scheduleController = new ScheduleController(db2.schedule.GetSchedule(1), db2);
             WorkerController workerController = new WorkerController(db2);
 
-            scheduleController.CreateTask("Kitchen");
-            scheduleController.CreateTask("Accomadation");
-            scheduleController.CreateTask("Kiosk");
-            scheduleController.CreateTask("Dinning Hall");
-            scheduleController.CreateTask("DishWash");
-            scheduleController.CreateTask("Car");
+            //scheduleController.CreateTask("Kitchen");
+            //scheduleController.CreateTask("Accomadation");
+            //scheduleController.CreateTask("Kiosk");
+            //scheduleController.CreateTask("Dinning Hall");
+            //scheduleController.CreateTask("DishWash");
+            //scheduleController.CreateTask("Car");
 
 
 
@@ -143,7 +144,8 @@ namespace VolunteerSystem
             //scheduleController.GetAllListOfShifts()[0].CreateRequest((Volunteer)workerController.ListOfWorkers[8]);
             //scheduleController.GetAllListOfShifts()[0].CreateRequest((Volunteer)workerController.ListOfWorkers[9]);
 
-            //db2.Complete();
+            db2.Complete();
+
 
             Notifier.AllNotifications.Add(new Notification("High Importance: Volunteer droped out", "Unfortunetly Casper has dropped his shift in the kitchen friday 22-01-2017", NotificationImportance.HighImportance));
             Notifier.AllNotifications.Add(new Notification("Medium Importance: En lang headder for at se hvad der sker når den bliver lang",
