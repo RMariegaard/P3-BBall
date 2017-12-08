@@ -19,19 +19,5 @@ namespace VolunteerPrototype
            // GetVolunteerID(email, hashedPassword);
         }
 
-        private void GetVolunteerID(string email, string hashedPassword)
-        {
-
-            string querry = $"SELECT VolunteerId FROM UserTable WHERE email = '{email}' AND password = '{hashedPassword}';";
-
-            var nhehe = new System.Data.SqlClient.SqlConnection(VolunteerSystem.Database2.DBConnection.ConnectionString);
-            nhehe.Open();
-            var hehehe = nhehe.CreateCommand();
-            hehehe.CommandText = querry;
-            var reader = hehehe.ExecuteReader();
-            _volunteerId = (int)reader[0];
-            nhehe.Close();
-
-        }
     }
 }

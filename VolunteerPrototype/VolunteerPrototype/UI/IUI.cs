@@ -20,5 +20,7 @@ namespace VolunteerPrototype.UI
         bool IsLoggedIn();
         void LogIn();
         void LogOut();
+
+        void ShowMyShifts();
     }
 }

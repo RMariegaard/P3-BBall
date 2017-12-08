@@ -109,7 +109,9 @@ namespace VolunteerPrototype.UI
                 Location = new System.Drawing.Point(_scheduleButton.Width + _scheduleButton.Location.X, _scheduleButton.Location.Y),
                 Size = _scheduleButton.Size
             };
+            _myShiftButton.Click += MyShiftClicked;
             Controls.Add(_myShiftButton);
+            
             _accountSettingsButton = new Button()
             {
                 Text = "Account Settings",
@@ -119,6 +121,11 @@ namespace VolunteerPrototype.UI
             Controls.Add(_accountSettingsButton);
 
             _userInforLabel.Text = $"Logged in as {_mainUI.GetCurrentUser}";
+        }
+
+        private void MyShiftClicked(object sender, EventArgs e)
+        {
+            _mainUI.ShowMyShifts();
         }
 
         private void LogOut(object sender, EventArgs e)

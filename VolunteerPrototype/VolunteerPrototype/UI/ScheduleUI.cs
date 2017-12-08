@@ -69,7 +69,7 @@ namespace VolunteerPrototype.UI
             colorAndShiftPanel.Dock = DockStyle.Fill;    
 
             //Adds Tasks and shifts
-            List<Shift> AllShifts = _mainUI.ScheduleController().GetAllShifts();
+            List<Shift> AllShifts = _mainUI.ScheduleController().GetAllListOfShifts();
             List<string> Tasks = _mainUI.ScheduleController().GetAllTasks();
 
             int widthOfTask;

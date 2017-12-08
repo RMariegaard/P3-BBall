@@ -20,6 +20,7 @@ namespace VolunteerPrototype.UI
         private Panel _schedulePanel;
         private Panel _dayNavigationPanel;
         private MenuUI _menu;
+        private MyShiftsPanel _myShiftsPanel;
 
         private Volunteer _user;
 
@@ -94,11 +95,17 @@ namespace VolunteerPrototype.UI
         public void LogIn()
         {
             _user = new Volunteer("hej", "hej@email.dk", "hej");
+            _myShiftsPanel = new MyShiftsPanel(_user, _schedulePanel.Size);
         }
 
         public void LogOut()
         {
             _user = null;
+        }
+
+        public void ShowMyShifts()
+        {
+            _myShiftsPanel.BringToFront();
         }
     }
 }

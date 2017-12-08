@@ -33,7 +33,7 @@ namespace VolunteerPrototype.UI
 
             shiftPanel = new Panel
             {
-                Name = "Shift " + shift.ID.ToString(),
+                Name = "Shift " + shift.ShiftId.ToString(),
                 BackColor = Color.AliceBlue,
                 BorderStyle = BorderStyle.FixedSingle
             };
@@ -88,11 +88,11 @@ namespace VolunteerPrototype.UI
             var topColorBinding = new Binding("BackColor", shiftBindingSource, "GetNumberOfVolunteers");
             topColorBinding.Format += delegate (object sender, ConvertEventArgs e)
             {
-                if (shift.Requests.Count() + shift.Workers.Count() < shift.VolunteersNeeded)
+                if (shift.ListOfRequests.Count() + shift.ListOfWorkers.Count() < shift.VolunteersNeeded)
                     e.Value = Color.LimeGreen;
-                else if ((shift.Workers.Count() < shift.VolunteersNeeded) && (shift.Workers.Count() + shift.Requests.Count() > shift.VolunteersNeeded))
+                else if ((shift.ListOfWorkers.Count() < shift.VolunteersNeeded) && (shift.ListOfWorkers.Count() + shift.ListOfRequests.Count() > shift.VolunteersNeeded))
                     e.Value = Color.Yellow;
-                else if (shift.Workers.Count() >= shift.VolunteersNeeded)
+                else if (shift.ListOfWorkers.Count() >= shift.VolunteersNeeded)
                     e.Value = Color.Red;
             };
 
@@ -130,10 +130,10 @@ namespace VolunteerPrototype.UI
                 Location = new Point(0, requestsLabel.Location.Y + requestsLabel.Font.Height + 2)
             };
 
-            var numberOfRequestsBinding = new Binding("Text", shiftBindingSource, "Requests");
+            var numberOfRequestsBinding = new Binding("Text", shiftBindingSource, "ListOfRequests");
             numberOfRequestsBinding.Format += delegate (object sender, ConvertEventArgs e)
             {
-                e.Value = "Requests:  " + shift.Requests.Count();
+                e.Value = "Requests:  " + shift.ListOfRequests.Count();
             };
             requestsLabel.DataBindings.Add(numberOfRequestsBinding);
 

@@ -13,14 +13,24 @@ namespace VolunteerPrototype.UI
     public class MyShiftsPanel : Panel
     {
         private Volunteer _volunteer;
-        private TextBox _shiftTextBox;
-        public MyShiftsPanel(Volunteer volunteer)
+        private TextBox _shiftsTextBox;
+        private TextBox _requestsTextBox;
+        public MyShiftsPanel(Volunteer volunteer, Size size)
         {
+            Size = size;
             _volunteer = volunteer;
-            _shiftTextBox = new TextBox()
+            _shiftsTextBox = new TextBox()
             {
-                Text = volunteer.GetHashCode();
-            }
+                Location = new Point(20, 20),
+                Text = string.Join("\n", volunteer.ListOfShifts)
+            };
+            _requestsTextBox = new TextBox()
+            {
+                Location = new Point(_shiftsTextBox.Location.X + 50, _shiftsTextBox.Location.Y),
+                Text = string.Join("\n", volunteer.ListOfRequests)
+            };
+            Controls.Add(_shiftsTextBox);
+            Controls.Add(_requestsTextBox);
         }
 
 
