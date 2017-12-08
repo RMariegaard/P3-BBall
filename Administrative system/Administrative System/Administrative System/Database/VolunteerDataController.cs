@@ -8,9 +8,9 @@ using VolunteerSystem.Model;
 
 namespace VolunteerSystem.Database
 {
-    public class VolunteerController : DatabaseController<Volunteer>, IVolunteerController
+    public class VolunteerDataController : DatabaseController<Volunteer>, IVolunteerController
     {
-        public VolunteerController(DatabaseContext context):base(context)
+        public VolunteerDataController(DatabaseContext context):base(context)
         {
 
         }

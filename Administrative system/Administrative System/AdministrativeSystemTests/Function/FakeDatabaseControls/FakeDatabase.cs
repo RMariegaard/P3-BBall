@@ -13,7 +13,7 @@ namespace VolunteerSystemTests.Function
         public FakeDatabase()
         {
             schedule = new FakeScheduleController();
-            request = new FakeRequestController();
+            request = new FakeRequestDataController();
             shift = new FakeShiftController();
             volunteer = new FakeVolunteerController();
             externalWorker = new FakeExternalWorker();

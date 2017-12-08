@@ -14,10 +14,10 @@ namespace VolunteerSystem.Database
         public FinalController(DatabaseContext context)
         {
             _context = context;
-            schedule = new ScheduleController(context);
-            request = new RequestController(context);
-            shift = new ShiftController(context);
-            volunteer = new VolunteerController(context);
+            schedule = new ScheduleDataController(context);
+            request = new RequestDataController(context);
+            shift = new ShiftDataController(context);
+            volunteer = new VolunteerDataController(context);
             externalWorker = new ExternalWorkerController(context);
 
 
