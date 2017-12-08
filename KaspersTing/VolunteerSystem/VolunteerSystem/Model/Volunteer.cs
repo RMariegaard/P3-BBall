@@ -16,15 +16,15 @@ namespace VolunteerSystem
         //public VolunteerController volunteerDatabase = new VolunteerController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
 
         //Constructors 
-        public Volunteer(string name, string email, string accosi):base(name, email)
+        public Volunteer(string name, string email, string accosi) : base(name, email)
         {
             this.DateCreated = DateTime.Now;
             this.Association = accosi;
             //Dette gør vi i controller i stedet for, så påvirker det heller ikke unit tests
-           //volunteerDatabase.Add(this);
-           //volunteerDatabase.Complete();
+            //volunteerDatabase.Add(this);
+            //volunteerDatabase.Complete();
             YearsWorked = new List<int>();
-            
+
         }
         public Volunteer()
         {
@@ -36,11 +36,21 @@ namespace VolunteerSystem
         public string Association { get; private set; }
         public DateTime DateCreated { get; private set; }
         public int? Phonenumber { get; set; }
-        [NotMapped]
-        public List<int> YearsWorked { get; set; }
+ 
 
+        public List<int> YearsWorked { get; set; }
+        public string YearsWorkedString
+        {
+            get { return string.Join(",", YearsWorked); }
+            set
+            {
+                YearsWorked = value.Split(',').Select(x => int.Parse(x)).ToList();
+            }
+        }
         
-                               
+        
+
+
         public override string ToString()
         {
             return Association + " " + Name + " " + Email;
