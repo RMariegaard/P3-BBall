@@ -27,28 +27,14 @@ namespace VolunteerSystem
         public int? WorkerId { get; set; }
         public Volunteer Volunteer { get; set; }
 
-
-
-        public Request(Volunteer volunteer, NotificationImportance hey)
-            : base(DateTime.Now, hey)
-        {
-            TimeSent = DateTime.Now;
-            Volunteer = volunteer;
-        }
-
+        
         public Request(Volunteer volunteer)
-            : base(DateTime.Now)
+            : base(DateTime.Now, NotificationImportance.MediumImportance)
         {
             TimeSent = DateTime.Now;
             Volunteer = volunteer;
         }
-
-
-        public Request()
-        {
-
-        }
-
+        
         ////Test Constructer only used for unit test does not connect to database
         //public Request(bool test, Worker worker)
         //    : base(DateTime.Now)

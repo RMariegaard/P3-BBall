@@ -14,6 +14,34 @@ namespace VolunteerSystem
     {
         public static List<Notification> AllNotifications = new List<Notification>();
 
+        public static string GetStandardVolunteerDeniedShiftMessage
+        {
+            get
+            {
+                var reader = new StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerRequestDeniedMessage.txt");
+                string message = reader.ReadToEnd();
+                return message;
+            }
+        }
+        public static string GetStandardVolunteerAcceptedShiftMessage
+        {
+            get
+            {
+                var reader = new StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerRequestAcceptedMessage.txt");
+                string message = reader.ReadToEnd();
+                return message;
+            }
+        }
+        public static string GetStandardVolunteerDeletedShiftMessage
+        {
+            get
+            {
+                var reader = new StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerShiftDeletedMessage.txt");
+                string message = reader.ReadToEnd();
+                return message;
+            }
+        }
+
         public static void InformAdmin()
         {
             throw new NotImplementedException();

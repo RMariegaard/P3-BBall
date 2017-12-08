@@ -29,7 +29,6 @@ namespace VolunteerSystem
         public List<AbstractNotification> GetAllRequestsAndNotifications()
         {
             List<AbstractNotification> notifications = new List<AbstractNotification>();
-           // _schedule.ListOfShifts.ForEach(x => notifications.AddRange(x.ListOfRequests));
            notifications.AddRange(_database.request.GetAllRequest());
             Notifier.AllNotifications.ForEach(x => notifications.Add(x));
 
@@ -96,17 +95,23 @@ namespace VolunteerSystem
 
         public void EditShift(Shift oldShift, Shift newShift)
         {
+            /*
             string[] changes = FindShiftChanges(oldShift, newShift);
+            
             foreach (var volunteer in oldShift.ListOfWorkers.Where(x => x.GetType() == typeof(Volunteer)))
             {
                 //Notifier.InformVolunteer(volunteer as Volunteer, oldShift, newShift, changes);
             }
+            */
+
             oldShift.EditShift(newShift);
             _database.schedule.UpdateSchedule(_schedule);
-
         }
+
         public void DeleteShift(Shift shift)
         {
+            /* This is being handled by the UI
+            
             //Both Volunteers on the shift and volunteers who have requested the shift have to be informed!!!!!
             foreach (var volunteer in shift.ListOfWorkers.Where(x => x.GetType() == typeof(Volunteer)))
             {
@@ -116,6 +121,7 @@ namespace VolunteerSystem
             {
                 //Notifier.InformVolunteer(volunteer, shift, InformShiftCommand.Deny)
             }
+            */
             _database.request.RemoveRange(shift.ListOfRequests);
             _database.shift.Remove(shift);
             //UpdateRequestPanel();
@@ -214,20 +220,39 @@ namespace VolunteerSystem
             _schedule.ListOfShifts.Find(x => x.ListOfRequests.Contains(request)).ApproveRequest(request, 2);
             _database.schedule.UpdateSchedule(_schedule);
             _database.request.RemoveRequest(request);
-            
-
-            // Notifier.InformVolunteer(request.Volunteer as Volunteer, shift, InformShiftCommand.Accept);
         }
 
         public void DenyRequest(Request request)
         {
             _database.request.RemoveRequest(request);
-            //Notifier.InformVolunteer(request.Worker as Volunteer, shift, InformShiftCommand.Deny);
         }
 
         public Shift FindSingleShift(Predicate<Shift> predicate)
         {
             return _schedule.ListOfShifts.Find(predicate);
+        }
+
+        public List<WorkerShiftPair> GetAllWorkersFromATask(string task)
+        {
+            List<WorkerShiftPair> result = new List<WorkerShiftPair>();
+
+            foreach (Shift shift in GetAllListOfShifts())
+            {
+                if (shift.Task == task)
+                {
+                    foreach (Worker worker in shift.ListOfWorkers)
+                    {
+                        result.Add(new WorkerShiftPair(worker, shift));
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public Shift GetshiftFromRequest(Request request)
+        {
+            return GetAllListOfShifts().First(x => x.ListOfRequests.Contains(request));
         }
     }
 }

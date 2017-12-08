@@ -200,11 +200,22 @@ namespace VolunteerSystem.UserInterfaceAdmin
         {
             DeleteFormPopUp deletePopup = new DeleteFormPopUp("Are you sure you want to delete this shift?");
             deletePopup.ShowDialog();
-            if(deletePopup.DialogResult == DialogResult.OK)
+            if (deletePopup.DialogResult == DialogResult.OK)
             {
-                this.Close();
-                volunteerMainUI.GetScheduleController().DeleteShift(shift);
-                volunteerMainUI.UpdateAllHomepage();
+                Shift shift = (Shift)sender;
+                //View the email preview window
+                string StandardMessage = Notifier.GetStandardVolunteerDeletedShiftMessage;
+                List<WorkerShiftPair> list = new List<WorkerShiftPair>();
+                shift.ListOfWorkers.ForEach(x => list.Add(new WorkerShiftPair(x, shift)));
+                InformVolunteerEmailBeforeSendUI emailPopup = new InformVolunteerEmailBeforeSendUI(StandardMessage, list.ToArray());
+
+                emailPopup.ShowDialog();
+                if (emailPopup.DialogResult == DialogResult.OK)
+                {
+                    this.Close();
+                    volunteerMainUI.GetScheduleController().DeleteShift(shift);
+                    volunteerMainUI.UpdateAllHomepage();
+                }
                 
             }
         }
