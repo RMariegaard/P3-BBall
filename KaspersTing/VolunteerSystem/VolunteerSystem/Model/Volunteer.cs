@@ -12,21 +12,24 @@ namespace VolunteerSystem
 {
     public class Volunteer : Worker
     {
-        //Database Connection
-        //public VolunteerController volunteerDatabase = new VolunteerController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
-
+  
         //Constructors 
         public Volunteer(string name, string email, string accosi) : base(name, email)
         {
             this.DateCreated = DateTime.Now;
             this.Association = accosi;
-            //Dette gør vi i controller i stedet for, så påvirker det heller ikke unit tests
-            //volunteerDatabase.Add(this);
-            //volunteerDatabase.Complete();
+
             YearsWorked = new List<int>();
-
-
         }
+        public Volunteer(string name, string email, string accosi, int phonenumber, string password) : base(name, email)
+        {
+            this.DateCreated = DateTime.Now;
+            this.Association = accosi;
+            this.Phonenumber = phonenumber;
+            this.HashPassworkd = password;
+            YearsWorked = new List<int>();
+        }
+
         public Volunteer()
         {
             YearsWorked = new List<int>();

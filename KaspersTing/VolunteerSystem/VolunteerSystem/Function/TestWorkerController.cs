@@ -24,7 +24,14 @@ namespace VolunteerSystem
         public void CreateWorker(Worker worker)
         {
             ListOfWorkers.Add(worker);
-            _database.volunteer.Add(worker as Volunteer);
+            if (worker is Volunteer)
+            {
+                _database.volunteer.Add(worker as Volunteer);
+            }
+            else
+            {
+                _database.externalWorker.Add(worker as ExternalWorker);
+            }
             _database.Complete();
         }
 

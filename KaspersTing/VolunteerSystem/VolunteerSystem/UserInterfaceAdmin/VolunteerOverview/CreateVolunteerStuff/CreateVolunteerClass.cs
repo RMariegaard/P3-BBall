@@ -154,10 +154,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
                     string name = labelAndTextBoxList.First(x => x.Label.Text == "Name").TextBox.Text;
                     string email = labelAndTextBoxList.First(x => x.Label.Text == "Email").TextBox.Text;
                     string team = labelAndTextBoxList.First(x => x.Label.Text == "Team").TextBox.Text;
-                    int phoneNumber = int.Parse(labelAndTextBoxList.First(x => x.Label.Text == "Phonenumber").TextBox.Text);
+                    int phoneNumber = int.Parse(labelAndTextBoxList.First(x => x.Label.Text == "Phone Number").TextBox.Text);
                     string password = labelAndTextBoxList.First(x => x.Label.Text == "Password").TextBox.Text;
 
-                    Volunteer volunteer = new Volunteer(name, email, team, phoneNumber)
+                    Volunteer volunteer = new Volunteer(name, email, team, phoneNumber, password)
                     {
 
                     };
