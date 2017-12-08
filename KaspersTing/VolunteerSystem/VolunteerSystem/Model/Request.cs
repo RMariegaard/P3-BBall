@@ -35,6 +35,11 @@ namespace VolunteerSystem
             Volunteer = volunteer;
         }
         
+        public Request():base(DateTime.Now, NotificationImportance.MediumImportance)
+        {
+
+        }
+        
         ////Test Constructer only used for unit test does not connect to database
         //public Request(bool test, Worker worker)
         //    : base(DateTime.Now)

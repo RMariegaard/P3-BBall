@@ -25,6 +25,7 @@ namespace VolunteerSystem
             //volunteerDatabase.Complete();
             YearsWorked = new List<int>();
 
+
         }
         public Volunteer()
         {
@@ -32,6 +33,7 @@ namespace VolunteerSystem
         }
 
         public List<Request> ListOfRequests { get; set; }
+        public string HashPassworkd { get; set; }
 
         public string Association { get; private set; }
         public DateTime DateCreated { get; private set; }
@@ -44,7 +46,17 @@ namespace VolunteerSystem
             get { return string.Join(",", YearsWorked); }
             set
             {
-                YearsWorked = value.Split(',').Select(x => int.Parse(x)).ToList();
+                if (value != "")
+                {
+                    if (value.Contains(',')){
+                        YearsWorked = value.Split(',').Select(x => int.Parse(x)).ToList();
+                    }
+                    else
+                    {
+                        YearsWorked.Add(int.Parse(value));
+                    }                   
+                 
+                }
             }
         }
         

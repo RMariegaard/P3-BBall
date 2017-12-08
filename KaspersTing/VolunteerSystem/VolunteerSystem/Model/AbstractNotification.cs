@@ -31,5 +31,10 @@ namespace VolunteerSystem
             _importance = importance;
             _dateCreated = DateCreated;
         }
+
+        public AbstractNotification()
+        {
+
+        }
     }   
 }
