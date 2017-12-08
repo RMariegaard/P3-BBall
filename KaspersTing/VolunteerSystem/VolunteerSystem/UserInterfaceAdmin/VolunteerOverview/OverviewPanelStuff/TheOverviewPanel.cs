@@ -147,7 +147,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
             {
                 //Removes
                 scheduleController.RemoveAllListOfRequestsForAWorker(volunteerOverview.SelectedWorker);
-                //scheduleController.RemoveWorkerFromAllHisListOfShifts(volunteerOverview.SelectedWorker);
                 workerController.RemoveWorker(volunteerOverview.SelectedWorker);
                 //Updates
                 volunteerOverview.UpdateSeachAndVolunteerElement();

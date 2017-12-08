@@ -3,51 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using VolunteerSystem.Database;
+using VolunteerSystem;
+using VolunteerSystem.Model;
 
 namespace VolunteerSystem
 {
     public class Request : AbstractNotification
     {
+        //public RequestController RequestDatabase = new RequestController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
+
         [Key]
-        public int id { get; set; }
+        public int RequestId { get; set; }
+        public DateTime TimeSent { get; set; }
 
-        private DateTime _timeSent;
-        public DateTime TimeSent
-        {
-            get
-            {
-                return _timeSent;
-            }
-        }
+        [ForeignKey("Shift")]
+        public int? ShiftId { get; set; }
+        public Shift Shift { get; set; }
 
-        private Worker _worker;
-        public Worker Worker
-        {
-            get
-            {
-                return _worker;
-            }
-        }
+        [ForeignKey("Volunteer")]
+        public int? WorkerId { get; set; }
+        public Volunteer Volunteer { get; set; }
 
-        public Request(Worker worker)
-            : base(DateTime.Now, NotificationImportance.MediumImportance)
+
+
+        public Request(Volunteer volunteer, NotificationImportance hey)
+            : base(DateTime.Now, hey)
         {
-            _timeSent = DateTime.Now;
-            _worker = worker;
+            TimeSent = DateTime.Now;
+            Volunteer = volunteer;
         }
 
-        //Test Constructer only used for unit test does not connect to database
-        public Request(bool test, Worker worker)
-            : base(DateTime.Now, NotificationImportance.MediumImportance)
+        public Request(Volunteer volunteer)
+            : base(DateTime.Now)
         {
-            _timeSent = DateTime.Now;
-            _worker = worker;
+            TimeSent = DateTime.Now;
+            Volunteer = volunteer;
         }
-        public override string ToString()
+
+
+        public Request()
         {
-            return $"{TimeSent.ToString("dd/MM/yyyy HH:mm")} - {Worker.Name} - {Worker.Email}";
+
         }
+
+        ////Test Constructer only used for unit test does not connect to database
+        //public Request(bool test, Worker worker)
+        //    : base(DateTime.Now)
+        //{
+        //    _timeSent = DateTime.Now;
+        //    _worker = worker;
+        //}
+
+
     }
 }

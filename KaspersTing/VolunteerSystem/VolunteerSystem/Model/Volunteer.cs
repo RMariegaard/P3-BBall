@@ -3,92 +3,96 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VolunteerSystem.Database;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using VolunteerSystem.Model;
 
 namespace VolunteerSystem
 {
-    public class Volunteer:Worker
+    public class Volunteer : Worker
     {
-        private static VolunteerSystem.Database2.VolunteerDatabase _db = new VolunteerSystem.Database2.VolunteerDatabase();
-        private string _assosiation;
-        public string Assosiation
-        {
-            get
-            {
-                return _assosiation;
-            }
-        }
+        //Database Connection
+        //public VolunteerController volunteerDatabase = new VolunteerController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
 
-        private int _phoneNumber;
-        public int PhoneNumber
+        //Constructors 
+        public Volunteer(string name, string email, string accosi):base(name, email)
         {
-            get
-            {
-                return _phoneNumber;
-            }
-            set
-            {
-                _phoneNumber = value;
-            }
-        }
-
-        private DateTime _dateCreated;
-        public DateTime DateCreated
-        {
-            get
-            {
-                return _dateCreated;
-            }
-        }
-
-        private List<int> _yearsWorked;
-        public List<int> YearsWorked
-        {
-            get
-            {
-                return _yearsWorked;
-            }
-        }
-        public void AddYearWorked(int year)
-        {
-            if (!_yearsWorked.Contains(year))
-            {
-                _yearsWorked.Add(year);
-                _db.Update(this);
-            }
-        }
-        
-        public Volunteer(string name, string email, string assosiation) : base(name, email)
-        {
-            this._dateCreated = DateTime.Now;
-            this._assosiation = assosiation;
-            this._yearsWorked = new List<int>();
-            _db.Add(this);
-            this.ID = _db.GetLatestID();
-        }
-        public Volunteer(int id, string name, string email, string assosiation, DateTime dateCreated, List<int> yearsworked) : base(name, email)
-        {
-            this.ID = id;
-            this._dateCreated = dateCreated;
-            this._assosiation = assosiation;
-            this._yearsWorked = yearsworked;
-        }
-
-        //Test Consctructor that does not connect to the database
-        public Volunteer(bool test, string name, string email, string assosiation) : base(name, email)
-        {
-            this._dateCreated = DateTime.Now;
-            this._assosiation = assosiation;
-            this._yearsWorked = new List<int>();
+            this.DateCreated = DateTime.Now;
+            this.Association = accosi;
+            //Dette gør vi i controller i stedet for, så påvirker det heller ikke unit tests
+           //volunteerDatabase.Add(this);
+           //volunteerDatabase.Complete();
+            YearsWorked = new List<int>();
             
         }
+        public Volunteer()
+        {
+            YearsWorked = new List<int>();
+        }
+
+        public List<Request> ListOfRequests { get; set; }
+
+        public string Association { get; private set; }
+        public DateTime DateCreated { get; private set; }
+        public int? Phonenumber { get; set; }
+        [NotMapped]
+        public List<int> YearsWorked { get; set; }
+
+        
+                               
+        public override string ToString()
+        {
+            return Association + " " + Name + " " + Email;
+        }
+
+
+
+
+
+
+        public void AddYearWorked(int year)
+        {
+            if (!YearsWorked.Contains(year))
+            {
+                YearsWorked.Add(year);
+                //update database på en måde
+            }
+        }
+
+
+        public Volunteer(string name, string email, string Association, int Phonenumber) : base(name, email)
+        {
+            this.DateCreated = DateTime.Now;
+            this.Association = Association;
+            this.YearsWorked = new List<int>();
+            this.Phonenumber = Phonenumber;
+
+        }
+        //public Volunteer(int id, string name, string email, string Association, DateTime dateCreated, List<int> yearsworked) : base(name, email)
+        //{
+        //    this.ID = id;
+        //    this._dateCreated = dateCreated;
+        //    this._Association = Association;
+        //    this._yearsWorked = yearsworked;
+        //}
+
+        //Test Consctructor that does not connect to the database
+        //public Volunteer(bool test, string name, string email, string Association) : base(name, email)
+        //{
+        //    this._dateCreated = DateTime.Now;
+        //    this._Association = Association;
+        //    this._yearsWorked = new List<int>();
+
+        //}
 
 
 
         public bool IsValidForSeasonTickets()
         {
-            //problem if the program is used before newyears.... or is it??
-            //When would you search for this? right after the tournament it is correct..
-            //When should the validation reset? when a new schedule is created??
+            //problem if the program is used before newyears....or is it ??
+            //When would you search for this ? right after the tournament it is correct..
+            //When should the validation reset ? when a new schedule is created ??
             int thisYear = DateTime.Now.Year;
             int lastYear = thisYear - 1;
             if (YearsWorked.Count >= 2)
@@ -96,7 +100,7 @@ namespace VolunteerSystem
             else
                 return false;
         }
-        // i would do it this way maybe
+        //i would do it this way maybe
         public bool IsValidForSeasonTickets(int scheduleYear)
         {
             int lastYear = scheduleYear - 1;
@@ -106,15 +110,12 @@ namespace VolunteerSystem
                 return false;
         }
 
-        public override string ToString()
-        {
-            return Assosiation + " " + Name + " " + Email;
-        }
+
 
 
         public void TempAddYearWorked(int year)
         {
-            _yearsWorked.Add(year);
+            YearsWorked.Add(year);
         }
 
 

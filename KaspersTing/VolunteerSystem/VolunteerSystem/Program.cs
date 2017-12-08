@@ -14,69 +14,8 @@ namespace VolunteerSystem
     {
         static void Main(string[] args)
         {
-            /*
-            Console.WriteLine(Database.DBConnection.Connection.Database);
-            Notifier.InformVolunteer();
-            Console.Read();
-            */
 
             FinalController db2 = new FinalController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
-
-            //     db2.externalWorker.Add(new TestExternalWorker("asd", "addsd"));
-            //     db2.externalWorker.Add(new TestExternalWorker("dasd", "adddssd"));
-            //     db2.externalWorker.Add(new TestExternalWorker("asasdd", "addasdsd"));
-            // db2.volunteer.Add(new Volunteer("asd", "asd","asdd"));
-            // db2.volunteer.Add(new Volunteer("asd", "asd", "asdd"));
-
-            // db2.volunteer.Add(new Volunteer("asd", "asd", "asdd"));
-            // db2.volunteer.Add(new Volunteer("asd", "asd", "asdd"));
-
-
-            //TestShift asd = new TestShift("hey", "asd");
-
-            //     asd.volunterId = 3;
-            // Volunteer klasu = new Volunteer("asd", "asdasd", "asda");
-            // klasu.volunterId = 2;
-            // asd.listOfVolunteers = new List<Volunteer>();
-            // asd.listOfVolunteers.Add(klasu);
-
-            // db2.shift.Add(asd);
-
-
-            //     db2.Complete();
-
-
-            //Volunteer wtf = new Volunteer("asd", "asd", "asdasd");
-            //Volunteer wtf1 = new Volunteer("asd", "asd", "asdasd");
-            //Volunteer wtf2 = new Volunteer("asd", "asd", "asdasd");
-            //Volunteer wtf3 = new Volunteer("asd", "asd", "asdasd");
-            //Volunteer wtf4 = new Volunteer("asd", "asd", "asdasd");
-            //Volunteer wtf5 = new Volunteer("asd", "asd", "asdasd");
-            //Volunteer wtf6 = new Volunteer("asd", "asd", "asdasd");
-
-            //TestShift fuck = new TestShift("asd", "asd", 5);
-            //TestShift fuck1 = new TestShift("asd", "asd", 5);
-            //TestShift fuck2 = new TestShift("asd", "asd", 5);
-            //TestShift fuck3 = new TestShift("asd", "asd", 5);
-            //TestShift fuck4 = new TestShift("asd", "asd", 5);
-            //TestShift fuck5 = new TestShift("asd", "asd", 5);
-            //TestShift fuck6 = new TestShift("asd", "asd", 5);
-
-            //fuck.CreateRequest(wtf);
-            //fuck.CreateRequest(wtf);
-            //fuck.CreateRequest(wtf1);
-            //fuck.CreateRequest(wtf2);
-            //fuck.CreateRequest(wtf3);
-            //fuck.CreateRequest(db2.volunteer.Get(38));
-
-            //List<TestShift> hey = db2.shift.getthembitches();
-            //List<Volunteer> hey2 = db2.volunteer.getthembitches();
-
-            //int he2y = 5;
-            //db2.schedule.Add(new Schedule(2018));
-            //db2.Complete();
-            //System.Windows.Forms.Application.Exit();
-
 
 
             //Schedule schedule = new Schedule(2018);

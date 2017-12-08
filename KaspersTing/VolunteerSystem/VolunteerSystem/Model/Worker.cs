@@ -1,19 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VolunteerSystem
 {
     public abstract class Worker
     {
-        protected string _name;
-        protected string _email;
+        public Worker(string name, string email)
+        {
+            this.Email = email;
+            this.Name = name;
+            ListOfShifts = new List<Shift>();
+        }
+        public Worker()
+        {
+            ListOfShifts = new List<Shift>();
+        }
+        [Key]
+        public int WorkerId { get; set; }
+        public string Name { get; private set; }
 
-        public string Email {
+        public List<Shift> ListOfShifts {get;set;}
+
+        private string _email;
+        public string Email
+        {
             get { return _email; }
             set
             {
@@ -23,17 +38,7 @@ namespace VolunteerSystem
                     throw new Exception();
             }
         }
-        
-        public string Name { get { return _name; } }
-        
-        public Worker(string name, string email)
-        {
-            this._name = name;
-            this.Email = email;
-        }
 
-        [Key]
-        public int ID { get; set; }
 
 
         public string GetInformation()
@@ -83,29 +88,5 @@ namespace VolunteerSystem
                 return false;
             }
         }
-
-        //private bool ValidateEmail(string email)
-        //{
-        //    string[] splittedEmail = email.Split('@');
-
-        //    if (splittedEmail.Length == 2)
-        //        return EmailLocalPartValidation(splittedEmail[0]) && EmailDomainValidation(splittedEmail[1]);
-        //    else
-        //        return false;
-        //}
-
-        //private bool EmailLocalPartValidation(string localPart)
-        //{
-        //    const string validCharacters = "abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789._-";
-        //    return localPart.All(x => validCharacters.Contains(x));
-        //}
-
-        //private bool EmailDomainValidation(string domain)
-        //{
-        //    const string validCharacters = "abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789.-";
-        //    if (domain.First() == '/' || domain.Last() == '/' || !domain.Contains('.'))
-        //        return false;
-        //    return domain.All(x => validCharacters.Contains(x));
-        //}
     }
 }
