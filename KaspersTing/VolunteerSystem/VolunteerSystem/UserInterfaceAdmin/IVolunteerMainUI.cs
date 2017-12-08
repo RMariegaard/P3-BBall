@@ -34,5 +34,6 @@ namespace VolunteerSystem.UserInterfaceAdmin
         void Start();
         void UpdateUI();
         void ScrollToControlOnSchedule(Control control);
+        void RemoveTaskAndAssociateShifts(string taskName);
     }
 }

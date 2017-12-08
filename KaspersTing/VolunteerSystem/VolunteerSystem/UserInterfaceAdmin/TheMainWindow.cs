@@ -201,28 +201,43 @@ namespace VolunteerSystem.UserInterface
             _volunteerOverview.GetPanel(_mainPanel.Size).Visible = true;
 
         }
-        
+
         public void AcceptWorkerRequest(Request request)
         {
+            //View the email preview window
+            string StandardMessage = Notifier.GetStandardVolunteerAcceptedShiftMessage;
+            InformVolunteerEmailBeforeSendUI emailPopup = new InformVolunteerEmailBeforeSendUI(StandardMessage, new WorkerShiftPair(request.Volunteer, ScheduleController.GetshiftFromRequest(request)));
+            emailPopup.ShowDialog();
+            if (emailPopup.DialogResult == DialogResult.OK)
+            {
+                //accept request
+                ScheduleController.ApproveRequest(request);
 
-            ScheduleController.ApproveRequest(request);
-
-            _homepage.UpdateTheRequestAndNotificationElements();
-            if (_homepage.ShownVolunteer != null)
-                if (_homepage.ShownVolunteer.Name == request.Volunteer.Name)
-                    _homepage.UpdateVolunteerPanel();
+                //show a volunteer
+                _homepage.UpdateTheRequestAndNotificationElements();
+                if (_homepage.ShownVolunteer != null)
+                    if (_homepage.ShownVolunteer.Name == request.Volunteer.Name)
+                        _homepage.UpdateVolunteerPanel();
+            }
         }
 
         public void DenyWorkerRequest(Request request)
         {
-            //Deny it
-            ScheduleController.DenyRequest(request);
+            //View the email preview window
+            string StandardMessage = Notifier.GetStandardVolunteerDeniedShiftMessage;
+            InformVolunteerEmailBeforeSendUI emailPopup = new InformVolunteerEmailBeforeSendUI(StandardMessage, new WorkerShiftPair(request.Volunteer, ScheduleController.GetshiftFromRequest(request)));
+            emailPopup.ShowDialog();
+            if (emailPopup.DialogResult == DialogResult.OK)
+            {
+                //Deny it
+                ScheduleController.DenyRequest(request);
 
-            //Update ui
-            _homepage.UpdatePendingRequestPanel();
-            if (_homepage.ShownVolunteer != null)
-                if (_homepage.ShownVolunteer.Name == request.Volunteer.Name)
-                    _homepage.UpdateVolunteerPanel();
+                //Update ui
+                _homepage.UpdatePendingRequestPanel();
+                if (_homepage.ShownVolunteer != null)
+                    if (_homepage.ShownVolunteer.Name == request.Volunteer.Name)
+                        _homepage.UpdateVolunteerPanel();
+            }
         }
 
         public void DisplayCreateNewShift()
@@ -323,6 +338,20 @@ namespace VolunteerSystem.UserInterface
         public void UpdateButtonsLeftSide()
         {
             _homepage.UpdateButtonsLeftSide(0 , 120);
+        }
+
+        public void RemoveTaskAndAssociateShifts(string taskName)
+        {
+            //View the email preview window
+            string StandardMessage = Notifier.GetStandardVolunteerDeletedShiftMessage;
+            List<WorkerShiftPair> list = ScheduleController.GetAllWorkersFromATask(taskName);
+            InformVolunteerEmailBeforeSendUI emailPopup = new InformVolunteerEmailBeforeSendUI(StandardMessage, list.ToArray());
+            emailPopup.ShowDialog();
+            if (emailPopup.DialogResult == DialogResult.OK)
+            {
+                ScheduleController.RemoveTaskAndAssociateListOfShifts(taskName);
+                UpdateAllHomepage();
+            }
         }
     }
 }

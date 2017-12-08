@@ -32,6 +32,5 @@ namespace VolunteerSystem
             _headder = headder;
             _body = body;
         }
-
     }
 }
