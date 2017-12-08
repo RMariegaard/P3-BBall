@@ -8,7 +8,7 @@ using VolunteerSystem.Database.InterfacesDatabase;
 
 namespace VolunteerSystemTests.Function
 {
-    class FakeScheduleController : IScheduleController
+    class FakeScheduleDataController : IScheduleController
     {
         public void Add(Schedule entity)
         {

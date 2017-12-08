@@ -102,21 +102,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             return _mainRequestPanel;
         }
 
-        private void checkBox_clicked(object sender, EventArgs e)
-        {
-            isChecked = !isChecked;
-            UpdateRequestAndNotificationPanels();
-
-        }
-
-        public void UpdateRequestAndNotificationPanels()
-        {
-            _mainRequestPanel.Controls.Remove(requestAndNotificationPanel);
-            requestAndNotificationPanel = theRequestPanel();
-            _mainRequestPanel.Controls.Add(requestAndNotificationPanel);
-            requestAndNotificationPanel.BringToFront();
-        }
-        
         private Panel theRequestPanel()
         {
             Panel theListOfRequestsPanel = new Panel
@@ -191,6 +176,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             }
 
             return theListOfRequestsPanel;
+        }
+
+        private void checkBox_clicked(object sender, EventArgs e)
+        {
+            isChecked = !isChecked;
+            UpdateRequestAndNotificationPanels();
+
+        }
+
+        public void UpdateRequestAndNotificationPanels()
+        {
+            _mainRequestPanel.Controls.Remove(requestAndNotificationPanel);
+            requestAndNotificationPanel = theRequestPanel();
+            _mainRequestPanel.Controls.Add(requestAndNotificationPanel);
+            requestAndNotificationPanel.BringToFront();
         }
 
         private Label notificationHeadder(Point location, int maxWidth, string headder)
@@ -288,8 +288,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             shiftInformationLabel.LinkColor = Color.Black;
 
             shiftInformationLabel.LinkBehavior = LinkBehavior.HoverUnderline;
-
-            //Mangler at skrive dato og klokslet på. Ikke længere
+            
             return shiftInformationLabel;
         }
 

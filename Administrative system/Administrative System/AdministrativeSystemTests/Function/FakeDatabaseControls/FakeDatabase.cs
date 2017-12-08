@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VolunteerSystem.Database.InterfacesDatabase;
+﻿using VolunteerSystem.Database.InterfacesDatabase;
 using VolunteerSystemTests.Function.FakeDatabaseControls;
 
 namespace VolunteerSystemTests.Function
@@ -12,11 +7,12 @@ namespace VolunteerSystemTests.Function
     {
         public FakeDatabase()
         {
-            schedule = new FakeScheduleController();
+            schedule = new FakeScheduleDataController();
             request = new FakeRequestDataController();
-            shift = new FakeShiftController();
+            shift = new FakeShiftDataController();
             volunteer = new FakeVolunteerController();
             externalWorker = new FakeExternalWorker();
+            notification = new FakeNotificationDataController();
         }
         public IScheduleController schedule { get; set; }
 
@@ -27,6 +23,8 @@ namespace VolunteerSystemTests.Function
         public IVolunteerController volunteer { get; private set; }
 
         public IExternalWorkerController externalWorker { get; private set; }
+
+        public INotificationDatabase notification { get; private set; }
 
         public int Complete()
         {

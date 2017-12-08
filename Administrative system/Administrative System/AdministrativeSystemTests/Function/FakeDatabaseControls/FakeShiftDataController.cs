@@ -4,9 +4,9 @@ using VolunteerSystem.Database.InterfacesDatabase;
 
 namespace VolunteerSystemTests.Function
 {
-    internal class FakeShiftController : IShiftController
+    internal class FakeShiftDataController : IShiftController
     {
-        public FakeShiftController()
+        public FakeShiftDataController()
         {
         }
 

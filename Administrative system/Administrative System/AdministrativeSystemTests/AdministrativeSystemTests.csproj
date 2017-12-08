@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Function\FakeDatabaseControls\FakeDatabase.cs" />
     <Compile Include="Function\FakeDatabaseControls\FakeExternalWorkerDataController.cs" />
+    <Compile Include="Function\FakeDatabaseControls\FakeNotificationDataController.cs" />
     <Compile Include="Function\FakeDatabaseControls\FakeRequestDataController.cs" />
     <Compile Include="Function\FakeDatabaseControls\FakeScheduleDataController.cs" />
     <Compile Include="Function\FakeDatabaseControls\FakeShiftDataController.cs" />

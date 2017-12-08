@@ -66,11 +66,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.VolunteersSeach
             filterOptions.Location = new Point(5, filterOptionLabel.Location.Y + filterOptionLabel.Size.Height - 5);
             filterOptions.Size = new Size(_size.Width -30, 0);
             filterOptions.Items.Add("All");
-            filterOptions.Items.Add("On ListOfShifts this year");
+            filterOptions.Items.Add("On Shifts this year");
             filterOptions.Items.Add("Volunteers from last year");
             filterOptions.Items.Add("Volunteers from last year, who has no shift");
             filterOptions.Items.Add("Volunteers validated for seasonal tickets");
-            filterOptions.Items.Add("External ListOfWorkers only");
+            filterOptions.Items.Add("External Workers only");
             filterOptions.Items.Add("New volunteers first time volunteering");
             filterOptions.SelectedIndex = 0;
             filterOptions.SelectedIndexChanged += FilterOptions_SelectedIndexChanged;

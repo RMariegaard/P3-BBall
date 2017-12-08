@@ -125,7 +125,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 
             Label shiftLabel = new Label
             {
-                Text = "ListOfShifts:",
+                Text = "Shifts:",
                 Location = new Point(0, 0),
                 AutoSize = true
             };
@@ -157,7 +157,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 
             Label shiftLabel = new Label
             {
-                Text = "ListOfRequests:",
+                Text = "Requests:",
                 Location = new Point(0, 0),
                 AutoSize = true
             };
@@ -165,11 +165,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
             {
 
 
-                List<Shift> ListOfWorkerListOfShifts = volunteerMainUI.GetScheduleController().GetAllListOfShifts().Where(x => x.ListOfRequests.Any(y => y.Volunteer.WorkerId == worker.WorkerId)).ToList();
+                List<Shift> WorkerListOfRequests = volunteerMainUI.GetScheduleController().GetAllListOfShifts().Where(x => x.ListOfRequests.Any(y => y.Volunteer.WorkerId == worker.WorkerId)).ToList();
                 int widthOfShiftElement = 100;
-                for (int i = 0; i < ListOfWorkerListOfShifts.Count; i++)
+                for (int i = 0; i < WorkerListOfRequests.Count; i++)
                 {
-                    volunteerRequestPanel.Controls.Add(_getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height - 2), new Size(widthOfShiftElement, volunteerRequestPanel.Size.Height - 50), ListOfWorkerListOfShifts[i]));
+                    volunteerRequestPanel.Controls.Add(_getSingleShiftPanel(new Point((i * widthOfShiftElement), shiftLabel.Size.Height - 2), new Size(widthOfShiftElement, volunteerRequestPanel.Size.Height - 50), WorkerListOfRequests[i]));
                 }
             }
             volunteerRequestPanel.Controls.Add(shiftLabel);
@@ -195,13 +195,16 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
                 BorderStyle = BorderStyle.FixedSingle
             };
 
-            Label information = new Label
+            var information = new LinkLabel
             {
                 Location = new Point(2, 2),
                 MaximumSize = new Size(size.Width - 4, size.Height - 4),
                 AutoSize = true,
+                LinkColor = Color.Black,
+                LinkBehavior = LinkBehavior.HoverUnderline,
+        };
+            information.Click += delegate (object sender, EventArgs e) {Information_Click(sender, shift); };
 
-            };
             var textBinding = new Binding("Text", shiftBindingSource, "Task");
             textBinding.Format += delegate (object sender, ConvertEventArgs convertEventArgs)
             {
@@ -213,6 +216,12 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.VolunteerSmallOverview
 
             singleShiftPanel.Controls.Add(information);
             return singleShiftPanel;
+        }
+
+        private void Information_Click(object sender, Shift shift)
+        {
+            volunteerMainUI.HomepageChangeDay(shift.StartTime.DayOfWeek.ToString() + " " + shift.StartTime.ToShortDateString());
+            volunteerMainUI.DisplayPressedOnShift(shift);
         }
     }
 }

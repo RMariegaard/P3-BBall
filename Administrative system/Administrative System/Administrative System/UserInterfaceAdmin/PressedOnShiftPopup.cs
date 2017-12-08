@@ -96,7 +96,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             {
                 Location = new Point(5, shiftInfo.Location.Y + shiftInfo.PreferredHeight),
                 MaximumSize = new Size(300, 0),
-                Text = "ListOfWorkers:",
+                Text = "Workers:",
                 AutoSize = true
             };
 
@@ -128,7 +128,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             {
                 Location = new Point(0, ListOfWorkersList.Location.Y + ListOfWorkersList.Height),
                 MaximumSize = new Size(300, 0),
-                Text = "ListOfRequests:",
+                Text = "Requests:",
                 AutoSize = true
             };
 
