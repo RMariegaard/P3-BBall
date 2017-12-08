@@ -74,10 +74,12 @@
     <Compile Include="Database\InterfacesDatabase\IDatabaseController.cs" />
     <Compile Include="Database\InterfacesDatabase\IExternalWorkerController.cs" />
     <Compile Include="Database\InterfacesDatabase\IFinalController.cs" />
+    <Compile Include="Database\InterfacesDatabase\INotificationDatabase.cs" />
     <Compile Include="Database\InterfacesDatabase\IRequestController.cs" />
     <Compile Include="Database\InterfacesDatabase\IScheduleController.cs" />
     <Compile Include="Database\InterfacesDatabase\IShiftController.cs" />
     <Compile Include="Database\InterfacesDatabase\IVolunteerController.cs" />
+    <Compile Include="Database\NotificationDatabase.cs" />
     <Compile Include="Database\RequestController.cs" />
     <Compile Include="Database\ScheduleController.cs" />
     <Compile Include="Database\ShiftController.cs" />

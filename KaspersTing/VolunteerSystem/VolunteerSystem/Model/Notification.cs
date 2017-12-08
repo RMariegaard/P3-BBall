@@ -8,29 +8,15 @@ namespace VolunteerSystem
 {
     public class Notification : AbstractNotification
     {
-        private string _body;
-        public string Body
-        {
-            get
-            {
-                return _body;
-            }
-        }
+        public string Body { get; private set; }
 
-        private string _headder;
-        public string Headder
-        {
-            get
-            {
-                return _headder;
-            }
-        }
+        public string Headder { get; private set; }
         
         public Notification(string headder, string body, NotificationImportance importance)
             : base(DateTime.Now, importance)
         {
-            _headder = headder;
-            _body = body;
+            Body = headder;
+           Headder = body;
         }
 
     }

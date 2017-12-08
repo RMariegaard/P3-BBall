@@ -13,11 +13,12 @@ namespace VolunteerSystem.Database
 {
     public class DatabaseContext : DbContext
     {
-        public DbSet<ExternalWorker> externalWorker {get;set;}
+        public DbSet<ExternalWorker> externalWorker { get; set; }
         public DbSet<Volunteer> volunteer { get; set; }
         public DbSet<Schedule> schedule { get; set; }
         public DbSet<Request> request { get; set; }
         public DbSet<Shift> shift { get; set; }
+        public DbSet<Notification> notication {get;set;}
 
         public DatabaseContext(string connectionString)
         {
