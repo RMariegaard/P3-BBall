@@ -7,19 +7,19 @@ using VolunteerSystem.Database.InterfacesDatabase;
 
 namespace VolunteerSystem.Database
 {
-    public class FinalController : IFinalController
+    public class FinalDataController : IFinalController
     {
         private DatabaseContext _context;
 
-        public FinalController(DatabaseContext context)
+        public FinalDataController(DatabaseContext context)
         {
             _context = context;
             schedule = new ScheduleDataController(context);
             request = new RequestDataController(context);
             shift = new ShiftDataController(context);
             volunteer = new VolunteerDataController(context);
-            externalWorker = new ExternalWorkerController(context);
-
+            externalWorker = new ExternalWorkerDataController(context);
+            notification = new NotificationDatabase(context);
 
         }
 
@@ -31,6 +31,8 @@ namespace VolunteerSystem.Database
         public IVolunteerController volunteer { get; private set; }
 
         public IExternalWorkerController externalWorker { get; private set; }
+
+        public INotificationDatabase notification { get; private set; }
 
         public int Complete()
         {

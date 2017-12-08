@@ -210,13 +210,15 @@ namespace VolunteerSystem.UserInterface
             emailPopup.ShowDialog();
             if (emailPopup.DialogResult == DialogResult.OK)
             {
+                string volunteerName = request.Volunteer.Name;
+
                 //accept request
                 ScheduleController.ApproveRequest(request);
 
                 //show a volunteer
                 _homepage.UpdateTheRequestAndNotificationElements();
                 if (_homepage.ShownVolunteer != null)
-                    if (_homepage.ShownVolunteer.Name == request.Volunteer.Name)
+                    if (_homepage.ShownVolunteer.Name == volunteerName)
                         _homepage.UpdateVolunteerPanel();
             }
         }
@@ -229,13 +231,14 @@ namespace VolunteerSystem.UserInterface
             emailPopup.ShowDialog();
             if (emailPopup.DialogResult == DialogResult.OK)
             {
+                string volunteerName = request.Volunteer.Name;
                 //Deny it
                 ScheduleController.DenyRequest(request);
 
                 //Update ui
                 _homepage.UpdatePendingRequestPanel();
                 if (_homepage.ShownVolunteer != null)
-                    if (_homepage.ShownVolunteer.Name == request.Volunteer.Name)
+                    if (_homepage.ShownVolunteer.Name == volunteerName)
                         _homepage.UpdateVolunteerPanel();
             }
         }

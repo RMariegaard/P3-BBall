@@ -69,8 +69,8 @@
   <ItemGroup>
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Database\DatabaseController.cs" />
-    <Compile Include="Database\ExternalWorkerController.cs" />
-    <Compile Include="Database\FinalController.cs" />
+    <Compile Include="Database\ExternalWorkerDataController.cs" />
+    <Compile Include="Database\FinalDataController.cs" />
     <Compile Include="Database\InterfacesDatabase\IDatabaseController.cs" />
     <Compile Include="Database\InterfacesDatabase\IExternalWorkerController.cs" />
     <Compile Include="Database\InterfacesDatabase\IFinalController.cs" />
@@ -80,15 +80,15 @@
     <Compile Include="Database\InterfacesDatabase\IShiftController.cs" />
     <Compile Include="Database\InterfacesDatabase\IVolunteerController.cs" />
     <Compile Include="Database\NotificationDatabase.cs" />
-    <Compile Include="Database\RequestController.cs" />
-    <Compile Include="Database\ScheduleController.cs" />
-    <Compile Include="Database\ShiftController.cs" />
-    <Compile Include="Database\VolunteerController.cs" />
+    <Compile Include="Database\RequestDataController.cs" />
+    <Compile Include="Database\ScheduleDataController.cs" />
+    <Compile Include="Database\ShiftDataController.cs" />
+    <Compile Include="Database\VolunteerDataController.cs" />
     <Compile Include="Enums\InformShiftCommand.cs" />
     <Compile Include="Enums\NotificationImportance.cs" />
     <Compile Include="Function\AccountController.cs" />
-    <Compile Include="Function\TestScheduleController.cs" />
-    <Compile Include="Function\TestWorkerController.cs" />
+    <Compile Include="Function\ScheduleController.cs" />
+    <Compile Include="Function\WorkerController.cs" />
     <Compile Include="Model\AbstractNotification.cs" />
     <Compile Include="Function\Notifier.cs" />
     <Compile Include="Database\SqlDataConnecter.cs" />

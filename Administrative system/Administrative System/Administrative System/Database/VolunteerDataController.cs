@@ -16,7 +16,7 @@ namespace VolunteerSystem.Database
         }
 
 
-        public List<Volunteer> getthembitches()
+        public List<Volunteer> GetVolunteersFromDatabase()
         {
             return _context.volunteer.Include("ListOfShifts").Include("ListOfRequests").ToList();
         }

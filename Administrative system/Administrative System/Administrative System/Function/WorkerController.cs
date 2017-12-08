@@ -61,7 +61,7 @@ namespace VolunteerSystem
         private List<Worker> UpdateListOfVolunteers()
         {
             List<Worker> ListOfWorkers = new List<Worker>();
-            ListOfWorkers.AddRange(_database.volunteer.getthembitches());
+            ListOfWorkers.AddRange(_database.volunteer.GetVolunteersFromDatabase());
             //ListOfWorkers.AddRange(_database.externalWorker.GetExternalListOfWorkers());
             return ListOfWorkers;
         }

@@ -18,8 +18,13 @@ namespace VolunteerSystem
         public Notification(string headder, string body, NotificationImportance importance)
             : base(DateTime.Now, importance)
         {
-            Body = headder;
-           Headder = body;
+            Body = body;
+           Headder = headder;
+        }
+
+        public Notification()
+        {
+
         }
     }
 }

@@ -19,6 +19,7 @@ namespace VolunteerSystem
         {
             _schedule = schedule;
             _database = database;
+            Notifier.AllNotifications = _database.notification.GetAll().ToList();
         }
 
         public ScheduleController(Schedule schedule)
@@ -34,6 +35,13 @@ namespace VolunteerSystem
 
             return notifications;
         }
+        public void CreateNotification(Notification notification)
+        {
+            Notifier.AllNotifications.Add(notification);
+            _database.notification.Add(notification);
+            _database.schedule.UpdateSchedule(_schedule);
+        }
+
         //public void CreateSchedule()
         //{
         //    throw new NotImplementedException();
@@ -62,7 +70,6 @@ namespace VolunteerSystem
         public void RemoveNotification(Notification notification)
         {
             Notifier.AllNotifications.Remove(notification);
-            //UpdateRequestPanel();
         }
 
         public List<Shift> GetAllListOfShifts()
@@ -124,7 +131,7 @@ namespace VolunteerSystem
             */
             _database.request.RemoveRange(shift.ListOfRequests);
             _database.shift.Remove(shift);
-            //UpdateRequestPanel();
+    
         }
 
         private string[] FindShiftChanges(Shift oldShift, Shift newShift)
@@ -181,9 +188,9 @@ namespace VolunteerSystem
             {
                 _database.volunteer.Remove(worker as Volunteer);
             }
-            //GetAllListOfShifts().ForEach(x => x.ListOfWorkers.RemoveAll(y => y == worker));
+           
             _database.schedule.UpdateSchedule(_schedule);
-            //UpdateRequestPanel();
+          
         }
 
         public void RemoveAllListOfRequestsForAWorker(Worker worker)
@@ -193,7 +200,7 @@ namespace VolunteerSystem
             foreach (Request request in GetAllListOfRequests())
                 if (request.Volunteer == worker)
                     RemoveRequest(request);
-            //UpdateRequestPanel();
+          
         }
 
         public void RemoveRequest(Request request)

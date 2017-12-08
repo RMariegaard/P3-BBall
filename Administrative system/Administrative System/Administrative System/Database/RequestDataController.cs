@@ -8,9 +8,9 @@ using VolunteerSystem.Model;
 
 namespace VolunteerSystem.Database
 {
-    public class RequestController : DatabaseController<Request>, IRequestController
+    public class RequestDataController : DatabaseController<Request>, IRequestController
     {
-        public RequestController(DatabaseContext context):base(context)
+        public RequestDataController(DatabaseContext context):base(context)
         {
 
         }

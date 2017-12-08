@@ -9,7 +9,7 @@ namespace VolunteerSystem.Database.InterfacesDatabase
 {
     public interface IVolunteerController : IDatabaseController<Volunteer>
     {
-        List<Volunteer> getthembitches();
+        List<Volunteer> GetVolunteersFromDatabase();
         void Complete();
     }
     

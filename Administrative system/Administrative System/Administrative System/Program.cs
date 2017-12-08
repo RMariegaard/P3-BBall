@@ -17,11 +17,11 @@ namespace VolunteerSystem
         static void Main(string[] args)
         {
 
-            FinalController db2 = new FinalController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
+            FinalDataController db2 = new FinalDataController(new DatabaseContext(SqlDataConnecter.CnnVal("DatabaseCS")));
 
-            Schedule schedule = new Schedule(2018);
-            db2.schedule.Add(schedule);
-            db2.Complete();
+            //Schedule schedule = new Schedule(2018);
+            //db2.schedule.Add(schedule);
+            //db2.Complete();
 
 
             ScheduleController scheduleController = new ScheduleController(db2.schedule.GetSchedule(1), db2);
@@ -162,15 +162,13 @@ namespace VolunteerSystem
             //scheduleController.GetAllListOfShifts()[0].CreateRequest((Volunteer)workerController.ListOfWorkers[8]);
             //scheduleController.GetAllListOfShifts()[0].CreateRequest((Volunteer)workerController.ListOfWorkers[9]);
 
+            //scheduleController.CreateNotification(new Notification("High Importance: Volunteer droped out", "Unfortunetly Casper has dropped his shift in the kitchen friday 22-01-2017", NotificationImportance.HighImportance));
+            //scheduleController.CreateNotification(new Notification("Medium Importance: En lang headder for at se hvad der sker når den bliver lang",
+            //    "Og den skal selvfølgelig have en mindst ligeså lang body for at se hvad der sker her ovre. Men hvor langt er for langt? Måske lige en sætning mere",
+            //    NotificationImportance.MediumImportance));
+            //scheduleController.CreateNotification(new Notification("Low importance: Headder", "Boddy, denne er ikke så vigtig", NotificationImportance.LowImportance));
+
             db2.Complete();
-
-
-            Notifier.AllNotifications.Add(new Notification("High Importance: Volunteer droped out", "Unfortunetly Casper has dropped his shift in the kitchen friday 22-01-2017", NotificationImportance.HighImportance));
-            Notifier.AllNotifications.Add(new Notification("Medium Importance: En lang headder for at se hvad der sker når den bliver lang",
-                "Og den skal selvfølgelig have en mindst ligeså lang body for at se hvad der sker her ovre. Men hvor langt er for langt? Måske lige en sætning mere",
-                NotificationImportance.MediumImportance));
-            Notifier.AllNotifications.Add(new Notification("Low importance: Headder", "Boddy, denne er ikke så vigtig", NotificationImportance.LowImportance));
-
 
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
 

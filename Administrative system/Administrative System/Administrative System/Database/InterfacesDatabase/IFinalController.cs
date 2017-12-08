@@ -16,6 +16,8 @@ namespace VolunteerSystem.Database.InterfacesDatabase
         IVolunteerController volunteer { get; }
         IExternalWorkerController externalWorker { get; }
 
+        INotificationDatabase notification { get; }
+
         int Complete();
     }
 }

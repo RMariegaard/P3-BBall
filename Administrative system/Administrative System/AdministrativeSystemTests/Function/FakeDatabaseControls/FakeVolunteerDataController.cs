@@ -35,7 +35,7 @@ namespace VolunteerSystemTests.Function
             throw new System.NotImplementedException();
         }
 
-        public List<Volunteer> getthembitches()
+        public List<Volunteer> GetVolunteersFromDatabase()
         {
             return new List<Volunteer>();
         }

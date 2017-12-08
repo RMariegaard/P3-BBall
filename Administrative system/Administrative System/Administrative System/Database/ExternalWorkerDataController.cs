@@ -8,9 +8,9 @@ using VolunteerSystem.Model;
 
 namespace VolunteerSystem.Database
 {
-    public class ExternalWorkerController : DatabaseController<ExternalWorker>, IExternalWorkerController
+    public class ExternalWorkerDataController : DatabaseController<ExternalWorker>, IExternalWorkerController
     {
-        public ExternalWorkerController(DatabaseContext context):base(context)
+        public ExternalWorkerDataController(DatabaseContext context):base(context)
         {
 
         }

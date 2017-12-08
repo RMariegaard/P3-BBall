@@ -8,9 +8,9 @@ using VolunteerSystem.Model;
 
 namespace VolunteerSystem.Database
 {
-    public class ScheduleController : DatabaseController<Schedule>, IScheduleController
+    public class ScheduleDataController : DatabaseController<Schedule>, IScheduleController
     {
-        public ScheduleController(DatabaseContext context):base(context)
+        public ScheduleDataController(DatabaseContext context):base(context)
         {
 
         }

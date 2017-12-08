@@ -8,9 +8,9 @@ using VolunteerSystem.Model;
 
 namespace VolunteerSystem.Database
 {
-    public class ShiftController : DatabaseController<Shift>, IShiftController
+    public class ShiftDataController : DatabaseController<Shift>, IShiftController
     {
-        public ShiftController(DatabaseContext context):base(context)
+        public ShiftDataController(DatabaseContext context):base(context)
         {
 
         }

@@ -8,7 +8,7 @@ using VolunteerSystem.Database.InterfacesDatabase;
 
 namespace VolunteerSystemTests.Function.FakeDatabaseControls
 {
-    class FakeRequestController : IRequestController
+    class FakeRequestDataController : IRequestController
     {
         public void Add(Request entity)
         {
