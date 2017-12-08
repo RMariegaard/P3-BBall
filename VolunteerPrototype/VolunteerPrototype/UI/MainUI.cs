@@ -24,7 +24,7 @@ namespace VolunteerPrototype.UI
 
         private Volunteer _user;
 
-        public string GetCurrentUser => _user.Name;
+        public Volunteer GetCurrentUser => _user;
 
         public MainUI(ScheduleController sc, WorkerController wc)
         {
@@ -57,7 +57,7 @@ namespace VolunteerPrototype.UI
 
         public void UpdateMenu()
         {
-            //hmm
+
         }
 
         public void UpdateSchedulePanel()
@@ -80,6 +80,7 @@ namespace VolunteerPrototype.UI
             };
             _schedulePanel.Controls.Add(_scheduleUI.GetPanel(_schedulePanel));
             Controls.Add(_schedulePanel);
+            _myShiftsPanel?.Hide();
         }
 
         public WorkerController WorkerController()
@@ -89,23 +90,33 @@ namespace VolunteerPrototype.UI
 
         public bool IsLoggedIn()
         {
+
             return _user != null;
+
         }
 
-        public void LogIn()
+        public void LogIn(Volunteer volunteer)
         {
-            _user = new Volunteer("hej", "hej@email.dk", "hej");
-            _myShiftsPanel = new MyShiftsPanel(_user, _schedulePanel.Size);
+            _user = volunteer;
+            _myShiftsPanel = new MyShiftsPanel(_user, _schedulePanel.Size)
+            {
+                Location = _schedulePanel.Location
+            };
+            Controls.Add(_myShiftsPanel);
         }
 
         public void LogOut()
         {
+            
             _user = null;
+
         }
 
         public void ShowMyShifts()
         {
-            _myShiftsPanel.BringToFront();
+            _myShiftsPanel.Show();
+            _schedulePanel.Hide();
+            _dayNavigationPanel.Hide();
         }
     }
 }

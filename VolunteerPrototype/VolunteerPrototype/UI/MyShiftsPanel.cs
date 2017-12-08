@@ -13,22 +13,29 @@ namespace VolunteerPrototype.UI
     public class MyShiftsPanel : Panel
     {
         private Volunteer _volunteer;
-        private TextBox _shiftsTextBox;
-        private TextBox _requestsTextBox;
+        private RichTextBox _shiftsTextBox;
+        private RichTextBox _requestsTextBox;
         public MyShiftsPanel(Volunteer volunteer, Size size)
         {
             Size = size;
             _volunteer = volunteer;
-            _shiftsTextBox = new TextBox()
+            var shifts = volunteer.ListOfShifts?.Select(x => x.Task + "\t" + x.StartTime + " - " + x.EndTime);
+            _shiftsTextBox = new RichTextBox()
             {
                 Location = new Point(20, 20),
-                Text = string.Join("\n", volunteer.ListOfShifts)
-            };
-            _requestsTextBox = new TextBox()
+                Size = new Size(400, 250),
+                Text = string.Join("\n", shifts),
+                ReadOnly = true,
+                BackColor = System.Drawing.SystemColors.Window
+        };
+            _requestsTextBox = new RichTextBox()
             {
-                Location = new Point(_shiftsTextBox.Location.X + 50, _shiftsTextBox.Location.Y),
-                Text = string.Join("\n", volunteer.ListOfRequests)
-            };
+                Location = new Point(_shiftsTextBox.Location.X + _shiftsTextBox.Width + 50, _shiftsTextBox.Location.Y),
+                Size = _shiftsTextBox.Size,
+                Text = string.Join("\n", volunteer.ListOfRequests ?? new List<Request>()),
+                ReadOnly = true,
+                BackColor = System.Drawing.SystemColors.Window
+        };
             Controls.Add(_shiftsTextBox);
             Controls.Add(_requestsTextBox);
         }

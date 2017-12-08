@@ -9,7 +9,7 @@ namespace VolunteerPrototype.UI
 {
     public interface IUI
     {
-        string GetCurrentUser { get; }
+        Volunteer GetCurrentUser { get; }
 
         ScheduleController ScheduleController();
         WorkerController WorkerController();
@@ -18,7 +18,7 @@ namespace VolunteerPrototype.UI
 
         int GetFullWidth();
         bool IsLoggedIn();
-        void LogIn();
+        void LogIn(Volunteer volunteer);
         void LogOut();
 
         void ShowMyShifts();

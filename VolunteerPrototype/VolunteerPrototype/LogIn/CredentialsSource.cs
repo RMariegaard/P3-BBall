@@ -19,8 +19,18 @@ namespace VolunteerPrototype.LogIn
             credentials.Add("Mary", GetHash("12345"));
         }
         internal static bool Check(string login, string pwd)
-        { 
-            return object.Equals(credentials[login], GetHash(pwd));
+        {
+            try
+            {
+                var db = new VolunteerSystem.Database.FinalController(new VolunteerSystem.Database.DatabaseContext(VolunteerSystem.Model.SqlDataConnecter.CnnVal("DatabaseCS")));
+                var volunteer = db.volunteer.GetAll().First(x => x.Email == login && x.HashPassworkd == pwd);
+
+                return volunteer != null;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Username or password was wrong");
+            }
         }
         static object GetHash(string password)
         {

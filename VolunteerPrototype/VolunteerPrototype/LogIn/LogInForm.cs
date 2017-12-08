@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VolunteerPrototype.UI;
+using VolunteerSystem;
 
 namespace VolunteerPrototype.LogIn
 {
@@ -16,9 +18,12 @@ namespace VolunteerPrototype.LogIn
 
         private Button _logInButton;
 
+        public VolunteerSystem.Volunteer _volunteer;
+        private IUI _mainUI;
 
-        public LogInForm()
+        public LogInForm(IUI mainUI)
         {
+            _mainUI = mainUI;
             Size = new System.Drawing.Size(300, 175);
             _emailLabel = new Label()
             {
@@ -71,23 +76,53 @@ namespace VolunteerPrototype.LogIn
 
         private void ValidateLogIn(object sender, EventArgs e)
         {
-            
-                if (CredentialsSource.Check(_emailInputBox.Text, _passwordInputBox.Text))
+            try
+            {
+                if (Check(_emailInputBox.Text, _passwordInputBox.Text))
                 {
 
-                DialogResult = DialogResult.Yes;
-                    Close(); }
+                    DialogResult = DialogResult.Yes;
+                    Close();
+                }
                 else
                 {
-                var popup = new VolunteerSystem.UserInterface.PopupUI("Login Failed", "The entered email or password was incorrect")
-                {
-                    StartPosition = FormStartPosition.CenterParent
-                };
-                popup.ShowDialog();
-                _passwordInputBox.SelectAll();
+                    LogInFailed();
                 }
-                
+            }
+            catch (Exception)
+            {
+                LogInFailed();
+            }
             
+        }
+
+        private void LogInFailed()
+        {
+            var popup = new VolunteerSystem.UserInterface.PopupUI("Login Failed", "The entered email or password was incorrect")
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
+            popup.ShowDialog();
+            _passwordInputBox.SelectAll();
+        }
+
+        private bool Check(string login, string pwd)
+        {
+            try
+            {
+                var db = new VolunteerSystem.Database.FinalController(new VolunteerSystem.Database.DatabaseContext(VolunteerSystem.Model.SqlDataConnecter.CnnVal("DatabaseCS")));
+                var volunteer = _mainUI.WorkerController().ListOfWorkers.Select(x => x as Volunteer).First(y => (y.Email == login && y.HashPassworkd == pwd));
+                
+                if(volunteer != null)
+                {
+                    _volunteer = volunteer;
+                }
+                return volunteer != null;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Username or password was wrong");
+            }
         }
     }
 }

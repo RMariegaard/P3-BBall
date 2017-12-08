@@ -22,7 +22,7 @@ namespace VolunteerPrototype.UI
 
         private IUI _mainUI;
 
-        private Form _logInPopUp;
+        private LogIn.LogInForm _logInPopUp;
 
         public MenuUI(IUI mainUI, int width)
         {
@@ -38,7 +38,9 @@ namespace VolunteerPrototype.UI
             Controls.Add(_scheduleButton);
             _userInforLabel = new Label()
             {
-                Location = new System.Drawing.Point(100, 30)
+                Location = new System.Drawing.Point(100, 30),
+                Width = width,
+                Height = 30
             };
             Controls.Add(_userInforLabel);
 
@@ -73,7 +75,7 @@ namespace VolunteerPrototype.UI
 
         private void Login(object sender, EventArgs e)
         {
-            _logInPopUp = new LogIn.LogInForm()
+            _logInPopUp = new LogIn.LogInForm(_mainUI)
             {
                 StartPosition = FormStartPosition.CenterParent
             };
@@ -81,8 +83,9 @@ namespace VolunteerPrototype.UI
             _logInPopUp.ShowDialog();
             if (_logInPopUp.DialogResult == DialogResult.Yes)
             {
+                _mainUI.LogIn(_logInPopUp._volunteer);
                 Controls.Remove(_loginButton);
-                _mainUI.LogIn();
+                
                 LoggedIn();
             }
             else
@@ -120,7 +123,7 @@ namespace VolunteerPrototype.UI
             };
             Controls.Add(_accountSettingsButton);
 
-            _userInforLabel.Text = $"Logged in as {_mainUI.GetCurrentUser}";
+            _userInforLabel.Text = $"Logged in as:\n{_mainUI.GetCurrentUser.Name}";
         }
 
         private void MyShiftClicked(object sender, EventArgs e)
@@ -131,7 +134,8 @@ namespace VolunteerPrototype.UI
         private void LogOut(object sender, EventArgs e)
         {
             Controls.Remove(_logOutButton);
-            
+            Controls.Remove(_accountSettingsButton);
+            Controls.Remove(_myShiftButton);
             Default();
             _mainUI.LogOut();
             _mainUI.UpdateMenu();
