@@ -21,7 +21,7 @@ namespace VolunteerPrototype.UI
         private Panel _dayNavigationPanel;
         private MenuUI _menu;
 
-        private User _user;
+        private Volunteer _user;
 
         public string GetCurrentUser => _user.Name;
 
@@ -93,7 +93,7 @@ namespace VolunteerPrototype.UI
 
         public void LogIn()
         {
-            _user = new User();
+            _user = new Volunteer("hej", "hej@email.dk", "hej");
         }
 
         public void LogOut()

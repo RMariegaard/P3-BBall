@@ -19,7 +19,7 @@ namespace VolunteerPrototype.LogIn
             credentials.Add("Mary", GetHash("12345"));
         }
         internal static bool Check(string login, string pwd)
-        {
+        { 
             return object.Equals(credentials[login], GetHash(pwd));
         }
         static object GetHash(string password)
