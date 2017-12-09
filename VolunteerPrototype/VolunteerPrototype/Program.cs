@@ -27,12 +27,12 @@ namespace VolunteerPrototype
 
             WorkerController workerController = new WorkerController(db);
 
+            var ui = new UI.MainUI(scheduleController, workerController);
 
 
 
 
-
-            Application.Run(new UI.MainUI(scheduleController, workerController));
+            Application.Run(ui);
         }
     }
 }

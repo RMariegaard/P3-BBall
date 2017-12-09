@@ -22,5 +22,6 @@ namespace VolunteerPrototype.UI
         void LogOut();
 
         void ShowMyShifts();
+        void ShowSettings();
     }
 }

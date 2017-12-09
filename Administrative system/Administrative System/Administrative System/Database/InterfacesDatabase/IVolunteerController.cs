@@ -11,6 +11,8 @@ namespace VolunteerSystem.Database.InterfacesDatabase
     {
         List<Volunteer> GetVolunteersFromDatabase();
         void Complete();
+
+        void Update(Volunteer volunteer);
     }
     
 }

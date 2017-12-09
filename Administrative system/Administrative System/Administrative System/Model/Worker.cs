@@ -16,6 +16,13 @@ namespace VolunteerSystem
             this.Name = name;
             ListOfShifts = new List<Shift>();
         }
+        public void Update(string name, string email)
+        {
+            this.Email = email;
+            this.Name = name;
+
+        }
+
         public Worker()
         {
             ListOfShifts = new List<Shift>();

@@ -72,6 +72,12 @@ namespace VolunteerPrototype.UI
        
 
         }
+        public void Login()
+        {
+            Controls.Remove(_loginButton);
+
+            LoggedIn();
+        }
 
         private void Login(object sender, EventArgs e)
         {
@@ -84,16 +90,14 @@ namespace VolunteerPrototype.UI
             if (_logInPopUp.DialogResult == DialogResult.Yes)
             {
                 _mainUI.LogIn(_logInPopUp._volunteer);
-                Controls.Remove(_loginButton);
-                
-                LoggedIn();
+                Login();
             }
             else
             {
                 //do nothing
             }
             
-            _mainUI.UpdateMenu();
+          //  _mainUI.UpdateMenu();
         }
 
         private void LoggedIn()
@@ -121,9 +125,15 @@ namespace VolunteerPrototype.UI
                 Location = new System.Drawing.Point(_myShiftButton.Width + _myShiftButton.Location.X, _myShiftButton.Location.Y),
                 Size = _scheduleButton.Size
             };
+            _accountSettingsButton.Click += SettingsClicked;
             Controls.Add(_accountSettingsButton);
 
             _userInforLabel.Text = $"Logged in as:\n{_mainUI.GetCurrentUser.Name}";
+        }
+
+        private void SettingsClicked(object sender, EventArgs e)
+        {
+            _mainUI.ShowSettings();
         }
 
         private void MyShiftClicked(object sender, EventArgs e)

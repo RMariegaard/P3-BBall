@@ -103,28 +103,6 @@ namespace VolunteerPrototype.UI
             ListOfWorkersList.AutoSize = true;
             ListOfWorkersList.ScrollAlwaysVisible = true;
 
-
-
-            //bindingSource.DataSource = shift.ListOfWorkers;
-            //ListOfWorkersList.BeginUpdate();
-            //ListOfWorkersList.DataSource = bindingSource;
-            //ListOfWorkersList.EndUpdate();
-            //Prøver lige noget andet:
-            var workerlist = shift.ListOfWorkers;
-            foreach(var volunteer in workerlist.Select(x => x as Volunteer)){
-                if (volunteer != null)
-                {
-                    if(_mainUI.IsLoggedIn())
-                        ListOfWorkersList.Items.Add($"{volunteer.Association} - {volunteer.Name}");
-                    else
-                        ListOfWorkersList.Items.Add($"{volunteer.Association}");
-                }
-            }
-            foreach (var worker in workerlist.Select(x => x as ExternalWorker))
-            {
-                if(worker != null)
-                    ListOfWorkersList.Items.Add($"{worker.Name}");
-            }
             Label requestLabel = new Label
             {
                 Location = new Point(0, ListOfWorkersList.Location.Y + ListOfWorkersList.Height),
@@ -143,16 +121,7 @@ namespace VolunteerPrototype.UI
                 BorderStyle = BorderStyle.FixedSingle
             };
 
-            ListOfRequestsList.BeginUpdate();
-            foreach (var r in shift.ListOfRequests)
-            {
-                if(_mainUI.IsLoggedIn())
-                    ListOfRequestsList.Items.Add(r.Volunteer.Association + " - " + r.Volunteer.Name);
-                else
-                    ListOfRequestsList.Items.Add(r.Volunteer.Association);
-            }
 
-            ListOfRequestsList.EndUpdate();
 
 
 
@@ -164,7 +133,43 @@ namespace VolunteerPrototype.UI
             this.Controls.Add(requestLabel);
             this.Controls.Add(shiftInfo);
             Controls.Add(_pressedOnShiftPopupMainPanel);
+
+            UpdateWorkersAndRequests();
         }
+
+        private void UpdateWorkersAndRequests()
+        {
+            var workerlist = shift.ListOfWorkers;
+            foreach (var volunteer in workerlist.Select(x => x as Volunteer))
+            {
+                if (volunteer != null)
+                {
+                    if (_mainUI.IsLoggedIn())
+                        ListOfWorkersList.Items.Add($"{volunteer.Association} - {volunteer.Name}");
+                    else
+                        ListOfWorkersList.Items.Add($"{volunteer.Association}");
+                }
+            }
+            foreach (var worker in workerlist.Select(x => x as ExternalWorker))
+            {
+                if (worker != null)
+                    ListOfWorkersList.Items.Add($"{worker.Name}");
+            }
+
+            ListOfRequestsList.BeginUpdate();
+            foreach (var r in shift.ListOfRequests)
+            {
+                if (_mainUI.IsLoggedIn())
+                    ListOfRequestsList.Items.Add(r.Volunteer.Association + " - " + r.Volunteer.Name);
+                else
+                    ListOfRequestsList.Items.Add(r.Volunteer.Association);
+            }
+
+            ListOfRequestsList.EndUpdate();
+            this._pressedOnShiftPopupMainPanel.Update();
+
+        }
+
 
         private void HasBeenRequested()
         {
@@ -176,15 +181,28 @@ namespace VolunteerPrototype.UI
         {
             if (_mainUI.IsLoggedIn())
             {
-                HasBeenRequested();
+
+
                 _mainUI.ScheduleController().SendRequest(shift, _mainUI.GetCurrentUser);
+                
+                HasBeenRequested();
                 _mainUI.UpdateSchedulePanel();
+                _mainUI.UpdateMenu();
             }
             else
             {
                 var login = new LogIn.LogInForm(_mainUI);
                 login.ShowDialog();
+                if(login.DialogResult == DialogResult.Yes)
+                {
+                    _mainUI.LogIn(_mainUI.GetCurrentUser);
+                    if (!shift.ListOfRequests.Exists(x => x.Volunteer == _mainUI.GetCurrentUser) && !shift.ListOfWorkers.Contains(_mainUI.GetCurrentUser))
+                        RequestShift(sender, e);
+                }
             }
+
+            UpdateWorkersAndRequests();
+
         }
     }
 

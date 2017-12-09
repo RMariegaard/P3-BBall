@@ -16,11 +16,13 @@ namespace VolunteerPrototype.UI
         private WorkerController _workerController;
         private ScheduleUI _scheduleUI;
         private DayNavigation _dayNavigation;
+        private AccountSettings _settings;
 
         private Panel _schedulePanel;
         private Panel _dayNavigationPanel;
         private MenuUI _menu;
         private MyShiftsPanel _myShiftsPanel;
+        private Panel _accountSettingsPanel;
 
         private Volunteer _user;
 
@@ -57,11 +59,21 @@ namespace VolunteerPrototype.UI
 
         public void UpdateMenu()
         {
-
+            _menu = new MenuUI(this, _schedulePanel.Width + _dayNavigationPanel.Width + 54)
+            {
+                Location = new Point(0, 0),
+                Height = 100
+            };
+            Controls.Add(_menu);
         }
 
         public void UpdateSchedulePanel()
         {
+            if (IsLoggedIn())
+            {
+                _myShiftsPanel.Hide();
+                _accountSettingsPanel.Hide();
+            }
             Controls.Remove(_schedulePanel);
             Controls.Remove(_dayNavigationPanel);
             _dayNavigationPanel = _dayNavigation.GetPanel(new Size(100, this.Height));
@@ -80,7 +92,8 @@ namespace VolunteerPrototype.UI
             };
             _schedulePanel.Controls.Add(_scheduleUI.GetPanel(_schedulePanel));
             Controls.Add(_schedulePanel);
-            _myShiftsPanel?.Hide();
+            _schedulePanel.BringToFront();
+
         }
 
         public WorkerController WorkerController()
@@ -103,12 +116,23 @@ namespace VolunteerPrototype.UI
                 Location = _schedulePanel.Location
             };
             Controls.Add(_myShiftsPanel);
+
+            _settings = new AccountSettings(this);
+            _accountSettingsPanel = _settings.GetPanel(_schedulePanel.Size);
+            _accountSettingsPanel.Location = _schedulePanel.Location;
+            Controls.Add(_accountSettingsPanel);
+            _menu.Login();
+            //UpdateMenu();
         }
 
         public void LogOut()
         {
-            
+            Controls.Remove(_myShiftsPanel);
+            Controls.Remove(_accountSettingsPanel);
+
             _user = null;
+            UpdateSchedulePanel();
+            
 
         }
 
@@ -117,6 +141,15 @@ namespace VolunteerPrototype.UI
             _myShiftsPanel.Show();
             _schedulePanel.Hide();
             _dayNavigationPanel.Hide();
+            _accountSettingsPanel.Hide();
+        }
+
+        public void ShowSettings()
+        {
+            _myShiftsPanel.Hide();
+            _schedulePanel.Hide();
+            _dayNavigationPanel.Hide();
+            _accountSettingsPanel.Show();
         }
     }
 }

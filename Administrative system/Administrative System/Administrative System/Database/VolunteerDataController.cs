@@ -24,6 +24,12 @@ namespace VolunteerSystem.Database
         {
             //_context.SaveChanges();
         }
+
+        public void Update(Volunteer volunteer)
+        {
+            _context.Entry(volunteer).State = System.Data.Entity.EntityState.Modified;
+            _context.SaveChanges();
+        }
         
     }
 }

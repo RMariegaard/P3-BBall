@@ -82,6 +82,7 @@ namespace VolunteerPrototype.LogIn
                 {
 
                     DialogResult = DialogResult.Yes;
+                    _mainUI.LogIn(_volunteer);
                     Close();
                 }
                 else

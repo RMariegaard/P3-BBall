@@ -35,6 +35,12 @@ namespace VolunteerSystem
             _database.Complete();
         }
 
+        public void UpdateVolunteer(Volunteer volunteer, string name, string email, string accosi, int phonenumber, string password)
+        {
+            volunteer.Update(name, email, accosi, phonenumber, password);
+            _database.volunteer.Update(volunteer);
+        }
+
         public List<Worker> SearchListOfWorkers(Predicate<Worker> predicate)
         {
             List<Worker> list = ListOfWorkers.FindAll(predicate);

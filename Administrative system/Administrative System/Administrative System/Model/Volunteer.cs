@@ -30,6 +30,13 @@ namespace VolunteerSystem
             YearsWorked = new List<int>();
         }
 
+        public void Update(string name, string email, string accosi, int phonenumber, string password){
+            base.Update(name, email);
+            this.Association = accosi;
+            this.Phonenumber = phonenumber;
+            this.HashPassworkd = password;
+        }
+
         public Volunteer()
         {
             YearsWorked = new List<int>();
