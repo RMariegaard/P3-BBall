@@ -59,6 +59,7 @@ namespace VolunteerPrototype.UI
 
         public void UpdateMenu()
         {
+            Controls.Remove(_menu);
             _menu = new MenuUI(this, _schedulePanel.Width + _dayNavigationPanel.Width + 54)
             {
                 Location = new Point(0, 0),
@@ -111,7 +112,7 @@ namespace VolunteerPrototype.UI
         public void LogIn(Volunteer volunteer)
         {
             _user = volunteer;
-            _myShiftsPanel = new MyShiftsPanel(_user, _schedulePanel.Size)
+            _myShiftsPanel = new MyShiftsPanel(_user, _schedulePanel.Size, this)
             {
                 Location = _schedulePanel.Location
             };
@@ -129,8 +130,9 @@ namespace VolunteerPrototype.UI
         {
             Controls.Remove(_myShiftsPanel);
             Controls.Remove(_accountSettingsPanel);
-
+            
             _user = null;
+            UpdateMenu();
             UpdateSchedulePanel();
             
 
@@ -138,7 +140,14 @@ namespace VolunteerPrototype.UI
 
         public void ShowMyShifts()
         {
+            Controls.Remove(_myShiftsPanel);
+            _myShiftsPanel = new MyShiftsPanel(_user, _schedulePanel.Size, this)
+            {
+                Location = _schedulePanel.Location
+            };
+            Controls.Add(_myShiftsPanel);
             _myShiftsPanel.Show();
+            _myShiftsPanel.BringToFront();
             _schedulePanel.Hide();
             _dayNavigationPanel.Hide();
             _accountSettingsPanel.Hide();
@@ -146,10 +155,14 @@ namespace VolunteerPrototype.UI
 
         public void ShowSettings()
         {
-            _myShiftsPanel.Hide();
+            Controls.Remove(_accountSettingsPanel);
+            _settings = new AccountSettings(this);
+            _accountSettingsPanel = _settings.GetPanel(_schedulePanel.Size);
+            _accountSettingsPanel.Location = _schedulePanel.Location;
+            Controls.Add(_accountSettingsPanel);
             _schedulePanel.Hide();
             _dayNavigationPanel.Hide();
-            _accountSettingsPanel.Show();
+            _accountSettingsPanel.BringToFront();
         }
     }
 }
