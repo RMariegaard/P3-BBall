@@ -117,6 +117,8 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                     e.Value = ColorAndStyle.ShiftColorEnoughListOfRequests();
                 else if (shift.ListOfWorkers.Count() >= shift.VolunteersNeeded)
                     e.Value = ColorAndStyle.ShiftColorWhenFull();
+                else
+                    e.Value = Color.Black;
             };
 
             Panel topColor = new Panel

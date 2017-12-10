@@ -108,6 +108,8 @@ namespace VolunteerPrototype.UI
                     e.Value = Color.Yellow;
                 else if (shift.ListOfWorkers.Count() >= shift.VolunteersNeeded)
                     e.Value = Color.Red;
+                else
+                    e.Value = Color.Black;
                 };
 
            topColor.DataBindings.Add(topColorBinding);
