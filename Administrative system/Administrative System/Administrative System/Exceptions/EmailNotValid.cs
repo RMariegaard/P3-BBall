@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace VolunteerSystem.Exceptions
 {
-    public class EmailUsedBeforeException : Exception
+    public class EmailNotValidException : Exception
     {
-        public EmailUsedBeforeException(string message) : base(message)
+        public EmailNotValidException()
         {
+            
         }
     }
 }

@@ -179,13 +179,11 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
                 message.StartPosition = FormStartPosition.CenterParent;
                 message.ShowDialog();
             }
-            catch(Exception)
+            catch(EmailNotValidException)
             { 
                 WrongEmailWarning message = new WrongEmailWarning("The Email format is not legal, enter a correct email adress.");
                 message.StartPosition = FormStartPosition.CenterParent;
                 message.ShowDialog();
-
-
             }
         }
     }

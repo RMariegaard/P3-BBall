@@ -86,6 +86,7 @@
     <Compile Include="Database\VolunteerDataController.cs" />
     <Compile Include="Enums\InformShiftCommand.cs" />
     <Compile Include="Enums\NotificationImportance.cs" />
+    <Compile Include="Exceptions\EmailNotValid.cs" />
     <Compile Include="Exceptions\EmailUsedBeforeException.cs" />
     <Compile Include="Function\AccountController.cs" />
     <Compile Include="Function\ScheduleController.cs" />

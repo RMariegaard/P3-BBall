@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using VolunteerSystem.Exceptions;
 
 namespace VolunteerSystem
 {
@@ -42,7 +43,7 @@ namespace VolunteerSystem
                 if (_checkEmailValidation(value))
                     _email = value;
                 else
-                    throw new Exception();
+                    throw new EmailNotValidException();
             }
         }
 
