@@ -89,7 +89,7 @@ namespace VolunteerPrototype.UI
             _logInPopUp.ShowDialog();
             if (_logInPopUp.DialogResult == DialogResult.Yes)
             {
-                _mainUI.LogIn(_logInPopUp._volunteer);
+                //_mainUI.LogIn(_logInPopUp._volunteer); //Dette gør vi allerede inde i LogInForm, så vi logger ind to gange
                 Login();
             }
             else
