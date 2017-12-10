@@ -52,7 +52,7 @@ namespace VolunteerSystem
 
             try
             {
-                workerController.CreateWorker(new Volunteer("Worked twice ", "nej@ja.maybe", "U12 Drenge", 12345678, "nejjamaybe"));
+                workerController.CreateWorker(new Volunteer("Worked twice ", "AnEmail@domainFindesIkke.dk", "U12 Drenge", 12345678, "nejjamaybe"));
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -68,17 +68,17 @@ namespace VolunteerSystem
             }
             ((Volunteer)workerController.ListOfWorkers.First()).TempAddYearWorked(2017);
             ((Volunteer)workerController.ListOfWorkers.First()).TempAddYearWorked(2018);
-            workerController.CreateWorker(new Volunteer("Kasper", "AnEmail@domainFindesIkke.dk", "U8 Drenge", 12345678, "password"));
+            workerController.CreateWorker(new Volunteer("Kasper", "AnEmail@domainFindesIkke1.dk", "U8 Drenge", 12345678, "password"));
             ((Volunteer)workerController.ListOfWorkers[1]).TempAddYearWorked(2017);
-            workerController.CreateWorker(new Volunteer("Casper", "AnEmail@domainFindesIkke.dk", "U16 Drenge", 12345678, "password1"));
-            workerController.CreateWorker(new Volunteer("Mark", "AnEmail@domainFindesIkke.dk", "U12 Drenge", 12345678, "password2"));
-            workerController.CreateWorker(new Volunteer("Mustafa", "AnEmail@domainFindesIkke.dk", "U12 Drenge", 12345678, "password3"));
-            workerController.CreateWorker(new Volunteer("Emil", "AnEmail@domainFindesIkke.dk", "U12 Drenge", 12345678, "password4"));
-            workerController.CreateWorker(new Volunteer("Rasmus", "JegKanIkkeLideSex@NarrePik.fuck", "U12 Drenge", 12345678, "password5"));
-            workerController.CreateWorker(new Volunteer("Peter", "anEmail@domainFindesIkke.dk", "U12 Drenge", 12345678, "password6"));
-            workerController.CreateWorker(new Volunteer("Søren", "AnEmail@domainFindesIkke.dk", "U14 Drenge", 12345678, "password7"));
-            workerController.CreateWorker(new Volunteer("Krisjan", "AnEmail@domainFindesIkke.dk", "U12 Drenge", 12345678, "password8"));
-            workerController.CreateWorker(new Volunteer("Mikkel", "AnEmail@domainFindesIkke.dk", "U12 Piger", 12345678, "password9"));
+            workerController.CreateWorker(new Volunteer("Casper", "AnEmail@domainFindesIkke2.dk", "U16 Drenge", 12345678, "password1"));
+            workerController.CreateWorker(new Volunteer("Mark", "AnEmail@domainFindesIkke3.dk", "U12 Drenge", 12345678, "password2"));
+            workerController.CreateWorker(new Volunteer("Mustafa", "AnEmail@domainFindesIkke4.dk", "U12 Drenge", 12345678, "password3"));
+            workerController.CreateWorker(new Volunteer("Emil", "AnEmail@domainFindesIkke5.dk", "U12 Drenge", 12345678, "password4"));
+            workerController.CreateWorker(new Volunteer("Rasmus", "AnEmail@domainFindesIkke6.dk", "U12 Drenge", 12345678, "password5"));
+            workerController.CreateWorker(new Volunteer("Peter", "anEmail@domainFindesIkke7.dk", "U12 Drenge", 12345678, "password6"));
+            workerController.CreateWorker(new Volunteer("Søren", "AnEmail@domainFindesIkke8.dk", "U14 Drenge", 12345678, "password7"));
+            workerController.CreateWorker(new Volunteer("Krisjan", "AnEmail@domainFindesIkke9.dk", "U12 Drenge", 12345678, "password8"));
+            workerController.CreateWorker(new Volunteer("Mikkel", "AnEmail@domainFindesIkke10.dk", "U12 Piger", 12345678, "password9"));
             workerController.CreateWorker(new Volunteer("Volunteer Test Person", "admin", "U12 Piger", 12345678, "admin"));
 
 

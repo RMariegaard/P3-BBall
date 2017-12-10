@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using VolunteerSystem.Database;
 using VolunteerSystem.Model;
 using VolunteerSystem.Database.InterfacesDatabase;
+using VolunteerSystem.Exceptions;
 
 namespace VolunteerSystem
 {
@@ -23,16 +24,33 @@ namespace VolunteerSystem
         
         public void CreateWorker(Worker worker)
         {
-            ListOfWorkers.Add(worker);
-            if (worker is Volunteer)
+            if (emailNotUsedBefore(worker.Email) == true)
             {
-                _database.volunteer.Add(worker as Volunteer);
+
+
+                ListOfWorkers.Add(worker);
+                if (worker is Volunteer)
+                {
+                    _database.volunteer.Add(worker as Volunteer);
+                }
+                else
+                {
+                    _database.externalWorker.Add(worker as ExternalWorker);
+                }
+                _database.Complete();
             }
             else
+                throw new EmailUsedBeforeException($"The email {worker.Email} is already in use with another account");
+        }
+
+        private bool emailNotUsedBefore(string email)
+        {
+            if (ListOfWorkers.Exists(x => x.Email == email))
             {
-                _database.externalWorker.Add(worker as ExternalWorker);
+                return false;
             }
-            _database.Complete();
+            else
+                return true;
         }
 
         public void UpdateVolunteer(Volunteer volunteer, string name, string email, string accosi, int phonenumber, string password)
