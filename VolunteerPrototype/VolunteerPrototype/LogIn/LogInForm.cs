@@ -111,7 +111,8 @@ namespace VolunteerPrototype.LogIn
         {
             try
             {
-               var volunteer = _mainUI.WorkerController().ListOfWorkers.Select(x => x as Volunteer).First(y => (y.Email == login && y.HashPassworkd == pwd));
+               var volunteer = _mainUI.WorkerController().ListOfWorkers.Select(x => x as Volunteer)
+                                      .First(y => (y.Email == login && y.HashPassworkd == AccountController.GetHash(pwd).ToString()));
                 
                 if(volunteer != null)
                 {

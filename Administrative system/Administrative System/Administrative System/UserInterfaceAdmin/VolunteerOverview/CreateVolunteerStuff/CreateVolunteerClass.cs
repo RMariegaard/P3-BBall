@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using VolunteerSystem.Exceptions;
 
 namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerStuff
 {
@@ -173,13 +173,17 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
                 message.StartPosition = FormStartPosition.CenterParent;
                 message.ShowDialog();
             }
-            catch(Exception)
+            catch (EmailUsedBeforeException excpetion)
+            {
+                WrongEmailWarning message = new WrongEmailWarning(excpetion.Message);
+                message.StartPosition = FormStartPosition.CenterParent;
+                message.ShowDialog();
+            }
+            catch(EmailNotValidException)
             { 
                 WrongEmailWarning message = new WrongEmailWarning("The Email format is not legal, enter a correct email adress.");
                 message.StartPosition = FormStartPosition.CenterParent;
                 message.ShowDialog();
-
-
             }
         }
     }

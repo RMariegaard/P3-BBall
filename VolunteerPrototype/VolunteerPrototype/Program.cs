@@ -29,9 +29,6 @@ namespace VolunteerPrototype
 
             var ui = new UI.MainUI(scheduleController, workerController);
 
-
-
-
             Application.Run(ui);
         }
     }

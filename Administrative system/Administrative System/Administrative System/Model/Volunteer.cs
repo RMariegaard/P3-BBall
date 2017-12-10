@@ -20,21 +20,31 @@ namespace VolunteerSystem
             this.Association = accosi;
 
             YearsWorked = new List<int>();
+            ListOfRequests = new List<Request>();
         }
         public Volunteer(string name, string email, string accosi, int phonenumber, string password) : base(name, email)
         {
             this.DateCreated = DateTime.Now;
             this.Association = accosi;
             this.Phonenumber = phonenumber;
-            this.HashPassworkd = password;
+            this.HashPassworkd = AccountController.GetHash(password).ToString();
             YearsWorked = new List<int>();
+            ListOfRequests = new List<Request>();
+        }
+        public Volunteer(string name, string email, string accosi, string password) : base(name, email)
+        {
+            this.DateCreated = DateTime.Now;
+            this.Association = accosi;
+            this.HashPassworkd = AccountController.GetHash(password).ToString();
+            YearsWorked = new List<int>();
+            ListOfRequests = new List<Request>();
         }
 
         public void Update(string name, string email, string accosi, int phonenumber, string password){
             base.Update(name, email);
             this.Association = accosi;
             this.Phonenumber = phonenumber;
-            this.HashPassworkd = password;
+            this.HashPassworkd = AccountController.GetHash(password).ToString();
         }
 
         public Volunteer()
@@ -69,18 +79,11 @@ namespace VolunteerSystem
                 }
             }
         }
-        
-        
-
 
         public override string ToString()
         {
             return Association + " " + Name + " " + Email;
         }
-
-
-
-
 
 
         public void AddYearWorked(int year)
@@ -109,29 +112,6 @@ namespace VolunteerSystem
         //    this._yearsWorked = yearsworked;
         //}
 
-        //Test Consctructor that does not connect to the database
-        //public Volunteer(bool test, string name, string email, string Association) : base(name, email)
-        //{
-        //    this._dateCreated = DateTime.Now;
-        //    this._Association = Association;
-        //    this._yearsWorked = new List<int>();
-
-        //}
-
-
-
-        public bool IsValidForSeasonTickets()
-        {
-            //problem if the program is used before newyears....or is it ??
-            //When would you search for this ? right after the tournament it is correct..
-            //When should the validation reset ? when a new schedule is created ??
-            int thisYear = DateTime.Now.Year;
-            int lastYear = thisYear - 1;
-            if (YearsWorked.Count >= 2)
-                return thisYear == YearsWorked.Last() && lastYear == YearsWorked[YearsWorked.Count - 2];
-            else
-                return false;
-        }
         //i would do it this way maybe
         public bool IsValidForSeasonTickets(int scheduleYear)
         {
@@ -141,9 +121,6 @@ namespace VolunteerSystem
             else
                 return false;
         }
-
-
-
 
         public void TempAddYearWorked(int year)
         {
