@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VolunteerSystem.Exceptions;
 
 namespace VolunteerSystem.Tests
 {
@@ -34,7 +35,7 @@ namespace VolunteerSystem.Tests
         public void WrongEmailFormatExceptionTest( string email)
         {
             Worker worker;
-            Assert.Throws<Exception>(() =>worker = new ExternalWorker( "Hallo", email));
+            Assert.Throws<EmailNotValidException>(() =>worker = new ExternalWorker( "Hallo", email));
         }
 
         [TestCase("Mark@hej.dk")]
