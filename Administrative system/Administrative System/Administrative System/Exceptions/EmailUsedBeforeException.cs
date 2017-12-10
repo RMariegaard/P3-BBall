@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VolunteerSystem.Exceptions
 {
-    public class EmailUsedBeforeException : Exception
+    class EmailUsedBeforeException : Exception
     {
         public EmailUsedBeforeException(string message) : base(message)
         {

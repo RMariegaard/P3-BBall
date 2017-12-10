@@ -20,7 +20,6 @@ namespace VolunteerSystem
             this.Association = accosi;
 
             YearsWorked = new List<int>();
-            ListOfRequests = new List<Request>();
         }
         public Volunteer(string name, string email, string accosi, int phonenumber, string password) : base(name, email)
         {
@@ -29,15 +28,6 @@ namespace VolunteerSystem
             this.Phonenumber = phonenumber;
             this.HashPassworkd = AccountController.GetHash(password).ToString();
             YearsWorked = new List<int>();
-            ListOfRequests = new List<Request>();
-        }
-        public Volunteer(string name, string email, string accosi, string password) : base(name, email)
-        {
-            this.DateCreated = DateTime.Now;
-            this.Association = accosi;
-            this.HashPassworkd = AccountController.GetHash(password).ToString();
-            YearsWorked = new List<int>();
-            ListOfRequests = new List<Request>();
         }
 
         public void Update(string name, string email, string accosi, int phonenumber, string password){

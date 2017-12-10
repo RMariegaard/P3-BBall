@@ -15,7 +15,6 @@ namespace VolunteerPrototype.UI
         private Button _scheduleButton;
         private Button _loginButton;
         private Button _logOutButton;
-        private Button _registerButton;
         private Button _myShiftButton;
         private Button _accountSettingsButton;
 
@@ -24,7 +23,6 @@ namespace VolunteerPrototype.UI
         private IUI _mainUI;
 
         private LogIn.LogInForm _logInPopUp;
-        private LogIn.RegisterForm _registerPopup;
 
         public MenuUI(IUI mainUI, int width)
         {
@@ -53,7 +51,6 @@ namespace VolunteerPrototype.UI
             else
             {
                 Default();
-
             }
         }
 
@@ -70,37 +67,14 @@ namespace VolunteerPrototype.UI
                  Location = new System.Drawing.Point(100, 5)
              };
             _loginButton.Click += Login;
-            
-            _userInforLabel.Text = "You are not logged in";
-
-            _registerButton = new Button()
-            {
-                Text = "Register",
-                Location = new Point(_loginButton.Location.X + _loginButton.Width + 10, 5),
-            };
-            _registerButton.Click += Register;
             Controls.Add(_loginButton);
-            Controls.Add(_registerButton);
-        }
-
-        private void Register(object sender, EventArgs e)
-        {
-            _registerPopup = new LogIn.RegisterForm(_mainUI)
-            {
-                StartPosition = FormStartPosition.CenterParent,
-            };
-            _registerPopup.ShowDialog();
-            if (_registerPopup.DialogResult == DialogResult.Yes)
-            {
-                Login();
-            }
+            _userInforLabel.Text = "You are not logged in";
+       
 
         }
-
         public void Login()
         {
             Controls.Remove(_loginButton);
-            Controls.Remove(_registerButton);
 
             LoggedIn();
         }

@@ -45,9 +45,7 @@ namespace VolunteerSystem
 
         private bool emailNotUsedBefore(string email)
         {
-            if (email == "")
-                return true;
-            else if (ListOfWorkers.Exists(x => x.Email == email))
+            if (ListOfWorkers.Exists(x => x.Email == email))
             {
                 return false;
             }
