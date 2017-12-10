@@ -49,18 +49,18 @@
             this.labelEmail.AutoSize = true;
             this.labelEmail.Location = new System.Drawing.Point(93, 64);
             this.labelEmail.Name = "labelEmail";
-            this.labelEmail.Size = new System.Drawing.Size(36, 13);
+            this.labelEmail.Size = new System.Drawing.Size(32, 13);
             this.labelEmail.TabIndex = 0;
-            this.labelEmail.Text = "Email*";
+            this.labelEmail.Text = "Email";
             // 
             // labelName
             // 
             this.labelName.AutoSize = true;
             this.labelName.Location = new System.Drawing.Point(73, 38);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(56, 13);
+            this.labelName.Size = new System.Drawing.Size(52, 13);
             this.labelName.TabIndex = 1;
-            this.labelName.Text = "Full name*";
+            this.labelName.Text = "Full name";
             // 
             // labelPhonenumber
             // 
@@ -85,18 +85,18 @@
             this.labelPassword.AutoSize = true;
             this.labelPassword.Location = new System.Drawing.Point(72, 145);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(57, 13);
+            this.labelPassword.Size = new System.Drawing.Size(53, 13);
             this.labelPassword.TabIndex = 4;
-            this.labelPassword.Text = "Password*";
+            this.labelPassword.Text = "Password";
             // 
             // labelConfirmPassword
             // 
             this.labelConfirmPassword.AutoSize = true;
             this.labelConfirmPassword.Location = new System.Drawing.Point(34, 171);
             this.labelConfirmPassword.Name = "labelConfirmPassword";
-            this.labelConfirmPassword.Size = new System.Drawing.Size(95, 13);
+            this.labelConfirmPassword.Size = new System.Drawing.Size(91, 13);
             this.labelConfirmPassword.TabIndex = 5;
-            this.labelConfirmPassword.Text = "Confirm Password*";
+            this.labelConfirmPassword.Text = "Confirm Password";
             // 
             // textBoxName
             // 
@@ -119,6 +119,13 @@
             this.textBoxPhonenumber.Size = new System.Drawing.Size(100, 20);
             this.textBoxPhonenumber.TabIndex = 8;
             // 
+            // textBoxAssociation
+            // 
+            this.textBoxAssociation.Location = new System.Drawing.Point(131, 113);
+            this.textBoxAssociation.Name = "textBoxAssociation";
+            this.textBoxAssociation.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAssociation.TabIndex = 9;
+            // 
             // textBoxPassword
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(131, 140);
@@ -132,13 +139,7 @@
             this.textBoxConfirmPassword.Name = "textBoxConfirmPassword";
             this.textBoxConfirmPassword.Size = new System.Drawing.Size(100, 20);
             this.textBoxConfirmPassword.TabIndex = 11;
-            // 
-            // textBoxAssociation
-            // 
-            this.textBoxAssociation.Location = new System.Drawing.Point(131, 113);
-            this.textBoxAssociation.Name = "textBoxAssociation";
-            this.textBoxAssociation.Size = new System.Drawing.Size(100, 20);
-            this.textBoxAssociation.TabIndex = 9;
+
             // 
             // buttonCreate
             // 
