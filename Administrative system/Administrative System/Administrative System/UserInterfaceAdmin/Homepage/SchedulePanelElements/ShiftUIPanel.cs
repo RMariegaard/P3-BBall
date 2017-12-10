@@ -113,7 +113,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             {
                 if (shift.ListOfRequests.Count() + shift.ListOfWorkers.Count() < shift.VolunteersNeeded)
                     e.Value = ColorAndStyle.ShiftColorCompletelyFree();
-                else if ((shift.ListOfWorkers.Count() < shift.VolunteersNeeded) && (shift.ListOfWorkers.Count() + shift.ListOfRequests.Count() > shift.VolunteersNeeded))
+                else if ((shift.ListOfWorkers.Count() < shift.VolunteersNeeded) && (shift.ListOfWorkers.Count() + shift.ListOfRequests.Count() >= shift.VolunteersNeeded))
                     e.Value = ColorAndStyle.ShiftColorEnoughListOfRequests();
                 else if (shift.ListOfWorkers.Count() >= shift.VolunteersNeeded)
                     e.Value = ColorAndStyle.ShiftColorWhenFull();

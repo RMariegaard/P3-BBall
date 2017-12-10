@@ -33,10 +33,6 @@ namespace VolunteerPrototype.UI
 
             //////////////////ShiftPanel////////////////////////
 
-            BindingSource myShiftSource = new BindingSource { DataSource = typeof(MainUI) };
-            myShiftSource.Add(_mainUI);
-
-
             shiftPanel = new Panel
             {
                 Name = "Shift " + shift.ShiftId.ToString(),
@@ -108,7 +104,7 @@ namespace VolunteerPrototype.UI
                     e.Value = Color.DarkBlue;
                 else if (shift.ListOfRequests.Count() + shift.ListOfWorkers.Count() < shift.VolunteersNeeded)
                     e.Value = Color.LimeGreen;
-                else if ((shift.ListOfWorkers.Count() < shift.VolunteersNeeded) && (shift.ListOfWorkers.Count() + shift.ListOfRequests.Count() > shift.VolunteersNeeded))
+                else if ((shift.ListOfWorkers.Count() < shift.VolunteersNeeded) && (shift.ListOfWorkers.Count() + shift.ListOfRequests.Count() >= shift.VolunteersNeeded))
                     e.Value = Color.Yellow;
                 else if (shift.ListOfWorkers.Count() >= shift.VolunteersNeeded)
                     e.Value = Color.Red;
