@@ -66,8 +66,6 @@ namespace VolunteerSystem
                 {
                     return true;
                 }
-                if (value == "admin")
-                    return true;
                 if (!value.Any(c => c == '@'))
                     return false;
 

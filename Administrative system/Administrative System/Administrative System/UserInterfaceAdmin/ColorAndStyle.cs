@@ -82,7 +82,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
         public static Color NotificationColorHighImportance()
         {
-            return Color.Blue;
+            return Color.Red;
         }
         public static Color NotificationColorMediumImportance()
         {
@@ -90,7 +90,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
         }
         public static Color NotificationColorLowImportance()
         {
-            return Color.Blue;
+            return Color.Green;
         }
     }
 }

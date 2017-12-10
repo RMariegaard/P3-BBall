@@ -33,18 +33,12 @@ namespace VolunteerPrototype.UI
 
             //////////////////ShiftPanel////////////////////////
 
-            BindingSource myShiftSource = new BindingSource { DataSource = typeof(MainUI) };
-            myShiftSource.Add(_mainUI);
-
-
             shiftPanel = new Panel
             {
                 Name = "Shift " + shift.ShiftId.ToString(),
                 BackColor = Color.AliceBlue,
                 BorderStyle = BorderStyle.FixedSingle
             };
-
-
 
             var locationBinding = new Binding("Location", shiftBindingSource, "StartTime");
             locationBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
@@ -92,32 +86,24 @@ namespace VolunteerPrototype.UI
             shiftPanel.DataBindings.Add(SizeBinding);
 
 
-
-
             //////////////////TopColorPanel////////////////////////
-            Panel topColor = new Panel
-            {
-                Location = new Point(0, 0),
-                Size = new Size(shiftPanel.Width, 5)
-            };
-
             var topColorBinding = new Binding("BackColor", shiftBindingSource, "GetNumberOfVolunteers");
             topColorBinding.Format += delegate (object sender, ConvertEventArgs e)
             {
-                if (shift.ListOfWorkers.Contains(_mainUI.GetCurrentUser))
-                    e.Value = Color.DarkBlue;
-                else if (shift.ListOfRequests.Count() + shift.ListOfWorkers.Count() < shift.VolunteersNeeded)
+                if (shift.ListOfRequests.Count() + shift.ListOfWorkers.Count() < shift.VolunteersNeeded)
                     e.Value = Color.LimeGreen;
                 else if ((shift.ListOfWorkers.Count() < shift.VolunteersNeeded) && (shift.ListOfWorkers.Count() + shift.ListOfRequests.Count() > shift.VolunteersNeeded))
                     e.Value = Color.Yellow;
                 else if (shift.ListOfWorkers.Count() >= shift.VolunteersNeeded)
                     e.Value = Color.Red;
-                };
+            };
 
-           topColor.DataBindings.Add(topColorBinding);
-          
-
-
+            Panel topColor = new Panel
+            {
+                Location = new Point(0, 0),
+                Size = new Size(shiftPanel.Width, 5)
+            };
+            topColor.DataBindings.Add(topColorBinding);
             //////////////////NumberOfVolunteerLabel////////////////////////
             var numberOfVolunteerBinding = new Binding("Text", shiftBindingSource, "GetNumberOfVolunteers");
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,7 +25,6 @@ namespace VolunteerPrototype.UI
         private Panel _accountSettingsPanel;
 
         private Volunteer _user;
-        
 
         public Volunteer GetCurrentUser => _user;
 
@@ -125,7 +123,6 @@ namespace VolunteerPrototype.UI
             _accountSettingsPanel.Location = _schedulePanel.Location;
             Controls.Add(_accountSettingsPanel);
             _menu.Login();
-            UpdateSchedulePanel();
             //UpdateMenu();
         }
 
