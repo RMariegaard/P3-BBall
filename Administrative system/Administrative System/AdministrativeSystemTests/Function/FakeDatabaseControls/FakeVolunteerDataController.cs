@@ -49,10 +49,5 @@ namespace VolunteerSystemTests.Function
         {
             
         }
-
-        public void Update(Volunteer volunteer)
-        {
-            
-        }
     }
 }

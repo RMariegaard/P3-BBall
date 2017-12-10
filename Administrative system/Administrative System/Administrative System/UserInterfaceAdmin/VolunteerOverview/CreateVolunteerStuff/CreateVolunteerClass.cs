@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using VolunteerSystem.Exceptions;
+
 
 namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerStuff
 {
@@ -170,12 +170,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.CreateVolunteerSt
             catch (FormatException)
             {
                 WrongEmailWarning message = new WrongEmailWarning("Phonenumber is not legal");
-                message.StartPosition = FormStartPosition.CenterParent;
-                message.ShowDialog();
-            }
-            catch (EmailUsedBeforeException excpetion)
-            {
-                WrongEmailWarning message = new WrongEmailWarning(excpetion.Message);
                 message.StartPosition = FormStartPosition.CenterParent;
                 message.ShowDialog();
             }
