@@ -59,7 +59,8 @@ namespace VolunteerPrototype.UI
             _shiftLabel = new Label()
             {
                 Location = new Point(_shiftsTextBox.Location.X, _shiftsTextBox.Location.Y - 25),
-                Text = "Your Shifts:"
+                Text = "Your Shifts:",
+                AutoSize = true 
             };
             _requeslLabel = new Label()
             {
@@ -72,7 +73,8 @@ namespace VolunteerPrototype.UI
             {
                 Location = new Point(_shiftsTextBox.Location.X, _shiftsTextBox.Location.Y + _shiftsTextBox.Height + 25),
                 Text = "Remove me from this shift",
-                Enabled = false
+                Enabled = false,
+                AutoSize = true
             };
             _removeShiftButton.Click += removeShift_click;
             _shiftsTextBox.SelectedIndexChanged += UpdateShiftButton;
@@ -81,7 +83,8 @@ namespace VolunteerPrototype.UI
             {
                 Location = new Point(_requestsTextBox.Location.X, _requestsTextBox.Location.Y + _requestsTextBox.Height + 25),
                 Text = "Cancel this request",
-                Enabled = false
+                Enabled = false,
+                AutoSize = true
             };
             _removeRequestButton.Click += removeRequest;
             _requestsTextBox.SelectedIndexChanged += UpdateRequestButton;
