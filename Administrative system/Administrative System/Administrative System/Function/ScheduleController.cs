@@ -227,7 +227,7 @@ namespace VolunteerSystem
 
         public void ApproveRequest(Request request)
         {
-            _schedule.ListOfShifts.Find(x => x.ListOfRequests.Contains(request)).ApproveRequest(request, 2);
+            _schedule.ListOfShifts.Find(x => x.ListOfRequests.Contains(request)).ApproveRequest(request, _schedule.Year);
             _database.schedule.UpdateSchedule(_schedule);
             _database.request.RemoveRequest(request);
         }
