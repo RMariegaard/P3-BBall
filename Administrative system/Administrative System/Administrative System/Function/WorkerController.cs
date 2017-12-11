@@ -24,7 +24,7 @@ namespace VolunteerSystem
         
         public void CreateWorker(Worker worker)
         {
-            if (emailNotUsedBefore(worker.Email) == true)
+            if (emailNotUsedBefore(worker.Email) && emailValidation(worker.Email))
             {
 
 
@@ -43,13 +43,53 @@ namespace VolunteerSystem
                 throw new EmailUsedBeforeException($"The email {worker.Email} is already in use with another account");
         }
 
+        private bool emailValidation(string value)
+        {
+            try
+            {
+                if (value == "")
+                {
+                    return true;
+                }
+                if (value == "admin")
+                    return true;
+                if (!value.Any(c => c == '@'))
+                    throw new EmailNotValidException();
+
+                string localPart = value.Substring(0, value.IndexOf('@'));
+                string domain = value.Substring(value.IndexOf('@') + 1);
+
+
+                if (!localPart.All(c => char.IsLetterOrDigit(c) || c == '.' || c == '_' || c == '-') || localPart.Count() < 1)
+                    throw new EmailNotValidException();
+
+
+
+                string domainFirstAndLast = domain.Substring(0, 1) + domain.Substring(domain.Count() - 1);
+                string domainMid = domain.Substring(1, domain.Count() - 2);
+
+                if (domainMid.All(c => char.IsLetterOrDigit(c) || c == '.' || c == '-')
+                    && domainFirstAndLast.All(c => char.IsLetterOrDigit(c))
+                    && domain.Any(c => c == '.'))
+                {
+                    return true;
+                }
+                else
+                    throw new EmailNotValidException();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new EmailNotValidException();
+            }
+        }
+
         private bool emailNotUsedBefore(string email)
         {
             if (email == "")
                 return true;
             else if (ListOfWorkers.Exists(x => x.Email == email))
             {
-                return false;
+                throw new EmailUsedBeforeException($"The email {email} is already in use with another account");
             }
             else
                 return true;

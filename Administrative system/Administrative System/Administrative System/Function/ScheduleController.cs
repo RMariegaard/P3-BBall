@@ -207,6 +207,7 @@ namespace VolunteerSystem
         {
             _database.request.RemoveRequest(request);
         }
+
         public void ViewShiftInformation()
         {
             throw new NotImplementedException();
