@@ -43,43 +43,48 @@ namespace VolunteerPrototype.UI
 
             //The labels and textboxes
             labelAndTextBoxList = new List<LabelAndTextBox>();
-            int labelandTextBoxHeight = 40;
+            int labelandTextBoxHeight = 50;
             LabelAndTextBox nameLabelandTextBox = new LabelAndTextBox("Name");
             
-            panel.Controls.Add(nameLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 1) + 2), new Point(2, 2), new Point((panel.Width / 10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
+            panel.Controls.Add(nameLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 1) + 2), new Point(2, 2), new Point((panel.Width / 10) * 1, 2), new Size(panel.Width / 3, labelandTextBoxHeight)));
             labelAndTextBoxList.Add(nameLabelandTextBox);
             nameLabelandTextBox.TextBox.Text = _volunteer.Name;
 
             LabelAndTextBox emailLabelandTextBox = new LabelAndTextBox("Email");
             
-            panel.Controls.Add(emailLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 2) + 2), new Point(2, 2), new Point((panel.Width / 10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
+            panel.Controls.Add(emailLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 2) + 2), new Point(2, 2), new Point((panel.Width / 10) * 1, 2), new Size(panel.Width / 3, labelandTextBoxHeight)));
             labelAndTextBoxList.Add(emailLabelandTextBox);
             emailLabelandTextBox.TextBox.Text = _volunteer.Email;
 
             LabelAndTextBox teamLabelandTextBox = new LabelAndTextBox("Team");
             
-            panel.Controls.Add(teamLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 3) + 2), new Point(2, 2), new Point((panel.Width / 10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
+            panel.Controls.Add(teamLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 3) + 2), new Point(2, 2), new Point((panel.Width / 10) * 1, 2), new Size(panel.Width / 3, labelandTextBoxHeight)));
             labelAndTextBoxList.Add(teamLabelandTextBox);
             teamLabelandTextBox.TextBox.Text = _volunteer.Association;
 
             LabelAndTextBox phoneLabelandTextBox = new LabelAndTextBox("Phone Number");
             
-            panel.Controls.Add(phoneLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 5) + 2), new Point(2, 2), new Point((panel.Width / 10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
+            panel.Controls.Add(phoneLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 5) + 2), new Point(2, 2), new Point((panel.Width / 10) * 1, 2), new Size(panel.Width / 3, labelandTextBoxHeight)));
   
             labelAndTextBoxList.Add(phoneLabelandTextBox);
             phoneLabelandTextBox.TextBox.Text = _volunteer.Phonenumber.ToString();
 
+            LabelAndTextBox oldPasswordLabelandTextBox = new LabelAndTextBox("Old Password");
+            panel.Controls.Add(oldPasswordLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 6) + 2), new Point(2, 2), new Point((panel.Width / 10) * 1, 2), new Size(panel.Width / 3, labelandTextBoxHeight)));
+            labelAndTextBoxList.Add(oldPasswordLabelandTextBox);
+
             LabelAndTextBox passwordLabelandTextBox = new LabelAndTextBox("New Password");
-            panel.Controls.Add(passwordLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 6) + 2), new Point(2, 2), new Point((panel.Width / 10) * 3, 2), new Size(panel.Width, labelandTextBoxHeight)));
+            panel.Controls.Add(passwordLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 7) + 2), new Point(2, 2), new Point((panel.Width / 10) * 1, 2), new Size(panel.Width / 3, labelandTextBoxHeight)));
             labelAndTextBoxList.Add(passwordLabelandTextBox);
 
 
             //Button
             Button updateButton = new Button
             {
-                Size = new Size(panel.Size.Width - 10, 40),
-                Location = new Point(5, panel.Height - 45),
-                Text = "Update"
+                Size = new Size(panel.Width / 3, labelandTextBoxHeight),
+                Location = new Point(10, panel.Height - 220),
+                Text = "Update",
+                AutoSize = true
             };
             updateButton.Click += UpdateButton_Click;
             panel.Controls.Add(updateButton);
