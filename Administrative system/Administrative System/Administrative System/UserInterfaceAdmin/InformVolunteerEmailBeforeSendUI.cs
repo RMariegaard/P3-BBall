@@ -36,7 +36,10 @@ namespace VolunteerSystem.UserInterfaceAdmin
             emailToLabel.Text = "Sending email to: \n";
             foreach (WorkerShiftPair pair in workersWithshiftsArray)
             {
-                emailToLabel.Text += $"{pair.Worker.Email}, ";
+                if (pair.Worker is Volunteer)
+                {
+                    emailToLabel.Text += $"{pair.Worker.Email}, ";
+                }
             }
 
             messageTextbox = new TextBox()
@@ -67,13 +70,16 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
             foreach (WorkerShiftPair pair in workersWithshiftsArray)
             {
-                message.Replace("[Volunteer]", pair.Worker.Name)
-                        .Replace("[Task]", pair.Shift.Task)
-                        .Replace("[Time]", pair.Shift.StartTime.ToString("dddd D. dd/MM/yyyy kl. hh:mm"))
-                        .Replace("[StartTime]", pair.Shift.StartTime.ToString("dddd D. dd/MM/yyyy kl. hh:mm"))
-                        .Replace("[Endtime]", pair.Shift.EndTime.ToString("dddd D. dd/MM/yyyy kl. hh:mm"));
+                if (pair.Worker is Volunteer)
+                {
+                    message.Replace("[Volunteer]", pair.Worker.Name)
+                            .Replace("[Task]", pair.Shift.Task)
+                            .Replace("[Time]", pair.Shift.StartTime.ToString("dddd D. dd/MM/yyyy kl. hh:mm"))
+                            .Replace("[StartTime]", pair.Shift.StartTime.ToString("dddd D. dd/MM/yyyy kl. hh:mm"))
+                            .Replace("[Endtime]", pair.Shift.EndTime.ToString("dddd D. dd/MM/yyyy kl. hh:mm"));
 
-                Notifier.InformVolunteer((Volunteer)pair.Worker, messageTextbox.Text);
+                    Notifier.InformVolunteer((Volunteer)pair.Worker, messageTextbox.Text);
+                }
             }
         }
     }

@@ -202,7 +202,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             deletePopup.ShowDialog();
             if (deletePopup.DialogResult == DialogResult.OK)
             {
-                Shift shift = (Shift)sender;
+       
                 //View the email preview window
                 string StandardMessage = Notifier.GetStandardVolunteerDeletedShiftMessage;
                 List<WorkerShiftPair> list = new List<WorkerShiftPair>();

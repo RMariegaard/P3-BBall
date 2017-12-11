@@ -128,7 +128,7 @@ namespace VolunteerSystem
         {
             List<Worker> ListOfWorkers = new List<Worker>();
             ListOfWorkers.AddRange(_database.volunteer.GetVolunteersFromDatabase());
-            //ListOfWorkers.AddRange(_database.externalWorker.GetExternalListOfWorkers());
+            ListOfWorkers.AddRange(_database.externalWorker.GetExternalListOfWorkers());
             return ListOfWorkers;
         }
 
