@@ -78,7 +78,7 @@
             this.labelAssociation.Name = "labelAssociation";
             this.labelAssociation.Size = new System.Drawing.Size(79, 13);
             this.labelAssociation.TabIndex = 3;
-            this.labelAssociation.Text = "Associate team";
+            this.labelAssociation.Text = "Associated team";
             // 
             // labelPassword
             // 
