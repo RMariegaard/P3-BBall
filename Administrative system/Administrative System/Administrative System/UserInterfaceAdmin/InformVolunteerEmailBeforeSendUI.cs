@@ -23,6 +23,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
             InitializeComponent();
             workersWithshiftsArray = workersWithshifts;
             initialMessage = message;
+            StartPosition = FormStartPosition.CenterParent;
 
             Height = 300;
             Width = 500;
