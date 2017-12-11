@@ -31,7 +31,7 @@ namespace VolunteerSystem
             /////////////////////Opdatere databasen med en masse information///////////////////////
             //UpdateDatabaseWithInfo(scheduleController, workerController);
 
-
+     
             db2.Complete();
             UserInterface.TheMainWindow Ui = new UserInterface.TheMainWindow(scheduleController, workerController);
             Ui.Start();

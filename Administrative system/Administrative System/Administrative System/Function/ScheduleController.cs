@@ -70,6 +70,8 @@ namespace VolunteerSystem
         public void RemoveNotification(Notification notification)
         {
             Notifier.AllNotifications.Remove(notification);
+            _database.notification.Remove(notification);
+            _database.schedule.UpdateSchedule(_schedule);
         }
 
         public List<Shift> GetAllListOfShifts()

@@ -31,14 +31,16 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             {
                 Location = new Point(0, 0),
                 Text = "Create Shift",
-                AutoSize = true
+                Size = new Size(70, 40),
+                AutoSize = true,
             };
             createShiftButton.Click += CreateShift_Clicked;
 
             Button createTaskButton = new Button
             {
-                Location = new Point(createShiftButton.Location.X + createShiftButton.Size.Width, 0),
+                Location = new Point(createShiftButton.Location.X + createShiftButton.Size.Width + 10, 0),
                 Text = "Create Task",
+                Size = new Size(70, 40),
                 AutoSize = true
             };
             createTaskButton.Click += CreateTask_Clicked;

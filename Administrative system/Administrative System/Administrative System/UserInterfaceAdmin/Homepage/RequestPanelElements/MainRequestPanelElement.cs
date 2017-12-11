@@ -75,7 +75,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
             _mainRequestPanel.Controls.Clear();
             _mainRequestPanel.Size = forRefference;
             titleTopLabel.Location = new Point(10, 0);
-            titleTopLabel.Text = "Pending ListOfRequests";
+            titleTopLabel.Text = "Pending Requests";
             titleTopLabel.Font = new Font("Arial", 24, FontStyle.Bold);
             titleTopLabel.AutoSize = true;
 
