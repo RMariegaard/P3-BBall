@@ -130,10 +130,10 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
             //////////////////NumberOfVolunteerLabel////////////////////////
             var numberOfVolunteerBinding = new Binding("Text", shiftBindingSource, "GetNumberOfVolunteers");
             //Ikke længere nødvendig
-            //binding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
-            //{
-            //    convertEventArgs.Value =  convertEventArgs.Value + "/"+shift.VolunteersNeeded;
-            //};
+            numberOfVolunteerBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
+            {
+                convertEventArgs.Value = "Workers: " + convertEventArgs.Value;
+            };
 
             Label headder = new Label();
             headder.DataBindings.Add(numberOfVolunteerBinding);
