@@ -40,8 +40,6 @@ namespace VolunteerSystem.UserInterfaceAdmin.Settings
             };
             _settingsList.Items.Add("Email ");
 
-            _settingsList.Items.Add("Hej");
-            _settingsList.Items.Add("Hej");
 
             _settingViewPanel = new EmailSetting()
             {
