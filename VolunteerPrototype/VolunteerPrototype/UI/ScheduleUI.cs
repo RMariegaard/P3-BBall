@@ -90,7 +90,7 @@ namespace VolunteerPrototype.UI
                         DateTime tempDateTime = new DateTime(shift.StartTime.Year, shift.StartTime.Month, shift.StartTime.Day, 0, 0, 0);
                         do
                         {
-                            if ((tempDateTime.ToShortDateString()) == _day)
+                            if ((tempDateTime == ConvertDayStringFromButtonToDateTime(_day)))
                             {
                                 toBeOnPanel.Add(shift);
                                 break;

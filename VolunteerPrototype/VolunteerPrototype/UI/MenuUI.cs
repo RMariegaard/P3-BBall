@@ -42,7 +42,7 @@ namespace VolunteerPrototype.UI
             {
                 Location = new System.Drawing.Point(100, 30),
                 Width = width,
-                Height = 30
+                Height = 30,
             };
             Controls.Add(_userInforLabel);
 
