@@ -30,6 +30,11 @@ namespace VolunteerSystemTests.Function
             throw new NotImplementedException();
         }
 
+        public Schedule GetLatestSchedule()
+        {
+            throw new NotImplementedException();
+        }
+
         public Schedule GetSchedule(int id)
         {
             throw new NotImplementedException();
