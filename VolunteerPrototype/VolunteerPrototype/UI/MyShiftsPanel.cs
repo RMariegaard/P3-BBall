@@ -99,8 +99,18 @@ namespace VolunteerPrototype.UI
 
         private void removeRequest(object sender, EventArgs e)
         {
-            _mainUI.ScheduleController().RemoveRequest((Request)_requestsTextBox.Items[_requestsTextBox.SelectedIndex]);
-            _mainUI.ShowMyShifts();
+            string message = "Are you sure that you want to cancel your request from this shift?";
+
+            var result = MessageBox.Show(message, "Cancel Request",
+                                 MessageBoxButtons.YesNo,
+                                 MessageBoxIcon.Question);
+
+            // If the no button was pressed ...
+            if (result == DialogResult.Yes)
+            {
+                _mainUI.ScheduleController().RemoveRequest((Request)_requestsTextBox.Items[_requestsTextBox.SelectedIndex]);
+                _mainUI.ShowMyShifts();
+            }
         }
 
         private void FormatShift(object sender, ListControlConvertEventArgs e)
@@ -113,15 +123,29 @@ namespace VolunteerPrototype.UI
         {
             Request request = e.ListItem as Request;
             var shift = request.Shift;
-            e.Value = shift.Task + "\t" + shift.StartTime + " - " + shift.EndTime;
+            if (shift != null)
+            {
+                e.Value = shift.Task + "\t" + shift.StartTime + " - " + shift.EndTime;
+            }
         }
 
         private void removeShift_click(object sender, EventArgs e)
         {
-            var shift = (Shift)_shiftsTextBox.SelectedItem;
-            _mainUI.ScheduleController().RemoveWorkerFromShift(_volunteer, shift);
-            _mainUI.ScheduleController().CreateNotification(new Notification("Volunteer Removed From Shift", $"{_volunteer.Name} has removed themselves from {shift.Task} - {shift.StartTime}", NotificationImportance.HighImportance));
-            _mainUI.ShowMyShifts();
+            string message = "Are you sure that you want to remove youself from this shift?\nThe Administrator will be notified of this.";
+
+            var result = MessageBox.Show(message, "Removing yourself from a shift",
+                                 MessageBoxButtons.YesNo,
+                                 MessageBoxIcon.Question);
+
+            // If the no button was pressed ...
+            if (result == DialogResult.Yes)
+            {
+
+                var shift = (Shift)_shiftsTextBox.SelectedItem;
+                _mainUI.ScheduleController().RemoveWorkerFromShift(_volunteer, shift);
+                _mainUI.ScheduleController().CreateNotification(new Notification("Volunteer Removed From Shift", $"{_volunteer.Name} has removed themselves from {shift.Task} - {shift.StartTime}", NotificationImportance.HighImportance));
+                _mainUI.ShowMyShifts();
+            }
         }
 
         private void UpdateRequestButton(object sender, EventArgs e)

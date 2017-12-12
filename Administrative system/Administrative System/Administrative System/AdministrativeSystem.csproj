@@ -88,7 +88,6 @@
     <Compile Include="Enums\NotificationImportance.cs" />
     <Compile Include="Exceptions\EmailNotValid.cs" />
     <Compile Include="Exceptions\EmailUsedBeforeException.cs" />
-    <Compile Include="Function\AccountController.cs" />
     <Compile Include="Function\ScheduleController.cs" />
     <Compile Include="Function\WorkerController.cs" />
     <Compile Include="Model\AbstractNotification.cs" />

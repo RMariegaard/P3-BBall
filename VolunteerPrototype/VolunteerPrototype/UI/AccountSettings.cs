@@ -72,11 +72,13 @@ namespace VolunteerPrototype.UI
             LabelAndTextBox oldPasswordLabelandTextBox = new LabelAndTextBox("Old Password");
             panel.Controls.Add(oldPasswordLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 6) + 2), new Point(2, 2), new Point((panel.Width / 10) * 1, 2), new Size(panel.Width / 3, labelandTextBoxHeight)));
             labelAndTextBoxList.Add(oldPasswordLabelandTextBox);
+            oldPasswordLabelandTextBox.TextBox.UseSystemPasswordChar = true;
 
             LabelAndTextBox passwordLabelandTextBox = new LabelAndTextBox("New Password");
+            
             panel.Controls.Add(passwordLabelandTextBox.GetLabelAndTextPanel(new Point(0, (labelandTextBoxHeight * 7) + 2), new Point(2, 2), new Point((panel.Width / 10) * 1, 2), new Size(panel.Width / 3, labelandTextBoxHeight)));
             labelAndTextBoxList.Add(passwordLabelandTextBox);
-
+            passwordLabelandTextBox.TextBox.UseSystemPasswordChar = true;
 
             //Button
             Button updateButton = new Button
@@ -104,9 +106,22 @@ namespace VolunteerPrototype.UI
                     int phoneNumber = int.Parse(labelAndTextBoxList.First(x => x.Label.Text == "Phone Number").TextBox.Text);
                     string temppassword = labelAndTextBoxList.First(x => x.Label.Text == "New Password").TextBox.Text;
                 string password = temppassword == "" || temppassword == null ? _volunteer.HashPassworkd : temppassword;
+                if (WorkerController.GetHash(labelAndTextBoxList.First(x => x.Label.Text == "Old Password").TextBox.Text).ToString() == _volunteer.HashPassworkd)
+                { 
+                    _mainUI.WorkerController().UpdateVolunteer(_mainUI.GetCurrentUser, name, email, team, phoneNumber, password);
 
-                _mainUI.WorkerController().UpdateVolunteer(_mainUI.GetCurrentUser, name, email, team, phoneNumber, password);
-
+                    WrongEmailWarning message = new WrongEmailWarning("Your account information has been updated");
+                    message.StartPosition = FormStartPosition.CenterParent;
+                    message.ShowDialog();
+                    labelAndTextBoxList.First(x => x.Label.Text == "Old Password").TextBox.Text = "";
+                    labelAndTextBoxList.First(x => x.Label.Text == "New Password").TextBox.Text = "";
+                }
+                else
+                {
+                    WrongEmailWarning message = new WrongEmailWarning("Old password was incorrect");
+                    message.StartPosition = FormStartPosition.CenterParent;
+                    message.ShowDialog();
+                }
             }
             catch (FormatException)
             {

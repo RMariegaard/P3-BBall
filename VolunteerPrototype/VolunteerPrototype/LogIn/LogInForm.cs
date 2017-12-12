@@ -17,6 +17,7 @@ namespace VolunteerPrototype.LogIn
         private TextBox _passwordInputBox;
 
         private Button _logInButton;
+        private Button _forgotMyPasswordButton;
 
         public VolunteerSystem.Volunteer _volunteer;
         private IUI _mainUI;
@@ -56,14 +57,23 @@ namespace VolunteerPrototype.LogIn
             _logInButton = new Button()
             {
                 Text = "Log In",
-                Location = new System.Drawing.Point(_passwordInputBox.Location.X, _passwordInputBox.Location.Y + _passwordInputBox.Height + 20)
+                Location = new System.Drawing.Point(_passwordLabel.Location.X, _passwordInputBox.Location.Y + _passwordInputBox.Height + 20)
             };
             _logInButton.Click += ValidateLogIn;
+
+            _forgotMyPasswordButton = new Button()
+            {
+                Text = "Forgot My Password",
+                Location = new System.Drawing.Point(_logInButton.Location.X + _logInButton.Width + 5, _logInButton.Location.Y),
+                AutoSize = true
+            };
+            
             Controls.Add(_emailLabel);
             Controls.Add(_emailInputBox);
             Controls.Add(_passwordLabel);
             Controls.Add(_passwordInputBox);
             Controls.Add(_logInButton);
+            Controls.Add(_forgotMyPasswordButton);
         }
 
         private void EnterKeyHit(object sender, KeyPressEventArgs e)
@@ -112,7 +122,7 @@ namespace VolunteerPrototype.LogIn
             try
             {
                var volunteer = _mainUI.WorkerController().ListOfWorkers.Select(x => x as Volunteer)
-                                      .First(y => (y.Email == login && y.HashPassworkd == AccountController.GetHash(pwd).ToString()));
+                                      .First(y => (y.Email == login && y.HashPassworkd == WorkerController.GetHash(pwd).ToString()));
                 
                 if(volunteer != null)
                 {

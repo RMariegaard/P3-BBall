@@ -27,7 +27,7 @@ namespace VolunteerSystem
             this.DateCreated = DateTime.Now;
             this.Association = accosi;
             this.Phonenumber = phonenumber;
-            this.HashPassworkd = AccountController.GetHash(password).ToString();
+            this.HashPassworkd = WorkerController.GetHash(password).ToString();
             YearsWorked = new List<int>();
             ListOfRequests = new List<Request>();
         }
@@ -35,7 +35,7 @@ namespace VolunteerSystem
         {
             this.DateCreated = DateTime.Now;
             this.Association = accosi;
-            this.HashPassworkd = AccountController.GetHash(password).ToString();
+            this.HashPassworkd = WorkerController.GetHash(password).ToString();
             YearsWorked = new List<int>();
             ListOfRequests = new List<Request>();
         }
@@ -44,7 +44,7 @@ namespace VolunteerSystem
             base.Update(name, email);
             this.Association = accosi;
             this.Phonenumber = phonenumber;
-            this.HashPassworkd = AccountController.GetHash(password).ToString();
+            this.HashPassworkd = WorkerController.GetHash(password).ToString();
         }
 
         public Volunteer()

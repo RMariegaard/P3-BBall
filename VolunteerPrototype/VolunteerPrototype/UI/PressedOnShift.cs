@@ -179,27 +179,63 @@ namespace VolunteerPrototype.UI
 
         private void RequestShift(object sender, EventArgs e)
         {
+            string message = "Are you sure you want to request this shift?\nThe Administrator has to accept your request before you actually are going to work on the shift.\nYou will be notified via email when this happens.";
+            DialogResult result = DialogResult.No; //Standard - has to be assigned
+
             if (_mainUI.IsLoggedIn())
             {
+                var res = MessageBox.Show(message, "Request Shift",
+                                                 MessageBoxButtons.YesNo,
+                                                 MessageBoxIcon.Question);
 
-
-                _mainUI.ScheduleController().SendRequest(shift, _mainUI.GetCurrentUser);
-                
-                HasBeenRequested();
-                _mainUI.UpdateSchedulePanel();
-                _mainUI.UpdateMenu();
+                if (res == DialogResult.Yes)
+                {
+                    _mainUI.ScheduleController().SendRequest(shift, _mainUI.GetCurrentUser);
+                    HasBeenRequested();
+                    _mainUI.UpdateSchedulePanel();
+                    _mainUI.UpdateMenu();
+                }
             }
             else
             {
-                var login = new LogIn.LogInForm(_mainUI);
-                login.ShowDialog();
-                if(login.DialogResult == DialogResult.Yes)
-                {
-                    _mainUI.LogIn(_mainUI.GetCurrentUser);
-                    if (!shift.ListOfRequests.Exists(x => x.Volunteer == _mainUI.GetCurrentUser) && !shift.ListOfWorkers.Contains(_mainUI.GetCurrentUser))
-                        RequestShift(sender, e);
+                var popUp = new RegisterOrLoginPopUp();
+                popUp.ShowDialog();
+                //Login
+                if (popUp.DialogResult == DialogResult.Yes) {
+                    var login = new LogIn.LogInForm(_mainUI);
+                    login.ShowDialog();
+                    if (login.DialogResult == DialogResult.Yes)
+                    {
+                        _mainUI.LogIn(_mainUI.GetCurrentUser);
+                        result = MessageBox.Show(message, "Request Shift",
+                                                     MessageBoxButtons.YesNo,
+                                                     MessageBoxIcon.Question);
+                    }
                 }
-            }
+                //register
+                else if(popUp.DialogResult == DialogResult.No)
+                {
+                    var register = new LogIn.RegisterForm(_mainUI);
+                    register.ShowDialog();
+                    if(register.DialogResult == DialogResult.Yes)
+                    {
+                        _mainUI.LogIn(_mainUI.GetCurrentUser);
+                        result = MessageBox.Show(message, "Request Shift",
+                                                     MessageBoxButtons.YesNo,
+                                                     MessageBoxIcon.Question);
+                    }
+
+                }
+                //If either registered or logged in
+                    if (result == DialogResult.Yes)
+                    {
+                        if (!shift.ListOfRequests.Exists(x => x.Volunteer == _mainUI.GetCurrentUser) && !shift.ListOfWorkers.Contains(_mainUI.GetCurrentUser))
+                        {
+                            RequestShift(sender, e);
+                        }
+                    }
+                }
+            
 
             UpdateWorkersAndRequests();
 
