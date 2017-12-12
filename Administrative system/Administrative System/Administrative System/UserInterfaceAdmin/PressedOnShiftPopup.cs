@@ -202,21 +202,40 @@ namespace VolunteerSystem.UserInterfaceAdmin
             deletePopup.ShowDialog();
             if (deletePopup.DialogResult == DialogResult.OK)
             {
-       
                 //View the email preview window
-                string StandardMessage = Notifier.GetStandardVolunteerDeletedShiftMessage;
                 List<WorkerShiftPair> list = new List<WorkerShiftPair>();
                 shift.ListOfWorkers.ForEach(x => list.Add(new WorkerShiftPair(x, shift)));
+                string StandardMessage = Notifier.GetStandardVolunteerDeletedShiftMessage;
                 InformVolunteerEmailBeforeSendUI emailPopup = new InformVolunteerEmailBeforeSendUI(StandardMessage, list.ToArray());
-
-                emailPopup.ShowDialog();
-                if (emailPopup.DialogResult == DialogResult.OK)
+                if (list.Count != 0)
+                    emailPopup.ShowDialog();
+                if (emailPopup.DialogResult == DialogResult.OK || list.Count == 0)
                 {
-                    this.Close();
-                    volunteerMainUI.GetScheduleController().DeleteShift(shift);
-                    volunteerMainUI.UpdateAllHomepage();
+                    //View the email preview window
+                    string StandardMessageRequest = Notifier.GetStandardVolunteerDeniedShiftMessage;
+                    List<Request> listOfRequests = shift.ListOfRequests;
+                    InformVolunteerEmailBeforeSendUI emailPopupRequest = new InformVolunteerEmailBeforeSendUI(StandardMessageRequest, listOfRequests.ToArray());
+                    if (listOfRequests.Count != 0)
+                        emailPopupRequest.ShowDialog();
+                    if (emailPopupRequest.DialogResult == DialogResult.OK || listOfRequests.Count == 0)
+                    {
+                        foreach (Request request in listOfRequests)
+                            volunteerMainUI.GetScheduleController().DenyRequest(request);
+                        volunteerMainUI.GetScheduleController().DeleteShift(shift);
+                        volunteerMainUI.UpdateAllHomepage();
+                        this.Close();
+                    }
+                    else
+                    {
+                        DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The shift is not removed and no emails has been sent\nIf you want to delete the shift, then you must press \"Send email\"");
+                        emailNotsentPopup.ShowDialog();
+                    }
                 }
-                
+                else
+                {
+                    DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The shift is not removed and no emails has been sent\nIf you want to delete the shift, then you must press \"Send email\"");
+                    emailNotsentPopup.ShowDialog();
+                }
             }
         }
 

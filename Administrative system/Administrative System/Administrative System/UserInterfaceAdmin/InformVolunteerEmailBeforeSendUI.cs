@@ -14,6 +14,7 @@ namespace VolunteerSystem.UserInterfaceAdmin
     {
         TextBox messageTextbox;
         Button sendEmailButton;
+        Button doItButDontSendEmailButton;
         Label emailToLabel;
         WorkerShiftPair[] workersWithshiftsArray;
         string initialMessage;
@@ -23,9 +24,27 @@ namespace VolunteerSystem.UserInterfaceAdmin
             InitializeComponent();
             workersWithshiftsArray = workersWithshifts;
             initialMessage = message;
+            createUI();
+        }
+
+        public InformVolunteerEmailBeforeSendUI(string message, params Request[] requests)
+        {
+            InitializeComponent();
+            initialMessage = message;
+            WorkerShiftPair[] workerShiftPairs = new WorkerShiftPair[requests.Count()];
+
+            for(int i = 0; i < requests.Count(); i++)
+                workerShiftPairs[i] = new WorkerShiftPair(requests[i].Volunteer, requests[i].Shift);
+            workersWithshiftsArray = workerShiftPairs;
+            
+            createUI();
+        }
+
+        private void createUI()
+        {
             StartPosition = FormStartPosition.CenterParent;
 
-            Height = 300;
+            Height = 320;
             Width = 500;
 
             emailToLabel = new Label
@@ -53,18 +72,27 @@ namespace VolunteerSystem.UserInterfaceAdmin
 
             sendEmailButton = new Button
             {
-                Size = new Size(100, 30),
-                Location = new Point((ClientRectangle.Width / 2) - 50, messageTextbox.Location.Y + messageTextbox.Height + 5),
+                Size = new Size(110, 50),
+                Location = new Point((ClientRectangle.Width / 2) - 120, messageTextbox.Location.Y + messageTextbox.Height + 5),
                 Text = "Send Mail",
-                DialogResult = DialogResult.OK,
+                DialogResult = DialogResult.OK
             };
             sendEmailButton.Click += SendEmailButton_Click;
 
+            doItButDontSendEmailButton = new Button()
+            {
+                Size = new Size(110, 50),
+                Location = new Point((ClientRectangle.Width / 2) + 10, messageTextbox.Location.Y + messageTextbox.Height + 5),
+                Text = "Don't send email\nBut do the action",
+                DialogResult = DialogResult.OK
+            };
+
             Controls.Add(sendEmailButton);
+            Controls.Add(doItButDontSendEmailButton);
             Controls.Add(emailToLabel);
             Controls.Add(messageTextbox);
         }
-
+        
         private void SendEmailButton_Click(object sender, EventArgs e)
         {
             string message = messageTextbox.Text;

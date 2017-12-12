@@ -270,7 +270,6 @@ namespace VolunteerSystem.UserInterface
 
         public void UpdateUI()
         {
-
             _homepageButton.BackColor = Color.White;
             _volunteerOverviewButton.BackColor = Color.White;
             _settingsButton.BackColor = Color.White;
@@ -291,7 +290,9 @@ namespace VolunteerSystem.UserInterface
                     break;
             }
         }
+
         public Shift selectedShift { get; set; }
+
         public void DisplayPressedOnShift(Shift shift)
         {
             selectedShift = shift;
@@ -300,8 +301,6 @@ namespace VolunteerSystem.UserInterface
             pressedOnShiftPopup.ShowDialog();
             selectedShift = null;
             PropertyChanged?.Invoke(selectedShift, new PropertyChangedEventArgs("selectedShift"));
-
-
         }
 
         public void DisplayVolunteerOnHomepage(Volunteer volunteer)
@@ -358,11 +357,34 @@ namespace VolunteerSystem.UserInterface
             string StandardMessage = Notifier.GetStandardVolunteerDeletedShiftMessage;
             List<WorkerShiftPair> list = ScheduleController.GetAllWorkersFromATask(taskName);
             InformVolunteerEmailBeforeSendUI emailPopup = new InformVolunteerEmailBeforeSendUI(StandardMessage, list.ToArray());
-            emailPopup.ShowDialog();
-            if (emailPopup.DialogResult == DialogResult.OK)
+            if (list.Count != 0)
+                emailPopup.ShowDialog();
+            if (emailPopup.DialogResult == DialogResult.OK || list.Count == 0)
             {
-                ScheduleController.RemoveTaskAndAssociateListOfShifts(taskName);
-                UpdateAllHomepage();
+                //View the email preview window
+                string StandardMessageRequest = Notifier.GetStandardVolunteerDeniedShiftMessage;
+                List<Request> listOfRequests = ScheduleController.GetAllListOfRequestsForATask(taskName);
+                InformVolunteerEmailBeforeSendUI emailPopupRequest = new InformVolunteerEmailBeforeSendUI(StandardMessageRequest, listOfRequests.ToArray());
+                if (listOfRequests.Count != 0)
+                    emailPopupRequest.ShowDialog();
+                if (emailPopupRequest.DialogResult == DialogResult.OK || listOfRequests.Count == 0)
+                {
+                    foreach(Request request in listOfRequests)
+                        ScheduleController.DenyRequest(request);
+                    
+                    ScheduleController.RemoveTaskAndAssociateListOfShifts(taskName);
+                    UpdateAllHomepage();
+                }
+                else
+                {
+                    DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The task is not removed and no emails has been sent\nIf you want to delete the shift, then you must press \"Send email\"");
+                    emailNotsentPopup.ShowDialog();
+                }           
+            }
+            else
+            {
+                DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The task is not removed and no emails has been sent\nIf you want to delete the shift, then you must press \"Send email\"");
+                emailNotsentPopup.ShowDialog();
             }
         }
     }

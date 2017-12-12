@@ -207,6 +207,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Messages\VolunteerRemovedFromShift.txt" />
     <Content Include="Messages\VolunteerRequestAcceptedMessage.txt" />
     <Content Include="Messages\VolunteerRequestDeniedMessage.txt" />
     <Content Include="Messages\VolunteerShiftChangedMessage.txt" />

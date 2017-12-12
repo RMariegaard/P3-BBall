@@ -14,6 +14,15 @@ namespace VolunteerSystem
     {
         public static List<Notification> AllNotifications = new List<Notification>();
 
+        public static string GetStandardVolunteerRemovedFromShiftMessage
+        {
+            get
+            {
+                var reader = new StreamReader((Path.GetDirectoryName(Path.GetDirectoryName(Environment.CurrentDirectory))) + @"\Messages\VolunteerRemovedFromShift.txt");
+                string message = reader.ReadToEnd();
+                return message;
+            }
+        }
         public static string GetStandardVolunteerDeniedShiftMessage
         {
             get

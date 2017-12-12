@@ -266,5 +266,10 @@ namespace VolunteerSystem
         {
             return GetAllListOfShifts().First(x => x.ListOfRequests.Contains(request));
         }
+
+        public List<Request> GetAllListOfRequestsForATask(string taskName)
+        {
+            return GetAllListOfRequests().Where(x => x.Shift.Task == taskName).ToList();
+        }
     }
 }

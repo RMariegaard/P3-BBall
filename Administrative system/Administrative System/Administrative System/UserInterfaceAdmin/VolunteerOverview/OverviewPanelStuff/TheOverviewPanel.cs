@@ -235,8 +235,20 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                     };
                     button.Click += delegate (object sender, EventArgs e)
                     {
-                        scheduleController.RemoveWorkerFromShift(volunteerOverview.SelectedWorker, (Shift)((Control)sender).Tag);
-                        updateShiftInformationPanel();
+                        //View the email preview window
+                        string StandardMessageRequest = Notifier.GetStandardVolunteerRemovedFromShiftMessage;
+                        InformVolunteerEmailBeforeSendUI emailPopupRequest = new InformVolunteerEmailBeforeSendUI(StandardMessageRequest, new WorkerShiftPair(volunteerOverview.SelectedWorker, shift));
+                        emailPopupRequest.ShowDialog();
+                        if (emailPopupRequest.DialogResult == DialogResult.OK)
+                        {
+                            scheduleController.RemoveWorkerFromShift(volunteerOverview.SelectedWorker, shift);
+                            updateShiftInformationPanel();
+                        }
+                        else
+                        {
+                            DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The volunteer has not been removed\nIf you want to remove the volunteer, then you must press \"Send email\", or \"Don't send email\"");
+                            emailNotsentPopup.ShowDialog();
+                        }
                     };
                     panel.Controls.Add(button);
 
@@ -328,9 +340,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                     };
                     acceptButton.Click += delegate (object sender, EventArgs e)
                     {
-                        scheduleController.ApproveRequest(((Shift)((Control)sender).Tag).ListOfRequests.First(x => x.Volunteer == volunteerOverview.SelectedWorker));
-                        updateShiftInformationPanel();
-                        updateRequestInformaitonPanel();
+                        //View the email preview window
+                        string StandardMessageRequest = Notifier.GetStandardVolunteerAcceptedShiftMessage;
+                        InformVolunteerEmailBeforeSendUI emailPopupRequest = new InformVolunteerEmailBeforeSendUI(StandardMessageRequest, new WorkerShiftPair(volunteerOverview.SelectedWorker, shift));
+                        emailPopupRequest.ShowDialog();
+                        if (emailPopupRequest.DialogResult == DialogResult.OK)
+                        {
+                            scheduleController.ApproveRequest(shift.ListOfRequests.First(x => x.Volunteer == volunteerOverview.SelectedWorker));
+                            updateShiftInformationPanel();
+                            updateRequestInformaitonPanel();
+                        }
+                        else
+                        {
+                            DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The request has not been accepted\nIf you want to accept the request, then you must press \"Send email\", or \"Don't send email\"");
+                            emailNotsentPopup.ShowDialog();
+                        }
                     };
                     panel.Controls.Add(acceptButton);
 
@@ -344,11 +368,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                     };
                     denyButton.Click += delegate (object sender, EventArgs e)
                     {
-                        scheduleController.DenyRequest(((Shift)((Control)sender).Tag).ListOfRequests.First(x => x.Volunteer == volunteerOverview.SelectedWorker));
-                        updateShiftInformationPanel();
-                        updateRequestInformaitonPanel();
-                        
-
+                        //View the email preview window
+                        string StandardMessageRequest = Notifier.GetStandardVolunteerDeniedShiftMessage;
+                        InformVolunteerEmailBeforeSendUI emailPopupRequest = new InformVolunteerEmailBeforeSendUI(StandardMessageRequest, new WorkerShiftPair(volunteerOverview.SelectedWorker, shift));
+                        emailPopupRequest.ShowDialog();
+                        if (emailPopupRequest.DialogResult == DialogResult.OK)
+                        {
+                            scheduleController.DenyRequest(shift.ListOfRequests.First(x => x.Volunteer == volunteerOverview.SelectedWorker));
+                            updateShiftInformationPanel();
+                            updateRequestInformaitonPanel();
+                        }
+                        else
+                        {
+                            DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The request has not been denyed\nIf you want to denyed the request, then you must press \"Send email\", or \"Don't send email\"");
+                            emailNotsentPopup.ShowDialog();
+                        }
                     };
                     panel.Controls.Add(denyButton);
 

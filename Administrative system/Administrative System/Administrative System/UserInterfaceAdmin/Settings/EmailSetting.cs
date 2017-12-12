@@ -44,9 +44,9 @@ namespace VolunteerSystem.UserInterfaceAdmin.Settings
             };
             _saveButton.Click += SaveChanges;
 
-            string[] text = { "Request accepted message", "Request denied message", "Shift changed message", "Shift deleted message" };
+            string[] text = { "Removed volunteer message", "Request accepted message", "Request denied message", "Shift changed message", "Shift deleted message"};
 
-            for(int i = 0; i < System.IO.Directory.GetFiles(_path).Count(); i++)
+            for(int i = 0; i < Directory.GetFiles(_path).Count(); i++)
             {
 
                 if (text[i] != null)
