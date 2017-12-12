@@ -377,13 +377,13 @@ namespace VolunteerSystem.UserInterface
                 }
                 else
                 {
-                    DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The task is not removed and no emails has been sent\nIf you want to delete the shift, then you must press \"Send email\"");
+                    DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The task is not removed and no emails has been sent\nIf you want to delete the shift,\nthen you must press \"Send email\"");
                     emailNotsentPopup.ShowDialog();
                 }           
             }
             else
             {
-                DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The task is not removed and no emails has been sent\nIf you want to delete the shift, then you must press \"Send email\"");
+                DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The task is not removed and no emails has been sent\nIf you want to delete the shift,\nthen you must press \"Send email\"");
                 emailNotsentPopup.ShowDialog();
             }
         }

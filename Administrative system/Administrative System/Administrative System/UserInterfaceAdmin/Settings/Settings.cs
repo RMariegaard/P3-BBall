@@ -39,7 +39,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.Settings
                 AutoSize = true
             };
             _settingsList.Items.Add("Email ");
-
+            _settingsList.SelectedIndex = 0;
 
             _settingViewPanel = new EmailSetting()
             {

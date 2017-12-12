@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,9 @@ namespace VolunteerSystem.UserInterfaceAdmin
         public InformVolunteerEmailBeforeSendUI(string message, params WorkerShiftPair[] workersWithshifts)
         {
             InitializeComponent();
+            this.Text = "Email";
+            this.Icon = new Icon(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\TwoMen.ico");
+
             workersWithshiftsArray = workersWithshifts;
             initialMessage = message;
             createUI();

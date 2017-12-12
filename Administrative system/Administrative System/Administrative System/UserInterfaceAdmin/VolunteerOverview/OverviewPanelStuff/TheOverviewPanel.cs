@@ -140,7 +140,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
 
         private void RemoveVolunteerButton_Click(object sender, EventArgs e)
         {
-            DeleteFormPopUp deleteFormPopUp = new DeleteFormPopUp("Are you sure you want to delete this volunteer and all ListOfRequests from given volunteer?");
+            DeleteFormPopUp deleteFormPopUp = new DeleteFormPopUp("Are you sure you want to delete this volunteer and all requests from given volunteer?");
             deleteFormPopUp.StartPosition = FormStartPosition.CenterParent;
             deleteFormPopUp.ShowDialog();
             if (deleteFormPopUp.DialogResult == DialogResult.OK)
@@ -246,7 +246,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                         }
                         else
                         {
-                            DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The volunteer has not been removed\nIf you want to remove the volunteer, then you must press \"Send email\", or \"Don't send email\"");
+                            DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The volunteer has not been removed\nIf you want to remove the volunteer,\nthen you must press \"Send email\",\nor \"Don't send email\"");
                             emailNotsentPopup.ShowDialog();
                         }
                     };
@@ -352,7 +352,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                         }
                         else
                         {
-                            DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The request has not been accepted\nIf you want to accept the request, then you must press \"Send email\", or \"Don't send email\"");
+                            DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The request has not been accepted\nIf you want to accept the request,\nthen you must press \"Send email\",\nor \"Don't send email\"");
                             emailNotsentPopup.ShowDialog();
                         }
                     };
@@ -380,7 +380,7 @@ namespace VolunteerSystem.UserInterfaceAdmin.VolunteerOverview.OverviewPanelStuf
                         }
                         else
                         {
-                            DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The request has not been denyed\nIf you want to denyed the request, then you must press \"Send email\", or \"Don't send email\"");
+                            DeleteFormPopUp emailNotsentPopup = new DeleteFormPopUp("The request has not been denyed\nIf you want to denyed the request,\nthen you must press \"Send email\",\nor \"Don't send email\"");
                             emailNotsentPopup.ShowDialog();
                         }
                     };
