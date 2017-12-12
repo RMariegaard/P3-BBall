@@ -25,7 +25,7 @@ namespace VolunteerSystem
             //db2.Complete();
 
 
-            ScheduleController scheduleController = new ScheduleController(db2.schedule.GetSchedule(1), db2);
+            ScheduleController scheduleController = new ScheduleController(db2.schedule.GetLatestSchedule(), db2);
             WorkerController workerController = new WorkerController(db2);
 
             /////////////////////Opdatere databasen med en masse information///////////////////////

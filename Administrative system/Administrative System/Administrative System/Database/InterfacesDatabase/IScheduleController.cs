@@ -11,6 +11,8 @@ namespace VolunteerSystem.Database.InterfacesDatabase
     {
         void UpdateSchedule(Schedule schedule);
         Schedule GetSchedule(int id);
+
+        Schedule GetLatestSchedule();
     }
 
 }

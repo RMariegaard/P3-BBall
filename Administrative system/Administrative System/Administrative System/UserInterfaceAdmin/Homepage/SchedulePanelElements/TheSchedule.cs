@@ -97,18 +97,21 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.SchedulePanelElements
                         } while (tempDateTime < shift.EndTime);
                     }
                 }
-                
+
                 //Create
-                Panel taskPanel = tempTaskPanel.GetATaskPanel(
-                    Tasks[i],
-                    toBeOnPanel,
-                    new Size(widthOfTask, colorAndShiftPanel.Height),
-                    new Point((i * (widthOfTask + 5)) + 50, 0),
-                    hourHeight,
-                    convertDayStringFromButtonToDateTime(day)
-                    );
-                
-                colorAndShiftPanel.Controls.Add(taskPanel);
+                if (day != null)
+                {
+                    Panel taskPanel = tempTaskPanel.GetATaskPanel(
+                        Tasks[i],
+                        toBeOnPanel,
+                        new Size(widthOfTask, colorAndShiftPanel.Height),
+                        new Point((i * (widthOfTask + 5)) + 50, 0),
+                        hourHeight,
+                        convertDayStringFromButtonToDateTime(day)
+                        );
+
+                    colorAndShiftPanel.Controls.Add(taskPanel);
+                }
             }
 
             _theSchedulemainPanel.Controls.Add(colorAndShiftPanel);

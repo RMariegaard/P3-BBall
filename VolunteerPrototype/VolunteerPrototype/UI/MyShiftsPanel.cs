@@ -29,8 +29,8 @@ namespace VolunteerPrototype.UI
             this.Font = new Font(Font.FontFamily, 12F);
             Size = size;
             _volunteer = volunteer;
-            var shifts = volunteer.ListOfShifts?.Select(x => x.Task + "\t" + x.StartTime + " - " + x.EndTime);
-            var requests = volunteer.ListOfRequests?.Select(x => x.Shift).Select(x => x.Task + "\t" + x.StartTime + " - " + x.EndTime);
+            var shifts = _mainUI.ScheduleController().GetAllListOfShifts().Where(x => x.ListOfWorkers.Contains(_volunteer)).Select(x => x.Task + "\t" + x.StartTime + " - " + x.EndTime);
+            var requests = _mainUI.ScheduleController().GetAllListOfRequests().Where(x => x.Volunteer == volunteer).Select(x => x.Shift).Select(x => x.Task + "\t" + x.StartTime + " - " + x.EndTime);
             _shiftsTextBox = new ListBox()
             {
                 Location = new Point(50, 50),

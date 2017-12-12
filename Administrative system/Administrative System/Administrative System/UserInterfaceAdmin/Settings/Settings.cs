@@ -38,23 +38,46 @@ namespace VolunteerSystem.UserInterfaceAdmin.Settings
                 Font = new Font(_settingsMainPanel.Font.Name, 14F),
                 AutoSize = true
             };
-            _settingsList.Items.Add("Email ");
-            _settingsList.SelectedIndex = 0;
+            _settingsList.Items.Add("Email");
+            _settingsList.Items.Add("Create new schedule");
+            _settingsList.SelectedIndexChanged += ChangeSetting;
 
-            _settingViewPanel = new EmailSetting()
-            {
-                Location = new Point(_settingsList.Location.X + _settingsList.Width + 10, _settingsList.Location.Y),
-
-                BorderStyle = BorderStyle.FixedSingle,
-                AutoSize = true
-            };
-
-            _settingsMainPanel.Controls.Add(_settingViewPanel);
-
+            
             this._settingsMainPanel.Controls.Add(_settingsList);
 
             this._settingsMainPanel.Controls.Add(_titleLabel);
     }
+
+        private void ChangeSetting(object sender, EventArgs e)
+        {
+            _settingsMainPanel.Controls.Remove(_settingViewPanel);
+            if (_settingsList.SelectedIndex == 0)
+            {
+                _settingViewPanel = new EmailSetting()
+                {
+                    Location = new Point(_settingsList.Location.X + _settingsList.Width + 10, _settingsList.Location.Y),
+
+                    BorderStyle = BorderStyle.FixedSingle,
+                    AutoSize = true
+                };
+
+                _settingsMainPanel.Controls.Add(_settingViewPanel);
+            }
+            if (_settingsList.SelectedIndex == 1)
+            {
+                _settingViewPanel = new CreateNewSchedulePanel(this._settingsMainUI)
+                {
+                    Location = new Point(_settingsList.Location.X + _settingsList.Width + 10, _settingsList.Location.Y),
+
+                    BorderStyle = BorderStyle.FixedSingle,
+                    AutoSize = true
+                };
+
+                _settingsMainPanel.Controls.Add(_settingViewPanel);
+
+            }
+
+        }
 
         public Panel GetPanel(Size size)
         {

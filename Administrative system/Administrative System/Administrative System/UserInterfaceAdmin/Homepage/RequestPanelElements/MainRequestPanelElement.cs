@@ -274,22 +274,29 @@ namespace VolunteerSystem.UserInterfaceAdmin.Homepage.RequestPanelElements
         {
 
             pressedShift = _volunteerMainUI.GetScheduleController().FindSingleShift(x => x.ListOfRequests.Contains(request));
-            LinkLabel shiftInformationLabel = new LinkLabel
+            if (pressedShift != null)
             {
-                Location = location,
-                Text = pressedShift.Task + " \n" +
-                                         pressedShift.StartTime.DayOfWeek + " " +
-                                         pressedShift.StartTime.TimeOfDay.ToString("hh\\:mm"),
-                AutoSize = true
-            };
-            //Hvis du bare bruger presseddShift, så vil den altid vise den sidste shift der er tilføjet.
-            shiftInformationLabel.Click += delegate (object sender, EventArgs e) { _getShiftInformation_Clicked(sender, _volunteerMainUI.GetScheduleController().FindSingleShift(x => x.ListOfRequests.Contains(request))); };
+                LinkLabel shiftInformationLabel = new LinkLabel
+                {
+                    Location = location,
+                    Text = pressedShift.Task + " \n" +
+                                             pressedShift.StartTime.DayOfWeek + " " +
+                                             pressedShift.StartTime.TimeOfDay.ToString("hh\\:mm"),
+                    AutoSize = true
+                };
+                //Hvis du bare bruger presseddShift, så vil den altid vise den sidste shift der er tilføjet.
+                shiftInformationLabel.Click += delegate (object sender, EventArgs e) { _getShiftInformation_Clicked(sender, _volunteerMainUI.GetScheduleController().FindSingleShift(x => x.ListOfRequests.Contains(request))); };
 
-            shiftInformationLabel.LinkColor = Color.Black;
+                shiftInformationLabel.LinkColor = Color.Black;
 
-            shiftInformationLabel.LinkBehavior = LinkBehavior.HoverUnderline;
-            
-            return shiftInformationLabel;
+                shiftInformationLabel.LinkBehavior = LinkBehavior.HoverUnderline;
+
+                return shiftInformationLabel;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private void _getShiftInformation_Clicked(object sender, Shift shift)

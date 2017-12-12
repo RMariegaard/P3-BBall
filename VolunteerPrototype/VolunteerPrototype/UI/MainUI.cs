@@ -83,7 +83,7 @@ namespace VolunteerPrototype.UI
             Controls.Add(_dayNavigationPanel);
 
 
-            _scheduleUI = new ScheduleUI(_dayNavigation._selected.Text, this);
+            _scheduleUI = new ScheduleUI(_dayNavigation._selected?.Text, this);
 
             _schedulePanel = new Panel()
             {

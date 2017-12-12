@@ -29,5 +29,10 @@ namespace VolunteerSystem.Database
         {
             return _context.schedule.Include("ListOfShifts").Include("ListOfShifts.ListOfWorkers").Include("ListOfShifts.ListOfRequests").Single(x => x.ScheduleId == id);
         }
+
+        public Schedule GetLatestSchedule()
+        {
+            return _context.schedule.Include("ListOfShifts").Include("ListOfShifts.ListOfWorkers").Include("ListOfShifts.ListOfRequests").ToList().Last();
+        }
     }
 }

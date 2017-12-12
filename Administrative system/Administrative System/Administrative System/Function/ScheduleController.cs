@@ -30,7 +30,11 @@ namespace VolunteerSystem
         public List<AbstractNotification> GetAllRequestsAndNotifications()
         {
             List<AbstractNotification> notifications = new List<AbstractNotification>();
-           notifications.AddRange(_database.request.GetAllRequest());
+            var shifts = _database.shift.GetAll().Where(x => x.ScheduleId == _schedule.ScheduleId);
+            foreach (var shift in shifts)
+            {
+                notifications.AddRange(shift.ListOfRequests);
+            }
             Notifier.AllNotifications.ForEach(x => notifications.Add(x));
 
             return notifications;
@@ -42,10 +46,11 @@ namespace VolunteerSystem
             _database.schedule.UpdateSchedule(_schedule);
         }
 
-        //public void CreateSchedule()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void CreateSchedule(int year)
+        {
+            _schedule = new Schedule(year);
+            _database.schedule.Add(_schedule);
+        }
         public int ScheduleYear()
         {
             return _schedule.Year;
@@ -54,7 +59,11 @@ namespace VolunteerSystem
         public List<Request> GetAllListOfRequests()
         {
             List<Request> ListOfRequests = new List<Request>();
-            _schedule.ListOfShifts.ForEach(x => ListOfRequests.AddRange(x.ListOfRequests));
+            var shifts = _database.shift.GetAll().Where(x => x.ScheduleId == _schedule.ScheduleId);
+            foreach (var shift in shifts)
+            {
+                ListOfRequests.AddRange(shift.ListOfRequests);
+            }
             return ListOfRequests;
         }
 

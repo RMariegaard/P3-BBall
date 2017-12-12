@@ -21,8 +21,8 @@ namespace VolunteerPrototype
 
             var db = new VolunteerSystem.Database.FinalDataController(new VolunteerSystem.Database.DatabaseContext(VolunteerSystem.Model.SqlDataConnecter.CnnVal("DatabaseCS")));
 
-            ScheduleController scheduleController = new ScheduleController(db.schedule.Get(1), db);
-           var list = db.shift.GetAll().ToList();
+            ScheduleController scheduleController = new ScheduleController(db.schedule.GetLatestSchedule(), db);
+           //var list = db.shift.GetAll().ToList();
            // var list2 = db.schedule.Get(1).ListOfShifts;
 
             WorkerController workerController = new WorkerController(db);

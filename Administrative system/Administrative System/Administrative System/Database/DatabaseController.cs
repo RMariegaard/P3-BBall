@@ -26,6 +26,7 @@ namespace VolunteerSystem.Database
         public void Add(TEntity entity)
         {
             _context.Set<TEntity>().Add(entity);
+            _context.SaveChanges();
         }
 
 
