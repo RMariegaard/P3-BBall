@@ -1,0 +1,7 @@
+﻿Dear [Volunteer],
+
+You have been removed from you shift at [Task]
+At the time: [StartTime].
+
+Best Regards,
+Aarhus Basketball Festival
