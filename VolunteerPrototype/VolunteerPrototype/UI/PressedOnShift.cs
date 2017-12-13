@@ -21,6 +21,7 @@ namespace VolunteerPrototype.UI
         ListBox ListOfWorkersList;
         ListBox ListOfRequestsList;
         private Button _requestButton;
+        private Button _removeButton;
 
         BindingSource bindingSource = new BindingSource();
 
@@ -72,19 +73,6 @@ namespace VolunteerPrototype.UI
             cancelButton.Location = new Point(5, _pressedOnShiftPopupMainPanel.Size.Height - cancelButton.Size.Height - 5);
             cancelButton.DialogResult = DialogResult.Cancel;
 
-            _requestButton = new Button()
-            {
-                Text = "Request this shift",
-                AutoSize = true,
-                Location = new Point(cancelButton.Location.X + cancelButton.Width + 5, cancelButton.Location.Y)
-            };
-            _requestButton.Click += RequestShift;
-            if(shift.ListOfRequests.Exists(x => x.Volunteer == _mainUI.GetCurrentUser) || shift.ListOfWorkers.Contains(_mainUI.GetCurrentUser))
-            {
-                HasBeenRequested();
-            }
-            Controls.Add(_requestButton);
-
             Label workerLabel = new Label
             {
                 Location = new Point(5, shiftInfo.Location.Y + shiftInfo.PreferredHeight),
@@ -122,6 +110,23 @@ namespace VolunteerPrototype.UI
             };
 
 
+            _requestButton = new Button()
+            {
+                Text = "Request this shift",
+                AutoSize = true,
+                Location = new Point(cancelButton.Location.X + cancelButton.Width + 5, cancelButton.Location.Y)
+            };
+            _requestButton.Click += RequestShift;
+            if (shift.ListOfRequests.Exists(x => x.Volunteer == _mainUI.GetCurrentUser))
+            {
+                HasBeenRequested();
+            }
+            else if (shift.ListOfWorkers.Contains(_mainUI.GetCurrentUser))
+            {
+                IsOnShift();
+            }
+            Controls.Add(_requestButton);
+
 
 
 
@@ -135,6 +140,48 @@ namespace VolunteerPrototype.UI
             Controls.Add(_pressedOnShiftPopupMainPanel);
 
             UpdateWorkersAndRequests();
+        }
+
+        private void IsOnShift()
+        {
+            MakeRemoveMeFromShiftButton();
+            _requestButton.Text = "You are on this shift";
+            _requestButton.Enabled = false;
+        }
+
+        private void MakeRemoveMeFromShiftButton()
+        {
+            _removeButton = new Button()
+            {
+                Text = "Remove Me From This Shift",
+                AutoSize = true,
+                Location = new Point(this.Width - 170, _requestButton.Location.Y)
+            };
+            _removeButton.Click += RemoveFromShiftClick;
+            Controls.Add(_removeButton);
+        }
+
+        private void RemoveFromShiftClick(object sender, EventArgs e)
+        {
+            string message = "Are you sure that you want to remove youself from this shift?\nThe Administrator will be notified of this.";
+
+            var result = MessageBox.Show(message, "Removing yourself from a shift",
+                                 MessageBoxButtons.YesNo,
+                                 MessageBoxIcon.Question);
+
+            // If the no button was pressed ...
+            if (result == DialogResult.Yes)
+            {
+                _mainUI.ScheduleController().RemoveWorkerFromShift(_mainUI.GetCurrentUser, shift);
+                _mainUI.ScheduleController().CreateNotification(new Notification("Volunteer Removed From Shift", $"{_mainUI.GetCurrentUser.Name} has removed themselves from {shift.Task} - {shift.StartTime}", NotificationImportance.HighImportance));
+            }
+
+            ListOfWorkersList.Items.Remove(_mainUI.GetCurrentUser.Association + " - " + _mainUI.GetCurrentUser.Name);
+
+            _requestButton.Text = "Request this shift";
+            _requestButton.Enabled = true;
+            Controls.Remove(_removeButton);
+
         }
 
         private void UpdateWorkersAndRequests()
@@ -175,6 +222,38 @@ namespace VolunteerPrototype.UI
         {
             _requestButton.Text = "You have requested this shift";
             _requestButton.Enabled = false;
+
+            _removeButton = new Button()
+            {
+                Text = "Cancel Request",
+                AutoSize = true,
+                Location = new Point(this.Width - 115, _requestButton.Location.Y)
+            };
+            _removeButton.Click += CancelRequestClick;
+            Controls.Add(_removeButton);
+            
+        }
+
+        private void CancelRequestClick(object sender, EventArgs e)
+        {
+            string message = "Are you sure that you want to cancel your request from this shift?";
+
+            var result = MessageBox.Show(message, "Cancel Request",
+                                 MessageBoxButtons.YesNo,
+                                 MessageBoxIcon.Question);
+
+            // If the yes button was pressed ...
+            if (result == DialogResult.Yes)
+            {
+                _mainUI.ScheduleController().RemoveRequest(_mainUI.GetCurrentUser.ListOfRequests.First(x => x.Shift == shift));
+                
+            }
+
+            ListOfRequestsList.Items.Remove(_mainUI.GetCurrentUser.Association + " - " + _mainUI.GetCurrentUser.Name);
+
+            _requestButton.Text = "Request this shift";
+            _requestButton.Enabled = true;
+            Controls.Remove(_removeButton);
         }
 
         private void RequestShift(object sender, EventArgs e)
@@ -206,7 +285,6 @@ namespace VolunteerPrototype.UI
                     login.ShowDialog();
                     if (login.DialogResult == DialogResult.Yes)
                     {
-                        _mainUI.LogIn(_mainUI.GetCurrentUser);
                         result = MessageBox.Show(message, "Request Shift",
                                                      MessageBoxButtons.YesNo,
                                                      MessageBoxIcon.Question);
@@ -219,7 +297,6 @@ namespace VolunteerPrototype.UI
                     register.ShowDialog();
                     if(register.DialogResult == DialogResult.Yes)
                     {
-                        _mainUI.LogIn(_mainUI.GetCurrentUser);
                         result = MessageBox.Show(message, "Request Shift",
                                                      MessageBoxButtons.YesNo,
                                                      MessageBoxIcon.Question);
@@ -230,14 +307,18 @@ namespace VolunteerPrototype.UI
                     if (result == DialogResult.Yes)
                     {
                         if (!shift.ListOfRequests.Exists(x => x.Volunteer == _mainUI.GetCurrentUser) && !shift.ListOfWorkers.Contains(_mainUI.GetCurrentUser))
-                        {
-                            RequestShift(sender, e);
-                        }
+                        { 
+                            _mainUI.ScheduleController().SendRequest(shift, _mainUI.GetCurrentUser);
+                            HasBeenRequested();
+                            _mainUI.UpdateSchedulePanel();
+                            _mainUI.UpdateMenu();
+                        }   
                     }
                 }
-            
 
-            UpdateWorkersAndRequests();
+
+            ListOfRequestsList.Items.Add(_mainUI.GetCurrentUser.Association + " - " + _mainUI.GetCurrentUser.Name);
+            HasBeenRequested();
 
         }
     }
