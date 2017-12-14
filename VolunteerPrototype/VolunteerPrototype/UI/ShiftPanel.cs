@@ -50,8 +50,7 @@ namespace VolunteerPrototype.UI
                 else
                     convertEventArgs.Value = new Point(0, 25); //25 svare til hourhight inde i theSchedule...
             };
-
-            DateTime test = shift.EndTime;
+            
             var SizeBinding = new Binding("Size", shiftBindingSource, "EndTime");
             SizeBinding.Format += delegate (object sentFrom, ConvertEventArgs convertEventArgs)
             {
@@ -76,11 +75,6 @@ namespace VolunteerPrototype.UI
                     int LengthInminuts = (int)timespan.TotalMinutes;
 
                     convertEventArgs.Value = new Size(forRefence.Size.Width, (int)(LengthInminuts * ((double)hourHeight / 60)));
-                }
-
-                if (test != shift.EndTime)
-                {
-                    //vgv 
                 }
             };
 
@@ -128,7 +122,7 @@ namespace VolunteerPrototype.UI
             headder.DataBindings.Add(numberOfVolunteerBinding);
             headder.Location = new Point(0 , 8);
             headder.AutoSize = true;
-
+            
             Label requestsLabel = new Label()
             {
                 Location = new Point(0, headder.Location.Y + headder.Font.Height + 2),
@@ -165,13 +159,17 @@ namespace VolunteerPrototype.UI
             shiftPanel.Controls.Add(requestsLabel);
             shiftPanel.Controls.Add(Time);
             shiftPanel.Click += OpenShift;
+
             return shiftPanel;
         }
 
         private void OpenShift(object sender, EventArgs e)
         {
             var popUp = new PressedOnShift(shift, _mainUI);
+            Panel panel = (Panel)sender;
+            panel.BackColor = Color.Gray;
             popUp.ShowDialog();
+            panel.BackColor = Color.AliceBlue;
         }
 
         private void NumberOfRequestsBinding_Format(object sender, ConvertEventArgs e)
