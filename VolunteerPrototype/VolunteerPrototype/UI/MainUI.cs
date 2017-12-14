@@ -83,8 +83,8 @@ namespace VolunteerPrototype.UI
             Controls.Add(_dayNavigationPanel);
 
 
+            //Schedule panel
             _scheduleUI = new ScheduleUI(_dayNavigation._selected?.Text, this);
-
             _schedulePanel = new Panel()
             {
                 Location = new Point(_dayNavigationPanel.Width, 100),
@@ -95,8 +95,21 @@ namespace VolunteerPrototype.UI
             };
             _schedulePanel.Controls.Add(_scheduleUI.GetPanel(_schedulePanel));
             Controls.Add(_schedulePanel);
-            _schedulePanel.BringToFront();
 
+            //Contact text in buttom
+            string textBeforeLink = "For more information, or to contact us, visit: ";
+            string link = "http://www.basketball-festival.dk/";
+            LinkLabel contactLabel = new LinkLabel()
+            {
+                Location = new Point(_dayNavigationPanel.Location.X + _dayNavigationPanel.Width + 5, _schedulePanel.Location.Y + _schedulePanel.Height + 2),
+                Text = textBeforeLink + link,
+                AutoSize = true,
+                LinkArea = new LinkArea(textBeforeLink.Length, link.Length),
+            };
+            contactLabel.Click += delegate(object sender, EventArgs e) { System.Diagnostics.Process.Start(link); contactLabel.LinkVisited = true; };
+            Controls.Add(contactLabel);
+            
+            _schedulePanel.BringToFront();
         }
 
         public WorkerController WorkerController()
