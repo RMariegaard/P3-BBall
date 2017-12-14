@@ -313,13 +313,14 @@ namespace VolunteerPrototype.UI
                             HasBeenRequested();
                             _mainUI.UpdateSchedulePanel();
                             _mainUI.UpdateMenu();
-                        }   
+
+
+                        ListOfRequestsList.Items.Add(_mainUI.GetCurrentUser.Association + " - " + _mainUI.GetCurrentUser.Name);
+                        HasBeenRequested();
+
                     }
                 }
-
-
-            ListOfRequestsList.Items.Add(_mainUI.GetCurrentUser.Association + " - " + _mainUI.GetCurrentUser.Name);
-            HasBeenRequested();
+                }
 
         }
     }
