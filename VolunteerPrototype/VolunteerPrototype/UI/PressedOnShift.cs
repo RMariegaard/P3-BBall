@@ -174,13 +174,14 @@ namespace VolunteerPrototype.UI
             {
                 _mainUI.ScheduleController().RemoveWorkerFromShift(_mainUI.GetCurrentUser, shift);
                 _mainUI.ScheduleController().CreateNotification(new Notification("Volunteer Removed From Shift", $"{_mainUI.GetCurrentUser.Name} has removed themselves from {shift.Task} - {shift.StartTime}", NotificationImportance.HighImportance));
+                ListOfWorkersList.Items.Remove(_mainUI.GetCurrentUser.Association + " - " + _mainUI.GetCurrentUser.Name);
+
+                _requestButton.Text = "Request this shift";
+                _requestButton.Enabled = true;
+                Controls.Remove(_removeButton);
+
             }
 
-            ListOfWorkersList.Items.Remove(_mainUI.GetCurrentUser.Association + " - " + _mainUI.GetCurrentUser.Name);
-
-            _requestButton.Text = "Request this shift";
-            _requestButton.Enabled = true;
-            Controls.Remove(_removeButton);
 
         }
 
@@ -246,14 +247,14 @@ namespace VolunteerPrototype.UI
             if (result == DialogResult.Yes)
             {
                 _mainUI.ScheduleController().RemoveRequest(_mainUI.GetCurrentUser.ListOfRequests.First(x => x.Shift == shift));
-                
+
+                ListOfRequestsList.Items.Remove(_mainUI.GetCurrentUser.Association + " - " + _mainUI.GetCurrentUser.Name);
+
+                _requestButton.Text = "Request this shift";
+                _requestButton.Enabled = true;
+                Controls.Remove(_removeButton);
             }
 
-            ListOfRequestsList.Items.Remove(_mainUI.GetCurrentUser.Association + " - " + _mainUI.GetCurrentUser.Name);
-
-            _requestButton.Text = "Request this shift";
-            _requestButton.Enabled = true;
-            Controls.Remove(_removeButton);
         }
 
         private void RequestShift(object sender, EventArgs e)
