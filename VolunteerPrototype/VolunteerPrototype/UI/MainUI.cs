@@ -98,7 +98,7 @@ namespace VolunteerPrototype.UI
 
             //Contact text in buttom
             string textBeforeLink = "For more information, or to contact us, visit: ";
-            string link = "http://www.basketball-festival.dk/";
+            string link = "http://www.basketball-festival.dk/about-aabf/contact";
             LinkLabel contactLabel = new LinkLabel()
             {
                 Location = new Point(_dayNavigationPanel.Location.X + _dayNavigationPanel.Width + 5, _schedulePanel.Location.Y + _schedulePanel.Height + 2),
