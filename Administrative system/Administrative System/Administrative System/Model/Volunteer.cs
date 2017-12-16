@@ -46,7 +46,12 @@ namespace VolunteerSystem
             this.Phonenumber = phonenumber;
             this.HashPassworkd = WorkerController.GetHash(password).ToString();
         }
-
+        public void Update(string name, string email, string accosi, int phonenumber)
+        {
+            base.Update(name, email);
+            this.Association = accosi;
+            this.Phonenumber = phonenumber;
+        }
         public Volunteer()
         {
             YearsWorked = new List<int>();

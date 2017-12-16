@@ -7,6 +7,7 @@ using VolunteerSystem;
 using System.Windows.Forms;
 using System.Drawing;
 using VolunteerSystem.UserInterfaceAdmin;
+using VolunteerSystem.Exceptions;
 
 namespace VolunteerPrototype.UI
 {
@@ -105,10 +106,15 @@ namespace VolunteerPrototype.UI
                     string team = labelAndTextBoxList.First(x => x.Label.Text == "Team").TextBox.Text;
                     int phoneNumber = int.Parse(labelAndTextBoxList.First(x => x.Label.Text == "Phone Number").TextBox.Text);
                     string temppassword = labelAndTextBoxList.First(x => x.Label.Text == "New Password").TextBox.Text;
-                string password = temppassword == "" || temppassword == null ? _volunteer.HashPassworkd : temppassword;
+
                 if (WorkerController.GetHash(labelAndTextBoxList.First(x => x.Label.Text == "Old Password").TextBox.Text).ToString() == _volunteer.HashPassworkd)
-                { 
-                    _mainUI.WorkerController().UpdateVolunteer(_mainUI.GetCurrentUser, name, email, team, phoneNumber, password);
+                {
+                    if (temppassword == null || temppassword == "")
+                        _mainUI.WorkerController().UpdateVolunteer(_mainUI.GetCurrentUser, name, email, team, phoneNumber);
+                    else
+                    {
+                        _mainUI.WorkerController().UpdateVolunteer(_mainUI.GetCurrentUser, name, email, team, phoneNumber, temppassword);
+                    }
 
                     WrongEmailWarning message = new WrongEmailWarning("Your account information has been updated");
                     message.StartPosition = FormStartPosition.CenterParent;
@@ -123,6 +129,18 @@ namespace VolunteerPrototype.UI
                     message.ShowDialog();
                 }
             }
+            catch (EmailNotValidException)
+            {
+                WrongEmailWarning message = new WrongEmailWarning("The Email format is not legal, enter a correct email adress.");
+                message.StartPosition = FormStartPosition.CenterParent;
+                message.ShowDialog();
+            }
+            catch (EmailUsedBeforeException)
+            {
+                WrongEmailWarning message = new WrongEmailWarning("The Email is used with another account");
+                message.StartPosition = FormStartPosition.CenterParent;
+                message.ShowDialog();
+            }
             catch (FormatException)
             {
                 WrongEmailWarning message = new WrongEmailWarning("Phonenumber is not legal");
@@ -131,11 +149,9 @@ namespace VolunteerPrototype.UI
             }
             catch (Exception)
             {
-                WrongEmailWarning message = new WrongEmailWarning("The Email format is not legal, enter a correct email adress.");
+                WrongEmailWarning message = new WrongEmailWarning("some information is not legal");
                 message.StartPosition = FormStartPosition.CenterParent;
                 message.ShowDialog();
-
-
             }
         }
     }

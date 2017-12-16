@@ -107,11 +107,33 @@ namespace VolunteerSystem
             else
                 return true;
         }
+        private bool emailNotUsedBefore(string email, Worker worker)
+        {
+            if (email == "")
+                return true;
+            else if (ListOfWorkers.Exists(x => x.Email == email && x != worker))
+            {
+                throw new EmailUsedBeforeException($"The email {email} is already in use with another account");
+            }
+            else
+                return true;
+        }
 
         public void UpdateVolunteer(Volunteer volunteer, string name, string email, string accosi, int phonenumber, string password)
         {
-            volunteer.Update(name, email, accosi, phonenumber, password);
-            _database.volunteer.Update(volunteer);
+            if (emailValidation(email) && emailNotUsedBefore(email, volunteer))
+            {
+                volunteer.Update(name, email, accosi, phonenumber, password);
+                _database.volunteer.Update(volunteer);
+            }
+        }
+        public void UpdateVolunteer(Volunteer volunteer, string name, string email, string accosi, int phonenumber)
+        {
+            if (emailValidation(email) && emailNotUsedBefore(email, volunteer))
+            {
+                volunteer.Update(name, email, accosi, phonenumber);
+                _database.volunteer.Update(volunteer);
+            }
         }
 
         public List<Worker> SearchListOfWorkers(Predicate<Worker> predicate)
