@@ -52,8 +52,6 @@ namespace VolunteerSystem
                 }
                 _database.Complete();
             }
-            else
-                throw new EmailUsedBeforeException($"The email {worker.Email} is already in use with another account");
         }
 
         private bool emailValidation(string value)

@@ -22,31 +22,5 @@ namespace VolunteerSystem.Tests
             Assert.AreEqual(worker.GetInformation(), actual);
         }
 
-
-        
-        [TestCase("jens@")]
-        [TestCase("jensEmail.Dk")]
-        [TestCase("jens")]
-        [TestCase("jens@jens")]
-        [TestCase(".Mark@.dk")]
-        [TestCase("@jens.Dk")]
-        [TestCase("@")]
-        [TestCase("mark@test.dk.")]
-        public void WrongEmailFormatExceptionTest( string email)
-        {
-            Worker worker;
-            Assert.Throws<EmailNotValidException>(() =>worker = new ExternalWorker( "Hallo", email));
-        }
-
-        [TestCase("Mark@hej.dk")]
-        [TestCase("Cooper@Love.Com.Uk")]
-        [TestCase("Easy.Peasy@Lemon.Dk")]
-        [TestCase("Mark_Underscore@Test.Test")]
-        public void CorrectEmailTest(string email)
-        {
-            Worker worker = new ExternalWorker("Mark", email);
-            Assert.AreEqual(worker.Email, email);
-        }
-
     }
 }

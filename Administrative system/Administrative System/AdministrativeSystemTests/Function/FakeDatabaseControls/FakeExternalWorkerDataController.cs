@@ -33,7 +33,7 @@ namespace VolunteerSystemTests.Function
 
         public List<ExternalWorker> GetExternalListOfWorkers()
         {
-            throw new System.NotImplementedException();
+            return new List<ExternalWorker>();
         }
 
         public void Remove(ExternalWorker entity)
