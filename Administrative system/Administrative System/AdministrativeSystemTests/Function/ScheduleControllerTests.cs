@@ -76,7 +76,6 @@ namespace VolunteerSystem.Tests
             scheduleController.CreateTask(task);
 
             Assert.IsTrue(schedule.Tasks.Contains(task));
-
         }
 
         [Test()]

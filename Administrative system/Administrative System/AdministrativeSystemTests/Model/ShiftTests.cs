@@ -41,7 +41,7 @@ namespace VolunteerSystem.Tests
             Assert.IsFalse(shift.IsFilled());
         }
 
-        [TestCase(1)]
+        [TestCase(0)]
         [TestCase(2)]
         [TestCase(1000)]
         public void TrueIsFilledTest(int volunteersNeeded)
@@ -54,8 +54,6 @@ namespace VolunteerSystem.Tests
             }
 
             Assert.IsTrue(shift.IsFilled());
-
-
         }
 
         [TestCase(1)]
