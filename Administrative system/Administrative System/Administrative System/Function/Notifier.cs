@@ -118,7 +118,7 @@ namespace VolunteerSystem
                 }
 
             }
-            message += "Aarhus Basketball Festival";
+            message += "Best regards,\nAarhus Basketball Festival";
             InformVolunteer(volunteer, message);
         }
 

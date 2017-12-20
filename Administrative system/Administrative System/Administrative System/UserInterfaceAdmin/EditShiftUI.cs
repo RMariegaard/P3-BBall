@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VolunteerSystem.UserInterfaceAdmin;
 
 namespace VolunteerSystem.UserInterface
 {
@@ -44,7 +45,7 @@ namespace VolunteerSystem.UserInterface
                 {
                     Result = new Shift(startDateTime, endDateTime, TasksComboBox.SelectedItem.ToString(), int.Parse(numberOfVolunteersTextBox.Text), desciptionTextBox.Text);
                     DialogResult = DialogResult.OK;
- 
+                    WrongEmailWarning emailWarning = new WrongEmailWarning("An email about the changes will be sent to the volunteer on the shift.");
                 }
                 else
                 {

@@ -113,14 +113,14 @@ namespace VolunteerSystem
 
         public void EditShift(Shift oldShift, Shift newShift)
         {
-            /*
+            
             string[] changes = FindShiftChanges(oldShift, newShift);
             
             foreach (var volunteer in oldShift.ListOfWorkers.Where(x => x.GetType() == typeof(Volunteer)))
             {
-                //Notifier.InformVolunteer(volunteer as Volunteer, oldShift, newShift, changes);
+                Notifier.InformVolunteer(volunteer as Volunteer, oldShift, newShift, changes);
             }
-            */
+            
 
             oldShift.EditShift(newShift);
             _database.schedule.UpdateSchedule(_schedule);
